@@ -1,0 +1,19 @@
+login: &login
+  adapter: 'postgresql'
+  username: 'write username'
+  password: 'write userpassword'
+  host: 'localhost'
+  port: 5432
+  encoding: 'UTF8'
+
+development:
+  <<: *login
+  database: 'write userdatebase_development'
+
+test:
+  <<: *login
+  database: 'write userdatebase_test'
+
+production:
+  <<: *login
+  database: 'write userdatebase_production'
