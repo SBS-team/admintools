@@ -1,4 +1,21 @@
 == Getting Started
 
-1. Get app from git 
-2. Dependence: postgreSQL, rails 3.2.8, ruby 1.9.3 
+Run next commands in the terminal:
+
+1. `git clone ...`
+2. `cd admintools`
+3. `bundle install`
+4. edit database.yaml file
+5. `rake db:create`
+
+Dependence: postgresql, ruby 1.9.3
+
+== Install PostgreSQL
+
+1. Install PostgreSQL locally. See Local PostgreSQL Installation on the Heroku site.
+
+  `sudo apt-get install postgresql`
+
+2. We also need libpq-dev. See this Stackoverflow article.
+
+  `sudo apt-get install libpq-dev`
