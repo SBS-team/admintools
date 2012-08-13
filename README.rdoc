@@ -19,3 +19,5 @@ Dependence: postgresql, ruby 1.9.3
 2. We also need libpq-dev. See this Stackoverflow article.
 
   `sudo apt-get install libpq-dev`
+
+1. Create new branch "dev"
