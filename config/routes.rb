@@ -1,7 +1,7 @@
 Admintools::Application.routes.draw do
+
   devise_for :admins
-  root :to => 'rooms#index'
   resources :rooms
-
-
+  resources :users
+  root :to => 'rooms#index'
 end

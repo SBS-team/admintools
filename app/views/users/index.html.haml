@@ -1,0 +1,12 @@
+%h1 Users index
+
+- @users.each do |u|
+  %ul
+    %li= u.first_name
+    %li= u.last_name
+    %li= u.email
+    %li= u.skype
+    %li= link_to 'more', user_path(u.id)
+    %li= link_to 'edit', edit_user_path(u.id)
+
+  %hr
