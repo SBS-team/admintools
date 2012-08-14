@@ -1,21 +1,24 @@
 %h1 New room
 
-= form_for @room do |f|
+= form_for @room, :class => "form-horizontal" do |f|
   -if @room.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@room.errors.count, "error")} prohibited this photo from being saved:"
+      %h2= "#{pluralize(@room.errors.count, "error")} какая-то ошибка, не может сохранить:"
       %ul
         - @room.errors.full_messages.each do |msg|
           %li= msg
-  %form.form-horizontal
-    %fieldset
-      .control-group
-        %label.control-label{:for => "office"} Номер офиса
-        = f.text_field :office
-      .control-group
-        %label.control-label{:for => "select01"} Ответственный
-        .controls
-          %select#select01{:type => "text"}
+  %fieldset
+    .control-group
+      %label.control-label{:for => "office"} Номер офиса
+      = f.text_field :office, :placeholder => "Введите номер офиса"
+    .control-group
+      %label.control-label{:for => "select01"} Ответственный
+      .controls
+        %select#select01{:name => "room[user_id]"}
+          -@users.each do |user|
+            %option{:value => "#{user.id}"}
+              = user.full_name
+
   .actions
-    %button.btn.btn-primary{:type => "submit"} Назначить
+    =f.submit "Назначить", :class => "btn btn-primary"
     = link_to "Назад", root_url, :class => "btn"

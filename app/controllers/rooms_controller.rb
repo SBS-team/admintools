@@ -2,11 +2,11 @@ class RoomsController < ApplicationController
 
   def index
     @rooms = Room.all
-    @users = User.all
   end
 
   def new
     @room = Room.new
+    @users = User.all
   end
 
   def show
@@ -18,6 +18,7 @@ class RoomsController < ApplicationController
     if @room.save
       redirect_to :root
     else
+      @users = User.all
       render(:action => "new")
     end
   end
