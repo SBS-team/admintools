@@ -3,5 +3,6 @@ class User < ActiveRecord::Base
 
   has_one  :desktop
   has_many :devices
+  has_many :rooms
 
 end
