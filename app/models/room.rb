@@ -2,7 +2,7 @@ class Room < ActiveRecord::Base
   attr_accessible :office, :responsible
 
   has_many :desktops
-  belongs_to :user
+  has_many :users, :through => :desktops
 
   validates :office, :presence => true
   validates_uniqueness_of :office
