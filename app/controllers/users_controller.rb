@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-    @user.save ? (redirect_to :users) : (render :action => 'new')
+    @user.save ? (redirect_to :users, notice: 'User added') : (render :action => 'new')
   end
 
   def edit
@@ -22,6 +22,6 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find_by_id(params[:id])
-    @user.update_attributes(params[:user]) ? (redirect_to :users) : (render :action => 'edit')
+    @user.update_attributes(params[:user]) ? (redirect_to :users, notice: 'User updated') : (render :action => 'edit')
   end
 end
