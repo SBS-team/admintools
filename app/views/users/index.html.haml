@@ -3,10 +3,10 @@
   %span.new-user-link
     = link_to 'Add user', new_user_path, :class => 'btn btn-info'
 
-  - @users.each_slice(3) do |users|
+  - @users.each_slice(4) do |users|
     .row-fluid  
       - users.each do |u|
-        .span4.well
+        .span3.well
           %p
             %i{:class => "icon-user"}
             = "#{u.first_name} #{u.last_name}"

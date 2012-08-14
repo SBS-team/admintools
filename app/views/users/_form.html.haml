@@ -23,4 +23,5 @@
     = u.text_area :info
 
   .actions
-    = u.submit 'Save', :class => 'btn btn-info'
+    = u.submit 'Save', :class => 'btn'
+    = link_to 'Back', users_path, :class => 'btn btn-info'
