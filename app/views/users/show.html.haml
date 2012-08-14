@@ -2,10 +2,18 @@
 
 -if @user
   .well
-    %p= "#{@user.first_name} #{@user.last_name}"
-    %p= @user.email
-    %p= @user.skype
+    %p 
+      %i{:class => "icon-user"}
+      = "#{@user.first_name} #{@user.last_name}"
+    %p
+      %i{:class => "icon-envelope"}
+      = @user.email
+    %p
+      %span.label.label-info Skype
+      = "#{@user.skype}"
     - if @user.info
-      %p= @user.info 
+      %p
+        %span.label.label-info Info
+        = "#{@user.info}"
     = link_to 'Edit', edit_user_path(@user.id), :class => 'btn btn-inverse'
     = link_to 'Back', users_path, :class => 'btn btn-info'
