@@ -24,9 +24,9 @@
             = link_to "#", :class => "btn" do
               %i{:class => "icon-zoom-in"}
               Просмотр
-            = link_to "#", :class => "btn" do
+            = link_to edit_room_path(room), :class => "btn" do
               %i{:class => "icon-pencil"}
               Редактировать
-            = link_to "#", :class => "btn btn-danger", :confirm => "Ты уверен?" do
+            = link_to room_url(room), :method => :DELETE, :class => "btn btn-danger", :confirm => "Ты уверен?" do
               %i{:class => "icon-remove"}
               Удалить
