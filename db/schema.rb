@@ -56,9 +56,9 @@ ActiveRecord::Schema.define(:version => 20120814121142) do
 
   create_table "rooms", :force => true do |t|
     t.integer  "office"
-    t.string   "responsible"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "user_id"
   end
 
   add_index "rooms", ["office"], :name => "index_rooms_on_office"

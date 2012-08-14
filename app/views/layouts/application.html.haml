@@ -36,13 +36,20 @@
           %a.brand{:href => "#"} Admintools
           .container-fluid.nav-collapse
             %ul.nav
-              %li= link_to "Компьютеры", "/path1"
+              %li= link_to "Офисы", rooms_path
           / /.nav-collapse
-
     .container-fluid
 
       .row-fluid
         .span9
+          %ul.breadcrumb
+            %li
+              %a{:href => "#"} Home
+              %span.divider /
+            %li
+              %a{:href => "#"} Library
+              %span.divider /
+            %li.active Data
           = yield
         .span3
           .well.sidebar-nav

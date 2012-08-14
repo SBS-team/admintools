@@ -1,1 +1,32 @@
-%h1
+%ul.nav.nav-list
+  %li.nav-header
+    %h3 List Offices
+  %table.table.table-striped
+    %thead
+      %tr
+        %th ID
+        %th Имя офиса
+        %th Управляющий
+        %th Кол-во ПК
+        %th
+          = link_to new_room_path, :class => "btn btn-success" do
+            %i{:class => "icon-plus"}
+            Создать
+
+    %tbody
+      - @rooms.each do |room|
+        %tr
+          %td= room.id
+          %td= room.office
+          %td= room.user.full_name
+          %td не реализованно
+          %td
+            = link_to "#", :class => "btn" do
+              %i{:class => "icon-zoom-in"}
+              Просмотр
+            = link_to edit_room_path(room), :class => "btn" do
+              %i{:class => "icon-pencil"}
+              Редактировать
+            = link_to room_url(room), :method => :DELETE, :class => "btn btn-danger", :confirm => "Ты уверен?" do
+              %i{:class => "icon-remove"}
+              Удалить

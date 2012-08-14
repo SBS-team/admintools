@@ -5,5 +5,4 @@ Admintools::Application.routes.draw do
   resources :users
   resources :desktops
   root :to => 'rooms#index'
-
 end

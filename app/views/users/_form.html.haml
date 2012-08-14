@@ -5,12 +5,12 @@
       %ul
         - @user.errors.full_messages.each do |msg|
           %li= msg
-
+    
   .field
-    = u.label 'Имя'
+    = u.label :first_name, 'Имя'
     = u.text_field :first_name
   .field
-    = u.label 'Фамилия'
+    = u.label :last_name, 'Фамилия'
     = u.text_field :last_name
   .field
     = u.label :email
@@ -19,8 +19,9 @@
     = u.label :skype
     = u.text_field :skype
   .field
-    = u.label 'Дополнительно'
+    = u.label :info, 'Дополнительно'
     = u.text_area :info
 
   .actions
-    = u.submit 'Save'
+    = u.submit 'Save', :class => 'btn'
+    = link_to 'Back', users_path, :class => 'btn btn-info'

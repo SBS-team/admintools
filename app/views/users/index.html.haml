@@ -1,12 +1,18 @@
-%h1 Users index
+%h1 User list
+#users
+  %span.new-user-link
+    = link_to 'Add user', new_user_path, :class => 'btn btn-info'
 
-- @users.each do |u|
-  %ul
-    %li= u.first_name
-    %li= u.last_name
-    %li= u.email
-    %li= u.skype
-    %li= link_to 'more', user_path(u.id)
-    %li= link_to 'edit', edit_user_path(u.id)
-
-  %hr
+  - @users.each_slice(4) do |users|
+    .row-fluid  
+      - users.each do |u|
+        .span3.well
+          %p
+            %i{:class => "icon-user"}
+            = "#{u.first_name} #{u.last_name}"
+          %p
+            %i{:class => "icon-envelope"}
+            = "#{u.email}"
+          %p= "Skype: #{u.skype}"
+          = link_to 'More', user_path(u.id), :class => 'btn btn-info'
+          = link_to 'Edit', edit_user_path(u.id), :class => 'btn btn-inverse'
