@@ -3,4 +3,7 @@
     %h3 List Offices
   - @rooms.each do |r|
     %li
-      %a{:href => "#"} #{r.office}
+      %a{:href => "#"} Номер офиса №#{r.office}
+      %pre
+        Ответственный за офис:
+        #{link_to "#{r.user_id}"}

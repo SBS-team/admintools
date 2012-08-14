@@ -8,6 +8,10 @@ class RoomsController < ApplicationController
     @room = Room.new
   end
 
+  def show
+
+  end
+
   def create
     @room = Room.new(params[:room])
     if @room.save
