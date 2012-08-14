@@ -3,20 +3,20 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 #users{
   position:relative;
-}
-
-form label{
-  float:left;
-  width:150px;
-}
-form textarea{
-  height:100px;
-}
-form div.actions{
-  padding-left:150px;
-}
-span.new-user-link{
-  position:absolute;
-  top:-35px;
-  right:0;
+  
+  form label{
+    float:left;
+    width:150px;
+  }
+  form textarea{
+    height:100px;
+  }
+  form div.actions{
+    padding-left:150px;
+  }
+  span.new-user-link{
+    position:absolute;
+    top:-35px;
+    right:0;
+  }
 }
