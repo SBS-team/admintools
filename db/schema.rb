@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120813090221) do
+ActiveRecord::Schema.define(:version => 20120814121142) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(:version => 20120813090221) do
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "room_id"
   end
 
   add_index "desktops", ["user_id"], :name => "index_desktops_on_user_id"

@@ -3,8 +3,7 @@ class Room < ActiveRecord::Base
 
   has_many :desktops
 
-  validates :office, :presence => true
-  validates_uniqueness_of :office
+  validates :office, :presence => true, :uniqueness => true
   validates :responsible, :presence => true
 
 end
