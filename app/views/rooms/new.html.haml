@@ -7,11 +7,15 @@
       %ul
         - @room.errors.full_messages.each do |msg|
           %li= msg
-  .field
-    = f.label :office
-    = f.text_field :office
-  -#.field
-  -#  = f.label :responsible
-  -#  = f.text_field :responsible
+  %form.form-horizontal
+    %fieldset
+      .control-group
+        %label.control-label{:for => "office"} Номер офиса
+        = f.text_field :office
+      .control-group
+        %label.control-label{:for => "select01"} Ответственный
+        .controls
+          %select#select01{:type => "text"}
   .actions
-    = f.submit 'Save'
+    %button.btn.btn-primary{:type => "submit"} Назначить
+    = link_to "Назад", root_url, :class => "btn"
