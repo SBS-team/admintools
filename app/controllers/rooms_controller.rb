@@ -1,5 +1,6 @@
 class RoomsController < ApplicationController
   before_filter :user_all, :only => [:new, :edit, :create, :update]
+  before_filter :current_room, :only => [:edit, :destroy, :update]
 
   def index
     @rooms = Room.all
@@ -14,11 +15,11 @@ class RoomsController < ApplicationController
   end
 
   def edit
-    @room = Room.find(params[:id])
+
   end
 
   def destroy
-    Room.find(params[:id]).destroy
+    @room.destroy
     redirect_to :root
   end
 
@@ -32,7 +33,6 @@ class RoomsController < ApplicationController
   end
 
   def update
-    @room = Room.find(params[:id])
     if @room.update_attributes(params[:room])
       redirect_to :root
     else
@@ -44,5 +44,9 @@ class RoomsController < ApplicationController
 
   def user_all
     @users = User.all
+  end
+
+  def current_room
+    @room = Room.find(params[:id])
   end
 end
