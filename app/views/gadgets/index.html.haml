@@ -1,0 +1,15 @@
+%h1 Gadget
+%table.table.table-striped
+  %thead
+    %tr
+      %th user_id
+      %th ip
+      %th mac
+  %tbody
+    - @gadgets.each do |w|
+      %tr
+        %td{:width => "100"}= w.user_id
+        %td{:width => "100"}= w.ip
+        %td{:width => "100"}= w.mac
+        %td= link_to "edit", edit_gadget_path(w.id)
+
