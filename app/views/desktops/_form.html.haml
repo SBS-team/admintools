@@ -1,0 +1,26 @@
+= form_for @desktop do |d|
+  -if @desktop.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@desktop.errors.count, "error")} prohibited this photo from being saved:"
+      %ul
+        - @desktop.errors.full_messages.each do |er|
+          %li= er
+  .field
+    = d.label :ip
+    = d.text_field :ip
+  .field
+    = d.label :mac
+    = d.text_field :mac
+  .field
+    = d.label :user_id
+    / = d.text_field :user_id
+    = select_tag :user_id, options_from_collection_for_select(@user, :id, :first_name)
+  .field
+    = d.label :room_id
+    / = d.text_field :room_id
+    = select_tag :room_id, options_from_collection_for_select(@room, :id, :office)
+  .field
+    = d.label :info
+    = d.text_field :info
+  .actions
+    = d.submit 'Save'

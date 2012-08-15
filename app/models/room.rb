@@ -5,8 +5,7 @@ class Room < ActiveRecord::Base
   has_many :users, :through => :desktops
   belongs_to :user
 
-  validates :office, :presence => true
-  validates_uniqueness_of :office
+  validates :office, :presence => true, :uniqueness => true
+  validates :responsible, :presence => true
   validates :user_id, :presence => true, :uniqueness => true
-
 end

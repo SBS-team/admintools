@@ -1,0 +1,19 @@
+%h1 desktop
+%table.table.table-striped
+  %thead
+    %tr
+      %th user_id
+      %th room
+      %th ip
+      %th mac
+      %th info
+  %tbody
+    - @desktops.each do |w|
+      %tr
+        %td{:width => "100"}= w.user_id
+        %td{:width => "100"}= link_to w.room_id
+        %td{:width => "100"}= w.ip
+        %td{:width => "100"}= w.mac
+        %td{:width => "100"}= w.info
+        %td= link_to "edit", edit_desktop_path(w.id)
+
