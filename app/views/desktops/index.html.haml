@@ -6,6 +6,7 @@
   %table.table.table-striped
     %thead
       %tr
+        %th Имя ПК
         %th IP
         %th MAC
         %th Офис
@@ -17,6 +18,7 @@
     %tbody
       - @desktops.each do |desktop|
         %tr
+          %td= desktop.name
           %td= desktop.ip
           %td= desktop.mac
           %td= (desktop.room.present?) ? (desktop.room.name) : ('пусто')
