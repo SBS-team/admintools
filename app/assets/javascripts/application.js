@@ -16,7 +16,8 @@
 //= require_tree .
 
 $(document).ready(function() {
-   nav_menu()
+    nav_menu()
+    tab_menu()
 });
 
 function nav_menu(){
@@ -28,3 +29,11 @@ function nav_menu(){
         $("ul.breadcrumb").append("<li><a href='"+url_href+"' >"+v+"</a><span class='divider'>/</span> </li>")
     });
 }
+function tab_menu(){
+    var tab = window.location.pathname.substr(1).split("/");
+    $("#"+tab[0]+"_tab").addClass("active");
+    if (!$(".active").length){
+        $("#rooms_tab").addClass("active");
+    }
+}
+
