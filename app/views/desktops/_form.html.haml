@@ -1,13 +1,15 @@
 = form_for(@desktop, :html => {:class => 'well form-horizontal'}) do |f|
 
   -if @desktop.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@desktop.errors.count, "error")} prohibited this desktop from being saved:"
-      %ul
-        - @desktop.errors.full_messages.each do |msg|
-          %li= msg
+    .alert.alert-error
+      - @desktop.errors.full_messages.each do |msg|
+        %p= msg
 
   %fieldset
+    .control-group
+      = f.label :name, 'Имя ПК', :class => 'control-label'
+      .controls
+        = f.text_field :name, :class => 'input-xlarge'
     .control-group
       = f.label :ip, 'IP', :class => 'control-label'
       .controls
