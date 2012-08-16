@@ -1,4 +1,4 @@
-= form_for @room, :class => "form-horizontal" do |f|
+= form_for(@room, :html => {:class => 'well form-horizontal'}) do |f|
   -if @room.errors.any?
     #error_explanation
       %h2= "#{pluralize(@room.errors.count, "error")} какая-то ошибка, не может сохранить:"
@@ -7,16 +7,13 @@
           %li= msg
   %fieldset
     .control-group
-      %label.control-label{:for => "name"} Номер офиса
-      = f.text_field :name, :placeholder => "Введите номер офиса"
-    .control-group
-      %label.control-label{:for => "select01"} Ответственный
+      = f.label :name, 'Номер офиса', :class => 'control-label'
       .controls
-        %select#select01{:name => "room[user_id]"}
-          -@users.each do |user|
-            %option{:value => "#{user.id}"}
-              = user.full_name
-
-  .actions
+        = f.text_field :name, :class => 'input-xlarge', :placeholder => "Введите номер офиса"
+    .control-group
+      = f.label :user_id, 'Пользователь', :class => 'control-label'
+      .controls
+        = select_tag :user_id, options_from_collection_for_select(@users, :id, :full_name, @room.user_id), :prompt => 'Выбрать пользователя', :include_blank => true, :class => 'input-xlarge', :name => "room[user_id]"
+  .form-actions
     =f.submit "Назначить", :class => "btn btn-primary"
     = link_to "Назад", root_url, :class => "btn"
