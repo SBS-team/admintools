@@ -19,7 +19,7 @@
         %tr
           %td= desktop.ip
           %td= desktop.mac
-          %td= (desktop.room.present?) ? (desktop.room.office) : ('пусто')
+          %td= (desktop.room.present?) ? (desktop.room.name) : ('пусто')
           %td= (desktop.user.present?) ? (desktop.user.full_name) : ('пусто')
           %td
             = link_to desktop_path(desktop), :class => "btn" do
