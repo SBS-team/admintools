@@ -1,18 +1,33 @@
-%h1 User list
-#users
-  %span.new-user-link
-    = link_to 'Add user', new_user_path, :class => 'btn btn-info'
+%h1 Пользователи
 
-  - @users.each_slice(4) do |users|
-    .row-fluid  
-      - users.each do |u|
-        .span3.well
-          %p
-            %i{:class => "icon-user"}
-            = "#{u.first_name} #{u.last_name}"
-          %p
-            %i{:class => "icon-envelope"}
-            = "#{u.email}"
-          %p= "Skype: #{u.skype}"
-          = link_to 'More', user_path(u.id), :class => 'btn btn-info'
-          = link_to 'Edit', edit_user_path(u.id), :class => 'btn btn-inverse'
+%hr
+
+.well
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Имя
+        %th Фамилия
+        %th Email
+        %th Skype
+        %th 
+          = link_to new_user_path, :class => "btn btn-success" do
+            %i{:class => "icon-plus"}
+              Создать
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td= user.first_name
+          %td= user.last_name
+          %td= user.email
+          %td= user.skype
+          %td
+            = link_to user_path(user), :class => "btn" do
+              %i{:class => "icon-zoom-in"}
+                Просмотр
+            = link_to edit_user_path(user), :class => "btn" do
+              %i{:class => "icon-pencil"}
+                Редактировать
+            = link_to user_url(user), :method => :DELETE, :class => "btn btn-danger", :confirm => "Ты уверен?" do
+              %i{:class => "icon-remove"}
+                Удалить

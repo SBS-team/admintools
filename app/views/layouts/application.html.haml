@@ -50,6 +50,16 @@
             %li#rooms_tab= link_to "Офисы", rooms_path
             %li#desktops_tab= link_to "Компьютеры", desktops_path
             %li#users_tab= link_to "Пользователи", users_path
+          - if notice
+            .alert.alert-info
+              %a.close{"data-dismiss" => "alert", :href => "#"}
+                ×
+              = notice
+          - if alert
+            .alert.alert-alert
+              %a.close{"data-dismiss" => "alert", :href => "#"}
+                ×
+              = alert
           = yield
         .span3
           .well.sidebar-nav
