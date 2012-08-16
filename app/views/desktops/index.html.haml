@@ -2,31 +2,32 @@
 
 %hr
 
-%table.table.table-striped
-  %thead
-    %tr
-      %th IP
-      %th MAC
-      %th Офис
-      %th Пользователь
-      %th 
-        = link_to new_desktop_path, :class => "btn btn-success" do
-          %i{:class => "icon-plus"}
-            Создать
-  %tbody
-    - @desktops.each do |desktop|
+.well
+  %table.table.table-striped
+    %thead
       %tr
-        %td= desktop.ip
-        %td= desktop.mac
-        %td= (desktop.room.present?) ? (desktop.room.name) : ('пусто')
-        %td= (desktop.user.present?) ? (desktop.user.full_name) : ('пусто')
-        %td
-          = link_to desktop_path(desktop), :class => "btn" do
-            %i{:class => "icon-zoom-in"}
-              Просмотр
-          = link_to edit_desktop_path(desktop), :class => "btn" do
-            %i{:class => "icon-pencil"}
-              Редактировать
-          = link_to desktop_url(desktop), :method => :DELETE, :class => "btn btn-danger", :confirm => "Ты уверен?" do
-            %i{:class => "icon-remove"}
-              Удалить
+        %th IP
+        %th MAC
+        %th Офис
+        %th Пользователь
+        %th 
+          = link_to new_desktop_path, :class => "btn btn-success" do
+            %i{:class => "icon-plus"}
+              Создать
+    %tbody
+      - @desktops.each do |desktop|
+        %tr
+          %td= desktop.ip
+          %td= desktop.mac
+          %td= (desktop.room.present?) ? (desktop.room.office) : ('пусто')
+          %td= (desktop.user.present?) ? (desktop.user.full_name) : ('пусто')
+          %td
+            = link_to desktop_path(desktop), :class => "btn" do
+              %i{:class => "icon-zoom-in"}
+                Просмотр
+            = link_to edit_desktop_path(desktop), :class => "btn" do
+              %i{:class => "icon-pencil"}
+                Редактировать
+            = link_to desktop_url(desktop), :method => :DELETE, :class => "btn btn-danger", :confirm => "Ты уверен?" do
+              %i{:class => "icon-remove"}
+                Удалить

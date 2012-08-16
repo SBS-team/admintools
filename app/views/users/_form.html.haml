@@ -1,27 +1,31 @@
-= form_for @user do |u|
+= form_for(@user, :html => {:class => 'well form-horizontal'}) do |u|
   -if @user.errors.any?
     #error_explanation
       %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved"
       %ul
         - @user.errors.full_messages.each do |msg|
           %li= msg
-    
-  .field
-    = u.label :first_name, 'Имя'
-    = u.text_field :first_name
-  .field
-    = u.label :last_name, 'Фамилия'
-    = u.text_field :last_name
-  .field
-    = u.label :email
-    = u.email_field :email
-  .field
-    = u.label :skype
-    = u.text_field :skype
-  .field
-    = u.label :info, 'Дополнительно'
-    = u.text_area :info
-
-  .actions
-    = u.submit 'Save', :class => 'btn'
-    = link_to 'Back', users_path, :class => 'btn btn-info'
+  %fieldset
+    .control-group
+      = u.label :first_name, 'Имя', :class => 'control-label'
+      .controls
+        = u.text_field :first_name, :class => 'input-xlarge'
+    .control-group
+      = u.label :last_name, 'Фамилия', :class => 'control-label'
+      .controls
+        = u.text_field :last_name, :class => 'input-xlarge'
+    .control-group
+      = u.label :email, 'Email', :class => 'control-label'
+      .controls
+        = u.text_field :email, :class => 'input-xlarge'
+    .control-group
+      = u.label :skype, 'Skype', :class => 'control-label'
+      .controls
+        = u.text_field :skype, :class => 'input-xlarge'
+    .control-group
+      = u.label :info, 'Информация', :class => 'control-label'
+      .controls
+        = u.text_area :info, :class => 'input-xxlarge', :id => 'nic', :style => "height:200px"
+    .form-actions
+      = u.submit (@user.id?) ? 'Изменить' : 'Создать' , :class => 'btn btn-primary'
+      = link_to 'Назад', users_path, :class => 'btn'
