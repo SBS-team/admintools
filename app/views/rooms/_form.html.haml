@@ -15,5 +15,5 @@
       .controls
         = select_tag :user_id, options_from_collection_for_select(@users, :id, :full_name, @room.user_id), :prompt => 'Выбрать пользователя', :include_blank => true, :class => 'input-xlarge', :name => "room[user_id]"
   .form-actions
-    =f.submit "Назначить", :class => "btn btn-primary"
+    = f.submit (@room.id?) ? 'Изменить' : 'Создать' , :class => 'btn btn-primary'
     = link_to "Назад", root_url, :class => "btn"
