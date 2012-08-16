@@ -1,5 +1,4 @@
 class Desktop < ActiveRecord::Base
-  attr_accessible :info, :ip, :mac, :name
 
   belongs_to :room
   belongs_to :user
