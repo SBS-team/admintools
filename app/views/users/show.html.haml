@@ -1,19 +1,34 @@
-%h1 User info
-#users
-  -if @user
-    .well
-      %p 
-        %i{:class => "icon-user"}
-        = "#{@user.first_name} #{@user.last_name}"
-      %p
-        %i{:class => "icon-envelope"}
-        = @user.email
-      %p
-        %span.label.label-info Skype
-        = "#{@user.skype}"
-      - if @user.info
-        %p
-          %span.label.label-info Info
-          = "#{@user.info}"
-      = link_to 'Edit', edit_user_path(@user.id), :class => 'btn btn-inverse'
-      = link_to 'Back', users_path, :class => 'btn btn-info'
+%h1 Информация пользователя
+
+%hr
+
+-if @user
+  .well.form-horizontal
+    %fieldset
+      .control-group
+        %label.control-label
+          Пользователь
+        .controls
+          %span.input-xlarge.uneditable-input= @user.full_name
+      .control-group
+        %label.control-label
+          Email
+        .controls
+          %span.input-xlarge.uneditable-input= @user.email
+      .control-group
+        %label.control-label
+          Skype
+        .controls
+          %span.input-xlarge.uneditable-input= @user.skype
+      .control-group
+        %label.control-label
+          Информация
+        .controls
+          %span.input-xxlarge.uneditable-input{:readonly => 'readonly', :style => 'height:200px;overflow:auto'}= @user.info.html_safe
+      .form-actions
+        = link_to users_path, :class => 'btn btn-primary' do
+          %i.icon-circle-arrow-left
+          Назад
+        = link_to edit_user_path, :class => 'btn btn-warning' do
+          %i.icon-pencil
+          Редактировать
