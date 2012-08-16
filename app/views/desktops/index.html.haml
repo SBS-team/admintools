@@ -1,19 +1,32 @@
-%h1 desktop
+%h1 Компьютеры
+
+%hr
+
 %table.table.table-striped
   %thead
     %tr
-      %th user_id
-      %th room
-      %th ip
-      %th mac
-      %th info
+      %th IP
+      %th MAC
+      %th Офис
+      %th Пользователь
+      %th 
+        = link_to new_desktop_path, :class => "btn btn-success" do
+          %i{:class => "icon-plus"}
+            Создать
   %tbody
-    - @desktops.each do |w|
+    - @desktops.each do |desktop|
       %tr
-        %td{:width => "100"}= w.user_id
-        %td{:width => "100"}= link_to w.room_id
-        %td{:width => "100"}= w.ip
-        %td{:width => "100"}= w.mac
-        %td{:width => "100"}= w.info
-        %td= link_to "edit", edit_desktop_path(w.id)
-
+        %td= desktop.ip
+        %td= desktop.mac
+        %td= (desktop.room.present?) ? (desktop.room.office) : ('пусто')
+        %td= (desktop.user.present?) ? (desktop.user.full_name) : ('пусто')
+        %td
+          = link_to desktop_path(desktop), :class => "btn" do
+            %i{:class => "icon-zoom-in"}
+              Просмотр
+          = link_to edit_desktop_path(desktop), :class => "btn" do
+            %i{:class => "icon-pencil"}
+              Редактировать
+          = link_to desktop_url(desktop), :method => :DELETE, :class => "btn btn-danger", :confirm => "Ты уверен?" do
+            %i{:class => "icon-remove"}
+              Удалить

@@ -1,26 +1,33 @@
-= form_for @desktop do |d|
+= form_for(@desktop, :html => {:class => 'well form-horizontal'}) do |f|
+
   -if @desktop.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@desktop.errors.count, "error")} prohibited this photo from being saved:"
+      %h2= "#{pluralize(@desktop.errors.count, "error")} prohibited this desktop from being saved:"
       %ul
-        - @desktop.errors.full_messages.each do |er|
-          %li= er
-  .field
-    = d.label :ip
-    = d.text_field :ip
-  .field
-    = d.label :mac
-    = d.text_field :mac
-  .field
-    = d.label :user_id
-    / = d.text_field :user_id
-    = select_tag :user_id, options_from_collection_for_select(@user, :id, :first_name)
-  .field
-    = d.label :room_id
-    / = d.text_field :room_id
-    = select_tag :room_id, options_from_collection_for_select(@room, :id, :office)
-  .field
-    = d.label :info
-    = d.text_field :info
-  .actions
-    = d.submit 'Save'
+        - @desktop.errors.full_messages.each do |msg|
+          %li= msg
+
+  %fieldset
+    .control-group
+      = f.label :ip, 'IP', :class => 'control-label'
+      .controls
+        = f.text_field :ip, :class => 'input-xlarge'
+    .control-group
+      = f.label :mac, 'MAC', :class => 'control-label'
+      .controls
+        = f.text_field :mac, :class => 'input-xlarge'
+    .control-group
+      = f.label :user_id, 'Пользователь', :class => 'control-label'
+      .controls
+        = select_tag :user_id, options_from_collection_for_select(@user, :id, :full_name, @desktop.user_id), :prompt => 'Выбрать пользователя', :include_blank => true, :class => 'input-xlarge'
+    .control-group
+      = f.label :room_id, 'Офис', :class => 'control-label'
+      .controls
+        = select_tag :room_id, options_from_collection_for_select(@room, :id, :office, @desktop.room_id), :prompt => 'Выбрать офис', :include_blank => true, :class => 'input-xlarge'
+    .control-group
+      = f.label :info, 'Информация', :class => 'control-label'
+      .controls
+        = f.text_area :info, :id => 'nic', :class => 'input-xxlarge', :style => 'height:200px'
+    .form-actions
+      = f.submit (@desktop.id?) ? 'Изменить' : 'Создать' , :class => 'btn btn-primary'
+      = link_to 'Назад', desktops_path, :class => 'btn'
