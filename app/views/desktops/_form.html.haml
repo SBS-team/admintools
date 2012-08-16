@@ -23,7 +23,7 @@
     .control-group
       = f.label :room_id, 'Офис', :class => 'control-label'
       .controls
-        = select_tag :room_id, options_from_collection_for_select(@room, :id, :office, @desktop.room_id), :prompt => 'Выбрать офис', :include_blank => true, :class => 'input-xlarge'
+        = select_tag :room_id, options_from_collection_for_select(@room, :id, :name, @desktop.room_id), :prompt => 'Выбрать офис', :include_blank => true, :class => 'input-xlarge'
     .control-group
       = f.label :info, 'Информация', :class => 'control-label'
       .controls
