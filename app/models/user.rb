@@ -4,7 +4,6 @@ class User < ActiveRecord::Base
   has_one  :desktop
   has_many :devices
   has_one :room
-  has_many :gadgets
   
   validates :first_name, :presence => true
   validates :last_name,  :presence => true
