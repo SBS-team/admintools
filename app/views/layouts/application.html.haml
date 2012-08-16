@@ -54,6 +54,16 @@
             -#  %a{:href => "#"} Library
             -#  %span.divider /
             -#%li.active Data
+          - if notice
+            .alert.alert-info
+              %a.close{"data-dismiss" => "alert", :href => "#"}
+                ×
+              = notice
+          - if alert
+            .alert.alert-alert
+              %a.close{"data-dismiss" => "alert", :href => "#"}
+                ×
+              = alert
           = yield
         .span3
           .well.sidebar-nav
