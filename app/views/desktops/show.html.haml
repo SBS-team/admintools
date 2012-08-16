@@ -30,7 +30,7 @@
       %label.control-label
         Информация
       .controls
-        %textarea.input-xxlarge{:readonly => 'readonly', :style => 'height:200px'}= @desktop.info
+        %span.input-xxlarge{:readonly => 'readonly', :style => 'height:200px;overflow:auto'}= @desktop.info.html_safe
     .form-actions
       = link_to desktops_path, :class => 'btn btn-primary' do
         %i.icon-circle-arrow-left
