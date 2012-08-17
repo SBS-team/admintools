@@ -1,6 +1,6 @@
 class DesktopsController < ApplicationController
   before_filter :all_users_and_rooms, :only => [:new, :edit, :create, :update]
-  before_filter :current_desktop, :only => [:edit, :destroy, :update, :show]
+  before_filter :current_desktop, :only => [:show, :edit, :update, :destroy]
 
   def index
     @desktops = Desktop.order('created_at').all

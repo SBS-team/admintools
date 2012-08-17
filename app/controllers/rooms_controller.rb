@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
   before_filter :user_all, :only => [:new, :edit, :create, :update]
-  before_filter :current_room, :only => [:edit, :destroy, :update, :show]
+  before_filter :current_room, :only => [:show, :edit, :update, :destroy]
 
   def index
     @rooms = Room.order('created_at').all

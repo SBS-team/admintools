@@ -1,6 +1,6 @@
 class DevicesController < ApplicationController
   before_filter :users_all, :only => [:new, :edit, :create, :update]
-  before_filter :current_device, :only => [:edit, :destroy, :update, :show]
+  before_filter :current_device, :only => [:show, :edit, :update, :destroy]
 
   def index
     @devices = Device.order('created_at').all
