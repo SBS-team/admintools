@@ -1,8 +1,5 @@
 class Desktop < ActiveRecord::Base
-  before_save :dec_counter
-  after_save :inc_counter
-  
-  attr_accessible :info, :ip, :mac, :name
+  after_update :re_counter
 
   belongs_to :room, :counter_cache => true
   belongs_to :user
@@ -14,11 +11,9 @@ class Desktop < ActiveRecord::Base
 
   private
 
-  def dec_counter
-    Room.update(room_id, {:desktops_count => Room.find(room_id).desktops.count - 1}) if :room_id?
-  end
-
-  def inc_counter
-    Room.update(room_id, {:desktops_count => Room.find(room_id).desktops.count + 1}) if :room_id?
+  def re_counter
+    Room.all.each do |r|
+      Room.update r.id, :desktops_count => r.desktops.count
+    end
   end
 end

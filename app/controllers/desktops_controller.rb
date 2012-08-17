@@ -1,6 +1,6 @@
 class DesktopsController < ApplicationController
-  before_filter :init_vars, :only => [:new, :edit]
-  after_filter :init_ids, :only => [:new, :edit]
+  before_filter :all_users_and_rooms, :only => [:new, :edit, :create, :update]
+  before_filter :current_desktop, :only => [:edit, :destroy, :update, :show]
 
   def index
     @desktops = Desktop.order('created_at').all
@@ -11,54 +11,43 @@ class DesktopsController < ApplicationController
   end
 
   def show
-    @desktop = Desktop.find_by_id(params[:id])
-  end
 
-  def create
-    user = User.find_by_id(params[:user_id])
-    room = Room.find_by_id(params[:room_id])
-
-    @desktop = Desktop.new(params[:desktop])
-
-    @desktop.user_id = user.id if user
-    @desktop.room_id = room.id if room
-      
-    @desktop.save ? (redirect_to :desktops) : (init_vars; init_ids; render :action => "new") 
   end
 
   def edit
-    @desktop = Desktop.find_by_id(params[:id])
+
+  end
+
+  def create
+    @desktop = Desktop.new(params[:desktop])
+    if @desktop.save
+      redirect_to :desktops
+    else
+      render :action => "new"
+    end
   end
 
   def update
-    user = User.find_by_id(params[:user_id])
-    room = Room.find_by_id(params[:room_id])
-    
-    @desktop = Desktop.find_by_id(params[:id])
-    
-    @desktop.attributes = params[:desktop]
-        
-    @desktop.user_id = user ? user.id : nil
-    @desktop.room_id = room ? room.id : nil
-        
-    @desktop.save ? (redirect_to :desktops) : (init_vars; init_ids; render :action => 'edit')
+    if @desktop.update_attributes(params[:desktop])
+      redirect_to :desktops
+    else
+      render :action => 'edit'
+    end
   end
 
   def destroy
-    @desktop = Desktop.find_by_id(params[:id])
     @desktop.destroy and redirect_to :desktops
   end
 
 private
 
-  def init_vars
-    @user = User.all
-    @room = Room.all
+  def all_users_and_rooms
+    @user ||= User.all
+    @room ||= Room.all
   end
 
-  def init_ids
-    @user_id = (@desktop.id?) ? (@desktop.user.nil?) ? false : (@desktop.user.id) : (false)
-    @room_id = (@desktop.id?) ? (@desktop.room.nil?) ? false : (@desktop.room.id) : (false)
+  def current_desktop
+    @desktop = Desktop.find_by_id(params[:id])
   end
 
 end

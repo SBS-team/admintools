@@ -26,4 +26,4 @@
           = select_tag :user_id, options_from_collection_for_select(@users, :id, :full_name, @device.user_id), :prompt => 'Выбрать пользователя', :name => "device[user_id]"
       .form-actions
         = f.submit (@device.id?) ? 'Изменить' : 'Создать' , :class => 'btn btn-primary'
-        -# = link_to 'Назад', device_path , :class => 'btn'
+        = link_to 'Назад', devices_path , :class => 'btn'
