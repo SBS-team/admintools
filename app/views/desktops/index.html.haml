@@ -21,8 +21,8 @@
           %td= desktop.name
           %td= desktop.ip
           %td= desktop.mac
-          %td= (desktop.room.present?) ? (desktop.room.name) : ('пусто')
-          %td= (desktop.user.present?) ? (desktop.user.full_name) : ('пусто')
+          %td= check_empty(desktop.room, "name")
+          %td= check_empty(desktop.user, "full_name")
           %td
             = link_to desktop_path(desktop), :class => "btn" do
               %i{:class => "icon-zoom-in"}
