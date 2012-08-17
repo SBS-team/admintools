@@ -19,7 +19,7 @@
         %tr
           %td= room.id
           %td= room.name
-          %td= room.user.full_name
+          %td= check_empty(room.user, "full_name")
           %td= room.desktops_count
           %td
             = link_to room_path(room), :class => "btn" do
