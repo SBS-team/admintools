@@ -21,7 +21,7 @@
           %td= device.name
           %td= device.ip
           %td= device.mac
-          %td= device.user.full_name
+          %td= check_empty(device.user, "full_name")
           %td
             = link_to device_path(device), :class => "btn" do
               %i{:class => "icon-zoom-in"}
