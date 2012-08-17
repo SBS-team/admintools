@@ -7,4 +7,5 @@ Admintools::Application.routes.draw do
   resources :desktops
 
   root :to => 'rooms#index'
+  match "/designer" => "constructor#designer"
 end
