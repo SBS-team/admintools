@@ -3,7 +3,7 @@ class DevicesController < ApplicationController
   before_filter :current_device, :only => [:edit, :destroy, :update, :show]
 
   def index
-    @devices = Device.all
+    @devices = Device.order('created_at').all
   end
 
   def new

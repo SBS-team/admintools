@@ -3,7 +3,7 @@ class RoomsController < ApplicationController
   before_filter :current_room, :only => [:edit, :destroy, :update, :show]
 
   def index
-    @rooms = Room.all
+    @rooms = Room.order('created_at').all
   end
 
   def new
@@ -36,14 +36,13 @@ class RoomsController < ApplicationController
   end
 
   def destroy
-    @room.destroy
-    redirect_to :root
+    @room.destroy and redirect_to :root
   end
 
   private
 
   def user_all
-    @users = User.all
+    @users ||= User.all
   end
 
   def current_room
