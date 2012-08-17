@@ -1,5 +1,5 @@
 class Desktop < ActiveRecord::Base
-  after_update :re_counter
+  after_save :re_counter
 
   belongs_to :room, :counter_cache => true
   belongs_to :user
