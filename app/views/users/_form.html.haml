@@ -15,6 +15,10 @@
       .controls
         = u.text_field :last_name, :class => 'input-xlarge'
     .control-group
+      = u.label :phone_field, 'Телефон', :class => 'control-label'
+      .controls
+        = u.text_field :phone, :value => "+3 80", :class => 'input-xlarge'
+    .control-group
       = u.label :email, 'Email', :class => 'control-label'
       .controls
         = u.text_field :email, :class => 'input-xlarge'

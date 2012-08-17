@@ -8,6 +8,7 @@
       %tr
         %th Имя
         %th Фамилия
+        %th Телефон
         %th Email
         %th Skype
         %th 
@@ -19,6 +20,7 @@
         %tr
           %td= user.first_name
           %td= user.last_name
+          %td= check_empty(user, "phone")
           %td= user.email
           %td= user.skype
           %td

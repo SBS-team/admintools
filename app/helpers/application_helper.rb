@@ -2,7 +2,7 @@
 module ApplicationHelper
 
   def check_empty(obj,field)
-    (obj.present?) ? (obj.try(field)) : ("Пусто")
+    obj.try(field) || "Пусто"
   end
 
 end
