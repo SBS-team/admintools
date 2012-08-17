@@ -1,0 +1,35 @@
+= form_for(@desktop, :html => {:class => 'well form-horizontal'}) do |f|
+
+  -if @desktop.errors.any?
+    .alert.alert-error
+      - @desktop.errors.full_messages.each do |msg|
+        %p= msg
+
+  %fieldset
+    .control-group
+      = f.label :name, 'Имя ПК', :class => 'control-label'
+      .controls
+        = f.text_field :name, :class => 'input-xlarge'
+    .control-group
+      = f.label :ip, 'IP', :class => 'control-label'
+      .controls
+        = f.text_field :ip, :class => 'input-xlarge'
+    .control-group
+      = f.label :mac, 'MAC', :class => 'control-label'
+      .controls
+        = f.text_field :mac, :class => 'input-xlarge'
+    .control-group
+      = f.label :user_id, 'Пользователь', :class => 'control-label'
+      .controls
+        = select_tag :user_id, options_from_collection_for_select(@user, :id, :full_name, @desktop.user_id), :prompt => 'Выбрать пользователя', :include_blank => true, :class => 'input-xlarge', :name => "desktop[user_id]"
+    .control-group
+      = f.label :room_id, 'Офис', :class => 'control-label'
+      .controls
+        = select_tag :room_id, options_from_collection_for_select(@room, :id, :name, @desktop.room_id), :prompt => 'Выбрать офис', :include_blank => true, :class => 'input-xlarge', :name => "desktop[room_id]"
+    .control-group
+      = f.label :info, 'Информация', :class => 'control-label'
+      .controls
+        = f.text_area :info, :id => 'nic', :class => 'input-xxlarge', :style => 'height:200px'
+    .form-actions
+      = f.submit (@desktop.id?) ? 'Изменить' : 'Создать' , :class => 'btn btn-primary'
+      = link_to 'Назад', desktops_path, :class => 'btn'

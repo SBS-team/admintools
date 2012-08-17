@@ -1,0 +1,35 @@
+%h1 Компьютеры
+
+%hr
+
+.well
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Имя ПК
+        %th IP
+        %th MAC
+        %th Офис
+        %th Пользователь
+        %th 
+          = link_to new_desktop_path, :class => "btn btn-success" do
+            %i{:class => "icon-plus"}
+              Создать
+    %tbody
+      - @desktops.each do |desktop|
+        %tr
+          %td= desktop.name
+          %td= desktop.ip
+          %td= desktop.mac
+          %td= check_empty(desktop.room, "name")
+          %td= check_empty(desktop.user, "full_name")
+          %td
+            = link_to desktop_path(desktop), :class => "btn" do
+              %i{:class => "icon-zoom-in"}
+                Просмотр
+            = link_to edit_desktop_path(desktop), :class => "btn" do
+              %i{:class => "icon-pencil"}
+                Редактировать
+            = link_to desktop_url(desktop), :method => :DELETE, :class => "btn btn-danger", :confirm => "Ты уверен?" do
+              %i{:class => "icon-remove"}
+                Удалить

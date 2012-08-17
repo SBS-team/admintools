@@ -1,0 +1,34 @@
+%h1 Устройства
+
+%hr
+
+.well
+
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Имя
+        %th IP
+        %th MAC
+        %th Пользователь
+        %th
+          = link_to new_device_path, :class => "btn btn-success" do
+            %i{:class => "icon-plus"}
+              Создать
+    %tbody
+      - @devices.each do |device|
+        %tr
+          %td= device.name
+          %td= device.ip
+          %td= device.mac
+          %td= check_empty(device.user, "full_name")
+          %td
+            = link_to device_path(device), :class => "btn" do
+              %i{:class => "icon-zoom-in"}
+                Просмотр
+            = link_to edit_device_path(device), :class => "btn" do
+              %i{:class => "icon-pencil"}
+                Редактировать
+            = link_to device_url(device), :method => :DELETE, :class => "btn btn-danger", :confirm => "Ты уверен?" do
+              %i{:class => "icon-remove"}
+                Удалить
