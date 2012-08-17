@@ -1,6 +1,5 @@
 class DevicesController < ApplicationController
-  before_filter :init_vars, :only => [:new, :edit]
-  after_filter :init_ids, :only => [:new, :edit]
+  before_filter :users_all, :only => [:new, :edit, :create, :update]
 
   def index
     @devices = Device.all
@@ -18,7 +17,7 @@ class DevicesController < ApplicationController
     user = User.find_by_id(params[:user_id])
     @device = Device.new(params[:device])
     @device.user_id = user.id if user
-    @device.save ? (redirect_to :devices) : (init_vars; init_ids; render :action => "new")
+    @device.save ? (redirect_to :devices) : (render :action => "new")
   end
 
   def edit
@@ -27,7 +26,7 @@ class DevicesController < ApplicationController
 
   def update
     @device = Device.find_by_id(params[:id])
-    @device.update_attributes(params[:device]) ? (redirect_to :devices) : (init_vars; init_ids; render :action => 'edit')
+    @device.update_attributes(params[:device]) ? (redirect_to :devices) : (render :action => 'edit')
   end
 
   def destroy
@@ -37,10 +36,8 @@ class DevicesController < ApplicationController
 
   private
 
-  def init_vars
+  def users_all
     @users = User.all
   end
-  def init_ids
-    @user_id = (@device.id?) ? (@device.user.nil?) ? false : (@device.user.id) : (false)
-  end
+
 end
