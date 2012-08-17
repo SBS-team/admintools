@@ -18,11 +18,6 @@ class RoomsController < ApplicationController
 
   end
 
-  def destroy
-    @room.destroy
-    redirect_to :root
-  end
-
   def create
     @room = Room.new(params[:room])
     if @room.save
@@ -38,6 +33,11 @@ class RoomsController < ApplicationController
     else
       render :action => "edit"
     end
+  end
+
+  def destroy
+    @room.destroy
+    redirect_to :root
   end
 
   private
