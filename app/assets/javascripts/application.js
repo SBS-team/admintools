@@ -37,3 +37,8 @@ function tab_menu(){
     }
 }
 
+$.ajaxSetup({
+    beforeSend: function(xhr) {
+        xhr.setRequestHeader("Accept", "text/javascript");
+    }
+});

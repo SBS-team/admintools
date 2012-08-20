@@ -1,7 +1,7 @@
 login: &login
   adapter: 'postgresql'
-  username: 'admintools'
-  password: '123456'
+  username: 'postgres'
+  password: 'pass'
   host: 'localhost'
   port: 5432
   encoding: 'UTF8'
