@@ -1,9 +1,9 @@
 class DevicesController < ApplicationController
-  before_filter :init_vars, :only => [:new, :edit]
-  after_filter :init_ids, :only => [:new, :edit]
+  before_filter :users_all, :only => [:new, :edit, :create, :update]
+  before_filter :current_device, :only => [:show, :edit, :update, :destroy]
 
   def index
-    @devices = Device.all
+    @devices = Device.order('created_at').all
   end
 
   def new
@@ -11,36 +11,42 @@ class DevicesController < ApplicationController
   end
 
   def show
-    @device = Device.find_by_id(params[:id])
-  end
 
-  def create
-    user = User.find_by_id(params[:user_id])
-    @device = Device.new(params[:device])
-    @device.user_id = user.id if user
-    @device.save ? (redirect_to :devices) : (init_vars; init_ids; render :action => "new")
   end
 
   def edit
-    @device = Device.find_by_id(params[:id])
+
+  end
+
+  def create
+    @device = Device.new(params[:device])
+    if @device.save
+      redirect_to :devices
+    else
+      render :action => "new"
+    end
   end
 
   def update
-    @device = Device.find_by_id(params[:id])
-    @device.update_attributes(params[:device]) ? (redirect_to :devices) : (init_vars; init_ids; render :action => 'edit')
+    if @device.update_attributes(params[:device])
+      redirect_to :devices
+    else
+      render :action => 'edit'
+    end
   end
 
   def destroy
-    @device = Device.find_by_id(params[:id])
     @device.destroy and redirect_to :devices
   end
 
   private
 
-  def init_vars
-    @users = User.all
+  def users_all
+    @users ||= User.all
   end
-  def init_ids
-    @user_id = (@device.id?) ? (@device.user.nil?) ? false : (@device.user.id) : (false)
+
+  def current_device
+    @device = Device.find_by_id(params[:id])
   end
+
 end

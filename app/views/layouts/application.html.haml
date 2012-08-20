@@ -37,13 +37,7 @@
             %span.icon-bar
           %a.brand{:href => "#"} Admintools
           .container-fluid.nav-collapse
-            -#%ul.nav
-            -#  %li= link_to "Офисы", rooms_path
-            -#  %li= link_to "Компьютеры", desktops_path
-            -#  %li= link_to "Пользователи", users_path
-          / /.nav-collapse
     .container-fluid
-
       .row-fluid
         .span9
           %ul.breadcrumb
@@ -52,6 +46,8 @@
             %li#desktops_tab= link_to "Компьютеры", desktops_path
             %li#users_tab= link_to "Пользователи", users_path
             %li#calendar_tab= link_to "Календарь", calendar_path
+            %li#devices_tab= link_to "Устройства", devices_path
+            %li#designer_tab= link_to "Конструктор", designer_path
           - if notice
             .alert.alert-info
               %a.close{"data-dismiss" => "alert", :href => "#"}
@@ -64,12 +60,9 @@
               = alert
           = yield
         .span3
-          .well.sidebar-nav
-            %ul.nav.nav-list
-              %li.nav-header Sidebar
-              %li= link_to "Link1", "/path1"
-              %li= link_to "Link2", "/path2"
-              %li= link_to "Link3", "/path3"
+          %form.well.form-search
+            %input.input-medium.search-query{:type => "text"}
+              %button.btn{:type => "submit"} Search
           / /.well
         / /span
       / /row
