@@ -3,7 +3,8 @@ class RoomsController < ApplicationController
   before_filter :current_room, :only => [:show, :edit, :update, :destroy]
 
   def index
-    @rooms = Room.order('created_at').all
+    @search = Room.search(params[:search])
+    @rooms = @search.order('created_at').all
   end
 
   def new

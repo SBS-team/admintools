@@ -12,5 +12,5 @@
     %p
       = f.label :skype_equals, "Введите skype"
       = f.text_field :skype_equals
-    -#%input.input-medium.search-query{:type => "text"}
     %button.btn{:type => "submit"} Search
+    = link_to "Reset", users_path, :class => 'btn btn-inverse'
