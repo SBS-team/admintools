@@ -58,9 +58,10 @@
               = alert
           = yield
         .span3
-          %form.well.form-search
-            %input.input-medium.search-query{:type => "text"}
-              %button.btn{:type => "submit"} Search
+          = yield :sidebar
+          -#%form.well.form-search
+          -#  %input.input-medium.search-query{:type => "text"}
+          -#    %button.btn{:type => "submit"} Search
           / /.well
         / /span
       / /row

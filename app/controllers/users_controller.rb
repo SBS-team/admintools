@@ -2,7 +2,8 @@ class UsersController < ApplicationController
   before_filter :current_user, :only => [:show, :edit, :update, :destroy]
 
   def index
-    @users = User.order('created_at').all
+    @search = User.search(params[:search])
+    @users = @search.all
   end
 
   def new
