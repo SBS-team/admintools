@@ -11,7 +11,8 @@
         %th Телефон
         %th Email
         %th Skype
-        %th 
+        %th Офис
+        %th
           = link_to new_user_path, :class => "btn btn-success" do
             %i{:class => "icon-plus"}
               Создать
@@ -23,6 +24,7 @@
           %td= check_empty(user, "phone")
           %td= user.email
           %td= user.skype
+          %td= check_empty(user.room, "name")
           %td
             = link_to user_path(user), :class => "btn" do
               %i{:class => "icon-zoom-in"}
