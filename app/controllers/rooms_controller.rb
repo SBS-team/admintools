@@ -1,5 +1,6 @@
+#encoding=UTF-8
 class RoomsController < ApplicationController
-  before_filter :user_all, :only => [:new, :edit, :create, :update]
+  before_filter :user_all, :only => [:index, :new, :edit, :create, :update]
   before_filter :current_room, :only => [:show, :edit, :update, :destroy]
 
   def index
