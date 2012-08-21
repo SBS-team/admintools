@@ -1,9 +1,10 @@
 class DesktopsController < ApplicationController
-  before_filter :all_users_and_rooms, :only => [:new, :edit, :create, :update]
+  before_filter :all_users_and_rooms, :only => [:index, :new, :edit, :create, :update]
   before_filter :current_desktop, :only => [:show, :edit, :update, :destroy]
 
   def index
-    @desktops = Desktop.order('created_at').all
+    @search = Desktop.search(params[:search])
+    @desktops = @search.order('created_at').all
   end
 
   def new
@@ -42,8 +43,8 @@ class DesktopsController < ApplicationController
 private
 
   def all_users_and_rooms
-    @user ||= User.all
-    @room ||= Room.all
+    @users ||= User.all
+    @rooms ||= Room.all
   end
 
   def current_desktop

@@ -1,4 +1,4 @@
-= form_for :search, :url => rooms_path, :html => {:method => :get, :class => 'well form-horizontal'} do |f|
+= form_for @search, :url => rooms_path, :html => {:method => :get, :class => 'well form-horizontal'} do |f|
   .input-medium.search-query{:type => "text"}
     %p
       = f.label :name_equals, "Введите имя офиса"
