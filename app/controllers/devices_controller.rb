@@ -1,9 +1,10 @@
 class DevicesController < ApplicationController
-  before_filter :users_all, :only => [:new, :edit, :create, :update]
+  before_filter :users_all, :only => [:index, :new, :edit, :create, :update]
   before_filter :current_device, :only => [:show, :edit, :update, :destroy]
 
   def index
-    @devices = Device.order('created_at').all
+    @search = Device.search(params[:search])
+    @devices = @search.order('created_at').all
   end
 
   def new
