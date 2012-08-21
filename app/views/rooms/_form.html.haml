@@ -14,6 +14,17 @@
       = f.label :user_id, 'Пользователь', :class => 'control-label'
       .controls
         = select_tag :user_id, options_from_collection_for_select(@users, :id, :full_name, @room.user_id), :prompt => 'Выбрать пользователя', :include_blank => true, :class => 'input-xlarge', :name => "room[user_id]"
+
+    = f.fields_for :room_plan do |builder|
+      .control-group
+        = builder.label :length, 'Длина', :class => 'control-label'
+        .controls
+          = builder.text_field :length, :class => 'input-xlarge', :placeholder => "Длина"
+      .control-group
+        = builder.label :width, 'Ширина', :class => 'control-label'
+        .controls
+          = builder.text_field :width, :class => 'input-xlarge', :placeholder => "Ширина"
+
   .form-actions
     = f.submit (@room.id?) ? 'Изменить' : 'Создать' , :class => 'btn btn-primary'
     = link_to "Назад", root_url, :class => "btn"

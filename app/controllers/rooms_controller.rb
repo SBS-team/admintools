@@ -8,14 +8,13 @@ class RoomsController < ApplicationController
 
   def new
     @room = Room.new
+    @room.build_room_plan
   end
 
   def show
-
   end
 
   def edit
-
   end
 
   def create
