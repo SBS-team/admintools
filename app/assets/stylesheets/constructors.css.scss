@@ -1,0 +1,79 @@
+// Place all the styles related to the constructors controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#schema-wrapper {
+  width: 410px;
+  height: 430px; }
+
+.room {
+  position: relative;
+  width: 410px;
+  height: 350px;
+  border: 1px solid black;
+  padding: 0;
+  margin: 0;
+  float: left; }
+
+#trash {
+  bottom: 0;
+  float: left;
+  width: 410px;
+  height: 50px;
+  border: 1px solid red; }
+
+#desktops {
+  float: right;
+  width: 170px;
+  height: 450px;
+  position: relative;
+  border: 1px solid black;
+  margin: 0;
+  padding: 5px;
+  text-align: center; }
+
+.table {
+  position: absolute;
+  display: inline-block;
+  text-align: center;
+  z-index: 10; }
+
+.line {
+  position: absolute;
+  background: url("/images/line-table.png"); }
+
+.horizontation {
+  width: 70px;
+  height: 40px;
+  line-height: 40px; }
+
+.vertication {
+  width: 40px;
+  height: 70px;
+  line-height: 70px; }
+
+.angl {
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  background: url("/images/angle-table.png"); }
+
+.nw {
+  background-position: 0px 0px; }
+
+.ne {
+  background-position: -70px 0px; }
+
+.sw {
+  background-position: 0px -70px; }
+
+.se {
+  background-position: -70px -70px; }
+
+.table-angle-space {
+  width: 40px;
+  height: 40px;
+  background: transparent; }
+
+.new-table {
+  right: -100px;
+  top: 0; }

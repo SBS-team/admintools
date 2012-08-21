@@ -1,8 +1,10 @@
 class Room < ActiveRecord::Base
-  has_one :room_plan
+  belongs_to :user
+  
+  has_one  :room_plan
   has_many :desktops
   has_many :users, :through => :desktops
-  belongs_to :user
+  has_many :workplaces, :through => :room_plan
 
   validates :name, :presence => true, :uniqueness => true
   validates :user_id, :presence => true, :uniqueness => true

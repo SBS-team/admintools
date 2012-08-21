@@ -1,0 +1,35 @@
+%h1 Конструктор
+
+.well
+
+  #desk-pannel.navbar
+    .navbar-inner
+      .container-fluid
+        %ul.nav
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              Прямой стол
+              %b.caret
+            %ul.dropdown-menu
+              %li
+                %a#horizontation.addLine{:href => "#"} Горизонтальный
+              %li
+                %a#vertication.addLine{:href => "#"} Вертикальный
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              Угловой стол
+              %b.caret
+            %ul.dropdown-menu
+              %li
+                %a#nw.addAngle{:href => "#"} 1
+              %li
+                %a#ne.addAngle{:href => "#"} 2
+              %li
+                %a#sw.addAngle{:href => "#"} 3
+              %li
+                %a#se.addAngle{:href => "#"} 4
+  #schema-wrapper
+    .room{:id => "room_#{@room_id}"}
+      - @room_plan.workplaces.each do |w|
+        .table{:class => "#{w.workplace_type} #{w.workplace_form}", :style => "top:#{w.top}px;left:#{w.left}px", :id => "workplace_#{w.id}"}
+    #trash
