@@ -3,7 +3,7 @@ class DesktopsController < ApplicationController
   before_filter :current_desktop, :only => [:show, :edit, :update, :destroy]
 
   def index
-    @search = Desktop.search(params[:search])
+    @search = Desktop.search(params[:search] || {"meta_sort" => "id.asc"})
     @desktops = @search.order('created_at').all
   end
 

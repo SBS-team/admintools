@@ -3,15 +3,14 @@
 %hr
 
 .well
-  %table.table.table-striped
+  %table.table.table-striped.pretty
     %thead
       %tr
-        %th Фото
-        %th Имя
-        %th Фамилия
-        %th Телефон
-        %th Email
-        %th Skype
+        %th= sort_link @search, :first_name, "Имя"
+        %th= sort_link @search, :last_name, "Фамилия"
+        %th= sort_link @search, :phone, "Телефон"
+        %th= sort_link @search, :email, "Email"
+        %th= sort_link @search, :skype, "Skype"
         %th Офис
         %th
           = link_to new_user_path, :class => "btn btn-success" do
