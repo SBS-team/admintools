@@ -1,3 +1,4 @@
+#encoding=UTF-8
 class UsersController < ApplicationController
 
   before_filter :current_user, :only => [:show, :edit, :update, :destroy]
