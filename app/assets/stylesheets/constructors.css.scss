@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 #schema-wrapper {
+  margin-right:20px;
+  float: left;
   width: 410px;
   height: 430px; }
 
@@ -15,21 +17,37 @@
   float: left; }
 
 #trash {
+  background-size: 50px 50px;
+  background-color: #EE5F5B;
+  background-image: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.25, rgba(255, 255, 255, .2)), color-stop(.25, transparent), color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .2)), color-stop(.75, rgba(255, 255, 255, .2)), color-stop(.75, transparent), to(transparent));
+  background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+  background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+  background-image: -ms-linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+  background-image: -o-linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(-45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
   bottom: 0;
+  padding: 0;
+  margin: 0;
   float: left;
+  clear:both;
   width: 410px;
-  height: 50px;
+  height: 70px;
   border: 1px solid red; }
 
 #desktops {
-  float: right;
+  float: left;
   width: 170px;
-  height: 450px;
+  // height: 450px;
   position: relative;
-  border: 1px solid black;
-  margin: 0;
-  padding: 5px;
   text-align: center; }
+
+.desktop {
+  display:inline-block;
+  position: relative;
+  width: 16px;
+  height: 16px;
+  background: url("/images/server-icon.png");
+  z-index:2222222; }
 
 .table {
   position: absolute;
@@ -39,11 +57,11 @@
 
 .line {
   position: absolute;
-  background: url("/images/line-table.png"); }
+  background: url("/images/line-table.png") transparent; }
 
 .horizontation {
   width: 70px;
-  height: 40px;
+    height: 40px;
   line-height: 40px; }
 
 .vertication {
@@ -55,7 +73,7 @@
   width: 70px;
   height: 70px;
   line-height: 70px;
-  background: url("/images/angle-table.png"); }
+  background: url("/images/angle-table.png") transparent; }
 
 .nw {
   background-position: 0px 0px; }
@@ -75,5 +93,5 @@
   background: transparent; }
 
 .new-table {
-  right: -100px;
-  top: 0; }
+  left: 50%;
+  top: 50%; }

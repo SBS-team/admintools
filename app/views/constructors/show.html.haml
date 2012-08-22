@@ -1,6 +1,9 @@
+- related_desktops = []
 %h1 Конструктор
 
-.well
+%span.alerts{:style => "display:none"}
+
+.well.clearfix
 
   #desk-pannel.navbar
     .navbar-inner
@@ -29,7 +32,14 @@
               %li
                 %a#se.addAngle{:href => "#"} 4
   #schema-wrapper
-    .room{:id => "room_#{@room_id}"}
+    .room.well{:id => "room_#{@room_id}"}
       - @room_plan.workplaces.each do |w|
         .table{:class => "#{w.workplace_type} #{w.workplace_form}", :style => "top:#{w.top}px;left:#{w.left}px", :id => "workplace_#{w.id}"}
-    #trash
+          - if w.desktop
+            - related_desktops << w.desktop
+            %a.desktop{:title => "#{w.desktop.name}", :id => "desktop_#{w.desktop.id}", "data-content" => "IP: #{w.desktop.ip}<br />MAC: #{w.desktop.mac}<br />User: #{w.desktop.user.try('full_name')}", "data-original-title" => "A Title", :href => "#", :rel => "popover"}
+    #trash.well.progress-danger.progress-sriped
+  #desktops.well
+    %h3 Компьютеры
+    - (@desktops - related_desktops).each do |d|
+      %a.desktop{:title => "#{d.name}", :id => "desktop_#{d.id}", "data-content" => "IP: #{d.ip}<br />MAC: #{d.mac}<br />User: #{d.user.try('full_name')}", "data-original-title" => "A Title", :href => "#", :rel => "popover"}
