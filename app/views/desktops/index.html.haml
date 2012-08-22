@@ -3,14 +3,14 @@
 %hr
 
 .well
-  %table.table.table-striped
+  %table.table.table-striped.pretty
     %thead
       %tr
-        %th Имя ПК
-        %th IP
-        %th MAC
+        %th= sortable "name", "Имя ПК"
+        %th= sortable "ip", "IP"
+        %th= sortable "mac", "MAC"
         %th Офис
-        %th Пользователь
+        %th= sortable "user_id", "Пользователь"
         %th 
           = link_to new_desktop_path, :class => "btn btn-success" do
             %i{:class => "icon-plus"}
