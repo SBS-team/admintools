@@ -20,9 +20,7 @@
     %tbody
       - @users.each do |user|
         %tr
-          %td
-            %p
-              = image_tag user.avatar(:thumb)
+          %td= image_tag user.avatar(:thumb)
           %td= user.first_name
           %td= user.last_name
           %td= check_empty(user, "phone")
