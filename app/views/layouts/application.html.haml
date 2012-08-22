@@ -36,6 +36,8 @@
             %span.icon-bar
           %a.brand{:href => "#"} Admintools
           .container-fluid.nav-collapse
+            - if admin_signed_in?
+              %input.btn.btn-danger{:type => "button", :value => "Sign_out", :style => "float: right"}
     .container-fluid
       .row-fluid
         .span9

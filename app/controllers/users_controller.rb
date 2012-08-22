@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   before_filter :current_user, :only => [:show, :edit, :update, :destroy]
 
   def index
@@ -42,4 +43,6 @@ class UsersController < ApplicationController
   def current_user
     @user = User.find_by_id(params[:id])
   end
+
+
 end
