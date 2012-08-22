@@ -24,4 +24,6 @@
 
 /db/schema.rb
 
+/public/system/*
+
 /test/*
