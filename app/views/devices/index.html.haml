@@ -4,13 +4,13 @@
 
 .well
 
-  %table.table.table-striped
+  %table.table.table-striped.pretty
     %thead
       %tr
-        %th Имя
-        %th IP
-        %th MAC
-        %th Пользователь
+        %th= sortable "name", "Имя"
+        %th= sortable "ip", "IP"
+        %th= sortable "mac", "MAC"
+        %th= sortable "user_id", "Пользователь"
         %th
           = link_to new_device_path, :class => "btn btn-success" do
             %i{:class => "icon-plus"}
