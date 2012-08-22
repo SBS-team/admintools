@@ -6,11 +6,11 @@
   %table.table.table-striped.pretty
     %thead
       %tr
-        %th= sortable "name", "Имя ПК"
-        %th= sortable "ip", "IP"
-        %th= sortable "mac", "MAC"
+        %th= sort_link @search, :name, "Имя ПК"
+        %th= sort_link @search, :ip, "IP"
+        %th= sort_link @search, :mac, "MAC"
         %th Офис
-        %th= sortable "user_id", "Пользователь"
+        %th= sort_link @search, :user_id, "Пользователь"
         %th 
           = link_to new_desktop_path, :class => "btn btn-success" do
             %i{:class => "icon-plus"}

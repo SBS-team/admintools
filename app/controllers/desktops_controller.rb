@@ -1,11 +1,10 @@
 class DesktopsController < ApplicationController
   before_filter :all_users_and_rooms, :only => [:index, :new, :edit, :create, :update]
   before_filter :current_desktop, :only => [:show, :edit, :update, :destroy]
-  helper_method :sort_column, :sort_direction
 
   def index
-    @search = Desktop.search(params[:search])
-    @desktops = @search.order(sort_column+ " " + sort_direction).all
+    @search = Desktop.search(params[:search] || {"meta_sort" => "id.asc"})
+    @desktops = @search.order('created_at').all
   end
 
   def new
@@ -50,14 +49,6 @@ private
 
   def current_desktop
     @desktop = Desktop.find_by_id(params[:id])
-  end
-
-  def sort_column
-    Desktop.column_names.include?(params[:sort]) ? params[:sort] : "name"
-  end
-
-  def sort_direction
-    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
   end
 
 end
