@@ -32,7 +32,8 @@
         = u.text_area :info, :class => 'input-xxlarge', :id => 'nic', :style => "height:200px"
     .control-group
       = u.label :avatar, 'Фото', :class => 'control-label'
-      = u.file_field :avatar
+      .controls
+        = u.file_field :avatar
     .form-actions
       = u.submit (@user.id?) ? 'Изменить' : 'Создать' , :class => 'btn btn-primary'
       = link_to 'Назад', users_path, :class => 'btn'
