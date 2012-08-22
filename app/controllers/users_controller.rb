@@ -39,6 +39,8 @@ class UsersController < ApplicationController
     @user.destroy and redirect_to :users
   end
 
+  private
+
   def current_user
     @user = User.find_by_id(params[:id])
   end

@@ -2,10 +2,11 @@
 class RoomsController < ApplicationController
   before_filter :user_all, :only => [:index, :new, :edit, :create, :update]
   before_filter :current_room, :only => [:show, :edit, :update, :destroy]
+  helper_method :sort_column, :sort_direction
 
   def index
     @search = Room.search(params[:search])
-    @rooms = @search.order('created_at').all
+    @rooms = @search.order(sort_column+ " " + sort_direction).all
   end
 
   def new
@@ -50,4 +51,13 @@ class RoomsController < ApplicationController
   def current_room
     @room = Room.find(params[:id])
   end
+
+  def sort_column
+    Room.column_names.include?(params[:sort]) ? params[:sort] : "id"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
+  end
+
 end
