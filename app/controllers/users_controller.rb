@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_filter :current_user, :only => [:show, :edit, :update, :destroy]
 
   def index
-    @search = User.search(params[:search])
+    @search = User.search(params[:search] || {"meta_sort" => "id.asc"})
     @users = @search.order('created_at').all
   end
 

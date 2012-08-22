@@ -3,7 +3,7 @@ class DevicesController < ApplicationController
   before_filter :current_device, :only => [:show, :edit, :update, :destroy]
 
   def index
-    @search = Device.search(params[:search])
+    @search = Device.search(params[:search] || {"meta_sort" => "id.asc"})
     @devices = @search.order('created_at').all
   end
 

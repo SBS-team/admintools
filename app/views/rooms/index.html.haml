@@ -3,13 +3,13 @@
 %hr
 
 .well
-  %table.table.table-striped
+  %table.table.table-striped.pretty
     %thead
       %tr
-        %th ID
-        %th Имя офиса
+        %th= sort_link @search, :id, "id"
+        %th= sort_link @search, :name, "Офис"
         %th Управляющий
-        %th Кол-во ПК
+        %th= sort_link @search, :desktops_count, "Кол-во ПК"
         %th
           = link_to new_room_path, :class => "btn btn-success" do
             %i{:class => "icon-plus"}
