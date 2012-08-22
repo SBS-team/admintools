@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  attr_accessible :avatar
+  attr_accessible :avatar, :first_name, :last_name, :phone, :email, :skype, :info
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 
   has_one  :desktop
