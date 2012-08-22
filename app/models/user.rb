@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
 
+  attr_accessible :avatar
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+
   has_one  :desktop
   has_many :devices
   has_one :room, :through => :desktop

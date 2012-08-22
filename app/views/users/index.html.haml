@@ -6,6 +6,7 @@
   %table.table.table-striped
     %thead
       %tr
+        %th фото
         %th Имя
         %th Фамилия
         %th Телефон
@@ -19,6 +20,7 @@
     %tbody
       - @users.each do |user|
         %tr
+          %td= user.avatar
           %td= user.first_name
           %td= user.last_name
           %td= check_empty(user, "phone")
