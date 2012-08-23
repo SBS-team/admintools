@@ -25,7 +25,7 @@
           = favicon_link_tag 'images/apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png'
           / For all other devices
           / Size should be 32 x 32 pixels
-          = favicon_link_tag 'images/favicon.ico', :rel => 'shortcut icon'
+          -#= favicon_link_tag 'images/favicon.ico', :rel => 'shortcut icon'
   %body
     .navbar.navbar-fixed-top
       .navbar-inner
@@ -48,6 +48,7 @@
             %li#users_tab= link_to "Пользователи", users_path
             %li#devices_tab= link_to "Устройства", devices_path
             %li#designer_tab= link_to "Конструктор", designer_path
+            %li#administrators_tab= link_to "Администраторы", admins_path
           - if notice
             .alert.alert-info
               %a.close{"data-dismiss" => "alert", :href => "#"}
