@@ -1,6 +1,6 @@
 class AdminsController < ApplicationController
 
-  before_filter :current_admin, :only => [:show, :edit, :update, :destroy]
+  before_filter :find_admin, :only => [:show, :edit, :update, :destroy]
 
   def index
     @admins = Admin.all
@@ -41,7 +41,7 @@ class AdminsController < ApplicationController
 
   private
 
-  def current_admin
+  def find_admin
     @admin = Admin.find_by_id(params[:id])
   end
 

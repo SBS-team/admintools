@@ -6,8 +6,6 @@ class User < ActiveRecord::Base
   has_many :devices
   has_one :room, :through => :desktop
 
-  attr_accessible :email, :first_name, :info, :last_name, :skype, :user_tokens
-
   attr_reader :user_tokens
   has_many :event_users
   has_many :events, :through => :event_users
