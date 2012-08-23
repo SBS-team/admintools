@@ -1,0 +1,15 @@
+= form_for(@admin, :html => {:class => 'well form-horizontal', :multipart => true}) do |a|
+  -if @admin.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@admin.errors.count, "error")} prohibited this admin from being saved"
+      %ul
+        - @admin.errors.full_messages.each do |msg|
+          %li= msg
+  %fieldset
+    .control-group
+      = a.label :email, 'Email', :class => 'control-label'
+      .controls
+        = a.text_field :email, :class => 'input-xlarge'
+    .form-actions
+      = a.submit (@admin.id?) ? 'Изменить' : 'Создать' , :class => 'btn btn-primary'
+      = link_to 'Назад', admins_path, :class => 'btn'

@@ -1,0 +1,27 @@
+%h1 Администраторы
+
+%hr
+
+.well
+  %table.table.table-striped.pretty
+    %thead
+      %tr
+        %th Email
+        %th
+          = link_to new_admin_path, :class => "btn btn-success" do
+            %i{:class => "icon-plus"}
+              Создать
+    %tbody
+      - @admins.each do |admin|
+        %tr
+          %td= admin.email
+          %td
+            = link_to admins_path(admin), :class => "btn" do
+              %i{:class => "icon-zoom-in"}
+                Просмотр
+            = link_to edit_admin_path(admin), :class => "btn" do
+              %i{:class => "icon-pencil"}
+                Редактировать
+            = link_to admins_url(admin), :method => :DELETE, :class => "btn btn-danger", :confirm => "Ты уверен?" do
+              %i{:class => "icon-remove"}
+                Удалить
