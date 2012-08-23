@@ -1,5 +1,9 @@
 var revertGlobal = true;
-var roomId = $(".room").attr("id").split("_")[1]
+var roomId
+var checkRoom = $(".room").length
+if(checkRoom > 0){
+  roomId = $(".room").attr("id").split("_")[1]
+}
 
 var dropWorkplaceOpt = {
   drop: function(event, ui){
@@ -11,7 +15,7 @@ var dropWorkplaceOpt = {
         relateDesktopToWorkplace($(this).attr("id").split("_")[1], 'nil')
       }
       // clear old workplace
-      if($("#"+ui.draggable.attr("id")).parent().hasClass("table")){
+      if($("#"+ui.draggable.attr("id")).parent().hasClass("workplace")){
         relateDesktopToWorkplace($("#"+ui.draggable.attr("id")).parent().attr('id').split("_")[1], 'nil')  
       }
       // relate desktop with workplace from desktops area
@@ -60,11 +64,9 @@ function createWorkplace(type, form){
         "room_plan_id"  : roomId
         }
       },
-      function(res){
+      function(res, status){
         if(res.status > 0){
-          $("<div />").attr("id", "workplace_"+res.workplace.id).addClass("table new-table").addClass(type).addClass(form).appendTo(".room").draggable(dragOpt).droppable(dropWorkplaceOpt);
-        } else {
-          // console.log('create', "error")
+          $("<div />").attr("id", "workplace_"+res.workplace.id).addClass("workplace new-table").addClass(type).addClass(form).appendTo(".room").draggable(dragOpt).droppable(dropWorkplaceOpt);
         }
       },
       "json"
@@ -80,31 +82,14 @@ function updateWorkplace(id, position){
         "top"  : position.top,
         "left" : position.left
       }
-    },
-    function(res, status){
-      console.log(res, status)
-      if(res && res.status > 0){
-        $(".alerts").after(
-          $("<div />").hide().addClass("alert alert-success alert-workplace").html("Данные обновлены").fadeIn("fast").delay(1000).fadeOut("fast", function(){
-              $(".alert-success.alert-workplace").remove()
-          })
-        )
-      
-      }
-    },
-    "json"
+    }
   )
 }
 
 function destroyWorkplace(id){
   $.post(
     "/constructors/"+id,
-    {"_method": "delete"},
-    function(res){
-      if(res){}
-        // console.log("destroy", res)
-    },
-    "json"
+    {"_method": "delete"}
   )
 }
 
@@ -117,17 +102,16 @@ function relateDesktopToWorkplace(workplace, desktop){
         "desktop_id": desktop
       }
     }
-    
   )
 }
 
 $(document).ready(function() {
 
-  $(".table").draggable(dragOpt).droppable(dropWorkplaceOpt)
+  $(".workplace").draggable(dragOpt).droppable(dropWorkplaceOpt)
 
   $("#desktops").droppable({
     drop: function(event, ui){
-      if($("#"+ui.draggable.attr("id")).parent().hasClass("table")){
+      if($("#"+ui.draggable.attr("id")).parent().hasClass("workplace")){
         var workplace = $("#"+ui.draggable.attr("id")).parent().attr("id").split("_")[1]
         $("#"+ui.draggable.attr('id')).css({'top':'0', 'left':'0'}).detach().appendTo("#desktops")
         relateDesktopToWorkplace(workplace, '')
@@ -151,10 +135,6 @@ $(document).ready(function() {
       }
     }
   })
-
-  $(".table").live("dblclick",function(){
-    $('#modalDesktops').modal('show')
-  });
 
   // table generator
   // line table
