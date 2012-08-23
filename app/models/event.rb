@@ -1,9 +1,14 @@
 class Event < ActiveRecord::Base
-  attr_accessible :title, :starts_at, :ends_at, :all_day, :description
+  attr_accessor :send_to_users
+  attr_accessible :title, :starts_at, :ends_at, :all_day, :description,:send_to_users,:send_at,:sendedr
+
   has_many :event_users
+  has_many :users, :through => :event_users
+
   validate :starts_at_is_less_than_ends_at
   scope :before, lambda {|end_time| {:conditions => ["ends_at < ?", Event.format_date(end_time)] }}
   scope :after, lambda {|start_time| {:conditions => ["starts_at > ?", Event.format_date(start_time)] }}
+  scope :sending_event, lambda { where("send_at < ?", Time.zone.now).where("send_at > ?", Time.zone.now - 2.month).where(:sended => false) }
 
   # need to override the json view to return what full_calendar is expecting.
   # http://arshaw.com/fullcalendar/docs/event_data/Event_Object/

@@ -22,7 +22,7 @@ class EventsController < ApplicationController
   # GET /events/1.xml
   def show
     @event = Event.find(params[:id])
-
+    Resque.enqueue_at(30.seconds.from_now, MyJob)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @event }
@@ -30,10 +30,19 @@ class EventsController < ApplicationController
     end
   end
 
+  def search_users
+    @all_users = User.where( ['first_name LIKE(?)', "%#{ params[:q] }%"])
+    @all_users=@all_users.to_a
+    respond_to do |format|
+      format.json { render  }
+    end
+  end
+
   # GET /events/new
   # GET /events/new.xml
   def new
     @event = Event.new
+    @all_users=User.all
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @event }
@@ -49,13 +58,19 @@ class EventsController < ApplicationController
   # POST /events.xml
   def create
     @event = Event.new(params[:event])
-    @kk=1
     #params[:users].each do |u|
     # @event.event_users.create(u)
     #end
 
     respond_to do |format|
       if @event.save
+        if  params[:send_to_users][:user]!=''
+        params[:send_to_users][:user].split(',').each do |i|
+          @event.event_users.create(:user_id=>i.to_i)
+        end
+        else
+          @event.event_users.create(:user_id=>current_admin.id)
+        end
         format.html { redirect_to(@event, :notice => 'Event was successfully created.') }
         format.xml  { render :xml => @event, :status => :created, :location => @event }
       else
@@ -94,7 +109,7 @@ class EventsController < ApplicationController
     @event.destroy
 
     respond_to do |format|
-      format.html { redirect_to(calendar_path) }
+      format.html { redirect_to :back }
       format.xml  { head :ok }
     end
   end

@@ -6,6 +6,8 @@ class CreateEvents < ActiveRecord::Migration
       t.datetime :ends_at
       t.boolean :all_day
       t.text :description
+      t.boolean :sended ,:default=>false
+      t.datetime :send_at
 
       t.timestamps
     end

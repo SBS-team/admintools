@@ -11,10 +11,14 @@
 -#  / these are needed for the calendars.
 -#  = javascript_include_tag "jquerymin.js"
 -#  = javascript_include_tag "fullcalendarmin.js"
+-#  = javascript_include_tag "modal.popup.js"
 -#  = javascript_tag "var AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery?
 
+
 = link_to "new event", new_event_path
-sdasdsa
+= link_to 'all event', events_path
+#popup{:style=>'display:none'}
+  AAAAA
 #calendarTrash{:style => "float: right; padding-top: 5px; padding-right: 5px; padding-left: 5px;"}
   %span.ui-icon.ui-icon-trash
 #calendar

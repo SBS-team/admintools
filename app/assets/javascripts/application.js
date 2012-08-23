@@ -42,3 +42,18 @@ $.ajaxSetup({
         xhr.setRequestHeader("Accept", "text/javascript");
     }
 });
+
+$(function () {
+    $('#event_users_user').tokenInput('/.json', {
+        crossDomain: false,
+        prePopulate: $('#book_author_tokens').data('pre'),
+        theme: 'facebook'
+    });
+});
+
+$(function() {
+    var $input = $('.token-input-users');
+    $input.tokenInput('/events/search_users.json', {
+        propertyToSearch: 'first_name'
+    });
+});

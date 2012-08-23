@@ -23,6 +23,10 @@
     <%= f.label :ends_at %><br />
     <%= f.datetime_select :ends_at %>
   </div>
+    <div class="field">
+      <%= f.label :send_at %><br />
+      <%= f.datetime_select :send_at %>
+    </div>
   <div class="field">
     <%= f.label :all_day %><br />
     <%= f.check_box :all_day %>
@@ -31,9 +35,12 @@
     <%= f.label :description %><br />
     <%= f.text_area :description %>
   </div>
+  <ui class='userList'>
+    <%=  render :partial => 'user_list'%>
+  </ui>
   <div class="field">
-      <%=f.fields_for :users do |u|%>
-     User:<%=u.text_field :user%>
+     <%= fields_for :send_to_users do |u|%>
+       User:<%= u.text_field :user, { class: 'token-input-users' } %>
      <%end%>
   </div>
   <div class="actions">

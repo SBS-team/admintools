@@ -1,4 +1,4 @@
-# Be sure to restart your server when you modify this file.
+# Be sure to restart your server when you modify this file.                                                          <%= sanitize @questionable.to_json(methods: [:id_with_class_name], only: [:id, :name]) %>
 #
 # This file contains settings for ActionController::ParamsWrapper which
 # is enabled by default.

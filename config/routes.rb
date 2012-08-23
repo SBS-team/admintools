@@ -2,6 +2,8 @@ Admintools::Application.routes.draw do
 
   devise_for :admins
 
+  get 'events/search_users/'=>'events#search_users'
+
   resources :devices
   resources :rooms
   resources :users
