@@ -3,14 +3,15 @@
 %hr
 
 .well
-  %table.table.table-striped
+  %table.table.table-striped.pretty
     %thead
       %tr
-        %th Имя
-        %th Фамилия
-        %th Телефон
-        %th Email
-        %th Skype
+        %th Фото
+        %th= sort_link @search, :first_name, "Имя"
+        %th= sort_link @search, :last_name, "Фамилия"
+        %th= sort_link @search, :phone, "Телефон"
+        %th= sort_link @search, :email, "Email"
+        %th= sort_link @search, :skype, "Skype"
         %th Офис
         %th
           = link_to new_user_path, :class => "btn btn-success" do
@@ -19,6 +20,7 @@
     %tbody
       - @users.each do |user|
         %tr
+          %td= image_tag (user.avatar(:thumb) != "/avatars/thumb/missing.png" ? user.avatar(:thumb) : "no_avatar.gif")
           %td= user.first_name
           %td= user.last_name
           %td= check_empty(user, "phone")

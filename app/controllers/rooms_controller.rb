@@ -4,20 +4,19 @@ class RoomsController < ApplicationController
   before_filter :current_room, :only => [:show, :edit, :update, :destroy]
 
   def index
-    @search = Room.search(params[:search])
+    @search = Room.search(params[:search] || {"meta_sort" => "id.asc"})
     @rooms = @search.order('created_at').all
   end
 
   def new
     @room = Room.new
+    @room.build_room_plan
   end
 
   def show
-
   end
 
   def edit
-
   end
 
   def create

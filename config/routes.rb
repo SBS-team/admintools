@@ -10,6 +10,10 @@ Admintools::Application.routes.draw do
   resources :users
   resources :desktops
 
+  resources :admins
+  resources :constructors
+
+
   #get "/events/:id" => "events#yomanarot"
   resources :events
 

@@ -1,4 +1,4 @@
-= form_for(@user, :html => {:class => 'well form-horizontal'}) do |u|
+= form_for(@user, :html => {:class => 'well form-horizontal', :multipart => true}) do |u|
   -if @user.errors.any?
     #error_explanation
       %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved"
@@ -17,7 +17,7 @@
     .control-group
       = u.label :phone_field, 'Телефон', :class => 'control-label'
       .controls
-        = u.text_field :phone, :value => "+3 80", :class => 'input-xlarge'
+        = u.text_field :phone, :value => "#{@user.phone ||'+3 80'}", :class => 'input-xlarge'
     .control-group
       = u.label :email, 'Email', :class => 'control-label'
       .controls
@@ -30,6 +30,10 @@
       = u.label :info, 'Информация', :class => 'control-label'
       .controls
         = u.text_area :info, :class => 'input-xxlarge', :id => 'nic', :style => "height:200px"
+    .control-group
+      = u.label :avatar, 'Фото', :class => 'control-label'
+      .controls
+        = u.file_field :avatar
     .form-actions
       = u.submit (@user.id?) ? 'Изменить' : 'Создать' , :class => 'btn btn-primary'
       = link_to 'Назад', users_path, :class => 'btn'

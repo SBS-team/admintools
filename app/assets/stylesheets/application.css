@@ -10,15 +10,29 @@
  *
  *= require_self
  *= require_tree .
- */
+  */
 #footer {
     text-align: center;
-    position: fixed; /* Фиксированное положение */
-    left: 0; bottom: 0; /* Левый нижний угол */
-    padding: 10px; /* Поля вокруг текста */
-    background: #181817;; /* Цвет фона */
-    color: #999; /* Цвет текста */
-    width: 100%; /* Ширина слоя */
+    position: absolute;
+    left: 0; bottom: 0;
+    padding: 10px;
+    background: #181817;
+    color: #999;
+    width: 100%;
+    bottom: 0;
+}
+
+.pretty th .current {
+    padding-right: 12px;
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+.pretty th .asc {
+    background-image: url(/images/up_arrow.gif);
+}
+
+.pretty th .desc {
+    background-image: url(/images/down_arrow.gif);
 }
 
 body {

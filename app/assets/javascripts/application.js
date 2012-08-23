@@ -14,7 +14,9 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+//= require jquery-ui
 //= require jquery.tokeninput
+
 
 $(document).ready(function() {
     nav_menu()
