@@ -17,24 +17,17 @@
           %link(href="images/favicon.ico" rel="shortcut icon")
 
   %body
-    .navbar.navbar-fixed-top
-      .navbar-inner
-        .container
-          %a.btn.btn-navbar(data-target=".nav-collapse" data-toggle="collapse")
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
-          %a.brand(href="#") Admintools
-    .container
-
-      .content
-        .row
+    .wrapper
+      .navbar.navbar-fixed-top
+        .navbar-inner
+          .container-fluid
+            %a.brand{:href => "#"} Admintools
+      .container-fluid
+        .content-fluid
           .span12
-            = yield
-      %footer#footer
-        %p &copy; Company 2012
-    /
-      Javascripts
-      \==================================================
-    / Placed at the end of the document so the pages load faster
+            .well
+              = yield
+      .push
+    %footer.container-fluid
+      %p &copy; Company 2012
     = javascript_include_tag "application"
