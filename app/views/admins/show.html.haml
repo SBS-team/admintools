@@ -1,0 +1,19 @@
+%h1 Информация пользователя
+
+%hr
+
+-if @user
+  .well.form-horizontal
+    %fieldset
+      .control-group
+        %label.control-label
+          Email
+        .controls
+          %span.input-xlarge.uneditable-input= @admin.email
+      .form-actions
+        = link_to admins_path, :class => 'btn btn-primary' do
+          %i.icon-circle-arrow-left
+          Назад
+        = link_to edit_admin_path, :class => 'btn btn-warning' do
+          %i.icon-pencil
+          Редактировать
