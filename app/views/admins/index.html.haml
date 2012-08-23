@@ -6,6 +6,7 @@
   %table.table.table-striped.pretty
     %thead
       %tr
+        %th Admin name
         %th Email
         %th
           = link_to new_admin_path, :class => "btn btn-success" do
@@ -14,6 +15,7 @@
     %tbody
       - @admins.each do |admin|
         %tr
+          %td= admin.name
           %td= admin.email
           %td
             = link_to admin_path(admin), :class => "btn" do
