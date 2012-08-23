@@ -26,7 +26,9 @@
             .container-fluid.nav-collapse{:style => "float: right"}
               = link_to "Администраторы", admins_path, :class => "btn btn-large btn-primary", :id => "admins_tab"
               - if admin_signed_in?
-                Signed in as #{current_admin.email}
+                Signed in as
+                %strong
+                  #{current_admin.name}
                 = link_to "Sign out", destroy_admin_session_path, :method => :delete, :class => "btn btn-danger"
       .container-fluid
         .row-fluid
