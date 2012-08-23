@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+//= require jquery-ui
 
 $(document).ready(function() {
     nav_menu()
