@@ -13,7 +13,6 @@ Admintools::Application.routes.draw do
   resources :admins
   resources :constructors
 
-
   #get "/events/:id" => "events#yomanarot"
   resources :events
 
@@ -21,7 +20,6 @@ Admintools::Application.routes.draw do
 
   #get "calendar/popup/:start/:end/:allday"
 
-
   root :to => 'rooms#index'
-  match "/designer" => "constructor#designer"
+
 end
