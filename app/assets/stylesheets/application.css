@@ -10,7 +10,10 @@
  *
  *= require_self
  *= require_tree .
-  */    
+<<<<<<< HEAD
+ *= require_tree ../../../vendor/assets/stylesheets/
+  */
+
 html, body { height: 100%; }
 
 footer {
