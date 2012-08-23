@@ -31,3 +31,5 @@
             = link_to room_url(room), :method => :DELETE, :class => "btn btn-danger", :confirm => "Ты уверен?" do
               %i{:class => "icon-remove"}
               Удалить
+
+- content_for :sidebar, render(:partial => 'sidebar')

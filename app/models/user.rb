@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
 
   has_one  :desktop
   has_many :devices
-  has_one :room
+  has_one :room, :through => :desktop
   has_many :event_users
 
   validates :first_name, :presence => true
