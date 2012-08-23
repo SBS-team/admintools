@@ -11,71 +11,55 @@ class EventsController < ApplicationController
     @events = @events.after(params['start']) if (params['start'])
     @events = @events.before(params['end']) if (params['end'])
 
+    @users = User.where("last_name like ?", "%#{params[:q]}%")
+
     respond_to do |format|
       format.html # index.html.haml
-      format.xml  { render :xml => @events }
       format.js  { render :json => @events }
+      format.json { render :json => @users.map(&:attributes) }
     end
   end
 
-  # GET /events/1
-  # GET /events/1.xml
   def show
     @event = Event.find(params[:id])
-    Resque.enqueue_at(30.seconds.from_now, MyJob)
+
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @event }
       format.js { render :json => @event.to_json }
     end
   end
 
-  def search_users
-    @all_users = User.where( ['first_name LIKE(?)', "%#{ params[:q] }%"])
-    @all_users=@all_users.to_a
-    respond_to do |format|
-      format.json { render  }
-    end
-  end
-
-  # GET /events/new
-  # GET /events/new.xml
   def new
     @event = Event.new
-    @all_users=User.all
+
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @event }
     end
   end
 
   # GET /events/1/edit
   def edit
     @event = Event.find(params[:id])
+    @all_users = User.all
   end
 
   # POST /events
-  # POST /events.xml
   def create
     @event = Event.new(params[:event])
-    #params[:users].each do |u|
-    # @event.event_users.create(u)
-    #end
 
     respond_to do |format|
       if @event.save
-        if  params[:send_to_users][:user]!=''
-        params[:send_to_users][:user].split(',').each do |i|
-          @event.event_users.create(:user_id=>i.to_i)
-        end
+        if params[:send_to_users][:user_tokens] == ""
+          @event.event_users.create(:user_id => current_admin.id)
         else
-          @event.event_users.create(:user_id=>current_admin.id)
+          params[:send_to_users][:user_tokens].split(",").each do |user|
+            @event.event_users.create(:user_id => user.to_i)
+          end
         end
+
         format.html { redirect_to(@event, :notice => 'Event was successfully created.') }
-        format.xml  { render :xml => @event, :status => :created, :location => @event }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @event.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -92,11 +76,9 @@ class EventsController < ApplicationController
     respond_to do |format|
       if @event.update_attributes(params[:event])
         format.html { redirect_to(@event, :notice => 'Event was successfully updated.') }
-        format.xml  { head :ok }
         format.js { head :ok}
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @event.errors, :status => :unprocessable_entity }
         format.js  { render :js => @event.errors, :status => :unprocessable_entity }
       end
     end
@@ -107,11 +89,14 @@ class EventsController < ApplicationController
   def destroy
     @event = Event.find(params[:id])
     @event.destroy
-
     respond_to do |format|
-      format.html { redirect_to :back }
-      format.xml  { head :ok }
+      format.html { redirect_to params[:owner]? calendar_path : :back}
     end
   end
+
+  def add_user
+    render :partial =>'/events/user_list', locals: {:all_users => @users}
+  end
+
 end
 

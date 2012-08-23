@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+//= require jquery.tokeninput
 
 $(document).ready(function() {
     nav_menu()
@@ -43,17 +44,20 @@ $.ajaxSetup({
     }
 });
 
-$(function () {
-    $('#event_users_user').tokenInput('/.json', {
+
+//$(function() {
+//    var $input = $('.token-input-users');
+//    $input.tokenInput('/events/search_users.json', {
+//        tokenLimit: 1,
+//        tokenValue: 'id_with_class_name'
+//    });
+//});
+
+$(function() {
+    $(".token-input-list").tokenInput("/events.json", {
         crossDomain: false,
-        prePopulate: $('#book_author_tokens').data('pre'),
-        theme: 'facebook'
+        prePopulate: $(".token-input-list").data("pre"),
+        propertyToSearch: "last_name"
     });
 });
 
-$(function() {
-    var $input = $('.token-input-users');
-    $input.tokenInput('/events/search_users.json', {
-        propertyToSearch: 'first_name'
-    });
-});

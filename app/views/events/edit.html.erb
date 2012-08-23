@@ -1,6 +1,8 @@
 <h1>Editing event</h1>
 
-<%= render 'form' %>
+
+<%= render 'form',  locals: {all_users: @all_users}%>
 
 <%= link_to 'Show', @event %> |
-<%= link_to 'Back', events_path %>
+<%= link_to 'Back', calendar_path %>
+

@@ -169,6 +169,8 @@ DEPENDENCIES
   meta_search
   mysql2
   rails
+  redis
+  resque
   resque-scheduler
   sass-rails (~> 3.2.3)
   twitter-bootstrap-rails

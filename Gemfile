@@ -21,3 +21,6 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem "redis"
+gem "resque"
+gem "resque-scheduler"  #, :require => "resque_sheduler"

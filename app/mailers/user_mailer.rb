@@ -1,12 +1,11 @@
 class UserMailer < ActionMailer::Base
-  default from: "dmitriy.savran@faceit.com.ua"
 
-  def welcome_email(user)
+  default from: "oleg.kotenko@faceit.com.ua"
+
+  def send_event_email(user)
     @user = user
-   # @url  = "http://example.com/login"
-    mail(:to => user.email, :subject => "bomba needs u")
-    p user.email
-    p 'SEND'
+    mail(:to => user.email, :subject => "Welcome to My Awesome Site")
+    puts "sended to #{user.email}"
   end
 
 end

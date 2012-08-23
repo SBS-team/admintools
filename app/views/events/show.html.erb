@@ -26,6 +26,9 @@
 </p>
 
 
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %> |
-<%= link_to 'Destroy', @event, :confirm => 'Are you sure?', :method => :delete %>
+<%= link_to 'Edit', edit_event_path(@event) %>
+<%= link_to 'Back', calendar_path %>
+<td><%= link_to 'Destroy', event_path(@event, :owner => "show"), :confirm => 'Are you sure?', :method => :delete %></td>
+
+
+

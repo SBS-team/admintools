@@ -1,7 +1,7 @@
 class Event < ActiveRecord::Base
   attr_accessor :send_to_users
-  attr_accessible :title, :starts_at, :ends_at, :all_day, :description,:send_to_users,:send_at,:sendedr
 
+  attr_accessible :title, :starts_at, :ends_at, :all_day, :description, :send_at, :sended, :send_to_users
   has_many :event_users
   has_many :users, :through => :event_users
 
