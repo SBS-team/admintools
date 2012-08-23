@@ -36,4 +36,16 @@ Admintools::Application.configure do
   config.assets.debug = true
 
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.perform_deliveries = true
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      :address              => "smtp.gmail.com",
+      :port                 => 587,
+      :domain               => "mail.google.com",
+      :user_name            => "oleg.kotenko@faceit.com.ua",
+      :password             => "&TPgxk#7Ftjh",
+      :authentication       => "plain",
+      :enable_starttls_auto => true
+  }
 end

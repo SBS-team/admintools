@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+//= require jquery.tokeninput
 
 $(document).ready(function() {
     nav_menu()
@@ -37,3 +38,25 @@ function tab_menu(){
     }
 }
 
+$.ajaxSetup({
+    beforeSend: function(xhr) {
+        xhr.setRequestHeader("Accept", "text/javascript");
+    }
+});
+
+
+//$(function() {
+//    var $input = $('.token-input-users');
+//    $input.tokenInput('/events/search_users.json', {
+//        tokenLimit: 1,
+//        tokenValue: 'id_with_class_name'
+//    });
+//});
+
+$(function() {
+    $(".token-input-list").tokenInput("/events.json", {
+        crossDomain: false,
+        prePopulate: $(".token-input-list").data("pre"),
+        propertyToSearch: "last_name"
+    });
+});

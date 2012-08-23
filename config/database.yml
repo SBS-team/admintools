@@ -1,6 +1,6 @@
 login: &login
-  adapter: 'postgresql'
-  username: 'admintools'
+  adapter: mysql2
+  username: 'root'
   password: '123456'
   host: 'localhost'
   port: 5432
