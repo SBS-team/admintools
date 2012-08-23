@@ -36,6 +36,7 @@
             %span.icon-bar
           %a.brand{:href => "#"} Admintools
           .container-fluid.nav-collapse{:style => "float: right"}
+            = link_to "Администраторы", admins_path, :class => "btn btn-large btn-primary", :id => "admins_tab"
             - if admin_signed_in?
               Signed in as #{current_admin.email}
               = link_to "Sign out", destroy_admin_session_path, :method => :delete, :class => "btn btn-danger"
@@ -48,8 +49,6 @@
             %li#desktops_tab= link_to "Компьютеры", desktops_path
             %li#users_tab= link_to "Пользователи", users_path
             %li#devices_tab= link_to "Устройства", devices_path
-            %li#designer_tab= link_to "Конструктор", designer_path
-            %li#administrators_tab= link_to "Администраторы", admins_path
           - if notice
             .alert.alert-info
               %a.close{"data-dismiss" => "alert", :href => "#"}
