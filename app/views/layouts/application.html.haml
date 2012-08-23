@@ -35,9 +35,10 @@
             %span.icon-bar
             %span.icon-bar
           %a.brand{:href => "#"} Admintools
-          .container-fluid.nav-collapse
+          .container-fluid.nav-collapse{:style => "float: right"}
             - if admin_signed_in?
-              %input.btn.btn-danger{:type => "button", :value => "Sign_out", :style => "float: right"}
+              Signed in as #{current_admin.email}
+              = link_to "Sign out", destroy_admin_session_path, :method => :delete, :class => "btn btn-danger"
     .container-fluid
       .row-fluid
         .span9
