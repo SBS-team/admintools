@@ -1,0 +1,5 @@
+do_my_job:
+ #cron: "*/10 * * * *"
+ every: 10s
+ class: MyJob
+ description: Runs the perform method in MyJob
