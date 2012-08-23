@@ -34,3 +34,15 @@
 .pretty th .desc {
     background-image: url(/images/down_arrow.gif);
 }
+
+body {
+    margin-top: 40px;
+    #text-align: center;
+    font-size: 14px;
+    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+}
+
+#calendar {
+    width: 900px;
+    margin: 0 auto;
+}

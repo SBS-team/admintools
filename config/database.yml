@@ -1,0 +1,22 @@
+login: &login
+  adapter: mysql2
+
+  encoding: utf8
+  reconnect: false
+  pool: 5
+  username: 'root'
+  password: 'root'
+  socket: /var/run/mysqld/mysqld.sock
+
+
+development:
+  <<: *login
+  database: 'admintools_development'
+
+test:
+  <<: *login
+  database: 'admintools_test'
+
+production:
+  <<: *login
+  database: 'admintools_production'
