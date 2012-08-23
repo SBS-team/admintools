@@ -24,6 +24,6 @@
             = link_to edit_admin_path(admin), :class => "btn" do
               %i{:class => "icon-pencil"}
                 Редактировать
-            = link_to admins_url(admin), :method => :DELETE, :class => "btn btn-danger", :confirm => "Ты уверен?" do
+            = link_to admin_url(admin), :method => :DELETE, :class => "btn btn-danger", :confirm => "Ты уверен?" do
               %i{:class => "icon-remove"}
                 Удалить

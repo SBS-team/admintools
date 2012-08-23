@@ -2,7 +2,7 @@
 
 %hr
 
--if @user
+-if @admin
   .well.form-horizontal
     %fieldset
       .control-group
@@ -10,6 +10,11 @@
           Email
         .controls
           %span.input-xlarge.uneditable-input= @admin.email
+      .control-group
+        %label.control-label
+          Admin name
+        .controls
+          %span.input-xlarge.uneditable-input= @admin.name
       .form-actions
         = link_to admins_path, :class => 'btn btn-primary' do
           %i.icon-circle-arrow-left
