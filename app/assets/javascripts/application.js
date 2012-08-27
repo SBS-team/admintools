@@ -16,6 +16,7 @@
 //= require_tree .
 //= require jquery-ui
 //= require jquery.tokeninput
+//= require nicEdit
 
 
 $(document).ready(function() {
