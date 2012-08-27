@@ -149,4 +149,16 @@ $(document).ready(function() {
   });
 
   $(".desktop").draggable({revert: true})
+
+  $(".desktop").bind("click", function(event){
+    event.preventDefault();
+  })
+  $(".desktop").bind("mousedown", function(event){
+    event.preventDefault();
+    $(this).css('z-index', '100000')
+  })
+  $(".desktop").bind("mouseup", function(event){
+    event.preventDefault();
+    $(this).css('z-index', 'auto')
+  })
 });
