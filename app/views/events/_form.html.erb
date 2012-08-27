@@ -12,28 +12,28 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br />
+    <%= f.label "Заголовок" %><br />
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :starts_at %><br />
+    <%= f.label "Начало в" %><br />
     <%= f.datetime_select :starts_at %>
   </div>
   <div class="field">
-    <%= f.label :ends_at %><br />
+    <%= f.label "Конец в" %><br />
     <%= f.datetime_select :ends_at %>
   </div>
     <div class="field">
-      <%= f.label :send_at %><br />
+      <%= f.label "Напомнить в" %><br />
       <%= f.datetime_select :send_at %>
     </div>
 
   <div class="field">
-    <%= f.label :all_day %><br />
+    <%= f.label "Все дни" %><br />
     <%= f.check_box :all_day %>
   </div>
   <div class="field">
-    <%= f.label :description %><br />
+    <%= f.label "Описание" %><br />
 
     <%= f.text_area :description %>
   </div>
@@ -45,6 +45,6 @@
 
     <div class="actions">
 
-    <%= f.submit %>
+    <%= f.submit "ОК"%>
   </div>
 <% end %>

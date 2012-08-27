@@ -1,34 +1,34 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Title:</b>
+  <b>Заголовок:</b>
   <%= @event.title %>
 </p>
 
 <p>
-  <b>Starts at:</b>
+  <b>Начало в:</b>
   <%= @event.starts_at %>
 </p>
 
 <p>
-  <b>Ends at:</b>
+  <b>Конец в:</b>
   <%= @event.ends_at %>
 </p>
 
 <p>
-  <b>All day:</b>
+  <b>Все дни:</b>
   <%= @event.all_day %>
 </p>
 
 <p>
-  <b>Description:</b>
+  <b>Описание:</b>
   <%= @event.description %>
 </p>
 
 
-<%= link_to 'Edit', edit_event_path(@event) %>
-<%= link_to 'Back', calendar_path %>
-<td><%= link_to 'Destroy', event_path(@event, :owner => "show"), :confirm => 'Are you sure?', :method => :delete %></td>
+<%= link_to 'Редактировать', edit_event_path(@event) %>
+<%= link_to 'Назад', calendar_path %>
+<td><%= link_to 'Удалить', event_path(@event, :owner => "show"), :confirm => 'Вы уверены?', :method => :delete %></td>
 
 
 
