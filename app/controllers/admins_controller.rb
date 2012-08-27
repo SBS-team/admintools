@@ -4,7 +4,8 @@ class AdminsController < ApplicationController
   before_filter :check_admin, :only => [:new, :create, :edit, :update, :destroy]
 
   def index
-    @admins = Admin.all
+    @search = Admin.search(params[:search] || {"meta_sort" => "id.asc"})
+    @admins = @search.order('created_at').all
   end
 
   def new
