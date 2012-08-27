@@ -9,7 +9,7 @@
         %label.control-label
           Фото
         .controls
-          = image_tag (@user.avatar(:thumb) != "/avatars/thumb/missing.png" ? user.avatar(:thumb) : "no_avatar.gif")
+          = image_tag (@user.avatar(:thumb) != "/avatars/thumb/missing.png" ? @user.avatar(:thumb) : "no_avatar.gif")
       .control-group
         %label.control-label
           Пользователь

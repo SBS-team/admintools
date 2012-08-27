@@ -26,10 +26,10 @@ var dropWorkplaceOpt = {
 }
 
 var dragOpt = {
-  grid:          [5, 5],
+  grid: [5, 5], 
   containment:   "#schema-wrapper",
   snap:          ".room",
-  snapTolerance: 15,
+  snapTolerance: 10,
   revert: function(droppableObj){
     if(droppableObj === false){
       revertGlobal = true
@@ -149,4 +149,16 @@ $(document).ready(function() {
   });
 
   $(".desktop").draggable({revert: true})
+
+  $(".desktop").bind("click", function(event){
+    event.preventDefault();
+  })
+  $(".desktop").bind("mousedown", function(event){
+    event.preventDefault();
+    $(this).css('z-index', '100000')
+  })
+  $(".desktop").bind("mouseup", function(event){
+    event.preventDefault();
+    $(this).css('z-index', 'auto')
+  })
 });

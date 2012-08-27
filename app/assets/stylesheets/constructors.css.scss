@@ -46,8 +46,8 @@
   position: relative;
   width: 16px;
   height: 16px;
-  background: url("/images/server-icon.png");
-  z-index:2222222; }
+  background: url("server-icon.png");
+  z-index:22; }
 
 .workplace {
   position: absolute;
@@ -57,7 +57,7 @@
 
 .line {
   position: absolute;
-  background: url("/images/line-table.png") transparent; }
+  background: url("line-table.png") transparent; }
 
 .horizontation {
   width: 70px;
@@ -73,7 +73,7 @@
   width: 70px;
   height: 70px;
   line-height: 70px;
-  background: url("/images/angle-table.png") transparent; }
+  background: url("angle-table.png") transparent; }
 
 .nw {
   background-position: 0px 0px; }

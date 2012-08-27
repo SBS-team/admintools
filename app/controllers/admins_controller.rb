@@ -1,9 +1,11 @@
 class AdminsController < ApplicationController
 
   before_filter :find_admin, :only => [:show, :edit, :update, :destroy]
+  before_filter :check_admin, :only => [:new, :create, :edit, :update, :destroy]
 
   def index
-    @admins = Admin.all
+    @search = Admin.search(params[:search] || {"meta_sort" => "id.asc"})
+    @admins = @search.order('created_at').all
   end
 
   def new
@@ -36,13 +38,17 @@ class AdminsController < ApplicationController
   end
 
   def destroy
-    @admin.destroy and redirect_to :admins
+    @admin.destroy# and redirect_to :admins
   end
 
   private
 
   def find_admin
     @admin = Admin.find_by_id(params[:id])
+  end
+
+  def check_admin
+    redirect_to :admins unless current_admin.is_super_admin?
   end
 
 end
