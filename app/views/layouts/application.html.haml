@@ -10,7 +10,6 @@
           / Le HTML5 shim, for IE6-8 support of HTML elements
           /[if lt IE 9]
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
-          <script src="/nicEdit/nicEdit.js"></script>
           = stylesheet_link_tag "application", :media => "all"
 
   %body
@@ -22,7 +21,7 @@
               %span.icon-bar
               %span.icon-bar
               %span.icon-bar
-            %a.brand{:href => "#"} Admintools
+            %a.brand{:href => "/"} Admintools
             .container-fluid.nav-collapse{:style => "float: right"}
               = link_to "Администраторы", admins_path, :class => "btn btn-large btn-primary", :id => "admins_tab"
               - if admin_signed_in?
