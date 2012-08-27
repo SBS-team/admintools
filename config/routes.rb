@@ -18,8 +18,7 @@ Admintools::Application.routes.draw do
   resources :events
 
   get "calendar/index", :as => :calendar
-
-  #get "calendar/popup/:start/:end/:allday"
+  get "calendar/popup/:start/:end" => "calendar#popup"
 
 
   root :to => 'rooms#index'

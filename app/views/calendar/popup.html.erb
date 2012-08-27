@@ -12,32 +12,33 @@
   <% end %>
 
   <div class="field">
-    <%= f.label "Заголовок" %><br />
+    <%= f.label "Заголовок" %>
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label "Начало" %><br />
+    <%= f.label "Начало" %>
     <%= f.datetime_select :starts_at %>
   </div>
   <div class="field">
-    <%= f.label "Конец" %><br />
+    <%= f.label "Конец" %>
     <%= f.datetime_select :ends_at %>
   </div>
     <div class="field">
-      <%= f.label "Напомнить" %><br />
+      <%= f.label "Напомнить" %>
       <%= f.datetime_select :send_at %>
     </div>
 
   <div class="field">
-    <%= f.label "Весь день" %><br />
+    <%= f.label "Весь день" %>
     <%= f.check_box :all_day %>
   </div>
   <div class="field">
-    <%= f.label "Описание" %><br />
+    <%= f.label "Описание" %>
 
-    <%= f.text_area :description %>
+    <%= f.text_field :description %>
   </div>
   <div class="field">
+    <%= f.label "Пользователи" %>
     <%= fields_for :send_to_users do |user|%>
       <%= user.text_field :user_tokens, {  class: 'token-input-list' } %>
     <%end%>
@@ -45,6 +46,6 @@
 
     <div class="actions">
 
-    <%= f.submit %>
+    <%= f.submit "ОК"%>
   </div>
 <% end %>

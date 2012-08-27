@@ -35,11 +35,11 @@ $(document).ready(function() {
             //Change these values to style your modal popup
             var align = 'center';									//Valid values; left, right, center
             var top = 100; 											//Use an integer (in pixels)
-            var width = 500; 										//Use an integer (in pixels)
+            var width = 1200; 										//Use an integer (in pixels)
             var padding = 10;										//Use an integer (in pixels)
             var backgroundColor = '#FFFFFF'; 						//Use any hex code
-            var source = '/calendar/popup/' + start + '/' + end + '/' + allDay; 								//Refer to any page on your server, external pages are not valid e.g. http://www.google.co.uk
-            //var source = '/calendar/popup/:start/:end/:allDay';
+            //var source = '/calendar/popup/'; 								//Refer to any page on your server, external pages are not valid e.g. http://www.google.co.uk
+            var source = '/calendar/popup/' + start +  '/' + end;
             var borderColor = '#333333'; 							//Use any hex code
             var borderWeight = 4; 									//Use an integer (in pixels)
             var borderRadius = 5; 									//Use an integer (in pixels)
