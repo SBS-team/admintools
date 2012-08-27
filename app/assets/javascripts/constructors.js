@@ -26,10 +26,10 @@ var dropWorkplaceOpt = {
 }
 
 var dragOpt = {
-  grid:          [5, 5],
+  grid: [5, 5], 
   containment:   "#schema-wrapper",
   snap:          ".room",
-  snapTolerance: 15,
+  snapTolerance: 10,
   revert: function(droppableObj){
     if(droppableObj === false){
       revertGlobal = true
