@@ -120,10 +120,10 @@
 		});
 	}
 
-	function allowAction(element) {
-		var message = element.data('confirm');
-		return !message || (fire(element, 'confirm') && confirm(message));
-	}
+//	function allowAction(element) {
+//		var message = element.data('confirm');
+//		return !message || (fire(element, 'confirm') && confirm(message));
+//	}
 
 	function blankInputs(form, specifiedSelector) {
 		var blankExists = false,
