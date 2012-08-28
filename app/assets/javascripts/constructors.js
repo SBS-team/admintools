@@ -25,22 +25,40 @@ var dropWorkplaceOpt = {
   }
 }
 
+function isWorkplace(obj){
+  if($(obj).hasClass('line') || $(obj).hasClass('angl'))
+    return true
+  else
+    return false
+}
+
 var dragOpt = {
   grid: [5, 5], 
   containment:   "#schema-wrapper",
   snap:          ".room",
+  snapMode:      "inner",
   snapTolerance: 10,
   revert: function(droppableObj){
-    if(droppableObj === false){
-      revertGlobal = true
-      return false
-    }else{
+    var draggableObj = $(this)
+    if($(droppableObj).attr('id') == 'trash'){
       revertGlobal = false
       return true
+    }else if(isWorkplace(draggableObj) && isWorkplace(droppableObj)){
+      revertGlobal = false
+      return true
+    }else{
+      revertGlobal = true
+      return false
     }
   }, 
   stack:         ".room div",
   stop: function(event, ui){
+    // fix snap position
+    if(ui.position.top % 5)
+      $(this).css('top', ui.position.top > 0 ? ui.position.top - 1 : ui.position.top + 1)
+    if(ui.position.left % 5)
+      $(this).css('left', ui.position.left > 0 ? ui.position.left - 1 : ui.position.left + 1)
+    
     var workplace_id = $(this).attr("id").split("_")[1]
     if(revertGlobal){
       updateWorkplace(workplace_id, ui.position)
@@ -51,10 +69,8 @@ var dragOpt = {
   }
 };
 
-function createWorkplace(type, form){
-  $.post(
-      "/constructors", 
-      {
+function createWorkplace(type, form, title){
+  var reqData = {
         "_method": "post",
         "workplace": {
         "workplace_type": type,
@@ -63,10 +79,17 @@ function createWorkplace(type, form){
         "left"          : "0",
         "room_plan_id"  : roomId
         }
-      },
+      };
+  if(title)
+    reqData["workplace"]["title"] = title
+  $.post(
+      "/constructors",
+      reqData,
       function(res, status){
         if(res.status > 0){
-          $("<div />").attr("id", "workplace_"+res.workplace.id).addClass("workplace new-table").addClass(type).addClass(form).appendTo(".room").draggable(dragOpt).droppable(dropWorkplaceOpt);
+          var el = $("<div />").attr("id", "workplace_"+res.workplace.id).addClass("workplace new-table").addClass(type).addClass(form).appendTo(".room").draggable(dragOpt).droppable(dropWorkplaceOpt);
+          if(title)
+            el.attr("title", title)
         }
       },
       "json"
@@ -107,7 +130,8 @@ function relateDesktopToWorkplace(workplace, desktop){
 
 $(document).ready(function() {
 
-  $(".workplace").draggable(dragOpt).droppable(dropWorkplaceOpt)
+  $(".workplace").draggable(dragOpt)
+  $(".workplace.line, .workplace.angl").droppable(dropWorkplaceOpt)
 
   $("#desktops").droppable({
     drop: function(event, ui){
@@ -122,31 +146,15 @@ $(document).ready(function() {
   $('#trash').droppable({
     drop: function(event, ui){
       var workplace_id = ui.draggable.attr("id").split("_")[1]
-      if(confirm('Remove?')){
+      if(confirm('Удалить?')){
         destroyWorkplace(workplace_id)
-        
         if( $("#"+ui.draggable.attr("id")).children().hasClass("desktop") ){
-
           $("#"+ui.draggable.attr('id')).children().css({'top':'0', 'left':'0'}).detach().appendTo("#desktops")
-
         }
-
         ui.draggable.fadeOut('1000', function(){ui.draggable.remove()})
       }
     }
   })
-
-  // table generator
-  // line table
-  $('.addLine').bind('click', function(event){
-    event.preventDefault();
-    createWorkplace("line", $(this).attr('id'))
-  });
-  // angle table
-  $('.addAngle').bind('click', function(event){
-    event.preventDefault();
-    createWorkplace("angl", $(this).attr('id'))
-  });
 
   $(".desktop").draggable({revert: true})
 
@@ -161,4 +169,22 @@ $(document).ready(function() {
     event.preventDefault();
     $(this).css('z-index', 'auto')
   })
+  // table generator
+  // line table
+  $('.addLine').bind('click', function(event){
+    event.preventDefault();
+    createWorkplace("line", $(this).attr('id'))
+  });
+  // angle table
+  $('.addAngle').bind('click', function(event){
+    event.preventDefault();
+    createWorkplace("angl", $(this).attr('id'))
+  });
+
+  // office devices generator
+  $('.addOfficeDevice').bind('click', function(event){
+    event.preventDefault();
+    createWorkplace("office-device", $(this).attr('id'), $(this).attr('id').split("-")[1])
+  })
+
 });

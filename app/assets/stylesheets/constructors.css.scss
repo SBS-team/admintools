@@ -55,6 +55,12 @@
   text-align: center;
   z-index: 10; }
 
+.office-device {
+  position: absolute;
+  display: inline-block;
+  width: 16px;
+  height: 16px; }
+
 .line {
   position: absolute;
   background: url("line-table.png") transparent; }
@@ -87,11 +93,20 @@
 .se {
   background-position: -70px -70px; }
 
+.d-printer {
+  background: url("printer-icon.png") transparent; }  
+.d-router {
+  background: url("router-icon.png") transparent; }  
+.d-switch {
+  background: url("switch-icon.png") transparent; }  
+.d-server {
+  background: url("servers-icon.png") transparent; }  
+
 .table-angle-space {
   width: 40px;
   height: 40px;
   background: transparent; }
 
 .new-table {
-  left: 50%;
-  top: 50%; }
+  left: 125px;
+  top: 125px; }
