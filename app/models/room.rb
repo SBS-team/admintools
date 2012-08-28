@@ -1,6 +1,5 @@
 class Room < ActiveRecord::Base
   belongs_to :user
-  
   has_one  :room_plan
   has_many :desktops
   has_many :users, :through => :desktops
