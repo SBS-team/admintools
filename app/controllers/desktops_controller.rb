@@ -1,3 +1,4 @@
+#encoding=UTF-8
 class DesktopsController < ApplicationController
   before_filter :all_users_and_rooms, :only => [:index, :new, :edit, :create, :update]
   before_filter :current_desktop, :only => [:show, :edit, :update, :destroy]
@@ -22,7 +23,7 @@ class DesktopsController < ApplicationController
   def create
     @desktop = Desktop.new(params[:desktop])
     if @desktop.save
-      redirect_to :desktops
+      redirect_to :desktops, :notice => "Компьютер #{@desktop.name} добавлен"
     else
       render :action => "new"
     end
@@ -30,14 +31,14 @@ class DesktopsController < ApplicationController
 
   def update
     if @desktop.update_attributes(params[:desktop])
-      redirect_to :desktops
+      redirect_to :desktops, :notice => "Компьютер #{@desktop.name} обновлен"
     else
       render :action => 'edit'
     end
   end
 
   def destroy
-    @desktop.destroy and redirect_to :desktops
+    @desktop.destroy and redirect_to :desktops, :notice => "Компьютер #{@desktop.name} удален"
   end
 
 private
