@@ -1,3 +1,4 @@
+#encoding=UTF-8
 class DevicesController < ApplicationController
   before_filter :users_all, :only => [:index, :new, :edit, :create, :update]
   before_filter :current_device, :only => [:show, :edit, :update, :destroy]
@@ -22,7 +23,7 @@ class DevicesController < ApplicationController
   def create
     @device = Device.new(params[:device])
     if @device.save
-      redirect_to :devices
+      redirect_to :devices, :notice => "Личное устройство добавлено"
     else
       render :action => "new"
     end
@@ -30,14 +31,14 @@ class DevicesController < ApplicationController
 
   def update
     if @device.update_attributes(params[:device])
-      redirect_to :devices
+      redirect_to :devices, :notice => "Личное устройство обновлено"
     else
       render :action => 'edit'
     end
   end
 
   def destroy
-    @device.destroy and redirect_to :devices
+    @device.destroy and redirect_to :devices, :notice => "Личное устройство удалено"
   end
 
   private
