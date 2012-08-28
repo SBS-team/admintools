@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  layout false, :only => [:new, :show]
   # GET /events
   # GET /events.xml
   def index
@@ -11,12 +12,12 @@ class EventsController < ApplicationController
     @events = @events.after(params['start']) if (params['start'])
     @events = @events.before(params['end']) if (params['end'])
 
-    @users = User.where("last_name like ?", "%#{params[:q]}%")
+    @admins = Admin.where("name like ?", "%#{params[:q]}%")
 
     respond_to do |format|
       format.html # index.html.haml
       format.js  { render :json => @events }
-      format.json { render :json => @users.map(&:attributes) }
+      format.json { render :json => @admins.map(&:attributes) }
     end
   end
 
@@ -30,7 +31,7 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = Event.new
+    @event = Event.new(:starts_at => params[:start], :ends_at => params[:end], :send_at => params[:start], :all_day => params[:all_day])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,7 +41,7 @@ class EventsController < ApplicationController
   # GET /events/1/edit
   def edit
     @event = Event.find(params[:id])
-    @all_users = User.all
+    @all_admins = Admin.all
   end
 
   # POST /events
@@ -49,15 +50,15 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        if params[:send_to_users][:user_tokens] == ""
-          @event.event_users.create(:user_id => current_admin.id)
+        if params[:send_to_admins][:admin_tokens] == ""
+          @event.event_admins.create(:admin_id => current_admin.id)
         else
-          params[:send_to_users][:user_tokens].split(",").each do |user|
-            @event.event_users.create(:user_id => user.to_i)
+          params[:send_to_admins][:admin_tokens].split(",").each do |admin|
+            @event.event_admins.create(:admin_id => admin.to_i)
           end
         end
 
-        format.html { redirect_to(@event, :notice => 'Event was successfully created.') }
+        format.html { redirect_to calendar_path }
       else
         format.html { render :action => "new" }
       end
@@ -75,7 +76,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.update_attributes(params[:event])
-        format.html { redirect_to(@event, :notice => 'Event was successfully updated.') }
+        format.html { redirect_to calendar_path }
         format.js { head :ok}
       else
         format.html { render :action => "edit" }
@@ -94,8 +95,8 @@ class EventsController < ApplicationController
     end
   end
 
-  def add_user
-    render :partial =>'/events/user_list', locals: {:all_users => @users}
+  def add_admin
+    render :partial =>'/events/admin_list', locals: {:all_admins => @admins}
   end
 
 end

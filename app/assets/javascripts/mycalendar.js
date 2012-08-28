@@ -15,8 +15,8 @@ $(document).ready(function() {
             center: 'title',
             right: 'month,agendaWeek,agendaDay'
         },
-        monthNames: ['Январь','Февраль','Март','Апрель','Май','οюнь','οюль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
-        monthNamesShort: ['Янв.','Фев.','Март','Апр.','Май','οюнь','οюль','Авг.','Сент.','Окт.','Ноя.','Дек.'],
+        monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+        monthNamesShort: ['Янв.','Фев.','Март','Апр.','Май','Июнь','Июль','Авг.','Сент.','Окт.','Ноя.','Дек.'],
         dayNames: ["Воскресенье","Понедельник","Вторник","Среда","Четверг","Пятница","Суббота"],
         dayNamesShort: ["ВС","ПН","ВТ","СР","ЧТ","ПТ","СБ"],
         buttonText: {
@@ -39,7 +39,7 @@ $(document).ready(function() {
             var padding = 10;										//Use an integer (in pixels)
             var backgroundColor = '#FFFFFF'; 						//Use any hex code
             //var source = '/calendar/popup/'; 								//Refer to any page on your server, external pages are not valid e.g. http://www.google.co.uk
-            var source = '/calendar/popup/' + start +  '/' + end;
+            var source = '/events/new/' + start +  '/' + end +  '/' + allDay;
             var borderColor = '#333333'; 							//Use any hex code
             var borderWeight = 4; 									//Use an integer (in pixels)
             var borderRadius = 5; 									//Use an integer (in pixels)
@@ -102,7 +102,26 @@ $(document).ready(function() {
 
         // http://arshaw.com/fullcalendar/docs/mouse/eventClick/
         eventClick: function(event, jsEvent, view){
+            var align = 'center';									//Valid values; left, right, center
+            var top = 100; 											//Use an integer (in pixels)
+            var width = 300; 										//Use an integer (in pixels)
+            var padding = 10;										//Use an integer (in pixels)
+            var backgroundColor = '#FFFFFF'; 						//Use any hex code
+            //var source = '/calendar/popup/'; 								//Refer to any page on your server, external pages are not valid e.g. http://www.google.co.uk
+            var source = '/events/' + event.id;
+            var borderColor = '#333333'; 							//Use any hex code
+            var borderWeight = 4; 									//Use an integer (in pixels)
+            var borderRadius = 5; 									//Use an integer (in pixels)
+            var fadeOutTime = 300; 									//Use any integer, 0 = no fade
+            var disableColor = '#666666'; 							//Use any hex code
+            var disableOpacity = 40; 								//Valid range 0-100
+            var loadingImage = '';		//Use relative path from this page
 
+            //This method initialises the modal popup
+            modalPopup(align, top, width, padding, disableColor, disableOpacity, backgroundColor, borderColor, borderWeight, borderRadius, fadeOutTime, source, loadingImage);
+
+            $('#calendar').fullCalendar('unselect');
+          return false;
         }
 
     });

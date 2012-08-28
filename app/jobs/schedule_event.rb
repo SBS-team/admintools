@@ -2,9 +2,9 @@ class ScheduleEvent
   @queue = :shedule_event
 
   def self.perform
-     Event.includes(:users).sending_event.each do |event|
-        event.users.each do |user|
-          UserMailer.send_event_email(user).deliver
+     Event.includes(:admins).sending_event.each do |event|
+        event.admins.each do |admin|
+          AdminMailer.send_event_email(admin).deliver
         end
      end
   end

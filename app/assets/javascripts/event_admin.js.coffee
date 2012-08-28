@@ -8,14 +8,17 @@
 #  , (data) ->
 #  $(".userList").html(data)
 
-
-$('.recommend > .userList li').click ->
-
-$('form.search').click (e) ->
-
-$("#user_search").keyup ->
-  $.post "/events/search_users",
-    cur_val: $(this).val()
-    , (data) ->
-    $(".userList").html(data)
-
+#
+#$('.recommend > .adminList li').click ->
+#
+#$('form.search').click (e) ->
+#
+#$("#admin_search").live "keyup", ->
+#  $.post "/events/search_admins",
+#    cur_val: $(this).val()
+#    , (data) ->
+#    $(".adminList").html(data)
+#
+#
+#
+#
