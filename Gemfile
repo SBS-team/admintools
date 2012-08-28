@@ -7,6 +7,7 @@ gem "devise"
 gem "haml-rails"
 gem "meta_search"
 gem "paperclip"
+gem 'will_paginate'
 gem 'resque-scheduler', :require => 'resque_scheduler'
 
 # Gems used only for assets and not required

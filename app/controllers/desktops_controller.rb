@@ -5,7 +5,7 @@ class DesktopsController < ApplicationController
 
   def index
     @search = Desktop.search(params[:search] || {"meta_sort" => "id.asc"})
-    @desktops = @search.order('created_at').all
+    @desktops = @search.paginate(:page => params[:page]).order('created_at').all
   end
 
   def new
