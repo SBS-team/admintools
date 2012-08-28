@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe Admin do
-  let(:admin){FactoryGirl.create :admin}
+  let(:admin){ FactoryGirl.create :admin }
 
   it "should return correct value for constant Admin::SUPER_ADMIN " do
     Admin::SUPER_ADMIN.should == "admin"
