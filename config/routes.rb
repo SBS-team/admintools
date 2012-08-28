@@ -19,7 +19,6 @@ Admintools::Application.routes.draw do
   get "calendar/index", :as => :calendar
 
 
-
   root :to => 'rooms#index'
-  match "/designer" => "constructor#designer"
+
 end

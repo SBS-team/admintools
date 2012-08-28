@@ -10,4 +10,11 @@ class Admin < ActiveRecord::Base
   def user_tokens=(ids)
     self.user_ids = ids.split(",")
   end
+
+  SUPER_ADMIN = "admin"
+
+  def is_super_admin?
+    name == SUPER_ADMIN
+  end
+
 end

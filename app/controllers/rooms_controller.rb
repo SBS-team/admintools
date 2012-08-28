@@ -22,7 +22,7 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new(params[:room])
     if @room.save
-      redirect_to :root
+      redirect_to :root, :notice => "Офис #{@room.name} добавлен"
     else
       render :action => "new"
     end
@@ -30,14 +30,14 @@ class RoomsController < ApplicationController
 
   def update
     if @room.update_attributes(params[:room])
-      redirect_to :root
+      redirect_to :root, :notice => "Офис #{@room.name} обновлен"
     else
       render :action => "edit"
     end
   end
 
   def destroy
-    @room.destroy and redirect_to :root
+    @room.destroy and redirect_to :root, :notice => "Офис #{@room.name} удален"
   end
 
   private

@@ -16,6 +16,7 @@
 //= require_tree .
 //= require jquery-ui
 //= require jquery.tokeninput
+//= require nicEdit
 
 
 
@@ -29,7 +30,7 @@ function nav_menu(){
     $("ul.breadcrumb").html()
 
     $.each(arr, function(k,v){
-        url_href= arr.slice(0, k+1).join("/")
+        var url_href= arr.slice(0, k+1).join("/")
         $("ul.breadcrumb").append("<li><a href='"+url_href+"' >"+v+"</a><span class='divider'>/</span> </li>")
     });
 }

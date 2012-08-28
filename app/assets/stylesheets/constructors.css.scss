@@ -46,8 +46,8 @@
   position: relative;
   width: 16px;
   height: 16px;
-  background: url("/images/server-icon.png");
-  z-index:2222222; }
+  background: url("server-icon.png");
+  z-index:22; }
 
 .workplace {
   position: absolute;
@@ -55,9 +55,15 @@
   text-align: center;
   z-index: 10; }
 
+.office-device {
+  position: absolute;
+  display: inline-block;
+  width: 16px;
+  height: 16px; }
+
 .line {
   position: absolute;
-  background: url("/images/line-table.png") transparent; }
+  background: url("line-table.png") transparent; }
 
 .horizontation {
   width: 70px;
@@ -73,7 +79,7 @@
   width: 70px;
   height: 70px;
   line-height: 70px;
-  background: url("/images/angle-table.png") transparent; }
+  background: url("angle-table.png") transparent; }
 
 .nw {
   background-position: 0px 0px; }
@@ -87,11 +93,20 @@
 .se {
   background-position: -70px -70px; }
 
+.d-printer {
+  background: url("printer-icon.png") transparent; }  
+.d-router {
+  background: url("router-icon.png") transparent; }  
+.d-switch {
+  background: url("switch-icon.png") transparent; }  
+.d-server {
+  background: url("servers-icon.png") transparent; }  
+
 .table-angle-space {
   width: 40px;
   height: 40px;
   background: transparent; }
 
 .new-table {
-  left: 50%;
-  top: 50%; }
+  left: 125px;
+  top: 125px; }

@@ -10,6 +10,18 @@
       = a.label :email, 'Email', :class => 'control-label'
       .controls
         = a.text_field :email, :class => 'input-xlarge'
+    .control-group
+      = a.label :name, 'Admin name', :class => 'control-label'
+      .controls
+        = a.text_field :name, :class => 'input-xlarge'
+    .control-group
+      = a.label :password, 'password', :class => 'control-label'
+      .controls
+        = a.password_field :password, :class => 'input-xlarge'
+    .control-group
+      = a.label :password_confirmation, 'confirmation password', :class => 'control-label'
+      .controls
+        = a.password_field :password_confirmation, :class => 'input-xlarge'
     .form-actions
       = a.submit (@admin.id?) ? 'Изменить' : 'Создать' , :class => 'btn btn-primary'
       = link_to 'Назад', admins_path, :class => 'btn'
