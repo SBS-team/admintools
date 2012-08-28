@@ -9,5 +9,4 @@ class Admin < ActiveRecord::Base
   def is_super_admin?
     name == SUPER_ADMIN
   end
-
 end
