@@ -1,6 +1,4 @@
 class Desktop < ActiveRecord::Base
-  after_save :re_counter
-
   belongs_to :room, :counter_cache => true
   belongs_to :user
   has_one :workplace, :dependent => :nullify
@@ -9,6 +7,8 @@ class Desktop < ActiveRecord::Base
   validates :mac, :presence => true, :uniqueness => true, :format => {:with => /\b([A-Fa-f0-9]{2}[:-]){5}[A-Fa-f0-9]{2}\b/, :massage => 'Wrong MAC'}
   validates :user_id, :uniqueness => true, :if => :user_id?
   validates :name, :presence => true
+
+  after_save :re_counter
 
   private
 
