@@ -13,4 +13,14 @@ require "spec_helper"
     it { should validate_presence_of(:mac) }
     it { should validate_uniqueness_of(:user_id) }
     it { should validate_presence_of(:name) }
+
+    context "creating room" do
+      before :each do
+        @room = FactoryGirl.create :room
+        5.times {FactoryGirl.create :desktop, :room => @room}
+      end
+      it "should create room with desktops_count eq 5" do
+        @room.reload.desktops_count.should == 5
+      end
+    end
   end
