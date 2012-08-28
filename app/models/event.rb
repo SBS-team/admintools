@@ -1,6 +1,9 @@
 class Event < ActiveRecord::Base
-  has_many :event_users
-  has_many :users, :through => :event_users
+  attr_accessor :send_to_admins
+
+  attr_accessible :title, :starts_at, :ends_at, :all_day, :description, :send_at, :sended, :send_to_admins
+  has_many :event_admins
+  has_many :admins, :through => :event_admins
 
   validate :starts_at_is_less_than_ends_at
 

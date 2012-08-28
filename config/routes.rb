@@ -3,7 +3,7 @@ Admintools::Application.routes.draw do
   devise_for :admins
 
 
-  get "events/search_users/" => "events#search_users"
+  get "events/search_admins/" => "events#search_admins"
 
   resources :devices
   resources :rooms
@@ -13,12 +13,11 @@ Admintools::Application.routes.draw do
   resources :admins
   resources :constructors
 
-  #get "/events/:id" => "events#yomanarot"
+  get "events/new/:start/:end/:all_day" => "events#new"
   resources :events
 
   get "calendar/index", :as => :calendar
 
-  #get "calendar/popup/:start/:end/:allday"
 
   root :to => 'rooms#index'
 
