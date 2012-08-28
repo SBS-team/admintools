@@ -8,6 +8,6 @@ class AddDesktopsCounterToRoom < ActiveRecord::Migration
   end
   
   def down
-    drop_column :rooms, :desktops_count
+    destroy_column :rooms, :desktops_count
   end
 end
