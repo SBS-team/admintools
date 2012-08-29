@@ -1,0 +1,2 @@
+class SargController < ApplicationController
+end

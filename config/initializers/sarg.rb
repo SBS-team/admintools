@@ -1,0 +1,1 @@
+SARG_LOCATION = YAML.load_file("#{Rails.root}/config/sarg_location.yml")
