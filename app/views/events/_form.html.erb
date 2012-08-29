@@ -1,50 +1,51 @@
 <%= form_for(@event) do |f| %>
-  <% if @event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+    <% if @event.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
 
-      <ul>
-      <% @event.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+          <ul>
+            <% @event.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :starts_at %><br />
-    <%= f.datetime_select :starts_at %>
-  </div>
-  <div class="field">
-    <%= f.label :ends_at %><br />
-    <%= f.datetime_select :ends_at %>
-  </div>
     <div class="field">
-      <%= f.label :send_at %><br />
+      <%= f.label "Заголовок" %>
+      <%= f.text_field :title %>
+    </div>
+    <div class="field">
+      <%= f.label "Начало" %>
+      <%= f.datetime_select :starts_at %>
+    </div>
+    <div class="field">
+      <%= f.label "Конец" %>
+      <%= f.datetime_select :ends_at %>
+    </div>
+    <div class="field">
+      <%= f.label "Напомнить" %>
       <%= f.datetime_select :send_at %>
     </div>
 
-  <div class="field">
-    <%= f.label :all_day %><br />
-    <%= f.check_box :all_day %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
+    <div class="field">
+      <%= f.label "Весь день" %>
+      <%= f.check_box :all_day %>
+    </div>
+    <div class="field">
+      <%= f.label "Описание" %>
 
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= fields_for :send_to_users do |user|%>
-      <%= user.text_field :user_tokens, {  class: 'token-input-list' } %>
-    <%end%>
-  </div>
+      <%= f.text_field :description %>
+    </div>
+    <div class="field">
+      <%= f.label "Пользователи" %>
+      <%= fields_for :send_to_admins do |admin|%>
+          <%= admin.text_field :admin_tokens, {id: "token-input-list", class: 'token-input-list' } %>
+      <%end%>
+    </div>
 
     <div class="actions">
 
-    <%= f.submit %>
-  </div>
+      <%= f.submit "ОК"%>
+    </div>
 <% end %>

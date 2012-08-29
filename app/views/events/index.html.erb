@@ -1,12 +1,12 @@
-<h1>Listing events</h1>
+<h1>Список событий</h1>
 
 <table>
   <tr>
-    <th>Title</th>
-    <th>Starts at</th>
-    <th>Ends at</th>
-    <th>All day</th>
-    <th>Description</th>
+    <th>Заголовок</th>
+    <th>Начало в</th>
+    <th>Конец в</th>
+    <th>Все дни</th>
+    <th>Описание</th>
     <th></th>
     <th></th>
     <th></th>
@@ -19,10 +19,10 @@
     <td><%= event.ends_at %></td>
     <td><%= event.all_day %></td>
     <td><%= event.description %></td>
-    <td><%= link_to 'Show', event %></td>
-    <td><%= link_to 'Edit', edit_event_path(event) %></td>
+    <td><%= link_to 'Просмотр', event %></td>
+    <td><%= link_to 'Редактировать', edit_event_path(event) %></td>
 
-    <td><%= link_to 'Destroy', event, :confirm => 'Are you sure?', :method => :delete%></td>
+    <td><%= link_to 'Удалить', event, :confirm => 'Вы уверены?', :method => :delete%></td>
 
   </tr>
 <% end %>
@@ -33,4 +33,4 @@
 
 
 <br/>
-<%= link_to 'New Event', new_event_path %>
+<%= link_to 'Добавить событие', new_event_path %>
