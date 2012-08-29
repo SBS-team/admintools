@@ -9,8 +9,6 @@ class Event < ActiveRecord::Base
 
   attr_accessor :send_to_users
 
-  attr_accessible :title, :starts_at, :ends_at, :all_day, :description, :send_at, :sended, :send_to_users
-
   scope :before, lambda {|end_time| {:conditions => ["ends_at < ?", Event.format_date(end_time)] }}
   scope :after, lambda {|start_time| {:conditions => ["starts_at > ?", Event.format_date(start_time)] }}
   scope :sending_event, lambda { where("send_at < ?", Time.zone.now).where("send_at > ?", Time.zone.now - 2.month).where(:sended => false) }
@@ -37,13 +35,13 @@ class Event < ActiveRecord::Base
 
   before_update do
     unless self.ends_at
-     self.ends_at=self.starts_at.end_of_day
+      self.ends_at=self.starts_at.end_of_day
     end
   end
 
   def starts_at_is_less_than_ends_at
     if self.ends_at
-    errors.add(:starts_at, "should be less than ends_at") if (starts_at > ends_at)
+      errors.add(:starts_at, "should be less than ends_at") if (starts_at > ends_at)
     end
   end
 
