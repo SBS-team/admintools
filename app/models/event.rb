@@ -2,9 +2,10 @@ class Event < ActiveRecord::Base
   has_many :event_admins
   has_many :admins, :through => :event_admins
 
-  validate :starts_at_is_less_than_ends_at
+  #validate :starts_at_is_less_than_ends_at
 
   attr_accessor :send_to_users
+  attr_accessor :send_to_admins
 
   scope :before, lambda {|end_time| {:conditions => ["ends_at < ?", Event.format_date(end_time)] }}
   scope :after, lambda {|start_time| {:conditions => ["starts_at > ?", Event.format_date(start_time)] }}
