@@ -1,6 +1,6 @@
 require "spec_helper"
 
-  describe EventUser do
-    it { should belong_to :user }
+  describe EventAdmin do
+    it { should belong_to :admin }
     it { should belong_to :event }
   end
