@@ -32,13 +32,13 @@ class Event < ActiveRecord::Base
 
   before_update do
     unless self.ends_at
-     self.ends_at=self.starts_at.end_of_day
+      self.ends_at=self.starts_at.end_of_day
     end
   end
 
   def starts_at_is_less_than_ends_at
     if self.ends_at
-    errors.add(:starts_at, "should be less than ends_at") if (starts_at > ends_at)
+      errors.add(:starts_at, "should be less than ends_at") if (starts_at > ends_at)
     end
   end
 

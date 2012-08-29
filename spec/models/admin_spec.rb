@@ -8,7 +8,7 @@ describe Admin do
   end
 
   context "is_super_admin?" do
-    before :each do
+    before(:each) do
       @super_admin = FactoryGirl.create :super_admin
     end
 

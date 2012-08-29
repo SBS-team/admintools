@@ -25,7 +25,7 @@ gem "resque-scheduler"  #, :require => "resque_sheduler"
 
 gem "rspec-rails", :group => [:test, :development]
 group :test do
-  gem "factory_girl_rails"
+  gem "factory_girl_rails", "~> 4.0.0"
   gem "capybara"
   gem "guard-rspec"
   gem "shoulda-matchers", "~> 1.2.0"
