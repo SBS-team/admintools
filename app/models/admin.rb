@@ -1,7 +1,7 @@
 class Admin < ActiveRecord::Base
   # Include default devise modules. Others available are:
   devise :database_authenticatable,
-         :rememberable, :trackable, :validatable
+         :rememberable, :trackable, :validatable, :timeoutable, :timeout_in => 30.minutes
   # Setup accessible (or protected) attributes for your model
   # attr_accessible :title, :body
   has_many :event_admins, :dependent => :delete_all
