@@ -1,5 +1,7 @@
 class Admin < ActiveRecord::Base
   # Include default devise modules. Others available are:
+  self.per_page = 10
+
   devise :database_authenticatable,
          :rememberable, :trackable, :validatable, :timeoutable, :timeout_in => 1.hours
   # Setup accessible (or protected) attributes for your model

@@ -5,7 +5,7 @@ class AdminsController < ApplicationController
 
   def index
     @search = Admin.search(params[:search] || {"meta_sort" => "id.asc"})
-    @admins = @search.order('created_at').all
+    @admins = @search.paginate(:page => params[:page]).order('created_at').all
   end
 
   def new

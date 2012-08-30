@@ -1,4 +1,5 @@
 class Room < ActiveRecord::Base
+  self.per_page = 10
   belongs_to :user
   has_one  :room_plan
   has_many :desktops
