@@ -1,4 +1,7 @@
 class Desktop < ActiveRecord::Base
+  self.per_page = 10
+  after_save :re_counter
+
   belongs_to :room, :counter_cache => true
   belongs_to :user
   has_one :workplace, :dependent => :nullify
