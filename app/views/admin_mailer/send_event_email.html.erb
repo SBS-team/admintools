@@ -4,7 +4,9 @@
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 </head>
 <body>
-<h1>Welcome to example.com, <%= @admin.name %></h1>
-<p>Thanks for joining and have a great day!</p>
+<h1><%= @event.title %> </h1>
+<p><%= @event.description ? @event.description : "" %></p>
+<p><%= @event.starts_at ? "Начало в #{@event.starts_at}" : "" %></p>
+<p><%= @event.ends_at ? "Конец в #{@event.ends_at}" : "" %></p>
 </body>
 </html>

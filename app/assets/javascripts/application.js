@@ -18,12 +18,17 @@
 //= require jquery.tokeninput
 //= require nicEdit
 
-
-
 $(document).ready(function() {
     nav_menu()
     tab_menu()
+
+    $(document).keyup(function(e) {
+        if (e.keyCode == 27) {
+            closePopup(300);
+        }
+    });
 });
+
 
 function nav_menu(){
     var arr =  window.location.pathname.split("/");
@@ -59,11 +64,12 @@ $.ajaxSetup({
 //        tokenValue: 'id_with_class_name'
 //    });
 //});
-$("#token-input-list").live('focus',function() {
+$("#z").live('mouseover',function(){
+//  $("#token-input-list").live('focus',function() {
     $(".token-input-list").tokenInput("/events.json", {
       crossDomain: false,
       prePopulate: $(".token-input-list").data("pre"),
       propertyToSearch: "name"
     }),
-    $(".token-input-list").attr("id","new-token-input-list");
+    $("#z").attr("id","zzz");
 });
