@@ -33,15 +33,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(params[:event])
-    if params[:send_to_admins][:admin_tokens] == ""
-      @event.event_admins.build(:admin_id => current_admin.id)
-    else
-      params[:send_to_admins][:admin_tokens].split(",").each do |admin|
-        @event.event_admins.build(:admin_id => admin.to_i)
-      end
-    end
-
+    @event = Event.new(params[:event].update(:event_admins_attributes => convert_params(params[:send_to_admins])))
     if @event.save
       redirect_to events_path
     else
@@ -51,9 +43,9 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
-
+    EventAdmin.where(:event_id => @event.id).destroy_all
     respond_to do |format|
-      if @event.update_attributes(params[:event])
+      if @event.update_attributes(params[:event].update(:event_admins_attributes => convert_params(params[:send_to_admins])))
         format.html { redirect_to events_path }
         format.js { head :ok}
       else
@@ -68,5 +60,10 @@ class EventsController < ApplicationController
     redirect_to params[:owner]? events_path : :back
   end
 
+  private
+
+  def convert_params(params)
+    params[:admin_tokens]=="" ? [{:admin_id => current_admin.id}] : params[:admin_tokens].split(",").map{|t| {:admin_id => t}}
+  end
 end
 

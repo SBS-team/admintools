@@ -61,12 +61,12 @@ $.ajaxSetup({
 //        tokenValue: 'id_with_class_name'
 //    });
 //});
-$("#z").live('mouseover',function(){
-//  $("#token-input-list").live('focus',function() {
+$("#SuperModalPopupDiv").live('mouseover focus',function(){
     $(".token-input-list").tokenInput("/events.json", {
       crossDomain: false,
+      preventDuplicates: true,
       prePopulate: $(".token-input-list").data("pre"),
       propertyToSearch: "name"
     }),
-    $("#z").attr("id","zzz");
+    $("#SuperModalPopupDiv").attr("id","SuperModalPopupDivOff");
 });

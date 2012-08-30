@@ -5,8 +5,9 @@ class Event < ActiveRecord::Base
 
   validate :starts_at_is_less_than_ends_at
 
-  accepts_nested_attributes_for :event_admins
+  accepts_nested_attributes_for :event_admins, :allow_destroy => true
   attr_accessor :send_to_admins
+  attr_accessor :delete_old_admins
 
   scope :before, lambda {|end_time| where("ends_at < ?", Event.format_date(end_time))}
   scope :after, lambda {|start_time| where("starts_at > ?", Event.format_date(start_time))}
@@ -35,6 +36,9 @@ class Event < ActiveRecord::Base
      self.ends_at=self.starts_at.end_of_day
     end
   end
+
+
+
 
   def starts_at_is_less_than_ends_at
     if self.ends_at
