@@ -26,8 +26,8 @@
 </p>
 
 
-<%= link_to 'Редактировать', edit_event_path(@event) %>
-<%= link_to 'Назад', calendar_path %>
+<%= link_to 'Редактировать', '#' , :onclick => "PopupEventEdit(#{@event.id.to_s});return false;"%>
+<%= link_to 'Назад', events_path %>
 <td><%= link_to 'Удалить', event_path(@event, :owner => "show"), :confirm => 'Вы уверены?', :method => :delete %></td>
 
 

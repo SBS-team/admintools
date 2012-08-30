@@ -1,22 +1,17 @@
 class Event < ActiveRecord::Base
-  attr_accessor :send_to_admins
 
-  attr_accessible :title, :starts_at, :ends_at, :all_day, :description, :send_at, :sended, :send_to_admins
-  has_many :event_admins
+  has_many :event_admins, :dependent => :delete_all
   has_many :admins, :through => :event_admins
 
   validate :starts_at_is_less_than_ends_at
 
-  attr_accessor :send_to_users
+  accepts_nested_attributes_for :event_admins
+  attr_accessor :send_to_admins
 
-  attr_accessible :title, :starts_at, :ends_at, :all_day, :description, :send_at, :sended, :send_to_users
-
-  scope :before, lambda {|end_time| {:conditions => ["ends_at < ?", Event.format_date(end_time)] }}
-  scope :after, lambda {|start_time| {:conditions => ["starts_at > ?", Event.format_date(start_time)] }}
+  scope :before, lambda {|end_time| where("ends_at < ?", Event.format_date(end_time))}
+  scope :after, lambda {|start_time| where("starts_at > ?", Event.format_date(start_time))}
   scope :sending_event, lambda { where("send_at < ?", Time.zone.now).where("send_at > ?", Time.zone.now - 2.month).where(:sended => false) }
 
-  # need to override the json view to return what full_calendar is expecting.
-  # http://arshaw.com/fullcalendar/docs/event_data/Event_Object/
   def as_json(options = {})
     {
         :id => self.id,

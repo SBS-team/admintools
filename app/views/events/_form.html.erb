@@ -1,4 +1,6 @@
+<div id="z">
 <%= form_for(@event) do |f| %>
+
     <% if @event.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
@@ -40,12 +42,14 @@
     <div class="field">
       <%= f.label "Пользователи" %>
       <%= fields_for :send_to_admins do |admin|%>
-          <%= admin.text_field :admin_tokens, {id: "token-input-list", class: 'token-input-list' } %>
+          <%= admin.text_field :admin_tokens, {"value" => "click to show", "data-pre" => @event.admins.map(&:attributes).to_json, id: "token-input-list", class: 'token-input-list' } %>
       <%end%>
     </div>
 
     <div class="actions">
 
-      <%= f.submit "ОК"%>
+      <%= f.submit "Save"%>
     </div>
+
 <% end %>
+</div>
