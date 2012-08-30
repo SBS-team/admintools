@@ -68,6 +68,7 @@ $("#z").live('mouseover',function(){
 //  $("#token-input-list").live('focus',function() {
     $(".token-input-list").tokenInput("/events.json", {
       crossDomain: false,
+      preventDuplicates: true,
       prePopulate: $(".token-input-list").data("pre"),
       propertyToSearch: "name"
     }),
