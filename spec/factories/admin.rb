@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :admin do |f|
+  factory :admin do
 
     sequence(:email) {|n| "example#{n}@example.com"}
     sequence(:name) {|n| "admin#{n}"}
