@@ -1,5 +1,19 @@
 source 'https://rubygems.org'
 
+<<<<<<< HEAD
+gem 'rails'
+gem "haml"
+gem "mysql2"
+gem "devise"
+gem "haml-rails"
+gem "meta_search"
+gem "paperclip"
+gem 'will_paginate'
+gem 'resque-scheduler', :require => 'resque_scheduler'
+
+# Gems used only for assets and not required
+# in production environments by default.
+=======
 gem "rails", "3.2.8"
 gem "haml", "~> 3.1.7"
 gem "mysql2", "~> 0.3.11"
@@ -8,6 +22,7 @@ gem "haml-rails", "~> 0.3.4"
 gem "meta_search", "~> 1.1.3"
 gem "paperclip", "~> 3.1.4"
 gem "resque-scheduler", :require => "resque_scheduler"
+>>>>>>> 237_tests
 
 group :assets do
   gem "sass-rails",   "~> 3.2.3"

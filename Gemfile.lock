@@ -222,6 +222,9 @@ GEM
     xpath (0.1.4)
       nokogiri (~> 1.3)
 
+    will_paginate (3.0.3)
+
+
 PLATFORMS
   ruby
 
@@ -247,3 +250,4 @@ DEPENDENCIES
   shoulda-matchers (~> 1.2.0)
   twitter-bootstrap-rails (~> 2.1.1)
   uglifier (>= 1.0.3)
+  will_paginate
