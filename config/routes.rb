@@ -2,9 +2,6 @@ Admintools::Application.routes.draw do
 
   devise_for :admins
 
-
-  get "events/search_admins/" => "events#search_admins"
-
   resources :devices
   resources :rooms
   resources :users
@@ -15,9 +12,6 @@ Admintools::Application.routes.draw do
 
   get "events/new/:start/:end/:all_day" => "events#new"
   resources :events
-
-  get "calendar/index", :as => :calendar
-
 
   root :to => 'rooms#index'
 
