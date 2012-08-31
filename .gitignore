@@ -11,7 +11,7 @@
 /config/database.yml
 
 # Ignore config Sarg file
-/config/sarg_location.yml
+/public/sarg_dir
 
 # Ignore the default SQLite database.
 /db/*.sqlite3

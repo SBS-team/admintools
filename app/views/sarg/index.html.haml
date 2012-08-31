@@ -1,0 +1,8 @@
+%h1 Sarg
+
+%hr
+.well{:style=>"text-align:center;"}
+  - ["Monthly", "Weekly", "Daily"] .each_with_index do |o, i|
+    = link_to o, "#",:class=>"btn btn-large btn-primary disabled", "data-url" => @indexes[i], :onclick => "$('iframe[name=\"sarg_index\"]').attr('src', $(this).data('url')); return false;"
+  %br
+%iframe{:name => "sarg_index", :frameborder => "0", :scrollbars => "auto", :width => "100%", :height => "100%"}

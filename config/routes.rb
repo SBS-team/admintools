@@ -13,6 +13,9 @@ Admintools::Application.routes.draw do
   resources :admins
   resources :constructors
 
+
+  get "/sarg/index" => "sarg#index", :as =>  :sarg_index
+
   get "events/new/:start/:end/:all_day" => "events#new"
   resources :events
 
