@@ -27,5 +27,5 @@ group :test do
   gem "capybara", "~> 1.1.2"
   gem "guard-rspec", "~> 1.2.1"
   gem "shoulda-matchers", "~> 1.2.0"
-  gem "database_cleaner", "~> 0.8.0"
+  gem "xpath", "~> 0.1.4"
 end
