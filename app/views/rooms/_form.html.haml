@@ -6,11 +6,11 @@
         - @room.errors.full_messages.each do |msg|
           %li= msg
   %fieldset
-    .control-group
+    .control-group#id_fields1
       = f.label :name, 'Номер офиса', :class => 'control-label'
       .controls
         = f.text_field :name, :class => 'input-xlarge', :placeholder => "Введите номер офиса"
-    .control-group
+    .control-group#id_fields2
       = f.label :user_id, 'Пользователь', :class => 'control-label'
       .controls
         = select_tag :user_id, options_from_collection_for_select(@users, :id, :full_name, @room.user_id), :prompt => 'Выбрать пользователя', :include_blank => true, :class => 'input-xlarge', :name => "room[user_id]"
