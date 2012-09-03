@@ -25,6 +25,9 @@ gem "rspec-rails", :group => [:test, :development]
 group :test do
   gem "factory_girl_rails", "~> 4.0.0"
   gem "capybara", "~> 1.1.2"
+  gem "cucumber"
+  gem "capybara-mechanize"
+  gem "database_cleaner", "~> 0.8.0"
   gem "guard-rspec", "~> 1.2.1"
   gem "shoulda-matchers", "~> 1.2.0"
   gem "xpath", "~> 0.1.4"
