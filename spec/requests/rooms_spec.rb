@@ -3,20 +3,21 @@ require 'spec_helper'
 
 describe "Rooms" do
   before(:each) do
-    login_admin
+    @admin = FactoryGirl.create(:admin)
   end
 
-  it "room have content", :js => true do
-    #sleep(100)
-    #visit root_path
+  it "signs me in", :js => true do
+    visit new_admin_session_path
+
+    within "#new_admin" do
+      fill_in 'Name', :with => @admin.name
+      fill_in 'Password', :with => "secret"
+    end
+    click_button('Sign in')
+    visit(root_path)
     page.should have_content("Signed in as #{@admin.name}")
-    #page.should have_content("Компьютеры")
-    #page.should have_content("Пользователи")
-    #page.should have_content("Устройства")
-    #page.should have_content("Календарь")
   end
-
-  #context "riidfd", :js => true do
+#context "riidfd", :js => true do
   #  before(:each) do
   #    room_creating
   #  end
