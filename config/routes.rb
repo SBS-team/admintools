@@ -14,12 +14,12 @@ Admintools::Application.routes.draw do
   resources :constructors
 
 
-  get "/sarg/index" => "sarg#index", :as =>  :sarg_index
+  get "/sarg" => "sarg#index", :as =>  :sarg_index
 
   get "events/new/:start/:end/:all_day" => "events#new"
   resources :events
 
-  get "calendar/index", :as => :calendar
+  get "/calendar" => "calendar#index", :as => :calendar
 
 
   root :to => 'rooms#index'

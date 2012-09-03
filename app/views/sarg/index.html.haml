@@ -2,6 +2,7 @@
 
 %hr
 .well{:style=>"text-align:center;"}
+  - @indexes = ['/sarg_dir/Monthly/index.html','/sarg_dir/Weekly/index.html','/sarg_dir/Daily/index.html']
   - ["Monthly", "Weekly", "Daily"] .each_with_index do |o, i|
     = link_to o, "#",:class=>"btn btn-large btn-primary disabled", "data-url" => @indexes[i], :onclick => "$('iframe[name=\"sarg_index\"]').attr('src', $(this).data('url')); return false;"
   %br
