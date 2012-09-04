@@ -41,8 +41,8 @@ class Event < ActiveRecord::Base
 
   after_create do
     if self.copy.blank?
-      self.update_attributes(:group_id => self.id)
-      count_of_copies = 10
+      self.update_attributes(:group_id => self.id) unless self.repeat_events == ""
+      count_of_copies = 9
       if self.repeat_events == "selected days"
         (good_days(self.starts_at.to_date, self.event_days.map(&:to_i), count_of_copies, 1)).each do |day|
           new_event = self.dup
@@ -77,6 +77,6 @@ class Event < ActiveRecord::Base
 
   def good_days date, bad_days, count_days, first_day = 0
     add_days = (7 - bad_days.count) * 7 * (count_days / 7+1)
-    ((date..(date+count_days+add_days)).select{|day| bad_days.include? day.cwday})[first_day...count_days]
+    ((date..(date+count_days+add_days)).select{|day| bad_days.include? day.cwday})[first_day..count_days]
   end
 end
