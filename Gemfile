@@ -21,11 +21,12 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem "redis"
+gem "redis", "~> 3.0.1"
 gem "resque"
 gem "resque-scheduler"  #, :require => "resque_sheduler"
 
 gem "rspec-rails", :group => [:test, :development]
+
 group :test do
   gem "factory_girl_rails", "~> 4.0.0"
   gem "capybara"
