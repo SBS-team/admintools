@@ -1,0 +1,20 @@
+%h1 Пинги
+
+%hr
+
+.well
+  %table.table.table-striped.pretty
+    %thead
+      %tr
+        %th ip
+        %th up
+        %th down
+    %tbody
+      - @logs.each do |desktop|
+        - desktop.ping_logs.each do |ping|
+          %tr
+            %td= desktop.ip
+            %td= ping.up
+            %td= ping.down
+
+/ = will_paginate @users, :class=>"pagination pagination-centered"

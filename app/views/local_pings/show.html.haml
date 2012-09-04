@@ -1,0 +1,21 @@
+%h1= "#{@desktop.name}: #{@desktop.ip}"
+
+%hr
+
+.well
+  %table.table.table-striped.pretty
+    %thead
+      %tr
+        %th up
+        %th down
+    %tbody
+      - @pings.each do |ping|
+        %tr
+          %td= ping.up.strftime("%H:%M:%S, %d %b %Y")
+          %td= ping.down.strftime("%H:%M:%S, %d %b %Y")
+      - if (Redis.current.exists :local_ping) && Redis.current.sismember(:local_ping, @desktop.ip)
+        %tr
+          %td= Redis.current.hget(@desktop.ip, :up).to_time.strftime("%H:%M:%S, %d %b %Y")
+          %td
+
+/ = will_paginate @users, :class=>"pagination pagination-centered"

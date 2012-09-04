@@ -22,6 +22,7 @@ gem "redis", "~> 3.0.1"
 gem "resque", "~> 1.22.0"
 
 gem "rspec-rails", :group => [:test, :development]
+
 group :test do
   gem "factory_girl_rails", "~> 4.0.0"
   gem "capybara", "~> 1.1.2"
