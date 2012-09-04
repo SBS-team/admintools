@@ -75,17 +75,15 @@ def login_admin
   click_button('Sign in')
 end
 
-#def room_creating
-#  @user = FactoryGirl.create(:user)
-#  visit new_room_path
-#  sleep(1000)
-#
-#  within "#new_room" do
-#    fill_in 'room_name', :with => '5'
-#    fill_in 'room_user_id', :with => @user.full_name
-#  end
-#    #fill_in 'Номер офиса', :with => '5'
-#    #fill_in 'Пользователь', :with => @user.full_name
-#
-#  click_button 'Создать'
-#end
+def user_creating
+  visit new_user_path
+  @user = FactoryGirl.create(:user)
+  visit new_room_path
+  #sleep(10)
+  within "#new_room" do
+    fill_in 'Номер офиса', :with => "1"
+    select @user.full_name
+  end
+
+  click_button 'Создать'
+end
