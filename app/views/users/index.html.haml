@@ -3,31 +3,41 @@
 %hr
 
 .well
-  %table.table.table-striped
+  %table.table.table-striped.pretty
     %thead
       %tr
-        %th Имя
-        %th Фамилия
-        %th Email
-        %th Skype
-        %th 
+        %th Фото
+        %th= sort_link @search, :first_name, "Имя"
+        %th= sort_link @search, :last_name, "Фамилия"
+        %th= sort_link @search, :phone, "Телефон"
+        %th= sort_link @search, :email, "Email"
+        %th= sort_link @search, :skype, "Skype"
+        %th Офис
+        %th
           = link_to new_user_path, :class => "btn btn-success" do
             %i{:class => "icon-plus"}
-              Создать
+            Создать
     %tbody
       - @users.each do |user|
         %tr
+          %td= image_tag (user.avatar(:thumb) != "/avatars/thumb/missing.png" ? user.avatar(:thumb) : "no_avatar.gif")
           %td= user.first_name
           %td= user.last_name
+          %td= check_empty(user, "phone")
           %td= user.email
           %td= user.skype
+          %td= check_empty(user.room, "name")
           %td
             = link_to user_path(user), :class => "btn" do
               %i{:class => "icon-zoom-in"}
-                Просмотр
+              Просмотр
             = link_to edit_user_path(user), :class => "btn" do
               %i{:class => "icon-pencil"}
-                Редактировать
+              Редактировать
             = link_to user_url(user), :method => :DELETE, :class => "btn btn-danger", :confirm => "Ты уверен?" do
               %i{:class => "icon-remove"}
-                Удалить
+              Удалить
+
+- content_for :sidebar, render(:partial => 'sidebar')
+
+= will_paginate @users, :class=>"pagination pagination-centered"

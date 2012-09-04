@@ -1,9 +1,18 @@
 class Admin < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable :registerable, :recoverable, :trackable, :validatable
-  devise :database_authenticatable, :rememberable
+  self.per_page = 10
 
-  # Setup accessible (or protected) attributes for your model
-  # attr_accessible :title, :body
+  devise :database_authenticatable, :rememberable, :trackable, :validatable
+
+  has_many :event_admins, :dependent => :delete_all
+  has_many :events, :through => :event_admins
+
+  def user_tokens=(ids)
+    self.user_ids = ids.split(",")
+  end
+
+  SUPER_ADMIN = "admin"
+
+  def is_super_admin?
+    name == SUPER_ADMIN
+  end
 end

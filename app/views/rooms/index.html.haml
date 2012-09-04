@@ -3,13 +3,13 @@
 %hr
 
 .well
-  %table.table.table-striped
+  %table.table.table-striped.pretty
     %thead
       %tr
-        %th ID
-        %th Имя офиса
+        %th= sort_link @search, :id, "id"
+        %th= sort_link @search, :name, "Офис"
         %th Управляющий
-        %th Кол-во ПК
+        %th= sort_link @search, :desktops_count, "Кол-во ПК"
         %th
           = link_to new_room_path, :class => "btn btn-success" do
             %i{:class => "icon-plus"}
@@ -22,6 +22,9 @@
           %td= check_empty(room.user, "full_name")
           %td= room.desktops_count
           %td
+            = link_to constructor_path(room), :class => "btn" do
+              %i{:class => "icon-cog"}
+              Конструктор
             = link_to room_path(room), :class => "btn" do
               %i{:class => "icon-zoom-in"}
               Просмотр
@@ -31,3 +34,7 @@
             = link_to room_url(room), :method => :DELETE, :class => "btn btn-danger", :confirm => "Ты уверен?" do
               %i{:class => "icon-remove"}
               Удалить
+
+- content_for :sidebar, render(:partial => 'sidebar')
+
+= will_paginate @rooms, :class=>"pagination pagination-centered"

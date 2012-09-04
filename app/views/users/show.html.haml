@@ -7,9 +7,19 @@
     %fieldset
       .control-group
         %label.control-label
+          Фото
+        .controls
+          = image_tag (@user.avatar(:thumb) != "/avatars/thumb/missing.png" ? @user.avatar(:thumb) : "no_avatar.gif")
+      .control-group
+        %label.control-label
           Пользователь
         .controls
           %span.input-xlarge.uneditable-input= @user.full_name
+      .control-group
+        %label.control-label
+          Телефон
+        .controls
+          %span.input-xlarge.uneditable-input= @user.phone
       .control-group
         %label.control-label
           Email
