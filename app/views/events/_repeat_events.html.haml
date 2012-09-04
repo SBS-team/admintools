@@ -1,0 +1,16 @@
+.field
+  = label_tag "Повторять"
+  = fields_for :repeat_events do |repeat|
+    = repeat.select(:select_repeat_events, [['Каждый день', "day"], |
+                       ['По дням', "selected days"],                  |
+                       ['Каждую неделю', "week"],                     |
+                       ['Каждый  месяц', "month"]                    |
+      ],{ :prompt => "Никогда"},{ :multiple => false}              |
+      )                                                 |
+    %p
+      .field{:id => "checkdays", :style => "display: none;"}
+        -["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"].each_with_index  do |day,val|
+          %div{:style => "float:left;"}
+            = repeat.label "#{day}"
+          %div{:style => "float:left; width:30px"}
+            = repeat.check_box :option, {:name=>"days[]", :class => "voting_elems"}, val.next, nil

@@ -69,4 +69,16 @@ $("#SuperModalPopupDiv").live('mouseover focus',function(){
       propertyToSearch: "name"
     }),
     $("#SuperModalPopupDiv").attr("id","SuperModalPopupDivOff");
+    $('#repeat_events_select_repeat_events').live('change',function(){
+      if ($(this).val() == "selected days"){
+        $("#checkdays").show();
+      }
+      else {
+        $("#checkdays").hide();
+      }
+    });
 });
+
+
+
+//checkdays
