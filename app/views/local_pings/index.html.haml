@@ -10,10 +10,10 @@
         %th up
         %th down
     %tbody
-      - @pings.each do |ip|
-        - ip.local_pings.each do |ping|
+      - @logs.each do |desktop|
+        - desktop.ping_logs.each do |ping|
           %tr
-            %td= ip.ip
+            %td= desktop.ip
             %td= ping.up
             %td= ping.down
 
