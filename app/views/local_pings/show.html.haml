@@ -9,7 +9,7 @@
         %th up
         %th down
     %tbody
-      - @desktop.local_pings.each do |ping|
+      - @pings.each do |ping|
         %tr
           %td= ping.up.strftime("%H:%M:%S, %d %b %Y")
           %td= ping.down.strftime("%H:%M:%S, %d %b %Y")

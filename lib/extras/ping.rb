@@ -72,7 +72,7 @@ class Ping
       if ($redis.exists :local_ping) && ($redis.hexists "#{desktop.ip}", :up)
         $redis.hset "#{desktop.ip}", :down, Time.now
         times = $redis.hmget "#{desktop.ip}", :up, :down        
-        if LocalPing.create(:desktop_id => desktop.id, :up => $redis.hget("#{desktop.ip}",:up),  :down => $redis.hget("#{desktop.ip}", :down)).save
+        if PingLog.create(:ping_type => :desktop, :ping_id => desktop.id, :up => $redis.hget("#{desktop.ip}",:up),  :down => $redis.hget("#{desktop.ip}", :down)).save
           $redis.hdel "#{desktop.ip}", :up
           $redis.hdel "#{desktop.ip}", :down
           $redis.decr(:count)
