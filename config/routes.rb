@@ -6,9 +6,9 @@ Admintools::Application.routes.draw do
   resources :rooms
   resources :users
   resources :desktops
-
   resources :admins
   resources :constructors
+  resources :domains
 
 
   get "/sarg" => "sarg#index", :as =>  :sarg_index
