@@ -10,6 +10,9 @@
 # Ignore database config file
 /config/database.yml
 
+# Ignore config Sarg file
+/public/sarg_dir
+
 # Ignore the default SQLite database.
 /db/*.sqlite3
 

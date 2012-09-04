@@ -8,6 +8,10 @@ Run next commands in the terminal:
 4. edit database.yaml file
 5. `rake db:create`
 
+== Sarg Information
+
+ You need create link to sarg folder location and put it to public folder, link name need to be "sarg_dir"
+
 Dependence: postgresql, ruby 1.9.3
 
 == Install PostgreSQL
