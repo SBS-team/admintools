@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def index
     @search = User.search(params[:search] || {"meta_sort" => "id.asc"})
-    @users = @search.order('created_at').all
+    @users = @search.paginate(:page => params[:page]).order('created_at').all
   end
 
   def new

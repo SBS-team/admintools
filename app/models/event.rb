@@ -1,5 +1,4 @@
 class Event < ActiveRecord::Base
-
   has_many :event_admins, :dependent => :delete_all
   has_many :admins, :through => :event_admins
 
@@ -36,7 +35,7 @@ class Event < ActiveRecord::Base
 
   before_update do
     unless self.ends_at
-     self.ends_at=self.starts_at.end_of_day
+      self.ends_at=self.starts_at.end_of_day
     end
   end
 
@@ -70,7 +69,7 @@ class Event < ActiveRecord::Base
 
   def starts_at_is_less_than_ends_at
     if self.ends_at
-    errors.add(:starts_at, "should be less than ends_at") if (starts_at > ends_at)
+      errors.add(:starts_at, "should be less than ends_at") if (starts_at > ends_at)
     end
   end
 
