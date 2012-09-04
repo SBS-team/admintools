@@ -7,7 +7,7 @@
     %thead
       %tr
         %th Url
-        %th Выбор
+        %th Поиск
         %th Активность
         %th
           = link_to new_domain_path, :class => "btn btn-success" do
@@ -17,7 +17,9 @@
       - @domains.each do |domain|
         %tr
           %td= domain.url
-          %td= domain.check
+          %td
+            %label.checkbox
+              %input{:type => "checkbox"}
           %td= domain.active
           %td
             = link_to domain_path(domain), :class => "btn" do
