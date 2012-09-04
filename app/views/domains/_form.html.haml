@@ -1,0 +1,20 @@
+= form_for(@domain, :html => {:class => 'well form-horizontal'}) do |f|
+  -if @domain.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@domain.errors.count, "error")} какая-то ошибка, не может сохранить:"
+      %ul
+        - @domain.errors.full_messages.each do |msg|
+          %li= msg
+  %fieldset
+    .control-group
+      = f.label :url, 'Url', :class => 'control-label'
+      .controls
+        = f.text_field :url, :class => 'input-xlarge', :value => "#{@domain.url ||'http://'}"
+    .control-group
+      = f.label :description, 'Информация', :class => 'control-label'
+      .controls
+        = f.text_area :description, :class => 'input-xxlarge', :id => 'nic', :style => "height:200px"
+
+  .form-actions
+    = f.submit (@domain.id?) ? 'Изменить' : 'Создать' , :class => 'btn btn-primary'
+    = link_to "Назад", domains_path, :class => "btn"
