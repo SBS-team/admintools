@@ -74,3 +74,26 @@ $("#z").live('mouseover',function(){
     }),
     $("#z").attr("id","zzz");
 });
+
+$('#sarg_search').live('keyup',function() {
+    var value = $(this).val();
+    if ($(this).val() == ""){
+        $("#sarg_index").contents().find("tr").show();
+    }
+    else {
+        $("#sarg_index").contents().find("tr").hide();
+        $("#sarg_index").contents().find('*:contains('+value+')').each(function(){
+            $(this).show();
+        });
+    }
+  return false;
+});
+
+//$('#sarg_search').live('keyup',function(){
+//    if ($(this).val() == ){
+//        $("#checkdays").show();
+//    }
+//    else {
+//        $("tr").hide();
+//    }
+//});
