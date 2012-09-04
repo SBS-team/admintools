@@ -82,6 +82,18 @@ $("#SuperModalPopupDiv").live('mouseover focus',function(){
     });
 });
 
-
-
 //checkdays
+
+$('#sarg_search').live('keyup',function() {
+    var value = $(this).val();
+    if ($(this).val() == ""){
+        $("#sarg_index").contents().find("tr").show();
+    }
+    else {
+        $("#sarg_index").contents().find("tr").hide();
+        $("#sarg_index").contents().find('*:contains('+value+')').each(function(){
+            $(this).show();
+        });
+    }
+  return false;
+});
