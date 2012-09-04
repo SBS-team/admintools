@@ -13,7 +13,7 @@ gem "resque-scheduler", :require => "resque_scheduler"
 group :assets do
   gem "sass-rails",   "~> 3.2.3"
   gem "coffee-rails", "~> 3.2.1"
-  gem "twitter-bootstrap-rails", "~> 2.1.1"
+  gem "twitter-bootstrap-rails"
   gem "uglifier", ">= 1.0.3"
 end
 
@@ -25,6 +25,9 @@ gem "rspec-rails", :group => [:test, :development]
 group :test do
   gem "factory_girl_rails", "~> 4.0.0"
   gem "capybara", "~> 1.1.2"
+  gem "cucumber"
+  gem "capybara-mechanize"
+  gem "database_cleaner", "~> 0.8.0"
   gem "guard-rspec", "~> 1.2.1"
   gem "shoulda-matchers", "~> 1.2.0"
   gem "xpath", "~> 0.1.4"

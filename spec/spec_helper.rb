@@ -27,7 +27,7 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
 
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
@@ -41,6 +41,17 @@ RSpec.configure do |config|
   config.order = "random"
   config.include Devise::TestHelpers, :type => :controller
 
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 end
 
 def auth_for(type, &block)
@@ -56,28 +67,20 @@ end
 def login_admin
   @admin = FactoryGirl.create(:admin)
   visit new_admin_session_path
-
-  #within "#id_auth" do
-  #  fill_in 'Name', :with => @admin.name
-  #  fill_in 'Password', :with => @admin.password
-  #end
-
-  fill_in 'Name', :with => @admin.name
-  fill_in 'Password', :with => @admin.password
+  within "#new_admin" do
+    fill_in 'Name', :with => @admin.name
+    fill_in 'Password', :with => "secret"
+  end
   click_button('Sign in')
 end
 
-#def room_creating
-#  @user = FactoryGirl.create(:user)
-#  visit new_room_path
-#  sleep(1000)
-#
-#  within "#new_room" do
-#    fill_in 'room_name', :with => '5'
-#    fill_in 'room_user_id', :with => @user.full_name
-#  end
-#    #fill_in 'Номер офиса', :with => '5'
-#    #fill_in 'Пользователь', :with => @user.full_name
-#
-#  click_button 'Создать'
-#end
+def user_creating
+  visit new_user_path
+  @user = FactoryGirl.create(:user)
+  visit new_room_path
+  within "#new_room" do
+    fill_in 'Номер офиса', :with => "1"
+    select @user.full_name
+  end
+  click_button 'Создать'
+end
