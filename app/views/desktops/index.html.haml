@@ -19,7 +19,7 @@
       - @desktops.each do |desktop|
         %tr
           %td= desktop.name
-          %td= desktop.ip
+          %td= link_to desktop.ip, local_pings_path(desktop.ip)
           %td= desktop.mac
           %td= check_empty(desktop.room, "name")
           %td= check_empty(desktop.user, "full_name")

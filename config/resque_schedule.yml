@@ -4,3 +4,8 @@ every_10m_schedule_event_job:
   class: ScheduleEvent
   #args:
   description: “”
+ping_local_desktops:
+  every: 10s
+  class: ScheduleLocalPing
+  #args:
+  description: "Ping local desktops for check available"
