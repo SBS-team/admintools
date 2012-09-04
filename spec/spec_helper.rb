@@ -67,7 +67,6 @@ end
 def login_admin
   @admin = FactoryGirl.create(:admin)
   visit new_admin_session_path
-
   within "#new_admin" do
     fill_in 'Name', :with => @admin.name
     fill_in 'Password', :with => "secret"
@@ -79,11 +78,9 @@ def user_creating
   visit new_user_path
   @user = FactoryGirl.create(:user)
   visit new_room_path
-  #sleep(10)
   within "#new_room" do
     fill_in 'Номер офиса', :with => "1"
     select @user.full_name
   end
-
   click_button 'Создать'
 end
