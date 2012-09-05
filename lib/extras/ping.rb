@@ -42,7 +42,7 @@ class Ping
       self.ping_fail(t[:desktop]) if t[:status].eql? "down"
       # DEBUG
       puts "#{t[:desktop].ip} Up" if t[:status].eql? "up"
-      # self.ping_fail(t[:desktop]) if t[:desktop].ip.match(/\.(\d+)$/)[1].to_i > 1
+      # self.ping_fail(t[:desktop]) if t[:desktop].ip.match(/\.(\d+)$/)[1].to_i > 60
     end
   end
   # DEBUG
@@ -72,7 +72,7 @@ class Ping
       if ($redis.exists :local_ping) && ($redis.hexists "#{desktop.ip}", :up)
         $redis.hset "#{desktop.ip}", :down, Time.now
         times = $redis.hmget "#{desktop.ip}", :up, :down        
-        if PingLog.create(:ping_type => :desktop, :ping_id => desktop.id, :up => $redis.hget("#{desktop.ip}",:up),  :down => $redis.hget("#{desktop.ip}", :down)).save
+        if desktop.ping_logs.create(:up => $redis.hget("#{desktop.ip}",:up).to_s(:db),  :down => $redis.hget("#{desktop.ip}", :down).to_s(:db))
           $redis.hdel "#{desktop.ip}", :up
           $redis.hdel "#{desktop.ip}", :down
           $redis.decr(:count)
