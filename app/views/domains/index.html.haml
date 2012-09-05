@@ -19,7 +19,7 @@
           %td= domain.url
           %td
             %label.checkbox
-              %input{:type => "checkbox"}
+              = check_box_tag("check" , "", domain.check, :onclick => "sendBoolian(this, '#{domain.id}');")
           %td= domain.active
           %td
             = link_to domain_path(domain), :class => "btn" do
