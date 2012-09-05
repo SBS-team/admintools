@@ -17,6 +17,8 @@
 //= require jquery-ui
 //= require jquery.tokeninput
 //= require nicEdit
+//= require jquery.metadata
+//= require jquery.tablesorter
 
 $(document).ready(function() {
     nav_menu()
@@ -27,8 +29,42 @@ $(document).ready(function() {
             closePopup(300);
         }
     });
+
+
 });
 
+$.tablesorter.addParser({
+    // set a unique id
+    id: 'bytes',
+    is: function(s) {
+        // return false so this parser is not auto detected
+        return false;
+    },
+    format: function(s) {
+        // format your data for normalization
+        var weight, val;
+        switch(s.toLowerCase()[s.length - 1]) {
+            case 'е': weight = 1024; val = parseFloat(s.substring(0, s.length - 1)); break;
+            case 'm': weight = Math.pow(1024,2); val = parseFloat(s.substring(0, s.length - 1)); break;
+            case 'g': weight = Math.pow(1024,3); val = parseFloat(s.substring(0, s.length - 1)); break;
+            case 't': weight = Math.pow(1024,4); val = parseFloat(s.substring(0, s.length - 1)); break;
+            default : weight = 1; val = parseFloat(s); break;
+        };
+        return val * weight;
+    },
+    // set type, either numeric or text
+    type: 'numeric'
+});
+
+
+function sarg_sort(current){
+    var iframe = current.contents()
+    iframe.find("table").addClass("tablesorter");
+    iframe.contents().find(".logo, .title, .index table tr:lt(2)").remove();
+    iframe.find("table").prepend('<thead><tr><th class="header_l">FILE/PERIOD</th><th class="header_l">CREATION DATE</th><th class="header_l">USERS</th><th class="header_l">BYTES</th><th class="header_l">AVERAGE</th></tr></thead>');
+    $.tablesorter.defaults.sortList = [[2,1],[3,1],[4,1]];
+    iframe.find("table").tablesorter({headers: { 3: {sorter:'bytes'}, 4: {sorter:'bytes'} } });
+};
 
 function nav_menu(){
     var arr =  window.location.pathname.split("/");
