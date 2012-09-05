@@ -6,6 +6,7 @@ FactoryGirl.define do
     password "secret"
     password_confirmation "secret"
 
+
   end
 
   factory :super_admin, :parent => :admin do
