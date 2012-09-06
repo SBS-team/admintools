@@ -9,3 +9,8 @@ ping_local_desktops:
   class: ScheduleLocalPing
   #args:
   description: "Ping local desktops for check available"
+domain_jobs_ping:
+  every: 10s
+  class: DomainJobsPing
+  #args:
+  description: "send curl"

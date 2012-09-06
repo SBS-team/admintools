@@ -1,0 +1,18 @@
+#encoding=UTF-8
+require "curb"
+
+class DomainPing
+  def self.send_ping(domains)
+    all_url = domains.map{|dom| dom.url}
+    curl = {}
+    Curl::Multi.get( all_url, :follow_location => true) do |easy|
+      begin
+        easy.connect_timeout = 5
+        curl[easy.url] = (easy.response_code >= 200 && easy.response_code < 300)
+      rescue Exception
+        {}  #выполнить запись в логи список урл, для дальнейшей отладки
+      end
+    end
+    curl
+  end
+end

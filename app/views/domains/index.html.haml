@@ -20,7 +20,7 @@
           %td
             %label.checkbox
               = check_box_tag("check" , "", domain.check, :onclick => "sendBoolian(this, '#{domain.id}');")
-          %td= domain.active
+          %td= domain.active == false ? "Не активен" : "Активен"
           %td
             = link_to domain_path(domain), :class => "btn" do
               %i{:class => "icon-zoom-in"}

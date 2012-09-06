@@ -9,6 +9,7 @@ gem "meta_search", "~> 1.1.3"
 gem "paperclip", "~> 3.1.4"
 gem "will_paginate", "~> 3.0.3"
 gem "resque-scheduler", :require => "resque_scheduler"
+gem "curb", "~> 0.8.1"
 
 group :assets do
   gem "sass-rails",   "~> 3.2.3"

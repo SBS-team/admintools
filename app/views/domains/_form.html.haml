@@ -9,7 +9,7 @@
     .control-group
       = f.label :url, 'Url', :class => 'control-label'
       .controls
-        = f.text_field :url, :class => 'input-xlarge', :value => "#{@domain.url ||'http://'}"
+        = f.text_field :url, :class => 'input-xlarge', :value => "#{@domain.url ||'http://www.'}"
     .control-group
       = f.label :description, 'Информация', :class => 'control-label'
       .controls
