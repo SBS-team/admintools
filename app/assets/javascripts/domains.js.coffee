@@ -6,5 +6,5 @@ window.sendBoolian = (elem, domain_id) ->
   $.post "/domains/" + domain_id,
     _method: "put"
     domain:
-      id: domain_id
       check: $(elem).is(":checked")
+      active: null
