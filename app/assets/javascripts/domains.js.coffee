@@ -7,4 +7,4 @@ window.sendBoolian = (elem, domain_id) ->
     _method: "put"
     domain:
       check: $(elem).is(":checked")
-      active: null
+      active: false

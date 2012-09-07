@@ -15,13 +15,12 @@
             Создать
     %tbody
       - @domains.each do |domain|
-        - check = check_true_or_false(domain)
         %tr
           %td= domain.url
           %td
             %label.checkbox
               = check_box_tag("check" , "", domain.check, :onclick => "sendBoolian(this, '#{domain.id}');")
-          %td= check
+          %td= check_true_or_false(domain)
           %td
             = link_to domain_path(domain), :class => "btn" do
               %i{:class => "icon-zoom-in"}
