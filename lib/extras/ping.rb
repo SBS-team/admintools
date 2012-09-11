@@ -1,5 +1,6 @@
 require 'timeout'
 require 'socket'
+
 class Ping
   def self.pingecho(desktop, timeout=5, service="echo")
     begin
@@ -17,88 +18,123 @@ class Ping
     # DEBUG
     puts status
   end
-  def self.multiecho(desktops, timeout=5, service="echo")
+
+  def self.multiecho(hardwares)
+    unreg = (1..255).map{ |seg| "192.168.137.#{seg}" }
+    thread_ping(hardwares).each do |t|
+      t.join
+      $redis.client.reconnect
+      self.ping_true(t[:ip], t[:hardware]) if t[:status].eql? "up"
+      self.ping_fail(t[:ip], t[:hardware]) if t[:status].eql? "down"
+      unreg.delete t[:hardware].ip
+      # DEBUG
+      debug_data do
+        puts "#{t[:hardware].ip} \t Up" if t[:status].eql? "up"
+        # self.ping_fail(t[:ip], t[:hardware]) if t[:ip].match(/\.(\d+)$/)[1].to_i > 10
+      end
+    end
+    thread_ping(unreg).each do |t|
+      t.join
+      $redis.client.reconnect
+      self.ping_true(t[:ip]) if t[:status].eql? "up"
+      self.ping_fail(t[:ip]) if t[:status].eql? "down"
+      # DEBUG
+      debug_data do
+        puts "#{t[:ip]} \t Up \t unregist" if t[:status].eql? "up"
+        # self.ping_fail(t[:ip]) if t[:ip].match(/\.(\d+)$/)[1].to_i > 50
+      end
+    end
+  end
+
+  # DEBUG
+  # clear redis data
+  def self.clear_all_redis
+    $redis.set :count, 0
+    (1..255).map do |x|
+      $redis.srem :local_ping, "192.168.137.#{x}"
+      $redis.hdel "192.168.137.#{x}", :up
+      $redis.hdel "192.168.137.#{x}", :down
+      $redis.hdel "192.168.137.#{x}", :mac
+    end
+  end
+
+  private 
+
+  def self.debug_data
+    yield if Rails.env.development?
+  end
+
+  def self.define_mac(ip)
+    if mac = `arp -a #{ip}`.match(/\b((?:[A-Fa-f0-9]{2}[:-]){5}[A-Fa-f0-9]{2})\b/)
+      return mac[1]
+    end
+  end
+
+  def self.thread_ping(collect, timeout=5, service="echo")
     threads = []
-    for fetch_to_ping in desktops do
-      threads << Thread.new(fetch_to_ping) do |desktop|
+    for fetch_to_ping in collect do
+      threads << Thread.new(fetch_to_ping) do |hardware|
         begin
-          Thread.current[:desktop] = desktop
+          if hardware.class.eql?String
+            ip = Thread.current[:ip] = hardware
+            Thread.current[:hardware] = false
+          else
+            ip = Thread.current[:ip] = hardware.ip
+            Thread.current[:hardware] = hardware
+          end
           timeout(timeout) do
-            s = TCPSocket.new(desktop.ip, service)
+            s = TCPSocket.new(ip, service)
             s.close
           end
           rescue Errno::ECONNREFUSED
             Thread.current[:status] = "up"
           rescue Timeout::Error, StandardError
             Thread.current[:status] = "down"
-          else 
-            Thread.current[:status] = "up"
         end
+        Thread.current[:status] ||= "up"
       end
     end
-    threads.each do |t|
-      t.join
-      self.ping_true(t[:desktop]) if t[:status].eql? "up"
-      self.ping_fail(t[:desktop]) if t[:status].eql? "down"
-      # DEBUG
-      puts "#{t[:desktop].ip} Up" if t[:status].eql? "up"
-      # self.ping_fail(t[:desktop]) if t[:desktop].ip.match(/\.(\d+)$/)[1].to_i > 1
-    end
-  end
-  # DEBUG
-  def self.clear_redis
-    (1..255).each.map do |x|
-      $redis.srem :local_ping, "192.168.137.#{x}"
-      $redis.hdel "192.168.137.#{x}", :up
-      $redis.hdel "192.168.137.#{x}", :down
-      $redis.srem :ping_local, "192.168.137.#{x}"
-      $redis.hdel "192.168.137.#{x}", :up_time
-      $redis.hdel "192.168.137.#{x}", :down_time
-      $redis.set :count, 0
-    end
+    return threads
   end
 
-  private 
-
-  def self.ping_true(desktop)
-    unless $redis.sismember :local_ping, desktop.ip
-      $redis.sadd :local_ping, desktop.ip
-      $redis.hset "#{desktop.ip}", :up, Time.now
+  def self.ping_true(ip, hardware=nil)
+    unless $redis.sismember :local_ping, ip
+      $redis.sadd :local_ping, ip
+      $redis.hset ip, :up, Time.now
       $redis.incr(:count)
+      unless hardware || $redis.hexists(ip, :mac)
+        mac = self.define_mac(ip)
+        $redis.hset ip, :mac, mac if mac
+        debug_data{ puts "get mac for #{ip}" }
+      end
     end
   end
-  def self.ping_fail(desktop)
+
+  def self.ping_fail(ip, hardware=nil)
     if $redis.get(:count).to_i > 0
-      if ($redis.exists :local_ping) && ($redis.hexists "#{desktop.ip}", :up)
-        $redis.hset "#{desktop.ip}", :down, Time.now
-        times = $redis.hmget "#{desktop.ip}", :up, :down        
-        if PingLog.create(:ping_type => :desktop, :ping_id => desktop.id, :up => $redis.hget("#{desktop.ip}",:up),  :down => $redis.hget("#{desktop.ip}", :down)).save
-          $redis.hdel "#{desktop.ip}", :up
-          $redis.hdel "#{desktop.ip}", :down
-          $redis.decr(:count)
-          $redis.srem :local_ping, desktop.ip
+      if ($redis.exists :local_ping) && ($redis.hexists ip, :up) && ($redis.sismember :local_ping, ip)
+        $redis.hset ip, :down, Time.now
+        if (hardware)
+          hardware.ping_logs.create(
+            :up => $redis.hget(ip, :up).to_datetime.to_s(:db),
+            :down => $redis.hget(ip, :down).to_datetime.to_s(:db)
+          )
+          debug_data{ puts "New rec for registered #{ip}" }
+        else 
+          PingLog.create(
+            :up => $redis.hget(ip, :up).to_datetime.to_s(:db),
+            :down => $redis.hget(ip, :down).to_datetime.to_s(:db),
+            :unregister_ip => ip,
+            :mac => $redis.hget(ip, :mac)
+          )
+          debug_data{ puts "New rec for UNregistered #{ip}" }
         end
+        $redis.hdel ip, :up
+        $redis.hdel ip, :down
+        $redis.hdel ip, :mac
+        $redis.srem :local_ping, ip
+        $redis.decr(:count)
       end
     end
   end
 end
-__END__
-
-Logic
-_____________________
-ping_fail
-   if redis_count>0
-     @desktop=select from REDIS by IP
-     if @desktop present
-      @desktop update (:down_time=>Time.now)
-      remove @dekstop from Redis and ADD it to DB
-      redis_count-1
-     end
-   end
-_____________________
-ping_good 
-  
-  if not present (select from REDIS by ip)
-    create new desktop in REDIS
-    redis_count+1
-  end

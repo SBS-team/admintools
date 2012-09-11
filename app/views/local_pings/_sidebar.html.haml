@@ -1,0 +1,14 @@
+%form.well.orm-horizontal{:method => :get, :action => local_ping_path}
+  .input-medium.search-query{:type => "text"}
+    %p
+      %input.datepicker{:name => :date}
+    %button.btn{:type => "submit"} Search
+    = link_to "Reset", users_path, :class => 'btn btn-inverse'
+
+/ = form_for @search, :url => local_ping_path, :html => {:method => :get, :class => 'well form-horizontal'} do |f|
+/   .input-medium.search-query{:type => "text"}
+/     %p
+/       = f.label :up_between, "Выбор даты"
+/       = f.text_field :up_between, :class => 'datepicker'
+/     %button.btn{:type => "submit"} Search
+/     = link_to "Reset", users_path, :class => 'btn btn-inverse'
