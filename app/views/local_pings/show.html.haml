@@ -1,5 +1,8 @@
-%h1= "#{@desktop.name}: #{@desktop.ip}"
-
+%h1 
+  = "#{@ip} #{@mac}"
+  - if @assigned_user
+    = " #{@assigned_user}"
+  
 %hr
 
 .well
@@ -11,11 +14,11 @@
     %tbody
       - @pings.each do |ping|
         %tr
-          %td= ping.up.strftime("%H:%M:%S, %d %b %Y")
-          %td= ping.down.strftime("%H:%M:%S, %d %b %Y")
-      - if (Redis.current.exists :local_ping) && Redis.current.sismember(:local_ping, @desktop.ip)
+          %td= ping.up.utc.strftime("%H:%M:%S, %d %b %Y")
+          %td= ping.down.utc.strftime("%H:%M:%S, %d %b %Y")
+      - if @redis
         %tr
-          %td= Redis.current.hget(@desktop.ip, :up).to_time.strftime("%H:%M:%S, %d %b %Y")
+          %td= @redis
           %td
 
 / = will_paginate @users, :class=>"pagination pagination-centered"

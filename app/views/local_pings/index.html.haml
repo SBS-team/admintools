@@ -1,4 +1,4 @@
-%h1 Пинги
+%h1 Лог локальных пингов
 
 %hr
 
@@ -7,14 +7,16 @@
     %thead
       %tr
         %th ip
+        %th mac
         %th up
         %th down
     %tbody
-      - @logs.each do |desktop|
-        - desktop.ping_logs.each do |ping|
-          %tr
-            %td= desktop.ip
-            %td= ping.up
-            %td= ping.down
+      - @logs.each do |log|
+        %tr
+          - ip_url = log.ping.try(:ip) || log.unregister_ip
+          %td= link_to ip_url, local_pings_path(ip_url)
+          %td= log.ping.try(:mac) || log.mac
+          %td= log.up.utc.strftime("%H:%M:%S, %d %b %Y")
+          %td= log.down.utc.strftime("%H:%M:%S, %d %b %Y")
 
-/ = will_paginate @users, :class=>"pagination pagination-centered"
+= will_paginate @logs, :class=>"pagination pagination-centered"
