@@ -6,19 +6,18 @@ class LocalPingsController < ApplicationController
   end
 
   def show 
+    date = params[:date].present? ? params[:date].to_datetime : Time.now
     @ip = params[:ip]
     @desktop = Desktop.find_by_ip(params[:ip]) || Device.find_by_ip(params[:ip])
-
     if @desktop
-      @pings = @desktop.ping_logs
+      @pings = @desktop.ping_logs.where(:up => date.midnight..date.end_of_day).all
       @assigned_user = @desktop.user.try(:full_name) || 'unrelated'
       @mac = @desktop.mac
-      # .where(:up => Time.now.utc.midnight..Time.now.utc.end_of_day)
     else 
-      @pings = PingLog.find_all_by_unregister_ip(params[:ip])
+      # get first mac address
+      @mac = PingLog.find_by_unregister_ip(params[:ip]).mac
+      @pings = PingLog.where(:up => date.utc.midnight..date.utc.end_of_day).find_all_by_unregister_ip(params[:ip])
       @assigned_user = ''
-      @mac = @pings.first.mac
-      # .where(:up => Time.now.utc.midnight..Time.now.utc.end_of_day)
     end
   end
 

@@ -14,7 +14,7 @@
       - @logs.each do |log|
         %tr
           - ip_url = log.ping.try(:ip) || log.unregister_ip
-          %td= link_to ip_url, local_pings_path(ip_url)
+          %td= link_to ip_url, local_ping_path(ip_url)
           %td= log.ping.try(:mac) || log.mac
           %td= log.up.utc.strftime("%H:%M:%S, %d %b %Y")
           %td= log.down.utc.strftime("%H:%M:%S, %d %b %Y")

@@ -19,6 +19,10 @@
 //= require nicEdit
 
 $(document).ready(function() {
+    $('.datepicker').datepicker({
+      dateFormat: 'yy-mm-dd'
+    })
+    
     nav_menu()
     tab_menu()
 
