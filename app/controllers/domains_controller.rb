@@ -3,7 +3,8 @@ class DomainsController < ApplicationController
   before_filter :current_domain, :only => [:show, :edit, :update, :destroy]
 
   def index
-    @domains = Domain.all
+    @search = Domain.search(params[:search] || {"meta_sort" => 'id.asc'})
+    @domains = @search.paginate(:page => params[:page]).order('created_at').all
   end
 
   def new

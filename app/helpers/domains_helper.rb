@@ -2,14 +2,15 @@
 module DomainsHelper
 
   def check_true_or_false(obj)
-    if obj.active == false && obj.check == false
-      "Нет информации"
-    else
-      if obj.active
+    case obj.active
+      when -1
+        "Нет информации"
+      when 0
+        "Не активен"
+      when 1
         "Активен"
       else
-        "Не активен"
-      end
+        {}
     end
   end
 end

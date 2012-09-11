@@ -7,7 +7,11 @@ class DomainPing
     Curl::Multi.get( all_url, :follow_location => true) do |easy|
       begin
         easy.connect_timeout = 5
-        curl[easy.url] = (easy.response_code >= 200 && easy.response_code < 300)
+        if (easy.response_code >= 200 && easy.response_code < 300)
+          curl[easy.url] = 1
+        else
+          curl[easy.url] = 0
+        end
       rescue Exception
         {}  #выполнить запись в логи список урл, для дальнейшей отладки
       end

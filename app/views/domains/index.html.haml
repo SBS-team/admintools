@@ -6,9 +6,9 @@
   %table.table.table-striped.pretty
     %thead
       %tr
-        %th Url
+        %th= sort_link @search, :url, "Url"
         %th Поиск
-        %th Активность
+        %th= sort_link @search, :active, "Активность"
         %th
           = link_to new_domain_path, :class => "btn btn-success" do
             %i{:class => "icon-plus"}
@@ -32,6 +32,6 @@
               %i{:class => "icon-remove"}
               Удалить
 
--#- content_for :sidebar, render(:partial => 'sidebar')
+- content_for :sidebar, render(:partial => 'sidebar')
 
--#= will_paginate @domains, :class=>"pagination pagina  tion-centered"
+= will_paginate @domains, :class=>"pagination pagina  tion-centered"

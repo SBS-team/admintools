@@ -3,7 +3,7 @@ class CreateDomains < ActiveRecord::Migration
     create_table :domains do |t|
       t.string :url
       t.boolean :check, :default => true
-      t.boolean :active, :default => false
+      t.integer :active
       t.text :description
 
       t.timestamps
