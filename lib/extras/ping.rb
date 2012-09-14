@@ -96,7 +96,7 @@ class Ping
     if $redis.sismember :local_ping, ip
       if $redis.hexists ip, :log_id
         $redis.hset ip, :down, Time.now
-        if log_record = $redis.hget ip, :log_id
+        if log_record = $redis.hget(ip, :log_id)
           if log = PingLog.find_by_id(log_record.to_i)
             log.update_attributes(:down => Time.zone.now)
             $redis.del ip
