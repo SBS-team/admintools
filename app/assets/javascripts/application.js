@@ -19,9 +19,12 @@
 //= require nicEdit
 
 $(document).ready(function() {
+    
+    // init and fix datepicker
     $('.datepicker').datepicker({
       dateFormat: 'yy-mm-dd'
     })
+    $("#ui-datepicker-div").hide()
     
     nav_menu()
     tab_menu()

@@ -1,0 +1,20 @@
+.well
+  Очистить логи
+  = form_tag clear_logs_path, :class => "form-horizontal" do
+    = hidden_field_tag '_method', 'delete'
+    = label_tag('per_all', :class => :radio) do 
+      все
+      #{radio_button_tag('per', 'all')}
+    = label_tag('per_year', :class => :radio) do 
+      за прошлые года
+      #{radio_button_tag('per', 'year')}
+    = label_tag('per_month', :class => :radio) do 
+      за прошлые месяцы
+      #{radio_button_tag('per', 'month')}
+    = label_tag('per_week', :class => :radio) do 
+      за прошлые недели
+      #{radio_button_tag('per', 'week')}
+    = label_tag('per_day', :class => :radio) do 
+      за прошлые дни
+      #{radio_button_tag('per', 'day')}
+    %button.btn.btn-inverse{:type => "submit", "data-confirm" => "Ты уверен?"} Очистить

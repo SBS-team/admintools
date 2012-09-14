@@ -9,12 +9,16 @@ Admintools::Application.routes.draw do
 
   resources :admins
   resources :constructors
-
+  
+  namespace :local_pings do
+    resources :subnetworks, :only => [:new, :create, :destroy]
+  end
 
   get "/sarg" => "sarg#index", :as =>  :sarg_index
 
   get "events/new/:start/:end/:all_day" => "events#new"
   get "local_pings" => "local_pings#index", :as => :local_pings
+  delete "local_pings" => "local_pings#clear", :as => :clear_logs
 
   constraints(:ip => /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/) do
     get "local_pings/:ip" => "local_pings#show", :as => :local_ping
