@@ -1,0 +1,13 @@
+.well
+  - if @networks.length > 0
+    %p Подсети
+    %ul
+      - @networks.each do |net|
+        %li
+          = net.network
+          = link_to local_pings_subnetwork_path(net), :method => :DELETE, :class => "btn btn-mini btn-danger", :confirm => "Ты уверен?" do
+            %i{:class => "icon-remove"}
+            Удалить
+  - else
+    Подсети для сканирования отсутствуют
+  = link_to "Добавить подсеть", new_local_pings_subnetwork_path, :class => 'btn btn-inverse'
