@@ -1,0 +1,15 @@
+= form_for @search, :url => domains_path, :html => {:method => :get, :class => 'well form-horizontal'} do |f|
+  .input-medium.search-query{:type => "text"}
+    %p
+      = f.label :url_equals, "Введите url"
+      = f.text_field :url_equals
+    %p
+      = f.label :active_in, "Выберите статус"
+      = f.checks(:active_in, [['Нет информации', -1], ['Не активен', 0], ['Активен', 1]], :class => 'checkboxy').in_groups_of(2, false) do |checks|
+        - checks.each do |check|
+          = check.box
+          = check.label
+    %button.btn{:type =>  "submit"}
+      %i.icon-search
+      Search
+    = link_to "Reset", domains_path, :class => 'btn btn-inverse'
