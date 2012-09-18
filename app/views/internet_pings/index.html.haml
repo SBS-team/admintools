@@ -14,7 +14,11 @@
       - @internet_pings.each do |internet_ping|
         %tr
           %td= internet_ping.ping.url
-          %td= internet_ping.status
+          -if internet_ping.status == "critical"
+            %td
+              %span.red-text= internet_ping.status
+          -else
+            %td= internet_ping.status
           %td= internet_ping.up
           %td= internet_ping.down
 
