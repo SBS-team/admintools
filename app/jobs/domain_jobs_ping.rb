@@ -10,13 +10,13 @@ class DomainJobsPing
             ping_last = PingLog.joins("INNER JOIN domains on domains.id = ping_id").where("domains.url = ?", url_key).order("created_at ASC").last
             if url_value == 1
               if !(!ping_last.try(:up).blank? && ping_last.try(:down).blank?) or PingLog.where(:ping_type => "Domain").blank?
-                Domain.find_by_url(url_key).ping_logs.create(:up => Time.now, :status => "ok")
+                Domain.find_by_url(url_key).ping_logs.create(:up => Time.zone.now, :status => "ok")
               end
             elsif url_value == 0
               if (ping_last.try(:up).blank? && ping_last.try(:down).blank?) or PingLog.where(:ping_type => "Domain").blank?
-                Domain.find_by_url(url_key).ping_logs.create(:down => Time.now, :status => "critical")
+                Domain.find_by_url(url_key).ping_logs.create(:down => Time.zone.now, :status => "critical")
               elsif (!ping_last.try(:up).blank? && ping_last.try(:down).blank?)
-                Domain.find_by_url(url_key).ping_logs.update_all(:down => Time.now, :status => "critical")
+                Domain.find_by_url(url_key).ping_logs.update_all(:down => Time.zone.now, :status => "critical")
               else
                 []
               end
@@ -29,12 +29,12 @@ class DomainJobsPing
     else
       if PingLog.where(:ping_type => "Domain").blank?
         Domain.all.each do |dom|
-          dom.ping_logs.create(:down => Time.now, :status => "critical")
+          dom.ping_logs.create(:down => Time.zone.now, :status => "critical")
         end
       else
         PingLog.where(:ping_type => "Domain").group(:ping_id, :updated_at).last(Domain.all.size).each do |obj|
           if obj.down.blank?
-            obj.update_attributes(:down => Time.now, :status => "critical")
+            obj.update_attributes(:down => Time.zone.now, :status => "critical")
           else
             []
           end
