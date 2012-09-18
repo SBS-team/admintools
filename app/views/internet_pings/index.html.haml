@@ -6,10 +6,10 @@
   %table.table.table-striped.pretty
     %thead
       %tr
-        %th Url
-        %th Status
-        %th Up
-        %th Down
+        %th= sort_link @search, :url, "Url"
+        %th= sort_link @search, :status, "Status"
+        %th= sort_link @search, :up, "Up"
+        %th= sort_link @search, :down, "Down"
     %tbody
       - @internet_pings.each do |internet_ping|
         %tr
@@ -18,6 +18,6 @@
           %td= internet_ping.up
           %td= internet_ping.down
 
--#- content_for :sidebar, render(:partial => 'sidebar')
+- content_for :sidebar, render(:partial => 'sidebar')
 
 = will_paginate @internet_pings, :class=>"pagination pagina  tion-centered"
