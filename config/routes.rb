@@ -9,7 +9,8 @@ Admintools::Application.routes.draw do
   resources :admins
   resources :constructors
   resources :domains
-  
+  resources :internet_pings
+
   namespace :local_pings do
     resources :subnetworks, :only => [:new, :create, :destroy]
   end
