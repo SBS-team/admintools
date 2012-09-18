@@ -13,7 +13,7 @@ class DomainPing
           curl[easy.url] = 0
         end
       rescue Exception
-        {}  #выполнить запись в логи список урл, для дальнейшей отладки
+        {}
       end
     end
     curl
