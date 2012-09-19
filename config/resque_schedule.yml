@@ -12,7 +12,6 @@ domain_jobs_ping:
   description: "send curl"
 
 local_ping_job:
-  every: 1m
+  every: 10m
   class: LocalPing
   description: "Ping local desktops for check available"
-
