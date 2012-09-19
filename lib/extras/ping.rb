@@ -3,14 +3,6 @@ require 'socket'
 
 class Ping
 
-  def self.clear_redis
-    $redis.smembers(:local_ping).each do |m|
-      $redis.del m
-    end
-    $redis.del :local_ping
-    1
-  end
-
   def self.multiecho(hardwares)
     networks = Subnetwork.all
     unreg = []
@@ -29,11 +21,6 @@ class Ping
       $redis.client.reconnect
       ping_true(t[:ip], t[:hardware]) if t[:status].eql? "up"
       ping_fail(t[:ip], t[:hardware]) if t[:status].eql? "down"
-      # DEBUG
-      # debug_data do
-      #   puts "#{t[:ip]} \t Up" if t[:status].eql? "up"
-      #   ping_fail(t[:ip], t[:hardware]) if ( (rand(1..1000) < 10) && (t[:status].eql? "up") )
-      # end
     end
   end
 
@@ -86,21 +73,23 @@ class Ping
       end
       log.attributes = {:up => Time.zone.now, :ip => ip, :mac => mac}
       if mac && log.save
-        $redis.sadd :local_ping, ip
+        $redis.hset log.id, :ip, ip
         $redis.hset ip, :log_id, log.id
+        $redis.sadd :local_ping, ip
+        $redis.sadd :logs, log.id
       end
     end
   end
 
   def self.ping_fail(ip, hardware=nil)
-    if $redis.sismember :local_ping, ip
-      if $redis.hexists ip, :log_id
-        $redis.hset ip, :down, Time.now
-        if log_record = $redis.hget(ip, :log_id)
-          if log = PingLog.find_by_id(log_record.to_i)
-            log.update_attributes(:down => Time.zone.now)
+    if $redis.sismember(:local_ping, ip) && $redis.hexists(ip, :log_id)
+      if log_record = $redis.hget(ip, :log_id)
+        if log = PingLog.find_by_id(log_record.to_i)
+          if log.update_attributes(:down => Time.zone.now)
             $redis.del ip
+            $redis.del log_record
             $redis.srem :local_ping, ip
+            $redis.srem :logs, log_record
           end
         end
       end

@@ -1,5 +1,7 @@
+#encoding=UTF-8
 class LocalPingsController < ApplicationController
-  before_filter :meta_search_params
+  before_filter :meta_search_params, :only => [:index, :show]
+  before_filter :define_range, :only => [:clear, :import]
 
   def index
     @network = Subnetwork.new
@@ -14,39 +16,47 @@ class LocalPingsController < ApplicationController
   end
 
   def clear
-    clause = case params[:per]
-      when "all"
-        :all
-      when "year"
-        Time.now.beginning_of_year
-      when "month"
-        Time.now.beginning_of_month
-      when "week"
-        Time.now.beginning_of_week
-      when "day"
-        Time.now.beginning_of_day
-      else
-        nil
-    end
-    redirect_to(:local_pings) and return unless clause
-    if clause.eql? :all
-      clear_logs { PingLog.local.destroy_all }
-      Ping.clear_redis
+    unless @from || @to
+      msg = "Выберите дату для очищений логов"
     else
-      clear_logs { PingLog.local.by_range(clause).destroy_all }
+      msg = "Логи будут очишены в ближайщее время"
+    end
+    Resque.enqueue(ClearLogs, @from, @to)
+    redirect_to(:local_pings, notice: "#{msg}")
+  end
+
+  def import
+    redirect_to(:local_pings) and return unless @from || @to
+    logs = PingLog.local
+    if (@from && @to)
+      import_logs(logs.where(:created_at => @from..@to).all)
+    elsif (@from && @to.nil?)
+      import_logs(logs.from_date(@from).all)
+    elsif (from.nil? && to)
+      import_logs(logs.to_date(@to).all)
     end
   end
 
   private
 
-  def clear_logs
-    yield
-    redirect_to :local_pings
+  def import_logs(entries)
+    import = CSV.generate do |csv|
+      csv << ["ip", "mac", "user_name", "up", "down", "date"] # header
+      entries.each do |e|
+        user = e.ping.user.try(:full_name) if e.ping_id
+        csv << [e.ip, e.mac, user || :empty, e.up, e.down, e.created_at]
+      end
+    end
+    send_data import, :type => "text/plain", :filename => "#{Time.now.to_s(:number)}_local_pings_log.csv", :disposition => 'attachment'
   end
 
   def meta_search_params
     @search = PingLog.local.search(params[:search] || {"up_between" => Time.now})
   end
+
+  def define_range
+    @from = params[:from].present? ? (params[:from].to_datetime.utc) : nil
+    @to   = params[:to].present?   ? (params[:to].to_datetime.utc)   : nil
+  end
+
 end
-__END__
-.where("created_at < ?", clause)

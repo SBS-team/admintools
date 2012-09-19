@@ -20,13 +20,6 @@
 //= require domains
 
 $(document).ready(function() {
-    
-    // init and fix datepicker
-    $('.datepicker').datepicker({
-      dateFormat: 'yy-mm-dd'
-    })
-    $("#ui-datepicker-div").hide()
-    
     nav_menu()
     tab_menu()
 
@@ -36,7 +29,6 @@ $(document).ready(function() {
         }
     });
 });
-
 
 function nav_menu(){
     var arr =  window.location.pathname.split("/");
@@ -50,6 +42,7 @@ function nav_menu(){
         });
     }
 }
+
 function tab_menu(){
     var tab = window.location.pathname.substr(1).split("/");
     $("#"+tab[0]+"_tab").addClass("active");
@@ -64,7 +57,6 @@ $.ajaxSetup({
     }
 });
 
-
 //$(function() {
 //    var $input = $('.token-input-users');
 //    $input.tokenInput('/events/search_users.json', {
@@ -72,6 +64,7 @@ $.ajaxSetup({
 //        tokenValue: 'id_with_class_name'
 //    });
 //});
+
 $("#SuperModalPopupDiv").live('mouseover focus',function(){
     $(".token-input-list").tokenInput("/events.json", {
       crossDomain: false,
