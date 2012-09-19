@@ -13,7 +13,7 @@
     %tbody
       - @internet_pings.each do |internet_ping|
         %tr
-          %td= internet_ping.ping.url
+          %td= link_to internet_ping.ping.url, internet_ping.ping.url
           -if internet_ping.status == "critical"
             %td
               %span.red-text= internet_ping.status

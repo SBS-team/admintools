@@ -3,7 +3,7 @@ class DomainJobsPing
 
   def self.perform
     @admins = Admin.all
-    if DomainPing.send_ping(["http://wwww.google.com.ua", "http://www.rwwambler.wru", "http://wwwwww.yandex.ru"]).has_value?(1)
+    if DomainPing.send_ping(["http://wwww.google.com.ua", "http://www.rambler.ru", "http://www.yandex.ru"]).has_value?(1)
       if !Domain.where(:check => true).blank?
         Domain.where(:check => true).find_in_batches(:batch_size => 20) do |dom|
           DomainPing.send_ping(dom.map(&:url)).each_pair do |url_key, url_value|

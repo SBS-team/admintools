@@ -16,7 +16,7 @@
     %tbody
       - @domains.each do |domain|
         %tr
-          %td= domain.url
+          %td= link_to domain.url, domain.url
           %td
             %label.checkbox
               = check_box_tag("check" , "", domain.check, :onclick => "sendBoolian(this, '#{domain.id}');")
