@@ -1,6 +1,6 @@
 every_10m_schedule_event_job:
   #cron: "*/30 * * * *"
-  every: 30s
+  every: 10m
   class: ScheduleEvent
   #args:
   description: “”
