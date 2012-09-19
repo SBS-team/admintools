@@ -9,8 +9,16 @@ class AdminMailer < ActionMailer::Base
     puts "sended to #{admin.email}"
   end
 
-  def send_email_to_admin(email)
-    mail(:to => email, :subject => "Что-то изменилось")
+  def send_email_status_critical(email, name, url_name)
+    @name = name
+    @url_name = url_name
+    mail(:to => email, :subject => "Статус #{@url_name} изменился")
+  end
+
+  def send_email_status_no_inet(email, name, url_name)
+    @name = name
+    @url_name = url_name
+    mail(:to => email, :subject => "Подключение к интернету отсутствует")
   end
 
 end
