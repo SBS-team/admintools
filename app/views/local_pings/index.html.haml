@@ -6,23 +6,25 @@
   %table.table.table-striped.pretty
     %thead
       %tr
-        %th ip
-        %th mac
-        %th up
-        %th down
+        %th IP
+        %th= sort_link @search, :mac, "MAC"
+        %th Пользователь
+        %th Up
+        %th Down
     %tbody
       - if @logs.length > 0
         - @logs.each do |log|
           %tr
             %td= link_to log.ip, local_ping_path(log.ip)
             %td= log.mac
+            %td= log.ping_id ? (log.ping.user.try(:full_name) || '-'*20) : '?'*3
             %td= log.up.utc.strftime("%H:%M:%S, %d %b %Y")
             %td
               - if log.down
                 = log.down.utc.strftime("%H:%M:%S, %d %b %Y")
       - else
         %tr
-          %td{:colspan => 4}
+          %td{:colspan => 5}
             Записи отсутствуют
 
 - content_for :sidebar, render(:partial => 'sidebar', :locals => { :action_url => local_pings_path })
