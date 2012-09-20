@@ -6,7 +6,7 @@ every_10m_schedule_event_job:
   description: “”
 
 domain_jobs_ping:
-  every: 10s
+  every: 30s
   class: DomainJobsPing
   #args:
   description: "send curl"
