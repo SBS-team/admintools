@@ -5,7 +5,7 @@ class RoomsController < ApplicationController
 
   def index
     @search = Room.search(params[:search] || {"meta_sort" => "id.asc"})
-    @rooms = @search.paginate(:page => params[:page]).order('created_at').all
+    @rooms = @search.includes(:user).paginate(:page => params[:page]).order('created_at').all
   end
 
   def new
