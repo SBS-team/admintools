@@ -27,24 +27,25 @@ class LocalPingsController < ApplicationController
 
   def import
     redirect_to(:local_pings) and return unless @from || @to
-    logs = PingLog.local
+    logs = PingLog.includes(:ping).local
     if (@from && @to)
-      import_logs(logs.where(:created_at => @from..@to).all)
+      entries = logs.where(:created_at => @from..@to).all
     elsif (@from && @to.nil?)
-      import_logs(logs.from_date(@from).all)
-    elsif (from.nil? && to)
-      import_logs(logs.to_date(@to).all)
+      entries = logs.from_date(@from).all
+    elsif (@from.nil? && @to)
+      entries = logs.to_date(@to).all
     end
+    import_logs{ entries } if entries
   end
 
   private
 
-  def import_logs(entries)
+  def import_logs( &block )
     import = CSV.generate do |csv|
       csv << ["ip", "mac", "user_name", "up", "down", "date"] # header
-      entries.each do |e|
-        user = e.ping.user.try(:full_name) if e.ping_id
-        csv << [e.ip, e.mac, user || :empty, e.up, e.down, e.created_at]
+      block.call.each do |e|
+        user = e.ping_id ? (e.ping.user.try(:full_name) || '-'*10) : '?'*3
+        csv << [e.ip, e.mac, user, e.up, e.down, e.created_at]
       end
     end
     send_data import, :type => "text/plain", :filename => "#{Time.now.to_s(:number)}_local_pings_log.csv", :disposition => 'attachment'
