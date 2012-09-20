@@ -11,7 +11,6 @@
  *= require_self
  *= cupertino/cupertino.css
  *= require_tree .
-<<<<<<< HEAD
  *= require_tree ../../../vendor/assets/stylesheets/
   */
 
@@ -62,16 +61,15 @@ footer {
     background-position: right center;
 }
 .pretty th .asc {
-    background-image: url(/images/up_arrow.gif);
+    /*background-image: url(images/up_arrow.gif);*/
 }
 
 .pretty th .desc {
-    background-image: url(/images/down_arrow.gif);
+    /*background-image: url(images/down_arrow.gif);*/
 }
 
 body {
     margin-top: 40px;
-    #text-align: center;
     font-size: 14px;
     font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
 }

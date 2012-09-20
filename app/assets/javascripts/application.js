@@ -17,6 +17,7 @@
 //= require jquery-ui
 //= require jquery.tokeninput
 //= require nicEdit
+//= require domains
 
 $(document).ready(function() {
     nav_menu()

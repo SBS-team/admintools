@@ -1,10 +1,17 @@
 every_10m_schedule_event_job:
   #cron: "*/30 * * * *"
-  every: 30s
+  every: 10m
   class: ScheduleEvent
   #args:
   description: “”
+
+domain_jobs_ping:
+  every: 10m
+  class: DomainJobsPing
+  #args:
+  description: "send curl"
+
 local_ping_job:
-  every: 1m
+  every: 10m
   class: LocalPing
   description: "Ping local desktops for check available"
