@@ -5,7 +5,7 @@ class DevicesController < ApplicationController
 
   def index
     @search = Device.search(params[:search] || {"meta_sort" => "id.asc"})
-    @devices = @search.paginate(:page => params[:page]).order('created_at').all
+    @devices = @search.includes(:user).paginate(:page => params[:page]).order('created_at').all
   end
 
   def new
