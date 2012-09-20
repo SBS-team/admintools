@@ -39,9 +39,9 @@
               %li#users_tab= link_to "Пользователи", users_path
               %li#devices_tab= link_to "Устройства", devices_path
               %li#events_tab= link_to "Календарь", events_path
+              %li#domains_tab= link_to "Внешние сервера", domains_path
+              %li#internet_pings_tab= link_to "Внешняя активность", internet_pings_path
               %li#local_pings_tab= link_to "Локальная активность", local_pings_path
-              %li#domains_tab= link_to "Пинг интернета",domains_path
-              %li#internet_pings_tab= link_to "Логи интернета",internet_pings_path
 
               -if File.exist?("#{Rails.root}/public/sarg_dir")
                 %li#sarg_tab= link_to "Sarg", sarg_index_path
