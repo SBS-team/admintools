@@ -23,7 +23,6 @@ class LogCleaner
   end
 
   def server
-    return
     if (@from && @to)
       PingLog.server.where(:created_at => @from..@to).destroy_all
     elsif (@from && @to.nil?)

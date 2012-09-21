@@ -24,7 +24,7 @@
         %input{:type => :hidden, :name => :to, :class => :to}
         %button.btn{:type => "submit", :name => "import"} Импортировать
     .span6
-      = form_tag clear_logs_path, :class => "form-horizontal" do
+      = form_tag clear_local_logs_path, :class => "form-horizontal" do
         %input{:type => :hidden, :name => :_method, :value => :delete}
         %input{:type => :hidden, :name => :from, :class => :from}
         %input{:type => :hidden, :name => :to, :class => :to}
