@@ -6,6 +6,6 @@ class PingLog < ActiveRecord::Base
   scope :get_by_ip, lambda { |ip| where("ip=?", ip) }
   scope :local, lambda { where("(`ping_type` IN ('Desktop', 'Device') OR `ping_type` IS NULL)") }
   scope :by_range, lambda { |d, cond| where("created_at #{cond} ?", d) }
-  scope :to_date, lambda { |d| where("created_at < ?", d) }
   scope :from_date, lambda { |d| where("created_at > ?", d) }
+  scope :to_date, lambda { |d| where("created_at < ?", d) }
 end
