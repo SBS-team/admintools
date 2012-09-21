@@ -6,8 +6,6 @@ class ClearLogs
     return unless from || to
     logs = LogCleaner.new(:type => type, :from => from, :to => to)
     logs.clean
-    # cleaner.local  if type == "local"
-    # cleaner.server if type == "server"
   end
 
 end
