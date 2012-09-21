@@ -1,7 +1,7 @@
 #encoding=UTF-8
 class LocalPingsController < ApplicationController
   before_filter :meta_search_params, :only => [:index, :show]
-  before_filter :define_range, :only => [:clear, :import]
+  before_filter :define_date_range, :only => [:clear, :import]
 
   def index
     @network = Subnetwork.new
@@ -17,11 +17,11 @@ class LocalPingsController < ApplicationController
 
   def clear
     unless @from || @to
-      msg = "Выберите дату для очищений логов"
+      msg = "Выберите дату для очищения логов"
     else
       msg = "Логи будут очишены в ближайщее время"
     end
-    Resque.enqueue(ClearLogs, @from, @to)
+    Resque.enqueue(ClearLogs, :local, @from, @to)
     redirect_to(:local_pings, notice: "#{msg}")
   end
 
@@ -55,9 +55,9 @@ class LocalPingsController < ApplicationController
     @search = PingLog.local.search(params[:search] || {"up_between" => Time.now})
   end
 
-  def define_range
-    @from = params[:from].present? ? (params[:from].to_datetime.utc) : nil
-    @to   = params[:to].present?   ? (params[:to].to_datetime.utc)   : nil
+  def define_date_range
+    @from = params[:from].present? ? (params[:from].to_datetime.midnight) : nil
+    @to   = params[:to].present?   ? (params[:to].to_datetime.end_of_day)   : nil
   end
 
 end

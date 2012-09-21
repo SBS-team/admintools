@@ -1,15 +1,14 @@
 class ClearLogs
   @queue = :clear_log
 
-  def self.perform(from=nil, to=nil)
+  def self.perform(type=nil, from=nil, to=nil)
+    return unless type
     return unless from || to
-    if (from && to)
-      RedisTools.clear_by_log(PingLog.local.where(:created_at => from..to).destroy_all)
-    elsif (from && to.nil?)
-      RedisTools.clear_by_log(PingLog.local.from_date(from).destroy_all)
-    elsif (from.nil? && to)
-      RedisTools.clear_by_log(PingLog.local.to_date(to).destroy_all)
-    end
+    puts "run cleaner for #{type}"
+    logs = LogCleaner.new(:type => type, :from => from, :to => to)
+    logs.clean
+    # cleaner.local  if type == "local"
+    # cleaner.server if type == "server"
   end
 
 end

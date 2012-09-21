@@ -21,6 +21,7 @@ class Ping
       $redis.client.reconnect
       ping_true(t[:ip], t[:hardware]) if t[:status].eql? "up"
       ping_fail(t[:ip], t[:hardware]) if t[:status].eql? "down"
+      # puts t[:ip] if t[:status].eql? "up"
     end
   end
 
