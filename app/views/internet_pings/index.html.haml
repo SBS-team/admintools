@@ -23,5 +23,6 @@
           %td= internet_ping.down
 
 - content_for :sidebar, render(:partial => 'sidebar')
+- content_for :sidebar, render(:partial => 'clear_logs')
 
 = will_paginate @internet_pings, :class=>"pagination pagina  tion-centered"
