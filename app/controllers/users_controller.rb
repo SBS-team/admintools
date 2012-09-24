@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      redirect_to :users, notice: "Пользователь добавлен"
+      redirect_to :users#, notice: "Пользователь добавлен"
     else
       render :action => 'new'
     end
@@ -31,14 +31,14 @@ class UsersController < ApplicationController
 
   def update
     if @user.update_attributes(params[:user])
-      redirect_to :users, notice: "Пользователь обновлен"
+      redirect_to :users#, notice: "Пользователь обновлен"
     else
       render :action => 'edit'
     end
   end
 
   def destroy
-    @user.destroy and redirect_to :users, notice: "Пользователь удален"
+    @user.destroy and redirect_to :users#, notice: "Пользователь удален"
   end
 
   private

@@ -7,6 +7,7 @@
       %ul
         - @user.errors.full_messages.each do |msg|
           %li= msg
+
   %fieldset
     .control-group
       = u.label :first_name, 'Имя', :class => 'control-label'
