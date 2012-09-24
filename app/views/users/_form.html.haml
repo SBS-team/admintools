@@ -1,10 +1,9 @@
 = form_for(@user, :html => {:class => 'well form-horizontal', :multipart => true}) do |u|
   -if @user.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved"
-      %ul
-        - @user.errors.full_messages.each do |msg|
-          %li= msg
+    %ul
+      - @user.errors.full_messages.each do |msg|
+        %li= msg
+
   %fieldset
     .control-group
       = u.label :first_name, 'Имя', :class => 'control-label'
