@@ -1,7 +1,9 @@
 = form_for(@admin, :html => {:class => 'well form-horizontal', :multipart => true}) do |a|
   -if @admin.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@admin.errors.count, "error")} prohibited this admin from being saved"
+    #error_explanation.alert.alert-error
+      %a.close{"data-dismiss" => "alert", :href => "#"}
+        ×
+      %h2 Возникли ошибки:
       %ul
         - @admin.errors.full_messages.each do |msg|
           %li= msg

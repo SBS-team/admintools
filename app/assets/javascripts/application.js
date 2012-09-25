@@ -17,6 +17,7 @@
 //= require jquery-ui
 //= require jquery.tokeninput
 //= require nicEdit
+//= require domains
 
 $(document).ready(function() {
     nav_menu()
@@ -28,7 +29,6 @@ $(document).ready(function() {
         }
     });
 });
-
 
 function nav_menu(){
     var arr =  window.location.pathname.split("/");
@@ -42,6 +42,7 @@ function nav_menu(){
         });
     }
 }
+
 function tab_menu(){
     var tab = window.location.pathname.substr(1).split("/");
     $("#"+tab[0]+"_tab").addClass("active");
@@ -56,7 +57,6 @@ $.ajaxSetup({
     }
 });
 
-
 //$(function() {
 //    var $input = $('.token-input-users');
 //    $input.tokenInput('/events/search_users.json', {
@@ -64,6 +64,7 @@ $.ajaxSetup({
 //        tokenValue: 'id_with_class_name'
 //    });
 //});
+
 $("#SuperModalPopupDiv").live('mouseover focus',function(){
     $(".token-input-list").tokenInput("/events.json", {
       crossDomain: false,
@@ -82,6 +83,18 @@ $("#SuperModalPopupDiv").live('mouseover focus',function(){
     });
 });
 
-
-
 //checkdays
+
+$('#sarg_search').live('keyup',function() {
+    var value = $(this).val();
+    if ($(this).val() == ""){
+        $("#sarg_index").contents().find("tr").show();
+    }
+    else {
+        $("#sarg_index").contents().find("tr").hide();
+        $("#sarg_index").contents().find('*:contains('+value+')').each(function(){
+            $(this).show();
+        });
+    }
+  return false;
+});

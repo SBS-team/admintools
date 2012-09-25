@@ -9,6 +9,8 @@ gem "meta_search", "~> 1.1.3"
 gem "paperclip", "~> 3.1.4"
 gem "will_paginate", "~> 3.0.3"
 gem "resque-scheduler", :require => "resque_scheduler"
+gem "curb", "~> 0.8.1"
+gem "thin", "~> 1.4.1"
 
 group :assets do
   gem "sass-rails",   "~> 3.2.3"
@@ -22,6 +24,7 @@ gem "redis", "~> 3.0.1"
 gem "resque", "~> 1.22.0"
 
 gem "rspec-rails", :group => [:test, :development]
+
 group :test do
   gem "factory_girl_rails", "~> 4.0.0"
   gem "capybara", "~> 1.1.2"
