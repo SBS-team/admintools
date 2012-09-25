@@ -16,6 +16,10 @@
 
 html, body { height: 100%; }
 
+table.m-hover tr:hover td{
+    background-color: #e8fbff !important;
+}
+
 footer {
     height:44px;
     line-height:44px;
