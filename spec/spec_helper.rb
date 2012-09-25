@@ -84,3 +84,11 @@ def user_creating
   end
   click_button 'Создать'
 end
+
+def edit_username_for_desktop
+  user_creating
+  visit desktops_path
+  click_link('Редактировать')
+  select @user.full_name.first
+  click_button('Изменить')
+end

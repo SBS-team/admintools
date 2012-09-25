@@ -29,7 +29,7 @@ describe "Rooms" do
         fill_in "Введите имя офиса", :with => "1"
         select @user.full_name
       end
-      click_button('Search')
+      click_button('Найти')
       page.should have_content("Vasya Ivanov")
     end
   end
