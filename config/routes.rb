@@ -7,7 +7,7 @@ Admintools::Application.routes.draw do
   resources :users
   resources :desktops
   resources :admins
-  resources :constructors
+  resources :constructors, :except => [:index, :show]
   resources :domains
   resources :internet_pings, :only => [:index]
 
@@ -22,6 +22,8 @@ Admintools::Application.routes.draw do
   delete "tasks/scheduler"  => "tasks#stop_scheduler",  :as => :stop_scheduler
 
   get "/sarg" => "sarg#index", :as =>  :sarg_index
+
+  get "rooms/:id/constructor" => "constructors#show", :as => :room_constructor
 
   get "events/new/:start/:end/:all_day" => "events#new"
   get "local_pings" => "local_pings#index", :as => :local_pings
