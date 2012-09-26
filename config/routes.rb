@@ -15,6 +15,12 @@ Admintools::Application.routes.draw do
     resources :subnetworks, :only => [:new, :create, :destroy]
   end
 
+  get "tasks"               => "tasks#index",           :as => :show_tasks
+  put "tasks/workers"       => "tasks#start_workers",   :as => :start_workers
+  put "tasks/scheduler"     => "tasks#start_scheduler", :as => :start_scheduler
+  delete "tasks/workers"    => "tasks#stop_workers",    :as => :stop_workers
+  delete "tasks/scheduler"  => "tasks#stop_scheduler",  :as => :stop_scheduler
+
   get "/sarg" => "sarg#index", :as =>  :sarg_index
 
   get "events/new/:start/:end/:all_day" => "events#new"
@@ -32,5 +38,4 @@ Admintools::Application.routes.draw do
   resources :events
 
   root :to => 'rooms#index'
-
 end

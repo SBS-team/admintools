@@ -1,0 +1,37 @@
+%h1 Задачи
+%hr
+.row-fluid
+  .span6
+    %h3 Планировщик задач
+    %hr
+    - if @scheduler
+      .scheduler-run
+        Работает
+        = link_to 'Остановить', '#', :class => "btn btn-danger", :id => "stop_scheduler", "data-loading-text" => "???"
+      .scheduler-stop.hide
+        Остановлен
+        = link_to 'Запустить', '#', :class => "btn btn-success", :id => "start_scheduler", "data-loading-text" => "???"
+    - else
+      .scheduler-run.hide
+        Работает
+        = link_to 'Остановить', '#', :class => "btn btn-danger", :id => "stop_scheduler", "data-loading-text" => "???"
+      .scheduler-stop
+        Остановлен
+        = link_to 'Запустить', '#', :class => "btn btn-success", :id => "start_scheduler", "data-loading-text" => "???"
+  .span6
+    %h3 Обработчик задач
+    %hr
+    - if @workers
+      .workers-run
+        Работает
+        = link_to 'Остановить', '#', :class => "btn btn-danger", :id => "stop_workers", "data-loading-text" => "???"
+      .workers-stop.hide
+        Остановлен
+        = link_to 'Запустить', '#', :class => "btn btn-success", :id => "start_workers", "data-loading-text" => "???"
+    - else
+      .workers-run.hide
+        Работает
+        = link_to 'Остановить', '#', :class => "btn btn-danger", :id => "stop_workers", "data-loading-text" => "???"
+      .workers-stop
+        Остановлен
+        = link_to 'Запустить', '#', :class => "btn btn-success", :id => "start_workers", "data-loading-text" => "???"
