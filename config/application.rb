@@ -62,5 +62,15 @@ module Admintools
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     config.assets.paths << Rails.root.join("vendor", "assets", "images")
+
+    # config.after_initialize do
+        # require 'rake'
+        # Admintools::Application.load_tasks
+        # `rake resque:start_scheduler`
+        # `rake resque:start_workers`
+        # Rake::Task["resque:scheduler"].invoke
+        # Rake::Task["resque:start_workers"].invoke
+        # Rake::Task["resque:start_scheduler"].invoke
+    # end
   end
 end
