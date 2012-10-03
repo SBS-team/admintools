@@ -22,6 +22,7 @@ Admintools::Application.routes.draw do
   delete "tasks/scheduler"  => "tasks#stop_scheduler",  :as => :stop_scheduler
 
   get "/sarg" => "sarg#index", :as =>  :sarg_index
+  post "/sarg/folder_create" => "sarg#folder_create", :as =>  :sarg_folder_create
 
   get "rooms/:id/constructor" => "constructors#show", :as => :room_constructor
 

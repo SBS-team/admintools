@@ -28,6 +28,10 @@ $(document).ready(function() {
             closePopup(300);
         }
     });
+
+    $('.sarg_choose').change(function(){
+        $(this).siblings('.testing_label').text(this.value || 'Nothing selected')
+    });
 });
 
 function nav_menu(){

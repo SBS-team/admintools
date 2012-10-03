@@ -1,17 +1,21 @@
 %h1 Sarg
+-if File.exist?("#{Rails.root}/public/sarg_dir")
+  %hr
+  .well{:style=>"text-align:center;"}
+    - @indexes = ['/sarg_dir/Monthly/index.html','/sarg_dir/Weekly/index.html','/sarg_dir/Daily/index.html']
+    - ["Monthly", "Weekly", "Daily"] .each_with_index do |o, i|
+      = link_to o, "#",:class=>"btn btn-large btn-primary disabled", "data-url" => @indexes[i], :onclick => "$('iframe[name=\"sarg_index\"]').attr('src', $(this).data('url')); return false;"
 
-%hr
-.well{:style=>"text-align:center;"}
-  - @indexes = ['/sarg_dir/Monthly/index.html','/sarg_dir/Weekly/index.html','/sarg_dir/Daily/index.html']
-  - ["Monthly", "Weekly", "Daily"] .each_with_index do |o, i|
-    = link_to o, "#",:class=>"btn btn-large btn-primary disabled", "data-url" => @indexes[i], :onclick => "$('iframe[name=\"sarg_index\"]').attr('src', $(this).data('url')); return false;"
+    .sarg_search
+      .control-group
+        .controls
+          .input-prepend
+            %span.add-on
+              %i.icon-search
+            %input#sarg_search.span2{:type => "text"}
 
-  .sarg_search
-    .control-group
-      .controls
-        .input-prepend
-          %span.add-on
-            %i.icon-search
-          %input#sarg_search.span2{:type => "text"}
-
-%iframe{:name => "sarg_index", :frameborder => "0", :scrollbars => "auto", :width => "100%", :height => "100%", :id => "sarg_index" }
+  %iframe{:name => "sarg_index", :frameborder => "0", :scrollbars => "auto", :width => "100%", :height => "800px", :id => "sarg_index" }
+-else
+  %hr
+  .well{:style=>"text-align:center;"}
+    =render 'form'
