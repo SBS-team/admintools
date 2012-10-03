@@ -87,10 +87,25 @@ body {
     padding: 15px 0 0 0;
 }
 
+.sarg_folder_choose .input-prepend.input-append .add-on:first-child, .sarg_folder_choose .input-prepend.input-append .btn:last-child  {
+    margin-right: -5px;
+    margin-left: -5px;
+}
+
+.sarg_folder_choose .input-prepend.input-append .btn:last-child  {
+    padding-bottom: 4px;
+    padding-top: 5px;}
+
 .sarg_search .input-prepend .add-on, .input-prepend .btn {
     margin-right: -5px;
 }
 
 .sarg_search .input-prepend .span2 {
     width: 200px;
+}
+
+.separator{
+    padding-right: 5px;
+    display: inline-block;
+    border-right: 1px solid white;
 }

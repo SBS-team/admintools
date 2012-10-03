@@ -12,6 +12,7 @@ Admintools::Application.routes.draw do
 
 
   get "/sarg" => "sarg#index", :as =>  :sarg_index
+  post "/sarg/folder_create" => "sarg#folder_create", :as =>  :sarg_folder_create
 
   get "events/new/:start/:end/:all_day" => "events#new"
   resources :events
