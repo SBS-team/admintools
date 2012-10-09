@@ -1,0 +1,31 @@
+.well
+  %p Работа с логами
+  .control-group
+    = label_tag 'from', :class => "control-label span2" do
+      с
+    .controls
+      .input-append
+        = text_field_tag 'from', nil, :class => 'datepicker-from input-medium'
+        %button#clear-from.btn.btn-danger
+          %i.icon-trash
+  .control-group
+    = label_tag 'to', :class => "control-label span2" do
+      по
+    .controls
+      .input-append
+        = text_field_tag 'to', nil, :class => 'datepicker-to input-medium'
+        %button#clear-to.btn.btn-danger
+          %i.icon-trash
+  .row-fluid
+    .span6
+      = form_tag import_server_pings_path, :method => :get, :class => "form-horizontal" do
+        %input{:type => :hidden, :name => :_method, :value => :get}
+        %input{:type => :hidden, :name => :from, :class => :from}
+        %input{:type => :hidden, :name => :to, :class => :to}
+        %button.btn{:type => "submit", :name => "import"} Импортировать
+    .span6
+      = form_tag clear_server_logs_path, :class => "form-horizontal" do
+        %input{:type => :hidden, :name => :_method, :value => :delete}
+        %input{:type => :hidden, :name => :from, :class => :from}
+        %input{:type => :hidden, :name => :to, :class => :to}
+        %button.btn.btn-inverse{:type => "submit", :name => "clear", "data-confirm" => "Ты уверен?"} Удалить

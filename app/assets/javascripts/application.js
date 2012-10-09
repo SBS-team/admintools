@@ -17,6 +17,7 @@
 //= require jquery-ui
 //= require jquery.tokeninput
 //= require nicEdit
+//= require domains
 
 $(document).ready(function() {
     nav_menu()
@@ -27,8 +28,11 @@ $(document).ready(function() {
             closePopup(300);
         }
     });
-});
 
+    $('.sarg_choose').change(function(){
+        $(this).siblings('.testing_label').text(this.value || 'Nothing selected')
+    });
+});
 
 function nav_menu(){
     var arr =  window.location.pathname.split("/");
@@ -37,11 +41,12 @@ function nav_menu(){
     $("ul.breadcrumb").append("<li><a href='/'>home</a><span class='divider'>/</span> </li>")
     if(arr[0] != ""){
         $.each(arr, function(k,v){
-            var url_href= arr.slice(0, k+1).join("/")
+            var url_href = "/" +  arr.slice(0, k+1).join("/")
             $("ul.breadcrumb").append("<li><a href='"+url_href+"' >"+v+"</a><span class='divider'>/</span> </li>")
         });
     }
 }
+
 function tab_menu(){
     var tab = window.location.pathname.substr(1).split("/");
     $("#"+tab[0]+"_tab").addClass("active");
@@ -56,7 +61,6 @@ $.ajaxSetup({
     }
 });
 
-
 //$(function() {
 //    var $input = $('.token-input-users');
 //    $input.tokenInput('/events/search_users.json', {
@@ -64,16 +68,26 @@ $.ajaxSetup({
 //        tokenValue: 'id_with_class_name'
 //    });
 //});
-$("#z").live('mouseover',function(){
-//  $("#token-input-list").live('focus',function() {
+
+$("#SuperModalPopupDiv").live('mouseover focus',function(){
     $(".token-input-list").tokenInput("/events.json", {
       crossDomain: false,
       preventDuplicates: true,
       prePopulate: $(".token-input-list").data("pre"),
       propertyToSearch: "name"
     }),
-    $("#z").attr("id","zzz");
+    $("#SuperModalPopupDiv").attr("id","SuperModalPopupDivOff");
+    $('#repeat_events_select_repeat_events').live('change',function(){
+      if ($(this).val() == "selected days"){
+        $("#checkdays").show();
+      }
+      else {
+        $("#checkdays").hide();
+      }
+    });
 });
+
+//checkdays
 
 $('#sarg_search').live('keyup',function() {
     var value = $(this).val();
@@ -88,12 +102,3 @@ $('#sarg_search').live('keyup',function() {
     }
   return false;
 });
-
-//$('#sarg_search').live('keyup',function(){
-//    if ($(this).val() == ){
-//        $("#checkdays").show();
-//    }
-//    else {
-//        $("tr").hide();
-//    }
-//});

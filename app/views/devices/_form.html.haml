@@ -1,12 +1,13 @@
 = form_for(@device, :html => {:class => 'well form-horizontal'}) do |f|
   -if @device.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@device.errors.count, "error")} prohibited this desktop from being saved:"
+    #error_explanation.alert.alert-error
+      %a.close{"data-dismiss" => "alert", :href => "#"}
+        ×
+      %h2 Возникли ошибки:
       %ul
         - @device.errors.full_messages.each do |msg|
           %li= msg
   %hr
-
     %fieldset
       .control-group
         = f.label :name, 'Имя', :class => 'control-label'

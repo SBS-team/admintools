@@ -1,0 +1,10 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %h1
+      = @event.title
+    %p= @event.description ? @event.description : ""
+    %p= @event.starts_at ? "Начало в #{@event.starts_at}" : ""
+    %p= @event.ends_at ? "Конец в #{@event.ends_at}" : ""

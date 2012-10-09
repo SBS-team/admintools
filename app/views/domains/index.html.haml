@@ -1,0 +1,37 @@
+%h1 Список сайтов
+
+%hr
+
+.well
+  %table.table.table-striped.pretty
+    %thead
+      %tr
+        %th= sort_link @search, :url, "Url"
+        %th Поиск
+        %th= sort_link @search, :active, "Активность"
+        %th
+          = link_to new_domain_path, :class => "btn btn-success" do
+            %i{:class => "icon-plus"}
+            Создать
+    %tbody
+      - @domains.each do |domain|
+        %tr
+          %td= link_to domain.url, domain.url
+          %td
+            %label.checkbox
+              = check_box_tag("check" , "", domain.check, :onclick => "sendBoolian(this, '#{domain.id}');")
+          %td= check_true_or_false(domain)
+          %td
+            = link_to domain_path(domain), :class => "btn" do
+              %i{:class => "icon-zoom-in"}
+              Просмотр
+            = link_to edit_domain_path(domain), :class => "btn" do
+              %i{:class => "icon-pencil"}
+              Редактировать
+            = link_to domain_url(domain), :method => :DELETE, :class => "btn btn-danger", :confirm => "Ты уверен?" do
+              %i{:class => "icon-remove"}
+              Удалить
+
+- content_for :sidebar, render(:partial => 'sidebar')
+
+= will_paginate @domains, :class=>"pagination pagina  tion-centered"

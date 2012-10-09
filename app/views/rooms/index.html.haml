@@ -22,7 +22,7 @@
           %td= check_empty(room.user, "full_name")
           %td= room.desktops_count
           %td
-            = link_to constructor_path(room), :class => "btn" do
+            = link_to room_constructor_path(room), :class => "btn" do
               %i{:class => "icon-cog"}
               Конструктор
             = link_to room_path(room), :class => "btn" do

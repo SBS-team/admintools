@@ -9,12 +9,16 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= cupertino/cupertino.css
  *= require_tree .
-<<<<<<< HEAD
  *= require_tree ../../../vendor/assets/stylesheets/
   */
 
 html, body { height: 100%; }
+
+table.m-hover tr:hover td{
+    background-color: #e8fbff !important;
+}
 
 footer {
     height:44px;
@@ -61,16 +65,15 @@ footer {
     background-position: right center;
 }
 .pretty th .asc {
-    background-image: url(/images/up_arrow.gif);
+    /*background-image: url(images/up_arrow.gif);*/
 }
 
 .pretty th .desc {
-    background-image: url(/images/down_arrow.gif);
+    /*background-image: url(images/down_arrow.gif);*/
 }
 
 body {
     margin-top: 40px;
-    #text-align: center;
     font-size: 14px;
     font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
 }
@@ -87,10 +90,25 @@ body {
     padding: 15px 0 0 0;
 }
 
+.sarg_folder_choose .input-prepend.input-append .add-on:first-child, .sarg_folder_choose .input-prepend.input-append .btn:last-child  {
+    margin-right: -5px;
+    margin-left: -5px;
+}
+
+.sarg_folder_choose .input-prepend.input-append .btn:last-child  {
+    padding-bottom: 4px;
+    padding-top: 5px;}
+
 .sarg_search .input-prepend .add-on, .input-prepend .btn {
     margin-right: -5px;
 }
 
 .sarg_search .input-prepend .span2 {
     width: 200px;
+}
+
+.separator{
+    padding-right: 5px;
+    display: inline-block;
+    border-right: 1px solid white;
 }

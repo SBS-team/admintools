@@ -12,7 +12,5 @@
     %p
       = f.label :user_id_equals, "Выберите пользователя"
       = select_tag :user_id_equals, options_from_collection_for_select(@users, :id, :full_name), :prompt => 'Выбрать пользователя', :include_blank => true, :name => "search[user_id_equals]"
-    %button.btn{:type => "submit"}
-      %i.icon-search
-      Search
-    = link_to "Reset", devices_path, :class => 'btn btn-inverse'
+    %button.btn{:type => "submit"} Найти
+    = link_to "Сбросить", devices_path, :class => 'btn btn-inverse'

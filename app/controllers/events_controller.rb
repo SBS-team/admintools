@@ -33,14 +33,9 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(params[:event])
-    if params[:send_to_admins][:admin_tokens] == ""
-      @event.event_admins.build(:admin_id => current_admin.id)
-    else
-      params[:send_to_admins][:admin_tokens].split(",").each do |admin|
-        @event.event_admins.build(:admin_id => admin.to_i)
-      end
-    end
+    @event = Event.new(params[:event].update(:event_admins_attributes => convert_params(params[:send_to_admins])))
+    @event.repeat_events = params[:repeat_events][:select_repeat_events]       # go to model.after_save
+    @event.event_days = params[:days] if params[:days]                            # go to model.after_save
 
     if @event.save
       redirect_to events_path
@@ -51,7 +46,12 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
-
+    if params[:send_to_admins]
+      EventAdmin.where(:event_id => @event.id).destroy_all
+      params[:event].update(:event_admins_attributes => convert_params(params[:send_to_admins]))
+    else
+      params[:event].update(:send_at => params[:event][:starts_at], :sended => false)
+    end
     respond_to do |format|
       if @event.update_attributes(params[:event])
         format.html { redirect_to events_path }
@@ -64,9 +64,18 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    Event.find(params[:id]).destroy
-    redirect_to params[:owner]? events_path : :back
+    if params[:delete_group]
+      Event.where(:group_id => params[:delete_group]).destroy_all
+    else
+      Event.find(params[:id]).destroy
+    end
+    redirect_to events_path
   end
 
+  private
+
+  def convert_params(params)
+    params[:admin_tokens]=="" ? [{:admin_id => current_admin.id}] : params[:admin_tokens].split(",").map{|t| {:admin_id => t}}
+  end
 end
 
