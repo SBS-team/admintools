@@ -12,16 +12,6 @@ Run next commands in the terminal:
 
  You need create link to sarg folder location and put it to public folder, link name need to be "sarg_dir"
 
-Dependence: postgresql, ruby 1.9.3
-
-== Install PostgreSQL
-
-1. Install PostgreSQL locally. See Local PostgreSQL Installation on the Heroku site.
-
-  `sudo apt-get install postgresql`
-
-2. We also need libpq-dev. See this Stackoverflow article.
-
-  `sudo apt-get install libpq-dev`
+MYSQL now!!!
 
 1. Create new branch "dev"
