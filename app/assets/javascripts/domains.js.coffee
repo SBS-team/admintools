@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 window.sendBoolian = (elem, domain_id) ->
-  $.post "/domains/" + domain_id,
+  $.post "/admin/domains/" + domain_id,
     _method: "put"
     domain:
       check: $(elem).is(":checked")

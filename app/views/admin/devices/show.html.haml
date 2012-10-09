@@ -1,0 +1,34 @@
+%h1 Устройство
+
+%hr
+
+.well.form-horizontal
+  %fieldset
+    .control-group
+      %label.control-label
+        Имя
+      .controls
+        %span.input-xlarge.uneditable-input= @device.name
+    .control-group
+      %label.control-label
+        IP
+      .controls
+        %span.input-xlarge.uneditable-input= @device.ip
+    .control-group
+      %label.control-label
+        MAC
+      .controls
+        %span.input-xlarge.uneditable-input= @device.mac
+    .control-group
+      %label.control-label
+        Пользователь
+      .controls
+        %span.input-xlarge.uneditable-input
+          = (@device.user_id) ? (@device.user.full_name) : ('-')
+    .form-actions
+      = link_to admin_devices_path, :class => 'btn btn-primary' do
+        %i.icon-circle-arrow-left
+        Назад
+      = link_to edit_admin_device_path, :class => 'btn btn-warning' do
+        %i.icon-pencil
+        Редактировать
