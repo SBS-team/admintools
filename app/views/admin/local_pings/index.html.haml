@@ -1,0 +1,34 @@
+%h1 Лог локальных пингов
+
+%hr
+
+.well
+  %table.table.table-striped.m-hover
+    %thead
+      %tr
+        %th IP
+        %th= sort_link @search, :mac, "MAC"
+        %th Пользователь
+        %th Up
+        %th Down
+    %tbody
+      - if @logs.length > 0
+        - @logs.each do |log|
+          %tr
+            %td= link_to log.ip, admin_local_ping_path(log.ip)
+            %td= log.mac
+            %td= log.ping_id ? (log.ping.user.try(:full_name) || '-'*20) : '?'*3
+            %td= log.up.utc.strftime("%H:%M:%S, %d %b %Y")
+            %td
+              - if log.down
+                = log.down.utc.strftime("%H:%M:%S, %d %b %Y")
+      - else
+        %tr
+          %td{:colspan => 5}
+            Записи отсутствуют
+
+- content_for :sidebar, render(:partial => 'sidebar', :locals => { :action_url => admin_local_pings_path })
+- content_for :sidebar, render(:partial => 'networks')
+- content_for :sidebar, render(:partial => 'clear_logs')
+
+= will_paginate @logs, :class=>"pagination pagination-centered"

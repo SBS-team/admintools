@@ -23,7 +23,7 @@
               %span.icon-bar
             %a.brand{:href => "/"} Admintools
             .container-fluid.nav-collapse{:style => "float: right"}
-              = link_to "Администраторы", admins_path, :class => "btn btn-large btn-primary", :id => "admins_tab"
+              = link_to "Администраторы", admin_admins_path, :class => "btn btn-large btn-primary", :id => "admins_tab"
               - if admin_signed_in?
                 Signed in as
                 %strong
@@ -34,16 +34,16 @@
           .span9
             %ul.breadcrumb
             %ul.nav.nav-tabs
-              %li#rooms_tab= link_to "Офисы", rooms_path
-              %li#desktops_tab= link_to "Компьютеры", desktops_path
-              %li#users_tab= link_to "Пользователи", users_path
-              %li#devices_tab= link_to "Устройства", devices_path
-              %li#events_tab= link_to "Календарь", events_path
-              %li#domains_tab= link_to "Внешние сервера", domains_path
-              %li#internet_pings_tab= link_to "Внешняя активность", internet_pings_path
-              %li#local_pings_tab= link_to "Локальная активность", local_pings_path
-              %li#tasks_tab= link_to "Задачи", show_tasks_path
-              %li#sarg_tab= link_to "Sarg", sarg_index_path
+              %li#rooms_tab= link_to "Офисы", admin_rooms_path
+              %li#desktops_tab= link_to "Компьютеры", admin_desktops_path
+              %li#users_tab= link_to "Пользователи", admin_users_path
+              %li#devices_tab= link_to "Устройства", admin_devices_path
+              %li#events_tab= link_to "Календарь", admin_events_path
+              %li#domains_tab= link_to "Внешние сервера", admin_domains_path
+              %li#internet_pings_tab= link_to "Внешняя активность", admin_internet_pings_path
+              %li#local_pings_tab= link_to "Локальная активность", admin_local_pings_path
+              %li#tasks_tab= link_to "Задачи", admin_show_tasks_path
+              %li#sarg_tab= link_to "Sarg", admin_sarg_index_path
             - if notice
               .alert.alert-info
                 %a.close{"data-dismiss" => "alert", :href => "#"}

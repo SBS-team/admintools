@@ -1,0 +1,10 @@
+= form_for [:admin, @search], :url => admin_users_path, :html => {:method => :get, :class => 'well form-horizontal'} do |f|
+  .input-medium.search-query{:type => "text"}
+    %p
+      = f.label :name_equals, "Введите имя"
+      = f.text_field :name_equals
+    %p
+      = f.label :email_equals, "Введите email"
+      = f.text_field :email_equals
+    %button.btn{:type => "submit"} Найти
+    = link_to "Сбросить", admin_users_path, :class => 'btn btn-inverse'

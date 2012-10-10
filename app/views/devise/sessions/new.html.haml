@@ -1,10 +1,24 @@
-%h1 Sign in
+%h1 Авторизация #{auth_role resource}
+
+= login_by_role resource
+/ - if resource.is_a?User
+/   = link_to "Войти как администратор", admin_root_path
+/ - if resource.is_a?Admin
+/   = link_to "Войти как пользователь", root_path
+
+
 = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-horizontal'}) do |f|
   %fieldset
-    .control-group
-      = f.label :name, :class => "control-label"
-      .controls
-        = f.text_field :name, :class => 'input-xlarge'
+    - if resource.is_a?User
+      .control-group
+        = f.label :email, :class => "control-label"
+        .controls
+          = f.text_field :email, :class => 'input-xlarge'
+    - if resource.is_a?Admin
+      .control-group
+        = f.label :name, :class => "control-label"
+        .controls
+          = f.text_field :name, :class => 'input-xlarge'
     .control-group
       = f.label :password, :class => "control-label"
       .controls

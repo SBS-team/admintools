@@ -19,6 +19,10 @@ group :assets do
   gem "uglifier", ">= 1.0.3"
 end
 
+group :development do
+  gem 'faker'
+end
+
 gem "jquery-rails", "~> 2.1.1"
 gem "redis", "~> 3.0.1"
 gem "resque", "~> 1.22.0"

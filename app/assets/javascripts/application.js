@@ -70,7 +70,7 @@ $.ajaxSetup({
 //});
 
 $("#SuperModalPopupDiv").live('mouseover focus',function(){
-    $(".token-input-list").tokenInput("/events.json", {
+    $(".token-input-list").tokenInput("/admin/events.json", {
       crossDomain: false,
       preventDuplicates: true,
       prePopulate: $(".token-input-list").data("pre"),

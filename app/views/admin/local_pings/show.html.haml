@@ -1,0 +1,24 @@
+%h1= "#{@ip} #{@mac}"
+
+%hr
+
+.well
+  %table.table.table-striped.pretty
+    %thead
+      %tr
+        %th up
+        %th down
+    %tbody
+      - if @logs.length > 0
+        - @logs.each do |ping|
+          %tr
+            %td= ping.up.utc.strftime("%H:%M:%S, %d %b %Y")
+            %td
+              - if ping.down
+                = ping.down.utc.strftime("%H:%M:%S, %d %b %Y")
+      - else
+        %tr
+          %td{:colspan => 2}
+            Активность не обнаружена
+
+- content_for :sidebar, render(:partial => 'sidebar', :locals => { :action_url => admin_local_ping_path })
