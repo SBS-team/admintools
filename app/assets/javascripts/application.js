@@ -18,6 +18,7 @@
 //= require jquery.tokeninput
 //= require nicEdit
 //= require domains
+//= require jquery.timepicker
 
 $(document).ready(function() {
     nav_menu()

@@ -28,12 +28,12 @@
       %label.control-label
         Дата рождения
       .controls
-        %span.input-xlarge.uneditable-input= Time.now.to_s(:db)
+        %span.input-xlarge.uneditable-input= @user.birthday
     .control-group
       %label.control-label
         График работы
       .controls
-        %span.input-xlarge.uneditable-input Пн Вт Ср Чт Пт
+        %span.input-xlarge.uneditable-input= @user.daily
     .control-group
       %label.control-label
         Менеджер
@@ -43,13 +43,13 @@
       %label.control-label
         Заказчик
       .controls
-        %span.input-xlarge.uneditable-input Nick Sutterer
+        %span.input-xlarge.uneditable-input= @user.employer
     .control-group
       %label.control-label
         oDesk аккаунт
       .controls
         %span.input-xlarge.uneditable-input
-          = link_to nil, 'https://www.odesk.com'
+          = link_to nil, @user.odesk
     .control-group
       %label.control-label
         Информация

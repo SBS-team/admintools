@@ -19,6 +19,10 @@ class User < ActiveRecord::Base
   validates :last_name,  :presence => true
   validates :email,      :presence => true, :uniqueness => true
   validates :skype,      :presence => true
+  validates :birthday,   :presence => true,
+                         :format => { :with => /\d{4}\-\d{2}\-\d{2}/ }
+  validates :daily,      :presence => true,
+                         :format => { :with => /^\d{2}\:\d{2}\-\d{2}\:\d{2}$/ }
 
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>"}
 

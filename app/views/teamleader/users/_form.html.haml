@@ -30,25 +30,27 @@
       .controls
         = u.text_field :skype, :class => 'input-xlarge'
     .control-group
-      = label_tag :birth_day, 'Дата рождения', :class => 'control-label'
+      = u.label :birthday, 'Дата рождения', :class => 'control-label'
       .controls
-        = text_field_tag :birth_day, :class => 'input-xlarge'
+        = u.text_field :birthday, :class => 'input-xlarge'
     .control-group
-      = label_tag :daily, 'График работы', :class => 'control-label'
+      = u.label :daily, 'График работы', :class => 'control-label'
       .controls
-        = text_field_tag :daily, :class => 'input-xlarge'
+        = u.hidden_field :daily
+        = text_field_tag nil, nil, :class => 'input-small', :id => 'daily-from'
+        = text_field_tag nil, nil, :class => 'input-small', :id => 'daily-to'
     .control-group
       = label_tag :manager, 'Менеджер', :class => 'control-label'
       .controls
         = text_field_tag :manager, :class => 'input-xlarge'
     .control-group
-      = label_tag :employer, 'Заказчик', :class => 'control-label'
+      = u.label :employer, 'Заказчик', :class => 'control-label'
       .controls
-        = text_field_tag :employer, :class => 'input-xlarge'
+        = u.text_field :employer, :class => 'input-xlarge'
     .control-group
-      = label_tag :odesk, 'oDesk аккаунт', :class => 'control-label'
+      = u.label :odesk, 'oDesk аккаунт', :class => 'control-label'
       .controls
-        = text_field_tag :odesk, :class => 'input-xlarge'
+        = u.url_field :odesk, :class => 'input-xlarge'
     .control-group
       = u.label :info, 'Информация', :class => 'control-label'
       .controls
