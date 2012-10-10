@@ -11,6 +11,7 @@ gem "will_paginate", "~> 3.0.3"
 gem "resque-scheduler", :require => "resque_scheduler"
 gem "curb", "~> 0.8.1"
 gem "thin", "~> 1.4.1"
+gem "cancan"
 
 group :assets do
   gem "sass-rails",   "~> 3.2.3"
