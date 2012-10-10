@@ -1,8 +1,9 @@
 Admintools::Application.routes.draw do
 
-  # devise_for :admins
-
+  devise_for :users
   devise_for :admins, :path => "admin"
+
+  get "/fakes" => 'fakes#index'
 
   namespace :admin do
 
@@ -46,5 +47,5 @@ Admintools::Application.routes.draw do
     end
   end
 
-  root :to => 'rooms#index'
+  root :to => 'fakes#index'
 end
