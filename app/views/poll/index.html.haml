@@ -1,0 +1,17 @@
+%p
+  %strong
+    = link_to "Создать новый опрос", new_poll_path
+%u
+  = "Выберите тему голосования:"
+-@polls.each do |poll|
+  %br
+  %dl
+    %dt{:style => " width: 20%; float: left; font-style: bold;"}
+      = link_to poll.question, poll_path(poll.id), :style => "color: black; "
+    %dd{:style => "width: 30%; float: left;"}
+      - if poll.end_at < DateTime.current
+        = "голосование окончено"
+      - elsif voted_set(poll)
+        = "проголосовал(а)"
+
+

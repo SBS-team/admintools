@@ -1,8 +1,11 @@
 Admintools::Application.routes.draw do
 
+
   devise_for :users
   devise_for :admins, :path => "admin"
 
+  resources :poll
+  post 'poll/voted' => 'poll#voted', :as => 'voted'
   get "/fakes" => 'fakes#index'
 
   namespace :admin do

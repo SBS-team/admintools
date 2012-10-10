@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
 
   has_one  :desktop
   has_many :devices
+  has_many :voteds
   has_one :room, :through => :desktop
 
   validates :first_name, :presence => true
