@@ -1,0 +1,43 @@
+%h1= @user.full_name
+
+%hr
+
+.well.form-horizontal
+  %fieldset
+    .control-group
+      %label.control-label
+        Фото
+      .controls
+        = image_tag (@user.avatar(:thumb) != "/avatars/thumb/missing.png" ? @user.avatar(:thumb) : "no_avatar.gif")
+    .control-group
+      %label.control-label
+        Пользователь
+      .controls
+        %span.input-xlarge.uneditable-input= @user.full_name
+    .control-group
+      %label.control-label
+        Телефон
+      .controls
+        %span.input-xlarge.uneditable-input= @user.phone
+    .control-group
+      %label.control-label
+        Email
+      .controls
+        %span.input-xlarge.uneditable-input= @user.email
+    .control-group
+      %label.control-label
+        Skype
+      .controls
+        %span.input-xlarge.uneditable-input= @user.skype
+    .control-group
+      %label.control-label
+        Информация
+      .controls
+        %span.input-xxlarge.uneditable-input{:readonly => 'readonly', :style => 'height:200px;overflow:auto'}= @user.info.html_safe
+    .form-actions
+      = link_to teamleader_users_path, :class => 'btn btn-primary' do
+        %i.icon-circle-arrow-left
+        Назад
+      = link_to edit_teamleader_user_path(@user), :class => 'btn btn-warning' do
+        %i.icon-pencil
+        Редактировать

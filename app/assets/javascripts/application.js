@@ -49,7 +49,7 @@ function nav_menu(){
 
 function tab_menu(){
     var tab = window.location.pathname.substr(1).split("/");
-    $("#"+tab[0]+"_tab").addClass("active");
+    $("#"+tab[1]+"_tab").addClass("active");
     if (!$(".active").length){
         $("#rooms_tab").addClass("active");
     }
