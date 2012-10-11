@@ -1,12 +1,15 @@
 Admintools::Application.routes.draw do
 
+  devise_for :users, :path => 'teamleader'
+  devise_for :admins, :path => 'admin'
 
-  devise_for :users
-  devise_for :admins, :path => "admin"
+  namespace :teamleader do
+    root :to => 'users#index'
+    resources :users
 
-  resources :poll
-  post 'poll/voted' => 'poll#voted', :as => 'voted'
-  get "/fakes" => 'fakes#index'
+    resources :poll
+    post 'poll/voted' => 'poll#voted', :as => 'voted'
+  end
 
   namespace :admin do
 
@@ -50,5 +53,5 @@ Admintools::Application.routes.draw do
     end
   end
 
-  root :to => 'fakes#index'
+  root :to => 'teamleader/users#index'
 end
