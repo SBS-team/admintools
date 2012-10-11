@@ -1,4 +1,4 @@
-= form_for @poll, url: poll_index_path do |m|
+= form_for [:teamleader, @poll], url: teamleader_poll_index_path do |m|
   .message_options{:style => "width: 99%;"}
     = "Вопрос:"
     .field{:style => "padding-left: 18px;"}

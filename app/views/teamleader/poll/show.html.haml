@@ -1,5 +1,5 @@
 -if !@poll.blank?
-  = form_for :poll, url: voted_path(:id => @poll.id), :method => :post do |f|
+  = form_for :poll, url: teamleader_voted_path(:id => @poll.id), :method => :post do |f|
     .content{:style => "margin-left: 25px; margin-right: 25px;"}
       %strong{:style => "margin-left: 30px;"}
         = "Вопрос: "

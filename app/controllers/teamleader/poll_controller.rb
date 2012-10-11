@@ -1,5 +1,5 @@
 # encoding: UTF-8
-class PollController < ApplicationController
+class Teamleader::PollController < Teamleader::AppTeamleaderController
 
   helper_method :total_voted, :opt_voted, :voted_set
 
@@ -27,20 +27,20 @@ class PollController < ApplicationController
     if !params['poll']['question'].blank? && params['poll']['max_votes'].to_i > 0 && params['poll']['option'].delete_if {|x| x == "" }.count > 1
       @poll = Poll.create(params['poll'])
       @poll.update_attribute(:end_at, 1.day.from_now) if @poll.end_at < DateTime.now
-      redirect_to poll_index_path
+      redirect_to teamleader_poll_index_path
     else
       flash[:notice] = "Неверно введены данные."
-      redirect_to new_poll_path
+      redirect_to new_teamleader_poll_path
     end
   end
 
   def show
-    redirect_to poll_index_path if (@poll = Poll.find_by_id(params['id'])).blank?
+    redirect_to teamleader_poll_index_path if (@poll = Poll.find_by_id(params['id'])).blank?
   end
 
   def voted
     if (@poll = Poll.find_by_id(params['id'])).blank?
-      redirect_to poll_index_path
+      redirect_to teamleader_poll_index_path
     else
       if !params['option'].blank? && params['option'].count <= @poll.max_votes
         params['option'].each do |opt|
@@ -49,7 +49,7 @@ class PollController < ApplicationController
       else
         flash[:notice] = "Неверное количество голосов, минимум 1, максимум #{@poll.max_votes}."
       end
-      redirect_to poll_path(@poll)
+      redirect_to teamleader_poll_path(@poll)
     end
   end
 
