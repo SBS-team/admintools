@@ -16,8 +16,7 @@ class User < ActiveRecord::Base
 
   has_many :voteds
 
-  has_many :users_roles
-  has_many :roles, :through => :users_roles
+
 
   has_one :room, :through => :desktop
   has_many :users_roles
@@ -33,6 +32,8 @@ class User < ActiveRecord::Base
                          :format => { :with => /^\d{2}\:\d{2}\-\d{2}\:\d{2}$/ }
 
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>"}
+
+  ROLES = %w[manager user teamleader]
 
   def full_name
     "#{first_name} #{last_name}"

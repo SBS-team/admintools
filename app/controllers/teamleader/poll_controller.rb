@@ -1,6 +1,6 @@
 # encoding: UTF-8
 class Teamleader::PollController < Teamleader::AppTeamleaderController
-
+  load_and_authorize_resource
   helper_method :total_voted, :opt_voted, :voted_set
 
   def opt_voted(opt,i,poll)
@@ -17,6 +17,7 @@ class Teamleader::PollController < Teamleader::AppTeamleaderController
 
   def index
     @polls = Poll.all
+    #authorize! :read, @polls
   end
 
   def new
