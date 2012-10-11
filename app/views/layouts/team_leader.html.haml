@@ -33,9 +33,8 @@
           .span9
             %ul.breadcrumb
             %ul.nav.nav-tabs
-              %li#rooms_tab= link_to "Офисы", admin_rooms_path
-              %li#desktops_tab= link_to "Компьютеры", admin_desktops_path
-              %li#users_tab= link_to "Пользователи", admin_users_path
+              %li#users_tab= link_to "Профиль", teamleader_users_path
+              %li#poll_tab= link_to "Голосование", teamleader_poll_index_path
             - if notice
               .alert.alert-info
                 %a.close{"data-dismiss" => "alert", :href => "#"}

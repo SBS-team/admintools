@@ -1,0 +1,28 @@
+-if !@poll.blank?
+  = form_for :poll, url: teamleader_voted_path(:id => @poll.id), :method => :post do |f|
+    .content{:style => "margin-left: 25px; margin-right: 25px;"}
+      %strong{:style => "margin-left: 30px;"}
+        = "Вопрос: "
+      = @poll.question
+      %p{:style => "margin-left: 30px;"}
+        (Максимальное количество голосов  #{@poll.max_votes}, минимум 1.)
+      %hr
+      %dl
+        -@poll.option.each_with_index do |opt,i|
+          - unless opt.blank?
+            %dt{:style => "margin-left: 30px; width: 60%; float: left;"}
+              = f.check_box :option, {:name=>"option[#{i}][name]", :class => "voting_elems", :checked => false}, opt, nil unless @poll.end_at < DateTime.current || voted_set(@poll)
+              = opt
+            -if @poll.end_at < DateTime.current || voted_set(@poll)
+              %dd{:style => "width: 30%; float: left;" , :class => "search_results"}
+                -if (@opt = opt_voted(opt,i,@poll)) != 0
+                  = ("#{@opt} (#{(@opt*100/(total_voted(@poll).count.to_f.round 1)).to_f.round 1}%)")
+                - else
+                  = "0 (0%)"
+      %div{:style => "clear:both;"}
+      %hr{:style => "margin-top: 20px;"}
+      -if @poll.end_at > DateTime.current && voted_set(@poll).blank?
+        = f.submit "Submit Vote", disable_with: "Waiting..."
+      -else
+        %strong{:style => "margin-left: 30px;"}
+          = "Всего проголосовало: #{total_voted(@poll).group_by(&:user_id).count}"

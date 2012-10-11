@@ -15,7 +15,7 @@ module ApplicationHelper
       return link_to "Войти как администратор", admin_root_path
     end
     if role.is_a?Admin
-      return link_to "Войти как пользователь", root_path
+      return link_to "Войти как пользователь", teamleader_root_path
     end
   end
 
