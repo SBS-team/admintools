@@ -19,8 +19,6 @@ class User < ActiveRecord::Base
 
 
   has_one :room, :through => :desktop
-  has_many :users_roles
-  has_many :roles, :through => :users_roles
 
   validates :first_name, :presence => true
   validates :last_name,  :presence => true
