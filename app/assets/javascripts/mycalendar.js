@@ -91,7 +91,7 @@ $(document).ready(function() {
             var width = 300; 										//Use an integer (in pixels)
             var padding = 10;										//Use an integer (in pixels)
             var backgroundColor = '#FFFFFF'; 						//Use any hex code
-            var source = '/events/' + event.id;
+            var source = '/admin/events/' + event.id;
             var borderColor = '#333333'; 							//Use any hex code
             var borderWeight = 4; 									//Use an integer (in pixels)
             var borderRadius = 5; 									//Use an integer (in pixels)

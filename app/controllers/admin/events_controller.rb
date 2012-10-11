@@ -9,9 +9,9 @@ class Admin::EventsController < Admin::AppAdminController
     @admins = Admin.where("name like ?", "%#{params[:q]}%")
 
     respond_to do |format|
-      format.html # index.html.haml
-      format.js  { render :json => @events }
-      format.json { render :json => @admins.map(&:attributes) }
+      format.html  # index.html.haml
+      format.js  {render :json => @events}
+      format.json {render :json => @admins.map(&:attributes)}
     end
   end
 
