@@ -14,8 +14,12 @@ namespace :populate do
         phone: Faker::PhoneNumber.phone_number,
         skype: "skype_#{n}",
         info: Faker::Lorem.sentences( 9 ),
-        :password => "123456",
-        :password_confirmation => "123456",
+        password: "123456",
+        password_confirmation: "123456",
+        birthday: "1999-10-10",
+        daily: "07:00-19:00",
+        employer: Faker::Name.name,
+        odesk: Faker::Internet.url,
       )
     end
   end

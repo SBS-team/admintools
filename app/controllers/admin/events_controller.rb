@@ -1,5 +1,6 @@
 class Admin::EventsController < Admin::AppAdminController
- layout false, :only => [:new, :show, :edit]
+  # layout false, :only => [:new, :show, :edit]
+  layout 'application', :except => [:new, :show, :edit]
 
   def index
     @events = Event.scoped

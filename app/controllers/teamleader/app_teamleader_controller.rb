@@ -1,20 +1,20 @@
-class Teamleader::AppTeamleaderController < ActionController::Base
-  protect_from_forgery
-  layout :layout_for_auth
-  before_filter :authenticate_user!
-  before_filter :set_locale
+class Teamleader::AppTeamleaderController < ApplicationController
+  # protect_from_forgery
+  # layout :layout_for_auth
+  # before_filter :authenticate_user!
+  # before_filter :set_locale
 
-  def set_locale
-    I18n.locale = params[:locale]
-  end
+  # def set_locale
+  #   I18n.locale = params[:locale]
+  # end
 
-  private
+  # private
 
-  def layout_for_auth
-    if devise_controller?
-      "authorization"
-    else
-      "team_leader"
-    end
-  end
+  # def layout_for_auth
+  #   if devise_controller?
+  #     "authorization"
+  #   else
+  #     "team_leader"
+  #   end
+  # end
 end

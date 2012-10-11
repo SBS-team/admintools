@@ -1,6 +1,6 @@
-class Admin::AppAdminController < ApplicationController
+class Admin::AppAdminController < ActionController::Base
   protect_from_forgery
-  #layout :layout_for_auth
+  layout :layout_for_auth
   before_filter :authenticate_admin!
   before_filter :set_locale
 
