@@ -5,7 +5,12 @@ Admintools::Application.routes.draw do
 
   namespace :teamleader do
     root :to => 'users#index'
-    resources :users
+    resources :users do
+      member do
+        get :edit_password
+        put :update_password
+      end
+    end
 
     resources :poll
     post 'poll/voted' => 'poll#voted', :as => 'voted'
