@@ -5,24 +5,22 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
 
   def index
     @user = current_user
+    render 'show'
   end
 
   def show
     authorize! :manage, @user
   end
 
-  def new
-    @user = User.new
-  end
-
   def edit
-    @user = current_user
+    @user = User.find(params[:id])
     authorize! :manage, @user
   end
 
   def update
+    params[:user].delete('role')
     if @user.update_attributes(params[:user])
-      redirect_to :teamleader_users
+      redirect_to :teamleader_user, :notice => 'Информация изменена'
     else
       render :action => 'edit'
     end
@@ -30,6 +28,19 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
 
   def birthday
     @users = User.all.sort_by{|d|d.birthday.day}
+  end
+
+  def edit_password
+  end
+
+  def update_password
+    params[:user].select! { |k,v| k.in? %w`current_password password password_confirmation` }
+    if @user.update_with_password(params[:user])
+      sign_in(@user, :bypass => true)
+      redirect_to root_path, notice: :'Пароль изменен'
+    else
+      render 'edit_password'
+    end
   end
 
   def edit_password
