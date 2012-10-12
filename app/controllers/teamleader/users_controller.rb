@@ -26,6 +26,10 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
     end
   end
 
+  def birthday
+    @users = User.all
+  end
+
   private
 
   def init_user

@@ -16,7 +16,7 @@ namespace :populate do
         info: Faker::Lorem.sentences( 9 ),
         password: "123456",
         password_confirmation: "123456",
-        birthday: "1999-10-10",
+        birthday: "#{rand(1950..2000)}-0#{rand(1..9)}-0#{rand(1..9)}",
         daily: "07:00-19:00",
         employer: Faker::Name.name,
         odesk: Faker::Internet.url,
