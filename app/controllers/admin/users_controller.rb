@@ -1,7 +1,8 @@
 #encoding=UTF-8
 class Admin::UsersController < Admin::AppAdminController
 
-  before_filter :current_user, :only => [:show, :edit, :update, :destroy]
+  before_filter :current_user, :only => [:show, :edit, :create, :update, :destroy]
+  # before_filter :set_role, :only => [:create, :update]
 
   def index
     @search = User.search(params[:search] || {"meta_sort" => "id.asc"})
@@ -22,6 +23,7 @@ class Admin::UsersController < Admin::AppAdminController
 
   def create
     @user = User.new(params[:user])
+    # @user.role = params[:user][:role] if User::ROLES.include?params[:user][:role]
     if @user.save
       redirect_to :admin_users#, notice: "Пользователь добавлен"
     else
@@ -47,4 +49,7 @@ class Admin::UsersController < Admin::AppAdminController
     @user = User.find_by_id(params[:id])
   end
 
+  def set_role
+    @user.role = params[:user].delete(:role)
+  end
 end

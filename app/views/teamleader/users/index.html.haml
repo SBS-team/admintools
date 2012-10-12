@@ -11,6 +11,11 @@
         = image_tag (@user.avatar(:thumb) != "/avatars/thumb/missing.png" ? @user.avatar(:thumb) : "no_avatar.gif")
     .control-group
       %label.control-label
+        Роль
+      .controls
+        %span.input-xlarge.uneditable-input= @user.role
+    .control-group
+      %label.control-label
         Email
       .controls
         %span.input-xlarge.uneditable-input= @user.email
