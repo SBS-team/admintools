@@ -60,8 +60,11 @@
         Информация
       .controls
         %span.input-xxlarge.uneditable-input{:readonly => 'readonly', :style => 'height:200px;overflow:auto'}= @user.info.html_safe
-    -if can? :manage,@user
-      .form-actions
+    .form-actions
+      = link_to edit_password_teamleader_user_path(@user), :class => 'btn' do
+        %i.icon-pencil
+        Изменить пароль
+      -if can? :manage,@user
         = link_to edit_teamleader_user_path(@user), :class => 'btn btn-inverse' do
           %i.icon-pencil
           Редактировать
