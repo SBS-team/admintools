@@ -5,25 +5,29 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
 
   def index
     @user = current_user
+    render 'show'
   end
 
   def show
-  end
-
-  def new
-    @user = User.new
+    authorize! :manage, @user
   end
 
   def edit
-    @user = current_user
+    @user = User.find(params[:id])
+    authorize! :manage, @user
   end
 
   def update
+    params[:user].delete('role')
     if @user.update_attributes(params[:user])
-      redirect_to :teamleader_users
+      redirect_to :teamleader_user, :notice => 'Информация изменена'
     else
       render :action => 'edit'
     end
+  end
+
+  def birthday
+    @users = User.all
   end
 
   def edit_password

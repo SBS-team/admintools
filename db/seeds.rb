@@ -7,6 +7,3 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Admin.create(:name => "admin", :email => "admin@admin.ua", :password => "123456", :password_confirmation => "123456")
-Role.create(:name=>'user')
-Role.create(:name=>'manager')
-Role.create(:name=>'room_boss')
