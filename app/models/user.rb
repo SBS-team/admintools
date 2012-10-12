@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :rememberable, :trackable, :validatable, :authentication_keys => [ :email ]
   # Setup accessible (or protected) attributes for your model
   # attr_accessible :email, :password, :password_confirmation, :remember_me
+  # attr_protected :role
 
   self.per_page = 10
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>"}
@@ -15,8 +16,6 @@ class User < ActiveRecord::Base
   has_many :devices
 
   has_many :voteds
-
-
 
   has_one :room, :through => :desktop
 
@@ -31,7 +30,7 @@ class User < ActiveRecord::Base
 
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>"}
 
-  ROLES = %w[manager user teamleader]
+  ROLES = %w[user teamleader manager admin]
 
   def full_name
     "#{first_name} #{last_name}"
