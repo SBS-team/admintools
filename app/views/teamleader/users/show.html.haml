@@ -38,6 +38,7 @@
       = link_to teamleader_users_path, :class => 'btn btn-primary' do
         %i.icon-circle-arrow-left
         Назад
-      = link_to edit_teamleader_user_path(@user), :class => 'btn btn-warning' do
-        %i.icon-pencil
-        Редактировать
+      -if can? :manage,@user
+        = link_to edit_teamleader_user_path(@user), :class => 'btn btn-warning' do
+          %i.icon-pencil
+          Редактировать

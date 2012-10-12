@@ -6,6 +6,7 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
   end
 
   def show
+    authorize! :manage, @user
   end
 
   def new
@@ -14,6 +15,7 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
 
   def edit
     @user = current_user
+    authorize! :manage, @user
   end
 
   def update
