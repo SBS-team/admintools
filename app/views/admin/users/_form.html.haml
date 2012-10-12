@@ -18,17 +18,52 @@
       .controls
         = u.text_field :last_name, :class => 'input-xlarge'
     .control-group
-      = u.label :phone_field, 'Телефон', :class => 'control-label'
+      = u.label :role, 'Роль', :class => 'control-label'
       .controls
-        = u.text_field :phone, :value => "#{@user.phone ||'+3 80'}", :class => 'input-xlarge'
+        / = u.select :role, {:'пользователь' => :user, :'менеджер' => :manager, :'тимлид' => :teamleader}, {:selected => :user},  :class => 'input-xlarge'
+        = u.select :role, User::ROLES, {}, :class => 'input-xlarge'
     .control-group
       = u.label :email, 'Email', :class => 'control-label'
       .controls
         = u.text_field :email, :class => 'input-xlarge'
     .control-group
+      = u.label :phone_field, 'Телефон', :class => 'control-label'
+      .controls
+        = u.text_field :phone, :value => "#{@user.phone ||'+3 80'}", :class => 'input-xlarge'
+    .control-group
       = u.label :skype, 'Skype', :class => 'control-label'
       .controls
         = u.text_field :skype, :class => 'input-xlarge'
+        .control-group
+      = u.label :birthday, 'Дата рождения', :class => 'control-label'
+      .controls
+        = u.text_field :birthday, :class => 'input-xlarge'
+    .control-group
+      = u.label :daily, 'График работы', :class => 'control-label'
+      .controls
+        = u.hidden_field :daily
+        = text_field_tag nil, nil, :class => 'input-small', :id => 'daily-from'
+        = text_field_tag nil, nil, :class => 'input-small', :id => 'daily-to'
+    .control-group
+      = label_tag :manager, 'Менеджер', :class => 'control-label'
+      .controls
+        = text_field_tag :manager, :class => 'input-xlarge'
+    .control-group
+      = u.label :employer, 'Заказчик', :class => 'control-label'
+      .controls
+        = u.text_field :employer, :class => 'input-xlarge'
+    .control-group
+      = u.label :odesk, 'oDesk аккаунт', :class => 'control-label'
+      .controls
+        = u.url_field :odesk, :class => 'input-xlarge'
+    .control-group
+      = u.label :password, 'Пароль', :class => 'control-label'
+      .controls
+        = u.text_field :password, :class => 'input-xlarge'
+    .control-group
+      = u.label :password_confirmation, 'Подтверждение', :class => 'control-label'
+      .controls
+        = u.text_field :password_confirmation, :class => 'input-xlarge'
     .control-group
       = u.label :info, 'Информация', :class => 'control-label'
       .controls

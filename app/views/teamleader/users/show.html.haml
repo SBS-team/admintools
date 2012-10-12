@@ -11,14 +11,9 @@
         = image_tag (@user.avatar(:thumb) != "/avatars/thumb/missing.png" ? @user.avatar(:thumb) : "no_avatar.gif")
     .control-group
       %label.control-label
-        Пользователь
+        Роль
       .controls
-        %span.input-xlarge.uneditable-input= @user.full_name
-    .control-group
-      %label.control-label
-        Телефон
-      .controls
-        %span.input-xlarge.uneditable-input= @user.phone
+        %span.input-xlarge.uneditable-input= @user.role
     .control-group
       %label.control-label
         Email
@@ -26,9 +21,40 @@
         %span.input-xlarge.uneditable-input= @user.email
     .control-group
       %label.control-label
+        Телефон
+      .controls
+        %span.input-xlarge.uneditable-input= @user.phone
+    .control-group
+      %label.control-label
         Skype
       .controls
         %span.input-xlarge.uneditable-input= @user.skype
+    .control-group
+      %label.control-label
+        Дата рождения
+      .controls
+        %span.input-xlarge.uneditable-input= @user.birthday
+    .control-group
+      %label.control-label
+        График работы
+      .controls
+        %span.input-xlarge.uneditable-input= @user.daily
+    .control-group
+      %label.control-label
+        Менеджер
+      .controls
+        %span.input-xlarge.uneditable-input Олеговна
+    .control-group
+      %label.control-label
+        Заказчик
+      .controls
+        %span.input-xlarge.uneditable-input= @user.employer
+    .control-group
+      %label.control-label
+        oDesk аккаунт
+      .controls
+        %span.input-xlarge.uneditable-input
+          = link_to nil, @user.odesk
     .control-group
       %label.control-label
         Информация
@@ -41,4 +67,3 @@
       -if can? :manage,@user
         = link_to edit_teamleader_user_path(@user), :class => 'btn btn-warning' do
           %i.icon-pencil
-          Редактировать
