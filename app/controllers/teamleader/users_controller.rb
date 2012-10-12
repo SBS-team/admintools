@@ -27,7 +27,7 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
   end
 
   def birthday
-    @users = User.all
+    @users = User.all.sort_by{|d|d.birthday.day}
   end
 
   private
