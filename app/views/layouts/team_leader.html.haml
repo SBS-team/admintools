@@ -38,17 +38,7 @@
               %li#birthday_tab= link_to "Дни рождения", teamleader_birthday_path
               -if can? :manage, Department
                 %li#departments_tab= link_to "Отделы", teamleader_departments_path
-
-            - if notice
-              .alert.alert-info
-                %a.close{"data-dismiss" => "alert", :href => "#"}
-                  ×
-                = notice
-            - if alert
-              .alert.alert-error
-                %a.close{"data-dismiss" => "alert", :href => "#"}
-                  ×
-                = alert
+            = flash_alerts
             = yield
           .span3
             = yield :sidebar

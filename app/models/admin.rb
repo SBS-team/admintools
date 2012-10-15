@@ -6,6 +6,9 @@ class Admin < ActiveRecord::Base
   has_many :event_admins, :dependent => :delete_all
   has_many :events, :through => :event_admins
 
+  validates :name, :presence => true, :uniqueness => true
+  validates :email, :presence => true, :uniqueness => true
+
   SUPER_ADMIN = "admin"
 
   def is_super_admin?

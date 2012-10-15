@@ -32,14 +32,14 @@ class Admin::UsersController < Admin::AppAdminController
 
   def update
     if @user.update_attributes(params[:user])
-      redirect_to :admin_users#, notice: "Пользователь обновлен"
+      redirect_to :admin_users, notice: "Информация изменена"
     else
       render :action => 'edit'
     end
   end
 
   def destroy
-    @user.destroy and redirect_to :admin_users#, notice: "Пользователь удален"
+    @user.destroy and redirect_to :admin_users, notice: "Пользователь удален"
   end
 
   private
