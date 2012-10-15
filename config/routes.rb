@@ -6,6 +6,7 @@ Admintools::Application.routes.draw do
   namespace :teamleader do
     root :to => 'users#index'
     resources :users
+    resources :absents
 
     resources :poll
     post 'poll/voted' => 'poll#voted', :as => 'voted'
