@@ -29,13 +29,16 @@ class User < ActiveRecord::Base
                             :format => { :with => /\d{4}\-\d{2}\-\d{2}/ }
   validates :daily,         :presence => true,
                             :format => { :with => /^\d{2}\:\d{2}\-\d{2}\:\d{2}$/ }
-  validates :department_id, :presence => true
+  # validates :department_id, :presence => true
 
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>"}
 
   ROLES = %w[user teamleader manager admin]
 
+  scope :for_manager, lambda { where(:role => ['teamleader', 'user']).order(:last_name, :first_name) }
+  scope :for_teamleader, lambda { |u| where(:role => 'user', :department_id => u.department_id).order(:last_name, :first_name) }
+
   def full_name
-    "#{first_name} #{last_name}"
+    "#{last_name} #{first_name}"
   end
 end
