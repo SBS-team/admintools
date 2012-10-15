@@ -6,7 +6,7 @@ namespace :populate do
   desc "Populate `users` table by 200 users"
   task :users => :environment do
     User.delete_all
-    (1..200).each do |n|
+    (1..50).each do |n|
       User.create!(
         first_name: Faker::Name.first_name,
         last_name: Faker::Name.last_name,
@@ -20,6 +20,7 @@ namespace :populate do
         daily: "07:00-19:00",
         employer: Faker::Name.name,
         odesk: Faker::Internet.url,
+        role: 'user'
       )
     end
   end

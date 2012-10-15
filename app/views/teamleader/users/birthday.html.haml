@@ -6,6 +6,6 @@
       - @users.each do |user|
         -if user.birthday.strftime("%B") == month
           %label.control-label
-            = "#{user.last_name}  #{user.first_name}"
+            = "#{user.full_name}"
           .controls
             %span.input-xlarge.uneditable-input= user.birthday.strftime("%d %B %Y")

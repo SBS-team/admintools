@@ -3,6 +3,7 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
   before_filter :init_user, :only => [:show, :update, :destroy]
   before_filter :password_for_user, :only => [:edit_password, :update_password]
   before_filter :select_departments, :only => [:edit, :update]
+  before_filter :users_list
 
   def index
     @user = current_user
@@ -28,7 +29,7 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
   end
 
   def birthday
-    @users = User.all.sort_by{|d|d.birthday.day}
+    @users = User.all.sort_by{ |d|d.birthday.day }
   end
 
   def edit_password
@@ -56,5 +57,10 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
 
   def select_departments
     @departments = Department.all
+  end
+
+  def users_list
+    @users_list = User.all.sort_by{ |u| u.full_name } if current_user.role.eql?'manager'
+    @users_list = User.where(:role => 'user', :department_id => current_user.department_id) if current_user.role.eql?'teamleader'
   end
 end

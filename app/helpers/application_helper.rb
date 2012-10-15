@@ -36,4 +36,16 @@ module ApplicationHelper
    end
    flash_messages.join("\n").html_safe
   end
+
+  def user_list
+    @users_list = case current_user.role
+    when 'admin'
+      User.all
+    when 'manager'
+      User.for_manager
+    when 'teamleader'
+      User.for_teamleader(current_user)
+    end
+    render :partial => 'teamleader/users/sidebar' if @users_list
+  end
 end

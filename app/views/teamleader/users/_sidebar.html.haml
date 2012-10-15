@@ -1,0 +1,4 @@
+-if current_user.role.eql?'manager'
+  = render 'teamleader/users/manager_sidebar'
+-if current_user.role.eql?'teamleader'
+  = render 'teamleader/users/teamleader_sidebar'
