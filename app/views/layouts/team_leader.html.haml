@@ -35,7 +35,10 @@
             %ul.nav.nav-tabs
               %li#users_tab= link_to "Профиль", teamleader_users_path
               %li#poll_tab= link_to "Голосование", teamleader_poll_index_path
-              %li#poll_tab= link_to "Дни рождения", teamleader_birthday_path
+              %li#birthday_tab= link_to "Дни рождения", teamleader_birthday_path
+              -if can? :manage, Department
+                %li#departments_tab= link_to "Отделы", teamleader_departments_path
+
             - if notice
               .alert.alert-info
                 %a.close{"data-dismiss" => "alert", :href => "#"}
