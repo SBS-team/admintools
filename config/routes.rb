@@ -13,6 +13,7 @@ Admintools::Application.routes.draw do
       end
     end
     resources :poll
+    resources :departments
     post 'poll/voted' => 'poll#voted', :as => 'voted'
   end
 
