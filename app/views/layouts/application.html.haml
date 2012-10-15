@@ -45,16 +45,17 @@
               %li#tasks_tab= link_to "Задачи", admin_show_tasks_path
               %li#sarg_tab= link_to "Sarg", admin_sarg_index_path
 
-            - if notice
-              .alert.alert-info
-                %a.close{"data-dismiss" => "alert", :href => "#"}
-                  ×
-                = notice
-            - if alert
-              .alert.alert-error
-                %a.close{"data-dismiss" => "alert", :href => "#"}
-                  ×
-                = alert
+            / - if notice
+            /   .alert.alert-info
+            /     %a.close{"data-dismiss" => "alert", :href => "#"}
+            /       ×
+            /     = notice
+            / - if alert
+            /   .alert.alert-error
+            /     %a.close{"data-dismiss" => "alert", :href => "#"}
+            /       ×
+            /     = alert
+            = flash_alerts
             = yield
           .span3
             = yield :sidebar

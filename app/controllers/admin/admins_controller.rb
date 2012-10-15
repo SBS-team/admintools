@@ -1,3 +1,4 @@
+#encoding=UTF-8
 class Admin::AdminsController < Admin::AppAdminController
 
   before_filter :find_admin, :only => [:show, :edit, :update, :destroy]
@@ -23,7 +24,7 @@ class Admin::AdminsController < Admin::AppAdminController
   def create
     @admin = Admin.new(params[:admin])
     if @admin.save
-      redirect_to :admin_admins, notice: 'Admin added'
+      redirect_to :admin_admins, notice: 'Администратор добавлен'
     else
       render :action => 'new'
     end
@@ -31,14 +32,15 @@ class Admin::AdminsController < Admin::AppAdminController
 
   def update
     if @admin.update_attributes(params[:admin])
-      redirect_to :admins, notice: 'Admin updated'
+      redirect_to :admins, notice: 'Информация изменена'
     else
       render :action => 'edit'
     end
   end
 
   def destroy
-    @admin.destroy# and redirect_to :admins
+    # @admin.destroy# and redirect_to :admins
+    @admin.destroy and redirect_to :admin_admins, notice: "Администратор удален"
   end
 
   private
