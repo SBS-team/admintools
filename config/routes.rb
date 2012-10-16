@@ -5,6 +5,8 @@ Admintools::Application.routes.draw do
 
   namespace :teamleader do
     root :to => 'users#index'
+    #resources :users
+    resources :absents
     match "/birthday" => "users#birthday", :as => 'birthday'
     resources :users, :except => [:new, :create, :destroy] do
       member do

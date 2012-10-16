@@ -1,0 +1,20 @@
+= form_for([:teamleader, @absent]) do |a|
+  -if @absent.errors.any?
+    #error_explanation.alert.alert-error
+      %a.close{"data-dismiss" => "alert", :href => "#"}
+        ×
+      %h2 Возникли ошибки:
+      %ul
+        - @absent.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = a.label :reason, 'Причина'
+    = a.text_field :reason
+  .field
+    = a.label :date_from, 'С:'
+    = a.datetime_select :date_from
+  .field
+    = a.label :date_to, 'До:'
+    = a.datetime_select :date_to
+  .field
+    = a.submit (@absent.id?) ? 'Изменить' : 'Создать' , :class => 'btn btn-primary'

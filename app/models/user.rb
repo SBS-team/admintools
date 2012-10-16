@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
 
   has_many :voteds
 
+  has_many :absents
+
   has_one :room, :through => :desktop
 
   belongs_to :department
