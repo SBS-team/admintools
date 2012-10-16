@@ -31,7 +31,13 @@ $(document).ready(function() {
     });
 
     $('.sarg_choose').change(function(){
-        $(this).siblings('.testing_label').text(this.value || 'Nothing selected')
+        $(this).siblings('.testing_label').text(this.value || 'Nothing selected');
+    });
+
+    // nav menu list drop up/down
+    $('li.nav-header').click(function(){
+        var item = $(this).children('i')
+        $(this).parent().children('li:not(:first)').toggle(500);
     });
 });
 

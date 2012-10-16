@@ -1,0 +1,5 @@
+-if @departments_list.present?
+  - @departments_list.each do |d|
+    %ul.nav.nav-list
+      %li.nav-header.custom= d.name
+      =render d.users
