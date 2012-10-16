@@ -35,20 +35,15 @@
             %ul.nav.nav-tabs
               %li#users_tab= link_to "Профиль", teamleader_users_path
               %li#poll_tab= link_to "Голосование", teamleader_poll_index_path
-              %li#absent_tab= link_to "Отпроситься", teamleader_absents_path
-            - if notice
-              .alert.alert-info
-                %a.close{"data-dismiss" => "alert", :href => "#"}
-                  ×
-                = notice
-            - if alert
-              .alert.alert-error
-                %a.close{"data-dismiss" => "alert", :href => "#"}
-                  ×
-                = alert
+              %li#absents_tab= link_to "Отпроситься", teamleader_absents_path
+              %li#birthday_tab= link_to "Дни рождения", teamleader_birthday_path
+              -if can? :manage, Department
+                %li#departments_tab= link_to "Отделы", teamleader_departments_path
+            = flash_alerts
             = yield
           .span3
             = yield :sidebar
+            = user_list
       .push
     %footer.container-fluid
       %p © Company 2012

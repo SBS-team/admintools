@@ -5,10 +5,17 @@ Admintools::Application.routes.draw do
 
   namespace :teamleader do
     root :to => 'users#index'
-    resources :users
+    #resources :users
     resources :absents
-
+    match "/birthday" => "users#birthday", :as => 'birthday'
+    resources :users, :except => [:new, :create, :destroy] do
+      member do
+        get :edit_password
+        put :update_password
+      end
+    end
     resources :poll
+    resources :departments
     post 'poll/voted' => 'poll#voted', :as => 'voted'
   end
 

@@ -2,7 +2,6 @@
 class Admin::UsersController < Admin::AppAdminController
 
   before_filter :current_user, :only => [:show, :edit, :create, :update, :destroy]
-  # before_filter :set_role, :only => [:create, :update]
 
   def index
     @search = User.search(params[:search] || {"meta_sort" => "id.asc"})
@@ -23,9 +22,9 @@ class Admin::UsersController < Admin::AppAdminController
 
   def create
     @user = User.new(params[:user])
-    # @user.role = params[:user][:role] if User::ROLES.include?params[:user][:role]
+    @user.password = @user.password_confirmation = @user.email.split('@')[0]
     if @user.save
-      redirect_to :admin_users#, notice: "Пользователь добавлен"
+      redirect_to :admin_users, notice: "Пользователь добавлен #{@user.full_name}"
     else
       render :action => 'new'
     end
@@ -33,23 +32,19 @@ class Admin::UsersController < Admin::AppAdminController
 
   def update
     if @user.update_attributes(params[:user])
-      redirect_to :admin_users#, notice: "Пользователь обновлен"
+      redirect_to :admin_users, notice: "Информация изменена"
     else
       render :action => 'edit'
     end
   end
 
   def destroy
-    @user.destroy and redirect_to :admin_users#, notice: "Пользователь удален"
+    @user.destroy and redirect_to :admin_users, notice: "Пользователь удален"
   end
 
   private
 
   def current_user
     @user = User.find_by_id(params[:id])
-  end
-
-  def set_role
-    @user.role = params[:user].delete(:role)
   end
 end

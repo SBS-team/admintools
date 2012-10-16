@@ -1,0 +1,13 @@
+%h1 Отделы
+%hr
+.well
+  %table.table.table-striped.pretty
+    %thead
+      %tr
+        %th Название
+        %th
+          = link_to new_teamleader_department_path, :class => "btn btn-success" do
+            %i{:class => "icon-plus"}
+            Создать
+    %tbody
+      =render @departments

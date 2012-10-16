@@ -1,0 +1,11 @@
+-Date::MONTHNAMES[1..-1].each do |month|
+  %h1
+    = month
+  .well.form-horizontal
+    .control-group{:style => "font-size:18;"}
+      - @users.each do |user|
+        -if user.birthday.strftime("%B") == month
+          %label.control-label
+            = "#{user.full_name}"
+          .controls
+            %span.input-xlarge.uneditable-input= user.birthday.strftime("%d %B %Y")

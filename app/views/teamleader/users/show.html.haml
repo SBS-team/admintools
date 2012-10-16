@@ -1,7 +1,5 @@
 %h1= @user.full_name
-
 %hr
-
 .well.form-horizontal
   %fieldset
     .control-group
@@ -14,6 +12,12 @@
         Роль
       .controls
         %span.input-xlarge.uneditable-input= @user.role
+    .control-group
+      %label.control-label
+        Отдел
+      .controls
+        %span.input-xlarge.uneditable-input
+          = @user.department ? @user.department.name : '---'
     .control-group
       %label.control-label
         Email
@@ -61,9 +65,11 @@
       .controls
         %span.input-xxlarge.uneditable-input{:readonly => 'readonly', :style => 'height:200px;overflow:auto'}= @user.info.html_safe
     .form-actions
-      = link_to teamleader_users_path, :class => 'btn btn-primary' do
-        %i.icon-circle-arrow-left
-        Назад
-      -if can? :manage,@user
-        = link_to edit_teamleader_user_path(@user), :class => 'btn btn-warning' do
+      -if @user.id.eql?current_user.id
+        = link_to edit_password_teamleader_user_path(@user), :class => 'btn' do
           %i.icon-pencil
+          Изменить пароль
+      -if can? :manage,@user
+        = link_to edit_teamleader_user_path(@user), :class => 'btn btn-inverse' do
+          %i.icon-pencil
+          Редактировать
