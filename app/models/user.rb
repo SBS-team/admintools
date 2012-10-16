@@ -38,7 +38,9 @@ class User < ActiveRecord::Base
   ROLES = %w[user teamleader manager admin]
 
   scope :for_manager, lambda { where(:role => ['teamleader', 'user']).order(:last_name, :first_name) }
-  scope :for_teamleader, lambda { |u| where(:role => 'user', :department_id => u.department_id).order(:last_name, :first_name) }
+  scope :teamleader_users, lambda { |u| where(:role => 'user', :department_id => u.department_id).order(:last_name, :first_name) }
+  scope :user_teamleader, lambda {|u| where(:role =>'teamleader',:department_id => u.department_id).order(:last_name,:first_name) }
+
 
   def full_name
     "#{last_name} #{first_name}"

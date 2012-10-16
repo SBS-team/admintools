@@ -11,8 +11,7 @@ class Teamleader::AbsentsController < Teamleader::AppTeamleaderController
   @absent=current_user.absents.build(params[:absent])
   if @absent.save
     redirect_to teamleader_absents_path
-    @addresses='savrand@gmail.com'
-    AbsentMailer.send_absent_mail(@absent,@addresses).deliver
+    AbsentMailer.send_absent_mail(@absent).deliver
   else
     render :new
   end
