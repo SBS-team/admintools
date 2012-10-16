@@ -113,7 +113,12 @@ body {
     border-right: 1px solid white;
 }
 
-
+li.nav-header.custom{
+    cursor:pointer;
+}
+li.nav-header.custom.warning{
+    color:red;
+}
 /* timepicker */
 .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
 .ui-timepicker-div dl { text-align: left; }
