@@ -11,7 +11,6 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
   end
 
   def show
-    authorize! :manage, @user
   end
 
   def edit
