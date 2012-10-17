@@ -34,4 +34,14 @@ $(document).ready(function(){
       set_daily_value('to', time)
     }
   })
+  $("#deleted_users").on("click", function(event){
+    $(".users_real").fadeOut(500, function() {
+      $(".users_deleted").fadeIn(500);
+    });
+  });
+  $("#real_users").on("click", function(event){
+    $(".users_deleted").fadeOut(500, function() {
+      $(".users_real").fadeIn(500);
+    });
+  });
 });

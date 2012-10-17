@@ -56,6 +56,8 @@ Admintools::Application.routes.draw do
     get  "internet_pings/import" => "internet_pings#import", :as => :import_server_pings
     delete "internet_pings" => "internet_pings#clear", :as => :clear_server_logs
 
+    get "users/restore/:id"     => "users#restore", :as => :restore_user
+
     constraints(:ip => /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/) do
       get "local_pings/:ip" => "local_pings#show", :as => :local_ping
     end

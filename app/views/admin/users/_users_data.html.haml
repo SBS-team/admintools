@@ -1,0 +1,42 @@
+#select_users
+  %table.table.table-striped.pretty
+    %thead
+      %tr
+        %th Фото
+        %th= sort_link @search, :first_name, "Имя"
+        %th= sort_link @search, :last_name, "Фамилия"
+        %th= sort_link @search, :phone, "Телефон"
+        %th= sort_link @search, :email, "Email"
+        %th= sort_link @search, :skype, "Skype"
+        %th Офис
+        %th
+          -if @deleted!="1"
+            = link_to new_admin_user_path, :class => "btn btn-success" do
+              %i{:class => "icon-plus"}
+              Создать
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td= image_tag (user.avatar(:thumb) != "/avatars/thumb/missing.png" ? user.avatar(:thumb) : "no_avatar.gif")
+          %td= user.first_name
+          %td= user.last_name
+          %td= check_empty(user, "phone")
+          %td= user.email
+          %td= user.skype
+          %td= check_empty(user.room, "name")
+          %td
+            -if @deleted!="1"
+              = link_to admin_user_path(user), :class => "btn" do
+                %i{:class => "icon-zoom-in"}
+                Просмотр
+              = link_to edit_admin_user_path(user), :class => "btn" do
+                %i{:class => "icon-pencil"}
+                Редактировать
+              = link_to admin_user_path(user), :method => :DELETE, :class => "btn btn-danger", :confirm => "Ты уверен?" do
+                %i{:class => "icon-remove"}
+                Удалить
+            -else
+              = link_to admin_restore_user_path(user), :class => "btn btn-success", remote: true do
+                %i{:class => "icon-plus"}
+                Восстановить
+  = will_paginate @users, :class=>"pagination pagination-centered"

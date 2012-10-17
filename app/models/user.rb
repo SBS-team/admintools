@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   # attr_accessible :email, :password, :password_confirmation, :remember_me
   # attr_protected :role
 
+  acts_as_paranoid
+
   self.per_page = 10
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>"}
 

@@ -2,10 +2,20 @@
 class Admin::UsersController < Admin::AppAdminController
 
   before_filter :current_user, :only => [:show, :edit, :create, :update, :destroy]
+  respond_to :js, :html
 
   def index
-    @search = User.search(params[:search] || {"meta_sort" => "id.asc"})
+    @deleted = params[:deleted]
+    if @deleted=="1"
+      @search = User.only_deleted.search(params[:search] || {"meta_sort" => "id.asc"})
+    else
+      @search = User.search(params[:search] || {"meta_sort" => "id.asc"})
+    end
     @users = @search.includes(:desktop, :room).paginate(:page => params[:page]).order('created_at').all
+    respond_to do |format|
+      format.html
+      format.js {render :layout => false}
+    end
   end
 
   def new
@@ -40,6 +50,14 @@ class Admin::UsersController < Admin::AppAdminController
 
   def destroy
     @user.destroy and redirect_to :admin_users, notice: "Пользователь удален"
+  end
+
+  def restore
+    User.only_deleted.find_by_id(params[:id]).update_attributes(:deleted_at => nil)
+    respond_to do |format|
+      format.html
+      format.js {redirect_to admin_users_path(:deleted => 1), notice: "Пользователь восстановлен"}
+    end
   end
 
   private
