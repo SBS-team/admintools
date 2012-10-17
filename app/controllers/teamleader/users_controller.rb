@@ -11,6 +11,7 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
   end
 
   def show
+
   end
 
   def edit

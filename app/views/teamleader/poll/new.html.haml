@@ -34,7 +34,7 @@
           %br
           %br
       %div{:style => "clear:both;"}
-      = m.submit 'Создать опрос'
+      = m.submit 'Создать опрос', disable_with: "Waiting..."
 
 :javascript
   function addOpt(obj) {

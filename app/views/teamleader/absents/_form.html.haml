@@ -17,4 +17,4 @@
     = a.label :date_to, 'До:'
     = a.datetime_select :date_to
   .field
-    = a.submit (@absent.id?) ? 'Изменить' : 'Создать' , :class => 'btn btn-primary'
+    = a.submit (@absent.id?) ? 'Изменить' : 'Создать' , :class => 'btn btn-primary', disable_with: "Waiting..."
