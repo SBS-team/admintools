@@ -1,6 +1,8 @@
 #encoding:utf-8
 class Teamleader::DepartmentsController < ApplicationController
+  load_and_authorize_resource
   before_filter :init_department, :only => [:show, :edit, :update, :destroy]
+
   def index
     @departments = Department.all
   end

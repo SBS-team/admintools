@@ -113,6 +113,31 @@ body {
     border-right: 1px solid white;
 }
 
+li.nav-header.custom{
+    cursor:pointer;
+}
+li.nav-header.custom.warning{
+    color:red;
+}
+
+.btn-group.report_edit{
+    float: right;
+    margin: -20px;
+    position: relative;
+}
+
+.btn-group.report_edit > .btn:last-child{
+    border-bottom-right-radius: 0 !important;
+}
+.btn-group.report_edit > .btn:first-child{
+    border-top-left-radius: 0 !important;
+}
+
+blockquote > p{
+    margin: 10px 0 10px 0 !important;
+
+ }
+
 
 /* timepicker */
 .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }

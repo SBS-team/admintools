@@ -1,36 +1,40 @@
-= form_for [:teamleader, @poll], url: teamleader_poll_index_path do |m|
-  .message_options{:style => "width: 99%;"}
-    = "Вопрос:"
-    .field{:style => "padding-left: 18px;"}
-      = m.text_field :question, :name => 'poll[question]', :style => "width: 450px;"
-    %hr
-    %br
-    - 5.times do |i|
-      .fields_opt
-        = label_tag do
-          Вариант ответа
-          %span.num= "#{i+1}"
-          = ":"
-        = m.text_field :option, :name => 'poll[option][]', :value => "", :style => "width: 450px; margin-left: 20px;"
-  %br
-  %strong
-    = link_to "(Добавить вариант ответа)", "#", :style => "float: left;", :onclick => "addOpt('.fields_opt');"
-    %hr
+%h1= "Создать новый опрос:"
+%hr
+.well.form-horizontal
+  %fieldset
+    = form_for [:teamleader, @poll], url: teamleader_poll_index_path do |m|
+      .message_options{:style => "width: 99%;"}
+        = "Вопрос:"
+        .field{:style => "padding-left: 18px;"}
+          = m.text_field :question, :name => 'poll[question]', :style => "width: 450px;"
+        %hr
+        %br
+        - 5.times do |i|
+          .fields_opt
+            = label_tag do
+              Вариант ответа
+              %span.num= "#{i+1}"
+              = ":"
+            = m.text_field :option, :name => 'poll[option][]', :value => "", :style => "width: 450px; margin-left: 20px;"
+      %br
+      %strong
+        = link_to "(Добавить вариант ответа)", "#", :style => "float: left;", :onclick => "addOpt('.fields_opt');"
+        %hr
 
-  %div{:style => "clear:both;"}
-  %dl
-    %dt{:style => "width: 48%; float:left"}==Максимальное кол-во ответов:
-    %dd{:style => "width: 33%; float:left"}= m.text_field :max_votes, :value => 1, :name => 'poll[max_votes]', :style => "width: 30px;"
-    %dt{:style => "width: 48%; float:left"}
-      %br
-      Дата окончания опроса:
-    %dd{:style => "width: 47%; float:left"}
-      %br
-      = m.date_select(:end_at, {:order => [:day, :month, :year], :start_year => Date.current.year, :end_year => Date.current.year + 1}, :style => "width: 180px;")
-      %br
-      %br
-  %div{:style => "clear:both;"}
-  = m.submit 'Создать опрос'
+      %div{:style => "clear:both;"}
+      %dl
+        %dt{:style => "width: 48%; float:left"}==Максимальное кол-во ответов:
+        %dd{:style => "width: 33%; float:left"}= m.text_field :max_votes, :value => 1, :name => 'poll[max_votes]', :style => "width: 30px;"
+        %dt{:style => "width: 48%; float:left"}
+          %br
+          Дата окончания опроса:
+        %dd{:style => "width: 47%; float:left"}
+          %br
+          = m.date_select(:end_at, {:order => [:day, :month, :year], :start_year => Date.current.year, :end_year => Date.current.year + 1}, :style => "width: 180px;")
+          %br
+          %br
+      %div{:style => "clear:both;"}
+      = m.submit 'Создать опрос', disable_with: "Waiting..."
 
 :javascript
   function addOpt(obj) {

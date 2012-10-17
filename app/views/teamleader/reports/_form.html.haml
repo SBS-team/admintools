@@ -1,0 +1,6 @@
+= form_for([:teamleader, @report]) do |a|
+  .well{:style=>"text-align:center;"}
+    .report_container{:style=>"display:-moz-groupbox;"}
+      = a.text_area :body, :rows=> 10, :style=>"width:800px; height:500px;", :placeholder=>"Enter text ...", :class=>"report"
+      .btn-group
+        = a.submit (@report.id?) ? 'Изменить отчёт' : 'Отправить отчёт', :class=>"btn btn-large btn-block btn-primary"

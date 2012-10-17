@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>"}
 
   has_one  :desktop
+
   has_many :devices
 
   has_many :voteds
@@ -25,22 +26,29 @@ class User < ActiveRecord::Base
 
   belongs_to :department
 
+  has_many :reports
+
   validates :first_name,    :presence => true
   validates :last_name,     :presence => true
   validates :email,         :presence => true, :uniqueness => true
   validates :skype,         :presence => true
   validates :birthday,      :presence => true,
-                            :format => { :with => /\d{4}\-\d{2}\-\d{2}/ }
+  :format => { :with => /\d{4}\-\d{2}\-\d{2}/ }
   validates :daily,         :presence => true,
                             :format => { :with => /^\d{2}\:\d{2}\-\d{2}\:\d{2}$/ }
-  # validates :department_id, :presence => true
+  validates :department_id, :numericality => { :greater_than => 0 },
+                            :if => :department_id?
 
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>"}
 
   ROLES = %w[user teamleader manager admin]
 
+  scope :by_name, lambda { order(:last_name, :first_name) }
+  scope :managers, lambda { where(:role => ['manager']) }
+  scope :out_department, lambda { where(:department_id => nil, :role => [:user, :teamleader]) }
   scope :for_manager, lambda { where(:role => ['teamleader', 'user']).order(:last_name, :first_name) }
-  scope :for_teamleader, lambda { |u| where(:role => 'user', :department_id => u.department_id).order(:last_name, :first_name) }
+  scope :teamleader_users, lambda { |u| where(:role => 'user', :department_id => u.department_id).order(:last_name, :first_name) }
+  scope :user_teamleader, lambda {|u| where(:role =>'teamleader',:department_id => u.department_id).order(:last_name,:first_name) }
 
   def full_name
     "#{last_name} #{first_name}"

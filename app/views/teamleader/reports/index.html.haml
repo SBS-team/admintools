@@ -1,0 +1,27 @@
+%h1 Отчёты пользователя: #{@user.full_name} #{@user.department ? "(" + @user.department.name + ")" : ""}
+-if @user.department
+  %small
+    Your teamleader:
+    = @user_teamleader.full_name
+%hr
+-if @reports
+  - @reports.each do |report|
+    .well
+      .btn-group.report_edit
+        = link_to edit_teamleader_report_path(report), :class => 'report_edit btn btn-block btn-warning' do
+          %i.icon-pencil
+          Редактировать
+        = link_to teamleader_report_path(report), :method => :DELETE, :class => "report_edit btn btn-block btn-danger", :confirm => "Ты уверен?" do
+          %i{:class => "icon-remove"}
+          Удалить
+
+      .report_container{:style=>"display:-moz-groupbox; height:auto; width:800px;cursor:text;"}
+        %blockquote
+          =simple_format(report.body)
+          %small
+            Report updated at:
+            =report.updated_at.strftime("%d %b %Y")
+
+.well{:style=>"text-align:center;"}
+  = link_to new_teamleader_report_path, :class => 'btn btn-large btn-primary', :style=>"width:800px;" do
+    Написать отчет.

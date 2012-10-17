@@ -14,6 +14,7 @@ Admintools::Application.routes.draw do
         put :update_password
       end
     end
+    resources :reports
     resources :poll
     resources :departments
     post 'poll/voted' => 'poll#voted', :as => 'voted'
