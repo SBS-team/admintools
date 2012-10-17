@@ -1,4 +1,8 @@
-%h1 Отчёты пользователя: #{@user.full_name} (#{@user.department.name})
+%h1 Отчёты пользователя: #{@user.full_name} #{@user.department ? "(" + @user.department.name + ")" : ""}
+-if @user.department
+  %small
+    Your teamleader:
+    = @user_teamleader.full_name
 %hr
 -if @reports
   - @reports.each do |report|

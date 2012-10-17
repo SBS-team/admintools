@@ -5,6 +5,7 @@ class Teamleader::ReportsController < Teamleader::AppTeamleaderController
 
   def index
     @reports=current_user.reports
+    @user_teamleader= User.user_teamleader(@user).first
   end
 
   def show
