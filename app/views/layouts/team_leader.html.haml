@@ -35,11 +35,13 @@
             %ul.nav.nav-tabs
               %li#users_tab= link_to "Профиль", teamleader_users_path
               %li#poll_tab= link_to "Голосование", teamleader_poll_index_path
+              %li#report_tab= link_to "Отчёт", teamleader_reports_path
               %li#absents_tab= link_to "Отпроситься", teamleader_absents_path
               %li#birthday_tab= link_to "Дни рождения", teamleader_birthday_path
               -if can? :manage, Department
                 %li#departments_tab= link_to "Отделы", teamleader_departments_path
             = flash_alerts
+
             = yield
           .span3
             = yield :sidebar

@@ -1,0 +1,2 @@
+module Teamleader::ReportHelper
+end
