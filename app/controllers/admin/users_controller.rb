@@ -41,6 +41,7 @@ class Admin::UsersController < Admin::AppAdminController
   end
 
   def update
+    params[:user].update(:changer => current_admin)
     if @user.update_attributes(params[:user])
       redirect_to :admin_users, notice: "Информация изменена"
     else

@@ -44,6 +44,9 @@ $(document).ready(function() {
 function nav_menu(){
     var arr =  window.location.pathname.split("/");
     arr.shift();
+    if(arr[arr.length-1] == ''){
+        arr.pop();
+    }
     $("ul.breadcrumb").html()
     $("ul.breadcrumb").append("<li><a href='/'>home</a><span class='divider'>/</span> </li>")
     if(arr[0] != ""){
@@ -57,8 +60,10 @@ function nav_menu(){
 function tab_menu(){
     var tab = window.location.pathname.substr(1).split("/");
     $("#"+tab[1]+"_tab").addClass("active");
-    if (!$(".active").length){
+    if (!$(".active").length && tab[0] == 'admin'){
         $("#rooms_tab").addClass("active");
+    } else if (!$(".active").length){
+        $("#users_tab").addClass("active");
     }
 }
 
