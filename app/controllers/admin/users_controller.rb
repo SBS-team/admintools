@@ -41,8 +41,7 @@ class Admin::UsersController < Admin::AppAdminController
   end
 
   def update
-    @user.role=params[:user].delete :role
-    params[:user].update(:changer=>current_admin)
+    params[:user].update(:changer => current_admin)
     if @user.update_attributes(params[:user])
       redirect_to :admin_users, notice: "Информация изменена"
     else

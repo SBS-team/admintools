@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :rememberable, :trackable, :validatable, :authentication_keys => [ :email ]
   # Setup accessible (or protected) attributes for your model
   # attr_accessible :email, :password, :password_confirmation, :remember_me
-  attr_protected :role
+  attr_protected :role, :as => :user
   attr_accessor :changer
 
   acts_as_paranoid
@@ -64,5 +64,4 @@ class User < ActiveRecord::Base
     UserChange.create(:editor=>self.changer,:edited_id=>self.id,:change=>self.changes)
     i=5
   end
-
 end
