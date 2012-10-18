@@ -20,7 +20,6 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
   end
 
   def update
-    params[:user].delete('role')
     params[:user].update(:changer=>current_user)
     if @user.update_attributes(params[:user])
       redirect_to :teamleader_user, :notice => 'Информация изменена'

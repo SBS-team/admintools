@@ -14,6 +14,7 @@ Admintools::Application.routes.draw do
         put :update_password
       end
     end
+    resources :user_changes
     resources :reports
     resources :poll
     resources :departments
