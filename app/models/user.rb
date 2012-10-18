@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   # attr_accessible :email, :password, :password_confirmation, :remember_me
   # attr_protected :role
+  attr_accessor :changer
 
   acts_as_paranoid
 
@@ -21,6 +22,10 @@ class User < ActiveRecord::Base
   has_many :voteds
 
   has_many :absents
+
+  has_many :users_change, :as=>:editor,:class_name => 'UserChange'
+
+  has_many :user_changes, :foreign_key => "edited_id"
 
   has_one :room, :through => :desktop
 
@@ -41,6 +46,7 @@ class User < ActiveRecord::Base
 
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>"}
 
+
   ROLES = %w[user teamleader manager admin]
 
   scope :by_name, lambda { order(:last_name, :first_name) }
@@ -53,4 +59,10 @@ class User < ActiveRecord::Base
   def full_name
     "#{last_name} #{first_name}"
   end
+
+  after_update do
+    UserChange.create(:editor=>self.changer,:edited_id=>self.id,:change=>self.changes)
+    i=5
+  end
+
 end

@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/goncalossilva/rails3_acts_as_paranoid.git
+  revision: 5f691e7fc5fca81ccace2deeccf57f92eadc9c03
+  specs:
+    rails3_acts_as_paranoid (0.0)
+      activerecord (~> 3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -274,6 +281,7 @@ DEPENDENCIES
   mysql2 (~> 0.3.11)
   paperclip (~> 3.1.4)
   rails (= 3.2.8)
+  rails3_acts_as_paranoid!
   redis (~> 3.0.1)
   resque (~> 1.22.0)
   resque-scheduler
