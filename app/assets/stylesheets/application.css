@@ -120,6 +120,11 @@ li.nav-header.custom.warning{
     color:red;
 }
 
+.report_container{
+    width: 800px;
+    margin: 0 auto;
+}
+
 .btn-group.report_edit{
     float: right;
     margin: -20px;
