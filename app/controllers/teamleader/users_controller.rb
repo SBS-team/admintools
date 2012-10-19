@@ -2,8 +2,7 @@
 class Teamleader::UsersController < Teamleader::AppTeamleaderController
   before_filter :init_user, :only => [:show, :update, :destroy]
   before_filter :password_for_user, :only => [:edit_password, :update_password]
-  before_filter :select_departments, :only => [:edit, :update]
-  before_filter :users_list
+  before_filter :select_related_options, :only => [:edit, :update]
 
   def index
     @user = current_user
@@ -45,7 +44,6 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
   end
 
   private
-
   def init_user
     @user = User.find_by_id(params[:id])
   end
@@ -54,13 +52,8 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
     @user = current_user
   end
 
-  def select_departments
+  def select_related_options
     @departments = Department.all
     @managers = User.managers
-  end
-
-  def users_list
-    @users_list = User.all.sort_by{ |u| u.full_name } if current_user.role.eql?'manager'
-    @users_list = User.where(:role => 'user', :department_id => current_user.department_id) if current_user.role.eql?'teamleader'
   end
 end
