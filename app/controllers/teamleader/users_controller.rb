@@ -11,7 +11,6 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
   end
 
   def show
-
   end
 
   def edit
@@ -57,6 +56,7 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
 
   def select_departments
     @departments = Department.all
+    @managers = User.managers
   end
 
   def users_list

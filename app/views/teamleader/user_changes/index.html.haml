@@ -10,7 +10,7 @@
   %tbody
     - @user_changes.each do |user|
       %tr
-        %td= user.editor.full_name
+        %td= editor_name(user.editor)
         %td= user.edited.full_name
         %td= user.created_at.to_s(:db)
         %td
