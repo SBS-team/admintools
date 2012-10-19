@@ -40,7 +40,7 @@
               %li#birthday_tab= link_to "Дни рождения", teamleader_birthday_path
               -if can?(:manage, Department)
                 %li#departments_tab= link_to "Отделы", teamleader_departments_path
-              -if can?(:read, Department)
+              -if can?(:read, UserChange)
                 %li#user_changes_tab= link_to "Логи", teamleader_user_changes_path
             = flash_alerts
 
