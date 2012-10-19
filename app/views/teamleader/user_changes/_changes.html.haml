@@ -1,0 +1,19 @@
+.modal.hide.fade(id="changesModal#{changes.id}")
+  .modal-header
+    %h1 Изменения #{changes.edited.full_name}
+  .modal-body
+    %table.table.table-striped
+      %thead
+        %tr
+          %th Поле
+          %th Было
+          %th Стало
+      %tbody
+        - changes.change.each_pair do |field, change|
+          %tr
+            %td= t(field)
+            %td= change.first.html_safe
+            %td= change.last.html_safe
+  .modal-footer
+    = link_to '#', :class => "btn btn-inverse", :'data-dismiss' => "modal" do
+      Закрыть
