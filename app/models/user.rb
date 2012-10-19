@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :rememberable, :trackable, :validatable, :authentication_keys => [ :email ]
   # Setup accessible (or protected) attributes for your model
   # attr_accessible :email, :password, :password_confirmation, :remember_me
-  # attr_protected :role
+  attr_protected :role, :as => :user
   attr_accessor :changer
 
   acts_as_paranoid
@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
 
   has_many :absents
 
-  has_many :users_change, :as=>:editor,:class_name => 'UserChange'
+  has_many :users_change, :as => :editor, :class_name => 'UserChange'
 
   has_many :user_changes, :foreign_key => "edited_id"
 
@@ -56,13 +56,30 @@ class User < ActiveRecord::Base
   scope :teamleader_users, lambda { |u| where(:role => 'user', :department_id => u.department_id).order(:last_name, :first_name) }
   scope :user_teamleader, lambda {|u| where(:role =>'teamleader',:department_id => u.department_id).order(:last_name,:first_name) }
 
+  def is_user?
+    self.role.eql?'user'
+  end
+
+  def is_admin?
+    self.role.eql?'admin'
+  end
+
+  def is_manager?
+    self.role.eql?'manager'
+  end
+
+  def is_teamleader?
+    self.role.eql?'teamleader'
+  end
+
   def full_name
     "#{last_name} #{first_name}"
   end
 
-  after_update do
-    UserChange.create(:editor=>self.changer,:edited_id=>self.id,:change=>self.changes)
-    i=5
+  before_update do
+    return unless self.changer
+    UserChange.create(:editor => self.changer,
+                      :edited_id => self.id,
+                      :change => self.changes) if self.changes.present?
   end
-
 end

@@ -258,3 +258,14 @@ ru:
   activerecord:
     errors:
       <<: *errors
+  first_name: "Имя"
+  last_name: "Фамилия"
+  skype: "Skype"
+  info: "Информация"
+  phone: "Телефон"
+  email: "Email"
+  birthday: "Дата рождения"
+  odesk: "odesk"
+  role: "Роль"
+  employer: "Заказчик"
+  daily: "График работы"
