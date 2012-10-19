@@ -12,8 +12,8 @@
         - changes.change.each_pair do |field, change|
           %tr
             %td= t(field)
-            %td= change.first.html_safe
-            %td= change.last.html_safe
+            %td= print_changes(field, change.first)
+            %td= print_changes(field, change.last)
   .modal-footer
     = link_to '#', :class => "btn btn-inverse", :'data-dismiss' => "modal" do
       Закрыть

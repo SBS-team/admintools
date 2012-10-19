@@ -44,9 +44,9 @@
         = text_field_tag nil, nil, :class => 'input-small', :id => 'daily-from'
         = text_field_tag nil, nil, :class => 'input-small', :id => 'daily-to'
     .control-group
-      = label_tag :manager, 'Менеджер', :class => 'control-label'
+      = label :manager_id, 'Менеджер', :class => 'control-label'
       .controls
-        = text_field_tag :manager, :class => 'input-xlarge'
+        = u.collection_select :manager_id, @managers, :id, :full_name, {:include_blank => '---'}, :class => 'input-xlarge'
     .control-group
       = u.label :employer, 'Заказчик', :class => 'control-label'
       .controls

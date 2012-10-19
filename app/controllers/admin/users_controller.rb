@@ -2,6 +2,8 @@
 class Admin::UsersController < Admin::AppAdminController
 
   before_filter :current_user, :only => [:show, :edit, :create, :update, :destroy]
+  before_filter :get_managers, :only => [:edit, :update]
+
   respond_to :js, :html
 
   def index
@@ -58,5 +60,9 @@ class Admin::UsersController < Admin::AppAdminController
 
   def current_user
     @user = User.find_by_id(params[:id])
+  end
+
+  def get_managers
+    @managers = User.managers
   end
 end
