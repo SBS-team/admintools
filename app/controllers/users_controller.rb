@@ -30,6 +30,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    params[:user].update(:changer => current_admin)
     if @user.update_attributes(params[:user])
       redirect_to :users#, notice: "Пользователь обновлен"
     else
