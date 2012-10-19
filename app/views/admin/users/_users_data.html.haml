@@ -36,7 +36,7 @@
                 %i{:class => "icon-remove"}
                 Удалить
             -else
-              = link_to admin_restore_user_path(user), :class => "btn btn-success", remote: true do
+              = link_to admin_restore_user_path(user), :class => "btn btn-success" do
                 %i{:class => "icon-plus"}
                 Восстановить
   = will_paginate @users, :class=>"pagination pagination-centered"

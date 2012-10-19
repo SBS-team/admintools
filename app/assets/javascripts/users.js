@@ -35,13 +35,11 @@ $(document).ready(function(){
     }
   })
   $("#deleted_users").on("click", function(event){
-    $(".users_real").fadeOut(500, function() {
-      $(".users_deleted").fadeIn(500);
-    });
+    $(".users_real").hide();
+      $(".users_deleted").show();
   });
   $("#real_users").on("click", function(event){
-    $(".users_deleted").fadeOut(500, function() {
-      $(".users_real").fadeIn(500);
-    });
+    $(".users_deleted").show();
+    $(".users_real").hide();
   });
 });

@@ -12,10 +12,6 @@ class Admin::UsersController < Admin::AppAdminController
       @search = User.search(params[:search] || {"meta_sort" => "id.asc"})
     end
     @users = @search.includes(:desktop, :room).paginate(:page => params[:page]).order('created_at').all
-    respond_to do |format|
-      format.html
-      format.js {render :layout => false}
-    end
   end
 
   def new
@@ -54,10 +50,7 @@ class Admin::UsersController < Admin::AppAdminController
 
   def restore
     User.only_deleted.find_by_id(params[:id]).update_attributes(:deleted_at => nil)
-    respond_to do |format|
-      format.html
-      format.js {redirect_to admin_users_path(:deleted => 1), notice: "Пользователь восстановлен"}
-    end
+    redirect_to admin_users_path(:deleted => 1), notice: "Пользователь восстановлен"
   end
 
   private
