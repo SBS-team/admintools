@@ -1,8 +1,11 @@
 module UserChangesHelper
 
   def editor_name(user)
-    return user.full_name if user.is_a?User
-    return user.name if user.is_a?Admin
+    if user.is_a?Admin
+      user.name
+    else
+      user.full_name
+    end
   end
 
   def print_changes(field, value)

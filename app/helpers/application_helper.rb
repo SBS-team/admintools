@@ -6,8 +6,11 @@ module ApplicationHelper
   end
 
   def auth_role( role )
-    return "пользователя" if role.is_a?User
-    return "админстратора" if role.is_a?Admin
+    if role.is_a?User
+      "пользователя"
+    else
+      "админстратора"
+    end
   end
 
   def login_by_role( role )
