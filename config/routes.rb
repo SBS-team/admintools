@@ -5,7 +5,6 @@ Admintools::Application.routes.draw do
 
   namespace :teamleader do
     root :to => 'users#index'
-    #resources :users
     resources :absents
     match "/birthday" => "users#birthday", :as => 'birthday'
     resources :users, :except => [:new, :create, :destroy] do
@@ -14,7 +13,7 @@ Admintools::Application.routes.draw do
         put :update_password
       end
     end
-    resources :user_changes
+    resources :user_changes, :only => [:index]
     resources :reports
     resources :poll
     resources :departments
