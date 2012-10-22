@@ -80,10 +80,25 @@ class User < ActiveRecord::Base
     "#{last_name} #{first_name}"
   end
 
-  before_update do
+  before_update :write_log
+  before_update :toggle_out_of_work
+
+  private
+  def write_log
     return unless self.changer
     UserChange.create(:editor => self.changer,
                       :edited_id => self.id,
                       :change => self.changes) if self.changes.present?
+  end
+
+  def toggle_out_of_work
+    if self.changes.has_key?(:employer)
+      if self.changes[:employer][0].present? && self.changes[:employer][1].empty?
+        self.out_of_work = Time.zone.now
+      end
+      if self.changes[:employer][0].empty? && self.changes[:employer][1].present?
+        self.out_of_work = nil
+      end
+    end
   end
 end
