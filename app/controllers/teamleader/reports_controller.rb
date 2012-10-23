@@ -51,8 +51,7 @@ class Teamleader::ReportsController < Teamleader::AppTeamleaderController
     if @report_unsended.update_attributes(:report_send => true)
       if current_user.role=="teamleader"
         @teamleader_users_reports_unsended.update_all(:report_send => true, :teamleader_report_id => @report_unsended.id)
-        #@report_unsended.users_reports.update_all(:report_send => true, :teamleader_report_id => @report.id)
-        #ReportMailer.send_report_mail(@report).deliver # Отправка отчётов на емейл, когда будут роли для директора.
+        ReportMailer.send_report_mail(@report_unsended, @teamleader_users_reports_unsended).deliver # Отправка отчётов на емейл, когда будут роли для директора.
       end
       redirect_to teamleader_reports_path, :notice => "Отчёт отправлен"
     else

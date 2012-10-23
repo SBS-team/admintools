@@ -7,5 +7,4 @@ class Report < ActiveRecord::Base
   belongs_to :user
 
   scope :users_unsended_reports, joins(:user).where(:report_send => false)
-  scope :users_sended_reports, lambda { |u| joins(:user).where(:users => {:role => 'user', :department_id => u.department_id}, :report_send => true)}
 end
