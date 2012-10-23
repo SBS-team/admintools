@@ -14,9 +14,12 @@ Admintools::Application.routes.draw do
         put :update_password
       end
     end
-
     resources :user_changes, :only => [:index, :show]
-    resources :reports
+    resources :reports do
+      member do
+        put :teamleader_mail_send
+      end
+    end
     resources :poll
     resources :departments
     resources :dashboard, :only => [:index]
