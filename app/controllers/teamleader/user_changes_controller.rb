@@ -3,7 +3,7 @@ class Teamleader::UserChangesController < Teamleader::AppTeamleaderController
 
   def index
     if current_user.is_manager? || current_user.is_admin?
-      @users_changes = UserChange.includes([:editor,:edited]).order('user_changes.created_at DESC').paginate(:page => params[:page])
+      @users_changes = UserChange.includes([:editor, :edited]).order('user_changes.created_at DESC').paginate(:page => params[:page])
     elsif current_user.is_teamleader?
       @users_changes = UserChange.subordinates(current_user).order('user_changes.created_at DESC').paginate(:page => params[:page])
     end
