@@ -1,6 +1,9 @@
 .modal.hide.fade(id="changesModal#{changes.id}")
   .modal-header
     %h1 Изменения #{changes.edited.full_name}
+    %small
+      изменил
+      = editor_name(changes.editor)
   .modal-body
     %table.table.table-striped
       %thead

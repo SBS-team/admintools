@@ -7,16 +7,19 @@ Admintools::Application.routes.draw do
     root :to => 'users#index'
     resources :absents
     match "/birthday" => "users#birthday", :as => 'birthday'
+
     resources :users, :except => [:new, :create, :destroy] do
       member do
         get :edit_password
         put :update_password
       end
     end
-    resources :user_changes, :only => [:index]
+
+    resources :user_changes, :only => [:index, :show]
     resources :reports
     resources :poll
     resources :departments
+    resources :dashboard, :only => [:index]
     post 'poll/voted' => 'poll#voted', :as => 'voted'
   end
 
