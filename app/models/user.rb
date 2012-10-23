@@ -63,7 +63,6 @@ class User < ActiveRecord::Base
 
   scope :out_of_work, where("`users`.`employer` = ''")
 
-
   def is_user?
     self.role.eql?'user'
   end
@@ -86,6 +85,10 @@ class User < ActiveRecord::Base
 
   before_update :write_log
   before_update :toggle_out_of_work
+
+  def self.subordinates(collect, user)
+    collect.where(:users => {:role => 'user', :department_id => user.department_id})
+  end
 
   private
   def write_log

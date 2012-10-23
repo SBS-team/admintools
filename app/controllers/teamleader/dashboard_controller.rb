@@ -9,7 +9,7 @@ class Teamleader::DashboardController < Teamleader::AppTeamleaderController
 
     @absents = Absent.actual_absents(Time.zone.now.midnight.to_s(:db))
     if current_user.is_teamleader?
-      @absents = @absents.subordinates(current_user)
+      @absents = User.subordinates(@absents, current_user)
     end
 
     start = Time.now
