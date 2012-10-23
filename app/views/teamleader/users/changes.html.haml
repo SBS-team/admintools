@@ -1,4 +1,4 @@
-%h1 Изменения пользователей
+%h1 Изменения пользователя
 
 %table.table.table-striped
   %thead
@@ -8,15 +8,15 @@
       %th Дата
       %th
   %tbody
-    - @users_changes.each do |user|
+    - @user_changes.each do |user|
       %tr
         %td= editor_name(user.editor)
-        %td= link_to user.edited.full_name, teamleader_user_changes_show_path(user.edited_id)
+        %td= user.edited.full_name
         %td= user.created_at.to_s(:db)
         %td
-          = render :partial => 'changes', :locals => { :changes => user }
+          = render :partial => 'teamleader/user_changes/changes', :locals => { :changes => user }
           = link_to "#changesModal#{user.id}", :'data-toggle' => :modal, :class => 'btn btn-inverse' do
             %i{:class => "icon-search"}
             Просмотр
 
-= will_paginate @users_changes, :class=>"pagination pagination-centered"
+= will_paginate @user_changes, :class=>"pagination pagination-centered"

@@ -42,6 +42,7 @@
                 %li#departments_tab= link_to "Отделы", teamleader_departments_path
               -if can?(:read, UserChange)
                 %li#user_changes_tab= link_to "Логи", teamleader_user_changes_path
+              %li#dashboard_tab= link_to "Dashboard", teamleader_dashboard_index_path
             = flash_alerts
 
             = yield

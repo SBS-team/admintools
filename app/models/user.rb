@@ -59,6 +59,10 @@ class User < ActiveRecord::Base
   scope :for_manager, lambda { where(:role => ['teamleader', 'user']).order(:last_name, :first_name) }
   scope :teamleader_users, lambda { |u| where(:role => 'user', :department_id => u.department_id).order(:last_name, :first_name) }
   scope :user_teamleader, lambda {|u| where(:role =>'teamleader',:department_id => u.department_id).order(:last_name,:first_name) }
+  scope :two_week_birthday, lambda {where("birthday < ? and birthday >= ?", Time.now.to_date+14.days,Time.now.to_date).order("birthday ASC")}
+
+  scope :out_of_work, where("`users`.`employer` = ''")
+
 
   def is_user?
     self.role.eql?'user'

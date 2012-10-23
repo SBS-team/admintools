@@ -1,77 +1,20 @@
-%h1= @user.full_name
+%h1 Изменения #{@user.full_name}
 %hr
-.well.form-horizontal
-  %fieldset
-    .control-group
-      %label.control-label
-        Фото
-      .controls
-        = image_tag (@user.avatar(:thumb) != "/avatars/thumb/missing.png" ? @user.avatar(:thumb) : "no_avatar.gif")
-    -if (current_user == @user) || (can? :manage,@user)
-      .control-group
-        %label.control-label
-          Роль
-        .controls
-          %span.input-xlarge.uneditable-input= @user.role
-      .control-group
-        %label.control-label
-          Отдел
-        .controls
-          %span.input-xlarge.uneditable-input
-            = @user.department ? @user.department.name : '---'
-    .control-group
-      %label.control-label
-        Email
-      .controls
-        %span.input-xlarge.uneditable-input= @user.email
-    .control-group
-      %label.control-label
-        Телефон
-      .controls
-        %span.input-xlarge.uneditable-input= @user.phone
-    .control-group
-      %label.control-label
-        Skype
-      .controls
-        %span.input-xlarge.uneditable-input= @user.skype
-    .control-group
-      %label.control-label
-        Дата рождения
-      .controls
-        %span.input-xlarge.uneditable-input= @user.birthday
-    .control-group
-      %label.control-label
-        График работы
-      .controls
-        %span.input-xlarge.uneditable-input= @user.daily
-    -if (current_user == @user) || (can? :manage,@user)
-      .control-group
-        %label.control-label
-          Менеджер
-        .controls
-          %span.input-xlarge.uneditable-input Олеговна
-      .control-group
-        %label.control-label
-          Заказчик
-        .controls
-          %span.input-xlarge.uneditable-input= @user.employer
-      .control-group
-        %label.control-label
-          oDesk аккаунт
-        .controls
-          %span.input-xlarge.uneditable-input
-            = link_to nil, @user.odesk
-      .control-group
-        %label.control-label
-          Информация
-        .controls
-          %span.input-xxlarge.uneditable-input{:readonly => 'readonly', :style => 'height:200px;overflow:auto'}= @user.info.html_safe
-    .form-actions
-      -if @user.id.eql?current_user.id
-        = link_to edit_password_teamleader_user_path(@user), :class => 'btn' do
-          %i.icon-pencil
-          Изменить пароль
-      -if can? :manage,@user
-        = link_to edit_teamleader_user_path(@user), :class => 'btn btn-inverse' do
-          %i.icon-pencil
-          Редактировать
+%table.table.table-striped
+  %thead
+    %tr
+      %th Редактировал
+      %th Дата
+      %th
+  %tbody
+    - @user_changes.each do |user|
+      %tr
+        %td= editor_name(user.editor)
+        %td= user.created_at.to_s(:db)
+        %td
+          = render :partial => 'changes', :locals => { :changes => user }
+          = link_to "#changesModal#{user.id}", :'data-toggle' => :modal, :class => 'btn btn-inverse' do
+            %i{:class => "icon-search"}
+            Просмотр
+
+= will_paginate @user_changes, :class=>"pagination pagination-centered"
