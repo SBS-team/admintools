@@ -21,7 +21,6 @@
           %li
             = render :partial => 'teamleader/user_changes/changes', :locals => { :changes => log }
             = link_to "#changesModal#{log.id}", :'data-toggle' => :modal do
-              / %i{:class => "icon-search"}
               = log.edited.full_name
 -unless @birthdays.empty?
   .well.well-small.pull-left.dashboard-box

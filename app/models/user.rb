@@ -92,10 +92,9 @@ class User < ActiveRecord::Base
 
   private
   def write_log
-    return unless self.changer
     UserChange.create(:editor => self.changer,
                       :edited_id => self.id,
-                      :change => self.changes) if self.changes.present?
+                      :change => self.changes) if(self.changer && self.changed?)
   end
 
   def toggle_out_of_work
