@@ -11,7 +11,7 @@
     - @users_changes.each do |user|
       %tr
         %td= editor_name(user.editor)
-        %td= link_to user.edited.full_name, teamleader_user_changes_show_path(user.edited_id)
+        %td= link_to user.edited.full_name, teamleader_user_change_path(user.edited_id)
         %td= user.created_at.to_s(:db)
         %td
           = render :partial => 'changes', :locals => { :changes => user }
