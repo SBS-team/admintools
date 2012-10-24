@@ -2,7 +2,7 @@
 class Admin::UsersController < Admin::AppAdminController
 
   before_filter :current_user, :only => [:show, :edit, :create, :update, :destroy]
-  before_filter :get_managers, :only => [:edit, :update]
+  before_filter :get_managers, :only => [:new, :edit, :update]
 
   respond_to :js, :html
 
