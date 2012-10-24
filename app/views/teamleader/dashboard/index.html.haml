@@ -12,16 +12,19 @@
             = a.date_from.to_s(:db)
             по
             = a.date_to.to_s(:db)
+
 -unless @last_logs.empty?
   .well.well-small.pull-left.dashboard-box
     %h2 Лог
     .box
       %ul.unstyled
         - @last_logs.each do |log|
-          %li
+          %li(style="height: 18px;")
             = render :partial => 'teamleader/user_changes/changes', :locals => { :changes => log }
+            = link_to log.edited.full_name, teamleader_user_path(log.edited)
             = link_to "#changesModal#{log.id}", :'data-toggle' => :modal do
-              = log.edited.full_name
+              %i.icon-search
+
 -unless @birthdays.empty?
   .well.well-small.pull-left.dashboard-box
     %h2 Дни рождения
@@ -31,6 +34,7 @@
           %li
             = link_to teamleader_user_path(u) do
               #{u.birthday} #{u.full_name}
+
 -unless @without_job.empty?
   .well.well-small.pull-left.dashboard-box
     %h2 Без работы
