@@ -1,5 +1,7 @@
 class Teamleader::DashboardController < Teamleader::AppTeamleaderController
   def index
+    authorize! :look, :dashboard
+
     @without_job = User.out_of_work
 
     @last_logs = UserChange.includes([:editor,:edited]).order('user_changes.created_at DESC').limit 10

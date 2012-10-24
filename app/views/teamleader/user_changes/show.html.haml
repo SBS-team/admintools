@@ -1,4 +1,7 @@
-%h1 Изменения #{@user.full_name}
+%h1
+  Изменения #{@user.full_name}
+  %small
+    = link_to 'профиль', teamleader_user_path(@user), :class => 'btn btn-info btn-mini'
 %hr
 %table.table.table-striped
   %thead
