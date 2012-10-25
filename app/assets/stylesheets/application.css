@@ -125,6 +125,31 @@ li.nav-header.custom.warning{
     margin: 0 auto;
 }
 
+.report_show_container{
+    display:-moz-groupbox;
+    height:auto;
+    width:800px;
+    cursor:text;
+    min-height: 50px;
+    min-width: 400px;
+    max-width: 1000px;
+}
+
+.report_department_info{
+    width: auto;
+    height: auto;
+}
+
+.teamleader_unsended{
+    border-color: #BCE8F1 !important;
+    color: #3A87AD;
+}
+
+.teamleader_sended{
+    border-color: #D6E9C6 !important;
+    color: #468847;
+}
+
 .btn-group.report_edit{
     float: right;
     margin: -20px;

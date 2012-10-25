@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
   validates :email,         :presence => true, :uniqueness => true
   validates :skype,         :presence => true
   validates :birthday,      :presence => true,
-  :format => { :with => /\d{4}\-\d{2}\-\d{2}/ }
+                            :format => { :with => /\d{4}\-\d{2}\-\d{2}/ }
   validates :daily,         :presence => true,
                             :format => { :with => /^\d{2}\:\d{2}\-\d{2}\:\d{2}$/ }
   validates :department_id, :numericality => { :greater_than => 0 },

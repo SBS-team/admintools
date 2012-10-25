@@ -4,7 +4,7 @@
     %meta{:charset => "utf-8"}
       %meta{:content => "IE=Edge,chrome=1", "http-equiv" => "X-UA-Compatible"}
         %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-          %title= content_for?(:title) ? yield(:title) : "Admintools"
+          %title= content_for?(:title) ? yield(:title) : "Team Leader"
           = csrf_meta_tags
           = yield :calendar
           / Le HTML5 shim, for IE6-8 support of HTML elements
@@ -42,7 +42,8 @@
                 %li#departments_tab= link_to "Отделы", teamleader_departments_path
               -if can?(:read, UserChange)
                 %li#user_changes_tab= link_to "Логи", teamleader_user_changes_path
-              %li#dashboard_tab= link_to "Dashboard", teamleader_dashboard_index_path
+              -if can?(:look, :dashboard)
+                %li#dashboard_tab= link_to "Dashboard", teamleader_dashboard_index_path
             = flash_alerts
 
             = yield
