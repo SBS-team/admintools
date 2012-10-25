@@ -1,4 +1,3 @@
-#encoding=UTF-8
 class Admin::DevicesController < Admin::AppAdminController
   before_filter :users_all, :only => [:index, :new, :edit, :create, :update]
   before_filter :current_device, :only => [:show, :edit, :update, :destroy]
@@ -23,7 +22,7 @@ class Admin::DevicesController < Admin::AppAdminController
   def create
     @device = Device.new(params[:device])
     if @device.save
-      redirect_to :admin_devices, :notice => "Личное устройство добавлено"
+      redirect_to :admin_devices, :notice => t(:'admin.devices.create.created')
     else
       render :action => "new"
     end
@@ -31,14 +30,14 @@ class Admin::DevicesController < Admin::AppAdminController
 
   def update
     if @device.update_attributes(params[:device])
-      redirect_to :admin_devices, :notice => "Личное устройство обновлено"
+      redirect_to :admin_devices, :notice => t(:'admin.devices.update.updated', :name => @device.name)
     else
       render :action => 'edit'
     end
   end
 
   def destroy
-    @device.destroy and redirect_to :admin_devices, :notice => "Личное устройство удалено"
+    @device.destroy and redirect_to :admin_devices, :notice => t(:'admin.devices.destroy.destroyed', :name => @device.name)
   end
 
   private
@@ -50,5 +49,4 @@ class Admin::DevicesController < Admin::AppAdminController
   def current_device
     @device = Device.find_by_id(params[:id])
   end
-
 end

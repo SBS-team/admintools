@@ -1,4 +1,3 @@
-#encoding=UTF-8
 class Admin::RoomsController < Admin::AppAdminController
   before_filter :user_all, :only => [:index, :new, :edit, :create, :update]
   before_filter :current_room, :only => [:show, :edit, :update, :destroy]
@@ -22,7 +21,7 @@ class Admin::RoomsController < Admin::AppAdminController
   def create
     @room = Room.new(params[:room])
     if @room.save
-      redirect_to :admin_root, :notice => "Офис #{@room.name} добавлен"
+      redirect_to :admin_root, :notice => t(:'admin.rooms.create.created', :name => @room.name)
     else
       render :action => "new"
     end
@@ -30,14 +29,14 @@ class Admin::RoomsController < Admin::AppAdminController
 
   def update
     if @room.update_attributes(params[:room])
-      redirect_to :admin_root, :notice => "Офис #{@room.name} обновлен"
+      redirect_to :admin_root, :notice => t(:'admin.rooms.update.updated', :name => @room.name)
     else
       render :action => "edit"
     end
   end
 
   def destroy
-    @room.destroy and redirect_to :admin_root, :notice => "Офис #{@room.name} удален"
+    @room.destroy and redirect_to :admin_root, :notice => t(:'admin.rooms.destroy.destroyed', :name => @room.name)
   end
 
   private

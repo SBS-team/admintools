@@ -271,3 +271,94 @@ ru:
   daily: "График работы"
   department_id: "Отдел"
   manager_id: "Менеджер"
+  admin:
+    admins:
+      create:
+        created: "Администратор %{name} добавлен"
+      update:
+        updated: "Информация изменена"
+      destroy:
+        destroyed: "Администратор %{name} удален"
+    users:
+      new:
+        title: "Добавить пользователя"
+      show:
+        title: "%{full_name}: информация о пользователе"
+      create:
+        title: 1
+        created: "Пользователь %{full_name} добавлен"
+      update:
+        updated: "Информация изменена"
+      destroy:
+        destroyed: "%{full_name} удален"
+      restore:
+        restored: "%{full_name} восстановлен"
+    rooms:
+      index:
+        title: "Офисы"
+      new:
+        title: "Добавить офис"
+      create:
+        created: "Офис %{name} добавлен"
+      update:
+        updated: "Офис %{name}, информация изменена"
+      destroy:
+        destroyed: "Офис %{name} удален"
+    desktops:
+      index:
+        title: "Компьютеры"
+      show:
+        title: "Информация о компьютере %{name}"
+      create:
+        created: "Компьютер %{name} добавлен"
+      update:
+        updated: "Компьютер %{name}, информация изменена"
+      destroy:
+        destroyed: "Компьютер %{name} удален"
+    devices:
+      index:
+        title: "Устройства"
+      create:
+        created: "Личное устройство добавлено"
+      update:
+        updated: "%{name} информация изменена"
+      destroy:
+        destroyed: "%{name} устройство удалено"
+    domains:
+      index:
+        title: "Внешние сервера"
+      new:
+        title: "Добавить домен"
+      create:
+        created: "Домен %{url} добавлен"
+      update:
+        updated: "Домен %{url} обновлен"
+      destroy:
+        destroyed: "Домен %{url} удален"
+    clear_logs:
+      choose: "Выберите дату для очищения логов"
+      cleaning: "Логи будут очишены в ближайщее время"
+    local_pings:
+      subnetworks:
+        create:
+          created: "Подсеть добавлена"
+        destroy:
+          destroyed: "Подсеть удалена"
+  teamleader:
+    departments:
+      create:
+        created: "Отдел %{name} добавлен"
+      update:
+        updated: "Информация изменена"
+      destroy:
+        destroyed: "Отдел %{name} удален"
+    poll:
+      create:
+        invalid: "Неверно введены данные"
+      voted:
+        invalid: "Неверное количество голосов"
+    users:
+      update:
+        updated: "Информация изменена"
+      update_password:
+        updated: "Пароль изменен"

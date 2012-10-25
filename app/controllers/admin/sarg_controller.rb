@@ -1,7 +1,6 @@
 class Admin::SargController < Admin::AppAdminController
 
   def index
-
   end
 
   def folder_create
@@ -10,5 +9,4 @@ class Admin::SargController < Admin::AppAdminController
     system"ln -s #{@from} #{@where}"
     redirect_to admin_sarg_index_path
   end
-
 end

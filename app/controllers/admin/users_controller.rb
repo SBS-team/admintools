@@ -1,8 +1,7 @@
-#encoding=UTF-8
 class Admin::UsersController < Admin::AppAdminController
 
   before_filter :current_user, :only => [:show, :edit, :create, :update, :destroy]
-  before_filter :get_managers, :only => [:new, :edit, :update]
+  before_filter :get_managers, :only => [:new, :create, :edit, :update]
 
   respond_to :js, :html
 
@@ -25,14 +24,13 @@ class Admin::UsersController < Admin::AppAdminController
   end
 
   def edit
-
   end
 
   def create
     @user = User.new(params[:user])
     @user.password = @user.password_confirmation = @user.email.split('@')[0]
     if @user.save
-      redirect_to :admin_users, notice: "Пользователь добавлен #{@user.full_name}"
+      redirect_to :admin_users, :notice => t('admin.users.create.created', full_name: @user.full_name)
     else
       render :action => 'new'
     end
@@ -41,19 +39,20 @@ class Admin::UsersController < Admin::AppAdminController
   def update
     params[:user].update(:changer => current_admin)
     if @user.update_attributes(params[:user])
-      redirect_to :admin_users, notice: "Информация изменена"
+      redirect_to :admin_users, :notice => t('admin.users.update.updated')
     else
       render :action => 'edit'
     end
   end
 
   def destroy
-    @user.destroy and redirect_to :admin_users, notice: "Пользователь удален"
+    @user.destroy and redirect_to :admin_users, :notice => t('admin.users.destroy.destroyed', :full_name => @user.full_name)
   end
 
   def restore
-    User.only_deleted.find_by_id(params[:id]).update_attributes(:deleted_at => nil)
-    redirect_to admin_users_path(:deleted => 1), notice: "Пользователь восстановлен"
+    user = User.only_deleted.find_by_id(params[:id])
+    user.update_attributes(:deleted_at => nil)
+    redirect_to admin_users_path(:deleted => 1), :notice => t('admin.users.restore.restored', :full_name => user.full_name)
   end
 
   private

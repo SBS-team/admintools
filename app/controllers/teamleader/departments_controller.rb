@@ -1,4 +1,3 @@
-#encoding:utf-8
 class Teamleader::DepartmentsController < ApplicationController
   load_and_authorize_resource
   before_filter :init_department, :only => [:show, :edit, :update, :destroy]
@@ -16,7 +15,7 @@ class Teamleader::DepartmentsController < ApplicationController
   def create
     @department = Department.new(params[:department])
     if @department.save
-      redirect_to :teamleader_departments, notice: "Отдел #{@department.name} добавлен"
+      redirect_to :teamleader_departments, notice: t(:'teamleader.departments.create.created', name: @department.name)
     else
       render :action => 'new'
     end
@@ -27,14 +26,14 @@ class Teamleader::DepartmentsController < ApplicationController
 
   def update
     if @department.update_attributes(params[:department])
-      redirect_to :teamleader_departments, notice: "Информация изменена"
+      redirect_to :teamleader_departments, notice: t(:'teamleader.departments.update.updated')
     else
       render :action => 'edit'
     end
   end
 
   def destroy
-    @department.destroy and redirect_to :teamleader_departments, notice: "Отдел удален"
+    @department.destroy and redirect_to :teamleader_departments, notice: t(:'teamleader.departments.destroy.destroyed', name: @department.name)
   end
 
   private

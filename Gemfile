@@ -44,3 +44,5 @@ group :test do
   gem "shoulda-matchers", "~> 1.2.0"
   gem "xpath", "~> 0.1.4"
 end
+
+gem 'capistrano'

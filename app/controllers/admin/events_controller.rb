@@ -79,4 +79,3 @@ class Admin::EventsController < Admin::AppAdminController
     params[:admin_tokens]=="" ? [{:admin_id => current_admin.id}] : params[:admin_tokens].split(",").map{|t| {:admin_id => t}}
   end
 end
-
