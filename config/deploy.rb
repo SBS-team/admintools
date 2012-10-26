@@ -5,7 +5,8 @@ set :application, "admintools"
 set :domain, "192.168.137.34"
 set :repository, "git@github.com:is-valid/admintools.git"
 set :rails_env, "production"
-set :branch, "teamleader"
+#set :branch, "teamleader"
+set :branch, "update_and_fix_bootstrap"
 #set :deploy_via, :remote_cache # Указание на то, что стоит хранить кеш репозитария локально и с каждым деплоем лишь подтягивать произведенные изменения. Очень актуально для больших и тяжелых репозитариев.
 set :user, "dimon"
 set :use_sudo, false
@@ -31,17 +32,48 @@ namespace :deploy do
     run "if [ -f #{unicorn_pid} ] && [ -e /proc/$(cat #{unicorn_pid}) ]; then kill -USR2 `cat #{unicorn_pid}`; else cd #{deploy_to}/current && bundle exec unicorn_rails -c #{unicorn_conf} -E #{rails_env} -D; fi"
   end
   task :start do
-    run "bundle exec unicorn_rails -c #{unicorn_conf} -E #{rails_env} -D"
+    run "bundle exec unicorn -c #{unicorn_conf} -E #{rails_env} -D"
+    #run "bundle exec unicorn -E production"
   end
   task :stop do
     run "if [ -f #{unicorn_pid} ] && [ -e /proc/$(cat #{unicorn_pid}) ]; then kill -QUIT `cat #{unicorn_pid}`; fi"
   end
 end
 
+after "deploy:update_code",
+      "deploy:config_symlink",
+      "deploy:db_create",
+      "deploy:db_migrate",
+      "deploy:db_seed"
+      #"deploy:bundle_install_no_dev",
+      #"deploy:start"
+
+namespace :deploy do
+  task :config_symlink do
+    run "cp #{shared_path}/database.yml #{release_path}/config/database.yml"
+  end
+
+  task :db_create, :roles => :app do
+    run "cd #{release_path}; RAILS_ENV=production rake db:create"
+  end
+  task :db_migrate, :roles => :app do
+    run "cd #{release_path}; RAILS_ENV=production rake db:migrate"
+  end
+  task :db_seed, :roles => :app do
+    run "cd #{release_path}; RAILS_ENV=production rake db:seed"
+  end
+  task :bundle_install_no_dev, :roles => :app do
+    #run "cd #{release_path}; bundle install --no-deployment"
+  end
+
+
+end
+
 after 'deploy:update_code', :roles => :app do
   # Здесь для примера вставлен только один конфиг с приватными данными - database.yml. Обычно для таких вещей создают папку /srv/myapp/shared/config и кладут файлы туда. При каждом деплое создаются ссылки на них в нужные места приложения.
-  run "rm -f #{current_release}/config/database.yml"
-  run "ln -s #{deploy_to}/shared/config/database.yml #{current_release}/config/database.yml"
+  #run "rm -f #{current_release}/config/database.yml"
+  #run "ln -s #{deploy_to}/shared/config/database.yml #{current_release}/config/database.yml"
+  #run "cd #{release_path}; rake assets:precompile RAILS_ENV=production "
 end
 
 #ssh_options[:port] = 7822
@@ -59,7 +91,7 @@ end
 
 
 # if you want to clean up old releases on each deploy uncomment this:
-# after "deploy:restart", "deploy:cleanup"
+after "deploy:restart", "deploy:cleanup"
 
 # if you're still using the script/reaper helper you will need
 # these http://github.com/rails/irs_process_scripts
