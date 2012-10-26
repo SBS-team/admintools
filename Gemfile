@@ -17,8 +17,8 @@ git 'git://github.com/goncalossilva/rails3_acts_as_paranoid.git' do
   gem 'rails3_acts_as_paranoid'
 end
 
-gem "twitter-bootstrap-rails", "~> 2.0.4"
 group :assets do
+  gem "twitter-bootstrap-rails", "~> 2.1.3"
   gem "sass-rails",   "~> 3.2.3"
   gem "coffee-rails", "~> 3.2.1"
   gem "uglifier", ">= 1.0.3"

@@ -61,7 +61,7 @@ module Admintools
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-    config.assets.paths << Rails.root.join("vendor", "assets", "images")
+    # config.assets.paths << Rails.root.join("vendor", "assets", "images")
 
     # config.after_initialize do
         # require 'rake'
