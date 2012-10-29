@@ -16,12 +16,10 @@ class Admin::ConstructorsController < Admin::AppAdminController
 
   def update
     @workplace = Workplace.find(params[:id])
-
-    if params[:workplace][:desktop_id]
-      old_workplace = Workplace.find_by_desktop_id(params[:workplace][:desktop_id])
-      # old_workplace.update_attributes({:workplace => {:desktop_id => nil}})
-    end
-
+    # if params[:workplace][:desktop_id]
+    #   old_workplace = Workplace.find_by_desktop_id(params[:workplace][:desktop_id])
+    #   # old_workplace.update_attributes({:workplace => {:desktop_id => nil}})
+    # end
     if @workplace.update_attributes(params[:workplace])
       render :json => {:status => 1, :workplace => @workplace}
     else

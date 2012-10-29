@@ -17,13 +17,11 @@ git 'git://github.com/goncalossilva/rails3_acts_as_paranoid.git' do
   gem 'rails3_acts_as_paranoid'
 end
 
-gem "twitter-bootstrap-rails", "~> 2.0.4"
-gem "unicorn"
-
 group :assets do
+  gem "twitter-bootstrap-rails", "~> 2.1.3"
   gem "sass-rails",   "~> 3.2.3"
   gem "coffee-rails", "~> 3.2.1"
-  gem "uglifier", ">= 1.0.3"
+  gem "uglifier"
 end
 
 group :development do
@@ -38,9 +36,6 @@ gem "resque", "~> 1.22.0"
 
 gem "rspec-rails", :group => [:test, :development]
 
-group :production do
-
-end
 group :test do
   gem "factory_girl_rails", "~> 4.0.0"
   gem "capybara", "~> 1.1.2"
@@ -51,3 +46,5 @@ group :test do
   gem "shoulda-matchers", "~> 1.2.0"
   gem "xpath", "~> 0.1.4"
 end
+
+gem 'capistrano'

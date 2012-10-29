@@ -1,4 +1,3 @@
-# encoding: UTF-8
 class Teamleader::PollController < Teamleader::AppTeamleaderController
   helper_method :total_voted, :opt_voted, :voted_set
 
@@ -30,7 +29,7 @@ class Teamleader::PollController < Teamleader::AppTeamleaderController
       PollMailer.send_poll_mail(@poll).deliver
       redirect_to teamleader_poll_index_path
     else
-      flash[:notice] = "Неверно введены данные."
+      flash[:alert] = t(:'teamleader.poll.create.invalid')
       redirect_to new_teamleader_poll_path
     end
   end
@@ -48,10 +47,9 @@ class Teamleader::PollController < Teamleader::AppTeamleaderController
           @voted = Voted.find_or_create_by_user_id_and_poll_id_and_option_vote_and_option_id(:user_id => current_user.id, :poll_id => @poll.id, :option_vote => opt.last["name"], :option_id => opt.first.to_i+1)
         end
       else
-        flash[:notice] = "Неверное количество голосов."
+        flash[:alert] = t(:'teamleader.poll.voted.invalid')
       end
       redirect_to teamleader_poll_path(@poll)
     end
   end
-
 end

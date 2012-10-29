@@ -4,11 +4,14 @@
 
 = form_for([:admin, :local_pings, @network], :html => {:class => "well form-horizontal"}) do |f|
   -if @network.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@network.errors.count, "error")} какая-то ошибка, не может сохранить:"
+    #error_explanation.alert.alert-error
+      %a.close{"data-dismiss" => "alert", :href => "#"}
+        ×
+      %h2 Возникли ошибки:
       %ul
         - @network.errors.full_messages.each do |msg|
           %li= msg
+
   %fieldset
     .control-group
       = f.label :network, 'Подсеть', :class => 'control-label'

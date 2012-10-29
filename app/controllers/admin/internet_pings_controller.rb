@@ -1,4 +1,3 @@
-#encoding=UTF-8
 class Admin::InternetPingsController < Admin::AppAdminController
 before_filter :define_date_range, :only => [:clear, :import]
 
@@ -10,12 +9,12 @@ before_filter :define_date_range, :only => [:clear, :import]
 
   def clear
     unless @from || @to
-      msg = "Выберите дату для очищения логов"
+      flash[:alert] = t :'admin.clear_logs.choose'
     else
-      msg = "Логи будут очишены в ближайщее время"
+      flash[:notice] = t :'admin.clear_logs.cleaning'
+      Resque.enqueue(ClearLogs, :server, @from, @to)
     end
-    Resque.enqueue(ClearLogs, :server, @from, @to)
-    redirect_to(:admin_internet_pings, notice: "#{msg}")
+    redirect_to(:admin_internet_pings)
   end
 
   def import

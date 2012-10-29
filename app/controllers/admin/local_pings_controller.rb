@@ -1,4 +1,3 @@
-#encoding=UTF-8
 class Admin::LocalPingsController < Admin::AppAdminController
   before_filter :meta_search_params, :only => [:index, :show]
   before_filter :define_date_range, :only => [:clear, :import]
@@ -17,12 +16,12 @@ class Admin::LocalPingsController < Admin::AppAdminController
 
   def clear
     unless @from || @to
-      msg = "Выберите дату для очищения логов"
+      flash[:alert] = t :'admin.clear_logs.choose'
     else
-      msg = "Логи будут очишены в ближайщее время"
+      flash[:notice] = t :'admin.clear_logs.cleaning'
+      Resque.enqueue(ClearLogs, :local, @from, @to)
     end
-    Resque.enqueue(ClearLogs, :local, @from, @to)
-    redirect_to(:admin_local_pings, notice: "#{msg}")
+    redirect_to(:admin_local_pings)
   end
 
   def import
@@ -59,5 +58,4 @@ class Admin::LocalPingsController < Admin::AppAdminController
     @from = params[:from].present? ? (params[:from].to_datetime.midnight) : nil
     @to   = params[:to].present?   ? (params[:to].to_datetime.end_of_day)   : nil
   end
-
 end

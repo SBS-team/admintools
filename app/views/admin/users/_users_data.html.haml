@@ -12,7 +12,7 @@
         %th
           -if @deleted!="1"
             = link_to new_admin_user_path, :class => "btn btn-success" do
-              %i{:class => "icon-plus"}
+              %i.icon-plus
               Создать
     %tbody
       - @users.each do |user|
@@ -27,16 +27,16 @@
           %td
             -if @deleted!="1"
               = link_to admin_user_path(user), :class => "btn" do
-                %i{:class => "icon-zoom-in"}
+                %i.icon-zoom-in
                 Просмотр
               = link_to edit_admin_user_path(user), :class => "btn" do
-                %i{:class => "icon-pencil"}
+                %i.icon-pencil
                 Редактировать
               = link_to admin_user_path(user), :method => :DELETE, :class => "btn btn-danger", :confirm => "Ты уверен?" do
-                %i{:class => "icon-remove"}
+                %i.icon-remove
                 Удалить
             -else
               = link_to admin_restore_user_path(user), :class => "btn btn-success" do
-                %i{:class => "icon-plus"}
+                %i.icon-plus
                 Восстановить
   = will_paginate @users, :class=>"pagination pagination-centered"

@@ -1,5 +1,5 @@
 = form_for [:admin, @search], :url => admin_internet_pings_path, :html => {:method => :get, :class => 'well form-horizontal'} do |f|
-  .input-medium.search-query{:type => "text"}
+  .search-query{:type => "text"}
     %p
       = f.label :url_equals, "Выберите Url"
       = select_tag :url_equals, options_from_collection_for_select(@domains, :id, :url), :prompt => 'Выбрать url', :include_blank => true, :name => "search[ping_id_equals]"

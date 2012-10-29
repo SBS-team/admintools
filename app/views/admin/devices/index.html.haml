@@ -13,7 +13,7 @@
         %th= sort_link @search, :user_id, "Пользователь"
         %th
           = link_to new_admin_device_path, :class => "btn btn-success" do
-            %i{:class => "icon-plus"}
+            %i.icon-plus
             Создать
     %tbody
       - @devices.each do |device|
@@ -24,13 +24,13 @@
           %td= check_empty(device.user, "full_name")
           %td
             = link_to admin_device_path(device), :class => "btn" do
-              %i{:class => "icon-zoom-in"}
+              %i.icon-zoom-in
               Просмотр
             = link_to edit_admin_device_path(device), :class => "btn" do
-              %i{:class => "icon-pencil"}
+              %i.icon-pencil
               Редактировать
             = link_to admin_device_path(device), :method => :DELETE, :class => "btn btn-danger", :confirm => "Ты уверен?" do
-              %i{:class => "icon-remove"}
+              %i.icon-remove
               Удалить
 
 - content_for :sidebar, render(:partial => 'sidebar')

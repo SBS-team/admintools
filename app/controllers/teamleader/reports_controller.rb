@@ -4,7 +4,7 @@ class Teamleader::ReportsController < Teamleader::AppTeamleaderController
   before_filter :find_report, :only => [:show, :edit, :update, :destroy]
 
   def index
-    @report_check=current_user.reports.find_by_report_send(false)
+    @report_check = current_user.reports.find_by_report_send(false)
     @report_sended = current_user.reports.order("created_at DESC").find_all_by_report_send(true)
     @teamleader_users_reports_sended = current_user.reports.includes(:users_reports).where(:report_send=>true).order("created_at DESC")
   end
@@ -73,6 +73,6 @@ class Teamleader::ReportsController < Teamleader::AppTeamleaderController
   end
 
   def find_report
-    @report=Report.find(params[:id])
+    @report = Report.find(params[:id])
   end
 end
