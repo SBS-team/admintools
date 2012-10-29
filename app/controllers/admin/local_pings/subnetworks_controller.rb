@@ -1,4 +1,3 @@
-#encoding=UTF-8
 class Admin::LocalPings::SubnetworksController < Admin::AppAdminController
 
   def new
@@ -8,19 +7,18 @@ class Admin::LocalPings::SubnetworksController < Admin::AppAdminController
   def create
     @network = Subnetwork.new(params[:subnetwork])
     if @network.save
-      redirect_to :admin_local_pings, notice: "Подсеть добавлена"
+      redirect_to :admin_local_pings, notice: t(:'admin.local_pings.subnetworks.create.created')
     else
-      redirect_to :admin_local_pings, alert: "Неверный формат подсети"
+      render :new
     end
   end
 
   def destroy
     @network = Subnetwork.find(params[:id])
     if @network.destroy
-      redirect_to :admin_local_pings, notice: "Подсеть удалена"
+      redirect_to :admin_local_pings, notice: t(:'admin.local_pings.subnetworks.destroy.destroyed')
     else
       redirect_to :admin_local_pings
     end
   end
-
 end

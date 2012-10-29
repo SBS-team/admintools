@@ -9,7 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= cupertino/cupertino.css
+ * cupertino/cupertino.css
  *= require_tree .
  *= require_tree ../../../vendor/assets/stylesheets/
   */
@@ -75,7 +75,7 @@ footer {
 body {
     margin-top: 40px;
     font-size: 14px;
-    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+    /*font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;*/
 }
 
 #calendar {

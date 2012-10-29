@@ -1,4 +1,4 @@
-%h1 Список сайтов
+%h1= t :'.title'
 
 %hr
 
@@ -11,7 +11,7 @@
         %th= sort_link @search, :active, "Активность"
         %th
           = link_to new_admin_domain_path, :class => "btn btn-success" do
-            %i{:class => "icon-plus"}
+            %i.icon-plus
             Создать
     %tbody
       - @domains.each do |domain|
@@ -23,13 +23,13 @@
           %td= check_true_or_false(domain)
           %td
             = link_to admin_domain_path(domain), :class => "btn" do
-              %i{:class => "icon-zoom-in"}
+              %i.icon-zoom-in
               Просмотр
             = link_to edit_admin_domain_path(domain), :class => "btn" do
-              %i{:class => "icon-pencil"}
+              %i.icon-pencil
               Редактировать
             = link_to admin_domain_path(domain), :method => :DELETE, :class => "btn btn-danger", :confirm => "Ты уверен?" do
-              %i{:class => "icon-remove"}
+              %i.icon-remove
               Удалить
 
 - content_for :sidebar, render(:partial => 'sidebar')
