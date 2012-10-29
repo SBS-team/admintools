@@ -1,5 +1,5 @@
 = form_for [:admin, @search], :url => admin_domains_path, :html => {:method => :get, :class => 'well form-horizontal'} do |f|
-  .input-medium.search-query{:type => "text"}
+  .search-query{:type => "text"}
     %p
       = f.label :url_equals, "Введите url"
       = f.text_field :url_equals
