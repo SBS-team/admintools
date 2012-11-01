@@ -121,8 +121,10 @@ ru:
       second: Секунд
       year: Год
   errors: &errors
-    format: ! '%{attribute} %{message}'
+    format: ! 'Поле "%{attribute}" %{message}'
     messages:
+      attributes:
+        first_name: "Имя"
       accepted: нужно подтвердить
       blank: не может быть пустым
       confirmation: не совпадает с подтверждением
@@ -256,6 +258,21 @@ ru:
     errors:
       <<: *errors
   activerecord:
+    models:
+      user: User
+      department: Department
+    attributes:
+      user:
+        first_name: "Имя"
+        last_name: "Фамилия"
+        password: "Пароль"
+        current_password: "Старый пароль"
+        email: "Email"
+        skype: "Skype"
+        birthday: "День рождения"
+        daily: "График работы"
+      department:
+        name: "Название"
     errors:
       <<: *errors
   first_name: "Имя"
