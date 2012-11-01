@@ -26,7 +26,7 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
   end
 
   def birthday
-    @users = User.all.sort_by{ |d|d.birthday.day }
+    @users = User.where('birthday is not null').sort_by{ |d| d.birthday.day }
   end
 
   def edit_password

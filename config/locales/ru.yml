@@ -271,6 +271,9 @@ ru:
   daily: "График работы"
   department_id: "Отдел"
   manager_id: "Менеджер"
+  remember_me: "Запомнить меня"
+  password: "Пароль"
+  name: "Имя"
   admin:
     admins:
       create:
