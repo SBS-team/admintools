@@ -17,9 +17,11 @@ class Teamleader::DashboardController < Teamleader::AppTeamleaderController
     start = Time.now
     finish = Time.now + 2.week
     @birthdays = User.select do |u|
-      date_from = Date.parse("#{u.birthday.day}-#{u.birthday.month}-#{start.year}")
-      date_to = Date.parse("#{u.birthday.day}-#{u.birthday.month}-#{finish.year}")
-      ((date_from >= start.to_date) && (date_from < finish.to_date))||((date_to >= start.to_date) && (date_to < finish.to_date))
+      if u.birthday
+        date_from = Date.parse("#{u.birthday.day}-#{u.birthday.month}-#{start.year}")
+        date_to = Date.parse("#{u.birthday.day}-#{u.birthday.month}-#{finish.year}")
+        ((date_from >= start.to_date) && (date_from < finish.to_date))||((date_to >= start.to_date) && (date_to < finish.to_date))
+      end
     end
   end
 end
