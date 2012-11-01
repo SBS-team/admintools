@@ -33,6 +33,7 @@ namespace :deploy do
   end
   task :start do
     #run "cd #{release_path}; bundle exec unicorn -c #{unicorn_conf} -E #{rails_env} -D"
+    #run "cd #{release_path}; bundle exec unicorn -p 80 -E production"
     run "cd #{release_path}; bundle exec unicorn -E production"
   end
   task :stop do
