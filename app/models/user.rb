@@ -41,10 +41,14 @@ class User < ActiveRecord::Base
   validates :last_name,     :presence => true
   validates :email,         :presence => true, :uniqueness => true
   validates :skype,         :presence => true
-  validates :birthday,      :presence => true,
+
+  validates :birthday,      :if => :by_user,
+                            :presence => true,
                             :format => { :with => /\d{4}\-\d{2}\-\d{2}/ }
-  validates :daily,         :presence => true,
+  validates :daily,         :if => :by_user,
+                            :presence => true,
                             :format => { :with => /^\d{2}\:\d{2}\-\d{2}\:\d{2}$/ }
+
   validates :department_id, :numericality => { :greater_than => 0 },
                             :if => :department_id?
 
@@ -91,6 +95,11 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  def by_user
+    self.changer.is_a?User if self.changer
+  end
+
   def write_log
     UserChange.create(:editor => self.changer,
                       :edited_id => self.id,

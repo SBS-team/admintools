@@ -16,6 +16,10 @@
 
 html, body { height: 100%; }
 
+.uneditable-input{
+    color: #444444 !important;
+}
+
 table.m-hover tr:hover td{
     background-color: #e8fbff !important;
 }
