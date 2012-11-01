@@ -43,6 +43,7 @@ end
 
 after "deploy:update_code",
       "deploy:config_symlink",
+      "deploy:rewrite_production_rb",
       "deploy:db_create",
       "deploy:db_migrate",
       "deploy:db_seed",
@@ -54,7 +55,9 @@ namespace :deploy do
   task :config_symlink do
     run "cp #{shared_path}/database.yml #{release_path}/config/database.yml"
   end
-
+  task :rewrite_production_rb do
+    run "cp -f #{shared_path}/production.rb #{release_path}/config/environments/production.rb"
+  end
   task :db_create, :roles => :app do
     run "cd #{release_path}; RAILS_ENV=production rake db:create"
   end
