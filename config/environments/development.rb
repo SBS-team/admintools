@@ -41,8 +41,8 @@ Admintools::Application.configure do
       :port                 => 587,
       :domain               => "mail.google.com",
 
-      :user_name            => "dmitriy.savran@faceit.com.ua",
-      :password             => "CYo4zxh3xcF",
+      :user_name            => "emailfaceit@gmail.com",
+      :password             => "hiddenfile",
       :authentication       => "plain",
       :enable_starttls_auto => true
   }
