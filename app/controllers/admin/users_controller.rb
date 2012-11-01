@@ -28,7 +28,7 @@ class Admin::UsersController < Admin::AppAdminController
 
   def create
     @user = User.new(params[:user])
-    @user.password = @user.password_confirmation = @user.email.split('@')[0]
+    @user.password = @user.password_confirmation = :'123456'
     if @user.save
       redirect_to :admin_users, :notice => t('admin.users.create.created', full_name: @user.full_name)
     else
