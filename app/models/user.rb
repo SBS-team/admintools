@@ -108,10 +108,10 @@ class User < ActiveRecord::Base
 
   def toggle_out_of_work
     if self.changes.has_key?(:employer)
-      if self.changes[:employer][0].present? && self.changes[:employer][1].empty?
+      if self.changes[:employer][0].present? && self.changes[:employer][1].blank?
         self.out_of_work = Time.zone.now
       end
-      if self.changes[:employer][0].empty? && self.changes[:employer][1].present?
+      if self.changes[:employer][0].blank? && self.changes[:employer][1].present?
         self.out_of_work = nil
       end
     end

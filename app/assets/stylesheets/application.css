@@ -174,11 +174,12 @@ blockquote > p{
 
 .dashboard-box{
     width: 450px;
-    height: 220px;
+    height: 245px;
     margin:0 20px 0 0;
 }
 .dashboard-box > .box{
     height: 190px;
+    overflow: auto
 }
 /* timepicker */
 .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
