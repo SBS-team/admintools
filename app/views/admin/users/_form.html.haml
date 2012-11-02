@@ -23,6 +23,10 @@
         / = u.select :role, {:'пользователь' => :user, :'менеджер' => :manager, :'тимлид' => :teamleader}, {:selected => :user},  :class => 'input-xlarge'
         = u.select :role, User::ROLES, {}, :class => 'input-xlarge'
     .control-group
+      = u.label :department_id, 'Отдел', :class => 'control-label'
+      .controls
+        = u.collection_select :department_id, @departments, :id, :name, {:include_blank => '---'}, :class => 'input-xlarge'
+    .control-group
       = u.label :email, 'Email', :class => 'control-label'
       .controls
         = u.text_field :email, :class => 'input-xlarge'

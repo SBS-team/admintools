@@ -20,7 +20,6 @@ class Admin::UsersController < Admin::AppAdminController
   end
 
   def show
-
   end
 
   def edit
@@ -63,5 +62,6 @@ class Admin::UsersController < Admin::AppAdminController
 
   def get_managers
     @managers = User.managers
+    @departments = Department.all
   end
 end

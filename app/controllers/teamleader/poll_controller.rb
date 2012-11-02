@@ -2,7 +2,7 @@ class Teamleader::PollController < Teamleader::AppTeamleaderController
   helper_method :total_voted, :opt_voted, :voted_set
 
   def opt_voted(opt,i,poll)
-    poll.voteds.find_all_by_option_vote_and_option_id(opt,i+1).count
+    poll.voteds.find_all_by_option_vote_and_option_id(opt, i+1).count
   end
 
   def total_voted(poll)
@@ -14,7 +14,7 @@ class Teamleader::PollController < Teamleader::AppTeamleaderController
   end
 
   def index
-    @polls = Poll.all
+    @polls = Poll.order("created_at DESC")
   # authorize! :read, @polls
   end
 
@@ -23,7 +23,7 @@ class Teamleader::PollController < Teamleader::AppTeamleaderController
   end
 
   def create
-    if !params['poll']['question'].blank? && params['poll']['max_votes'].to_i > 0 && params['poll']['option'].delete_if {|x| x == "" }.count > 1
+    if !params['poll']['question'].blank? && params['poll']['max_votes'].to_i > 0 && params['poll']['option'].delete_if { |x| x == "" }.count > 1
       @poll = Poll.create(params['poll'])
       @poll.update_attribute(:end_at, 1.day.from_now) if @poll.end_at < DateTime.now
       PollMailer.send_poll_mail(@poll).deliver

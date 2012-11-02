@@ -143,6 +143,7 @@ ru:
       odd: может иметь лишь четное значение
       record_invalid: ! 'Возникли ошибки: %{errors}'
       taken: уже существует
+      one_leader: ", в отделе может быть один управляющий"
       too_long:
         few: слишком большой длины (не может быть больше чем %{count} символа)
         many: слишком большой длины (не может быть больше чем %{count} символов)
@@ -261,6 +262,9 @@ ru:
     models:
       user: User
       department: Department
+      room: Room
+      desktop: Desktop
+      device: Device
     attributes:
       user:
         first_name: "Имя"
@@ -271,8 +275,18 @@ ru:
         skype: "Skype"
         birthday: "День рождения"
         daily: "График работы"
+        department_id: "Отдел"
+        role: "Роль"
       department:
         name: "Название"
+      room:
+        name: "Офис"
+        user_id: "Ответственный"
+      desktop:
+        name: "Имя ПК"
+      device:
+        name: "Имя"
+        user_id: "Пользователь"
     errors:
       <<: *errors
   first_name: "Имя"
@@ -384,3 +398,15 @@ ru:
         updated: "Информация изменена"
       update_password:
         updated: "Пароль изменен"
+  January: "Январь"
+  February: "Февраль"
+  March: "Март"
+  April: "Апрель"
+  May: "Май"
+  June: "Июнь"
+  July: "Июль"
+  August: "Август"
+  September: "Сентябрь"
+  October: "Октябрь"
+  November: "Ноябрь"
+  December: "Декабрь"
