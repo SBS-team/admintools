@@ -1,10 +1,10 @@
--Date::MONTHNAMES[1..-1].each do |month|
-  %h1
-    = month
-  .well.form-horizontal
-    .control-group{:style => "font-size:18;"}
-      - @users.each do |user|
-        -if user.birthday.strftime("%B") == month
+- @users.each_pair do |month, users|
+  - if users.present?
+    %h1
+      = t(month)
+    .well.form-horizontal
+      .control-group{:style => "font-size:18;"}
+        - users.each do |user|
           %label.control-label
             = "#{user.full_name}"
           .controls

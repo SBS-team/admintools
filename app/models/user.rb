@@ -51,6 +51,8 @@ class User < ActiveRecord::Base
   validates :department_id, :numericality => { :greater_than => 0 },
                             :if => :department_id?
 
+  validate :set_teamleader
+
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>"}
 
 
@@ -95,8 +97,12 @@ class User < ActiveRecord::Base
 
   private
 
+  def set_teamleader
+    errors.add(:department_id, :empty) if self.is_teamleader? && self.department_id.blank?
+  end
+
   def by_user
-    self.changer.is_a?User if self.changer
+    self.changer.is_a?User
   end
 
   def write_log
