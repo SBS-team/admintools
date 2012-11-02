@@ -1,8 +1,14 @@
+#encoding:utf-8
 class Teamleader::DepartmentsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :except => :restore
   before_filter :init_department, :only => [:show, :edit, :update, :destroy]
   def index
-    @departments = Department.all
+    @deleted = params[:deleted]
+    if @deleted=="1"
+      @departments = Department.only_deleted
+    else
+      @departments = Department.all
+    end
   end
 
   def show
@@ -34,6 +40,13 @@ class Teamleader::DepartmentsController < ApplicationController
 
   def destroy
     @department.destroy and redirect_to :teamleader_departments, notice: t(:'teamleader.departments.destroy.destroyed', name: @department.name)
+  end
+
+  def restore
+    authorize! :restore, :departments
+    department = Department.only_deleted.find_by_id(params[:id])
+    department.update_attributes(:deleted_at => nil)
+    redirect_to teamleader_departments_path(:deleted => 1), :notice => t('teamleader.departments.restore.restored', :name => department.name)
   end
 
   private

@@ -372,6 +372,8 @@ ru:
         updated: "Информация изменена"
       destroy:
         destroyed: "Отдел %{name} удален"
+      restore:
+        restored: "Отдел %{name} восстановлен"
     poll:
       create:
         invalid: "Неверно введены данные"

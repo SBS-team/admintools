@@ -17,6 +17,7 @@ class Ability
       can :look, :dashboard
       can :manage, User
       can :manage, Department
+      can :restore, :departments
       can :read, UserChange
     end
 
