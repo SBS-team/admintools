@@ -398,6 +398,9 @@ ru:
         updated: "Информация изменена"
       update_password:
         updated: "Пароль изменен"
+    mailer:
+      poll_mailer:
+        new_poll: "Новый опрос"
   January: "Январь"
   February: "Февраль"
   March: "Март"
