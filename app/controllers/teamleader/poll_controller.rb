@@ -24,7 +24,7 @@ class Teamleader::PollController < Teamleader::AppTeamleaderController
 
   def create
     if !params['poll']['question'].blank? && params['poll']['max_votes'].to_i > 0 && params['poll']['option'].delete_if { |x| x == "" }.count > 1
-      @poll = Poll.create(params['poll'])
+      @poll = current_user.polls.build(params['poll'])
       @poll.update_attribute(:end_at, 1.day.from_now) if @poll.end_at < DateTime.now
       PollMailer.send_poll_mail(@poll,current_user).deliver
       redirect_to teamleader_poll_index_path
@@ -51,5 +51,9 @@ class Teamleader::PollController < Teamleader::AppTeamleaderController
       end
       redirect_to teamleader_poll_path(@poll)
     end
+  end
+
+  def destroy
+    @poll.destroy and redirect_to :teamleader_polls, notice: t(:'teamleader.polls.destroy.destroyed', question: @poll.question)
   end
 end

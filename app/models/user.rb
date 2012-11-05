@@ -37,6 +37,8 @@ class User < ActiveRecord::Base
 
   has_many :reports
 
+  has_many :polls
+
   validates :first_name,    :presence => true
   validates :last_name,     :presence => true
   validates :skype,         :presence => true

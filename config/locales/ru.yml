@@ -393,6 +393,8 @@ ru:
         invalid: "Неверно введены данные"
       voted:
         invalid: "Неверное количество голосов"
+      destroy:
+        destroyed: "Опрос %{question} удален"
     users:
       update:
         updated: "Информация изменена"

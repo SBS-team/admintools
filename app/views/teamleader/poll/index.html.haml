@@ -15,4 +15,8 @@
             = "проголосовал(а)"
           - else
             = "окончание голосования:  #{poll.end_at.strftime("%d %B %Y")}"
+      -if poll.user_id.eql?current_user.id
+        = link_to teamleader_poll_path(poll), :method => :DELETE, :class => "btn btn-danger", :confirm => "Ты уверен?" do
+          %i{:class => "icon-remove"}
+          Удалить
       %br
