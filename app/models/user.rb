@@ -63,6 +63,7 @@ class User < ActiveRecord::Base
 
   scope :by_name, lambda { order(:last_name, :first_name) }
   scope :managers, lambda { where(:role => ['manager']) }
+  scope :admins, lambda { where(:role => ['admin']) }
   scope :out_department, lambda { where(:department_id => nil, :role => [:user, :teamleader]) }
   scope :for_manager, lambda { where(:role => ['teamleader', 'user']).order(:last_name, :first_name) }
   scope :teamleader_users, lambda { |u| where(:role => 'user', :department_id => u.department_id).order(:last_name, :first_name) }
