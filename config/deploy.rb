@@ -7,7 +7,7 @@ set :repository, "git@github.com:is-valid/admintools.git"
 set :rails_env, "production"
 #set :branch, "teamleader"
 #set :branch, "update_and_fix_bootstrap"
-set :branch, "capistrano_apache"
+set :branch, "master"
 #set :deploy_via, :remote_cache # Указание на то, что стоит хранить кеш репозитария локально и с каждым деплоем лишь подтягивать произведенные изменения. Очень актуально для больших и тяжелых репозитариев.
 set :user, "admintools"
 set :use_sudo, false
