@@ -42,7 +42,7 @@ module ApplicationHelper
 
   def user_list
     @managers_list = User.managers.by_name
-    @departments_list = Department.includes(:users).where(:users => { :role => [:user, :teamleader] }).order('departments.id, users.role, users.last_name, users.first_name')
+    @departments_list = Department.includes(:users).order('departments.id, users.role, users.last_name, users.first_name')
     @out_users_list = User.out_department.by_name
     render :partial => 'teamleader/shared/sidebar'
   end
