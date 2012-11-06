@@ -1,6 +1,6 @@
 class Teamleader::PollController < Teamleader::AppTeamleaderController
   helper_method :total_voted, :opt_voted, :voted_set
-
+  before_filter :init_poll, :only => :destroy
   def opt_voted(opt,i,poll)
     poll.voteds.find_all_by_option_vote_and_option_id(opt, i+1).count
   end
@@ -24,7 +24,7 @@ class Teamleader::PollController < Teamleader::AppTeamleaderController
 
   def create
     if !params['poll']['question'].blank? && params['poll']['max_votes'].to_i > 0 && params['poll']['option'].delete_if { |x| x == "" }.count > 1
-      @poll = Poll.create(params['poll'])
+      @poll = current_user.polls.build(params['poll'])
       @poll.update_attribute(:end_at, 1.day.from_now) if @poll.end_at < DateTime.now
       PollMailer.send_poll_mail(@poll,current_user).deliver
       redirect_to teamleader_poll_index_path
@@ -51,5 +51,15 @@ class Teamleader::PollController < Teamleader::AppTeamleaderController
       end
       redirect_to teamleader_poll_path(@poll)
     end
+  end
+
+  def destroy
+    @poll.destroy and redirect_to :teamleader_poll_index, notice: t(:'teamleader.poll.destroy.destroyed', question: @poll.question)
+  end
+
+  private
+
+  def init_poll
+    @poll = Poll.find(params[:id])
   end
 end
