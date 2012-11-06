@@ -2,21 +2,22 @@
 %hr
 %p
   = link_to "Создать новый опрос", new_teamleader_poll_path, :class => "btn"
-.well.form-horizontal
-  %fieldset
-    -@polls.each do |poll|
-      %dl
-        %dt{:style => " width: 68%; float: left; font-style: bold;"}
-          = link_to poll.question, teamleader_poll_path(poll.id)
-        %dd{:style => "width: 30%; float: left;"}
-          - if poll.end_at < DateTime.current
-            = "голосование окончено"
-          - elsif voted_set(poll)
-            = "проголосовал(а)"
-          - else
-            = "окончание голосования:  #{poll.end_at.strftime("%d %B %Y")}"
-      -if poll.user_id.eql?current_user.id
-        = link_to teamleader_poll_path(poll), :method => :DELETE, :class => "btn btn-danger", :confirm => "Ты уверен?" do
-          %i{:class => "icon-remove"}
-          Удалить
-      %br
+
+%table.table.table-striped.pretty
+  %tbody
+  -@polls.each do |poll|
+    %tr
+      %td
+        = link_to poll.question, teamleader_poll_path(poll.id)
+      %td
+        - if poll.end_at < DateTime.current
+          = "голосование окончено"
+        - elsif voted_set(poll)
+          = "проголосовал(а)"
+        - else
+          = "окончание голосования:  #{poll.end_at.strftime("%d %B %Y")}"
+      %td
+        -if poll.user_id.eql?current_user.id
+          = link_to teamleader_poll_path(poll), :method => :DELETE, :class => "btn btn-danger", :confirm => "Ты уверен?" do
+            %i{:class => "icon-remove"}
+            Удалить

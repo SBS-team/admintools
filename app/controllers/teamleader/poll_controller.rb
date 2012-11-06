@@ -1,6 +1,6 @@
 class Teamleader::PollController < Teamleader::AppTeamleaderController
   helper_method :total_voted, :opt_voted, :voted_set
-
+  before_filter :init_poll, :only => :destroy
   def opt_voted(opt,i,poll)
     poll.voteds.find_all_by_option_vote_and_option_id(opt, i+1).count
   end
@@ -54,6 +54,12 @@ class Teamleader::PollController < Teamleader::AppTeamleaderController
   end
 
   def destroy
-    @poll.destroy and redirect_to :teamleader_polls, notice: t(:'teamleader.polls.destroy.destroyed', question: @poll.question)
+    @poll.destroy and redirect_to :teamleader_poll_index, notice: t(:'teamleader.poll.destroy.destroyed', question: @poll.question)
+  end
+
+  private
+
+  def init_poll
+    @poll = Poll.find(params[:id])
   end
 end
