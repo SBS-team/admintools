@@ -38,7 +38,7 @@ $(document).ready(function() {
             var width = 1200; 										//Use an integer (in pixels)
             var padding = 10;										//Use an integer (in pixels)
             var backgroundColor = '#FFFFFF'; 						//Use any hex code
-            var source = '/events/new/' + start +  '/' + end +  '/' + allDay;
+            var source = '/admin/events/new/' + start +  '/' + end +  '/' + allDay;
             var borderColor = '#333333'; 							//Use any hex code
             var borderWeight = 4; 									//Use an integer (in pixels)
             var borderRadius = 5; 									//Use an integer (in pixels)
@@ -62,7 +62,7 @@ $(document).ready(function() {
 
         // a future calendar might have many sources.
         eventSources: [{
-            url: '/events',
+            url: '/admin/events',
             ignoreTimezone: true
 
         }],
@@ -91,7 +91,7 @@ $(document).ready(function() {
             var width = 300; 										//Use an integer (in pixels)
             var padding = 10;										//Use an integer (in pixels)
             var backgroundColor = '#FFFFFF'; 						//Use any hex code
-            var source = '/events/' + event.id;
+            var source = '/admin/events/' + event.id;
             var borderColor = '#333333'; 							//Use any hex code
             var borderWeight = 4; 									//Use an integer (in pixels)
             var borderRadius = 5; 									//Use an integer (in pixels)
@@ -115,7 +115,7 @@ $(document).ready(function() {
 
 function updateEvent(the_event) {
     $.update(
-        "/events/" + the_event.id,
+        "/admin/events/" + the_event.id,
         { event: { title: the_event.title,
             starts_at: "" + the_event.start,
             ends_at: "" + the_event.end,
@@ -132,7 +132,7 @@ function PopupEventEdit(id) {
     var width = 1200; 										//Use an integer (in pixels)
     var padding = 10;										//Use an integer (in pixels)
     var backgroundColor = '#FFFFFF'; 						//Use any hex code
-    var source = "/events/"+id+"/edit";
+    var source = "/admin/events/"+id+"/edit";
     var borderColor = '#333333'; 							//Use any hex code
     var borderWeight = 4; 									//Use an integer (in pixels)
     var borderRadius = 5; 									//Use an integer (in pixels)

@@ -18,6 +18,7 @@
 //= require jquery.tokeninput
 //= require nicEdit
 //= require domains
+//= require jquery.timepicker
 
 $(document).ready(function() {
     nav_menu()
@@ -30,13 +31,22 @@ $(document).ready(function() {
     });
 
     $('.sarg_choose').change(function(){
-        $(this).siblings('.testing_label').text(this.value || 'Nothing selected')
+        $(this).siblings('.testing_label').text(this.value || 'Nothing selected');
+    });
+
+    // nav menu list drop up/down
+    $('li.nav-header').click(function(){
+        var item = $(this).children('i')
+        $(this).parent().children('li:not(:first)').toggle(500);
     });
 });
 
 function nav_menu(){
     var arr =  window.location.pathname.split("/");
     arr.shift();
+    if(arr[arr.length-1] == ''){
+        arr.pop();
+    }
     $("ul.breadcrumb").html()
     $("ul.breadcrumb").append("<li><a href='/'>home</a><span class='divider'>/</span> </li>")
     if(arr[0] != ""){
@@ -49,9 +59,11 @@ function nav_menu(){
 
 function tab_menu(){
     var tab = window.location.pathname.substr(1).split("/");
-    $("#"+tab[0]+"_tab").addClass("active");
-    if (!$(".active").length){
+    $("#"+tab[1]+"_tab").addClass("active");
+    if (!$(".active").length && tab[0] == 'admin'){
         $("#rooms_tab").addClass("active");
+    } else if (!$(".active").length){
+        $("#users_tab").addClass("active");
     }
 }
 
@@ -70,7 +82,7 @@ $.ajaxSetup({
 //});
 
 $("#SuperModalPopupDiv").live('mouseover focus',function(){
-    $(".token-input-list").tokenInput("/events.json", {
+    $(".token-input-list").tokenInput("/admin/events.json", {
       crossDomain: false,
       preventDuplicates: true,
       prePopulate: $(".token-input-list").data("pre"),

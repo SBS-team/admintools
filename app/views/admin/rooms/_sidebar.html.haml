@@ -1,0 +1,10 @@
+= form_for @search, :url => admin_rooms_path, :html => {:method => :get, :class => 'well form-horizontal'} do |f|
+  .search-query{:type => "text"}
+    %p
+      = f.label :name_equals, "Введите имя офиса"
+      = f.text_field :name_equals
+    %p
+      = f.label :user_id_equals, "Введите имя пользователя"
+      = select_tag :user_id_equals, options_from_collection_for_select(@users, :id, :full_name), :prompt => 'Выбрать пользователя', :include_blank => true, :name => "search[user_id_equals]"
+    = button_tag("Найти", :class => :btn)
+    = link_to("Сбросить", admin_rooms_path, :class => "btn btn-inverse")

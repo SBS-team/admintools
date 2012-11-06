@@ -1,0 +1,15 @@
+%h1
+  Отделы
+  .pull-right
+    -if @deleted!="1"
+      .department_real
+        = link_to 'Удаленные', teamleader_departments_path(:deleted => 1), :class => "btn btn-danger", :id => "deleted_departments", "data-loading-text" => "???"
+      .department_deleted.hide
+        = link_to 'Действующие', teamleader_departments_path(:deleted => 0), :class => "btn btn-success", :id => "real_departments", "data-loading-text" => "???"
+    -else
+      .department_real.hide
+        = link_to 'Удаленные', teamleader_departments_path(:deleted => 1), :class => "btn btn-danger", :id => "deleted_departments", "data-loading-text" => "???"
+      .department_deleted
+        = link_to 'Действующие', teamleader_departments_path(:deleted => 0), :class => "btn btn-success", :id => "real_departments", "data-loading-text" => "???"
+.well
+  =render "departments_data"

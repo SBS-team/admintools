@@ -1,0 +1,7 @@
+%h1 Отчёт за месяц пользователя: #{@user.full_name}
+
+%hr
+- if current_user.role=="teamleader"
+  = render 'teamleader_form'
+- else
+  = render 'form'

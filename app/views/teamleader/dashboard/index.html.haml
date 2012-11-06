@@ -1,0 +1,44 @@
+%h1 Dashboard
+%hr
+-unless @absents.empty?
+  .well.well-small.pull-left.dashboard-box
+    %h2 Отпросились
+    .box
+      %ul.unstyled
+        - @absents.each do |a|
+          %li
+            = a.user.full_name
+            с
+            = a.date_from.to_s(:db)
+            по
+            = a.date_to.to_s(:db)
+
+-unless @last_logs.empty?
+  .well.well-small.pull-left.dashboard-box
+    %h2 Лог
+    .box
+      %ul.unstyled
+        - @last_logs.each do |log|
+          %li(style="height: 18px;")
+            = render :partial => 'teamleader/user_changes/changes', :locals => { :changes => log }
+            = link_to log.edited.full_name, teamleader_user_path(log.edited)
+            = link_to "#changesModal#{log.id}", :'data-toggle' => :modal do
+              %i.icon-search
+
+-unless @birthdays.empty?
+  .well.well-small.pull-left.dashboard-box
+    %h2 Дни рождения
+    .box
+      %ul.unstyled
+        - @birthdays.each do |u|
+          %li
+            = link_to teamleader_user_path(u) do
+              #{u.birthday} #{u.full_name}
+
+-unless @without_job.empty?
+  .well.well-small.pull-left.dashboard-box
+    %h2 Без работы
+    .box
+      %ul.unstyled
+        - @without_job.each do |u|
+          %li= link_to u.full_name, teamleader_user_path(u)

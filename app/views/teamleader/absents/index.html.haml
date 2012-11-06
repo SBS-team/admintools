@@ -1,0 +1,38 @@
+%h1 Отпрашивался
+
+%hr
+
+.well
+  %table.table.table-striped.pretty
+    %tbody
+      - @absents.each do |absent|
+        %tr
+          %td
+            Причина:
+            = absent.reason
+          -if absent.date_from.to_date==absent.date_to.to_date
+            %td
+              Дата:
+              = absent.date_from.strftime("%d-%m-%Y")
+            %td
+              C:
+              =absent.date_from.strftime("%H-%M")
+            %td
+              До:
+              = absent.date_to.strftime("%H-%M")
+          -else
+            %td
+              С:
+              = absent.date_from.strftime("%d-%m-%Y")
+            %td(colspan="2" )
+              До:
+              = absent.date_to.strftime("%d-%m-%Y")
+
+          %td
+            = link_to teamleader_absent_path(absent), :method => :DELETE, :class => "btn btn-danger", :confirm => "Ты уверен?" do
+              %i{:class => "icon-remove"}
+              Удалить
+  .form-actions
+    = link_to new_teamleader_absent_path(@user), :class => 'btn btn-primary' do
+      Отпроситься
+

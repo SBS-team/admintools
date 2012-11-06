@@ -9,12 +9,16 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= cupertino/cupertino.css
+ * cupertino/cupertino.css
  *= require_tree .
  *= require_tree ../../../vendor/assets/stylesheets/
   */
 
 html, body { height: 100%; }
+
+.uneditable-input{
+    color: #444444 !important;
+}
 
 table.m-hover tr:hover td{
     background-color: #e8fbff !important;
@@ -75,7 +79,7 @@ footer {
 body {
     margin-top: 40px;
     font-size: 14px;
-    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+    /*font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;*/
 }
 
 #calendar {
@@ -112,3 +116,79 @@ body {
     display: inline-block;
     border-right: 1px solid white;
 }
+
+li.nav-header.custom{
+    cursor:pointer;
+}
+li.nav-header.custom.warning{
+    color:red;
+}
+
+.report_container{
+    width: 800px;
+    margin: 0 auto;
+}
+
+.report_show_container{
+    display:-moz-groupbox;
+    height:auto;
+    width:800px;
+    cursor:text;
+    min-height: 50px;
+    min-width: 400px;
+    max-width: 1000px;
+}
+
+.report_department_info{
+    width: auto;
+    height: auto;
+}
+
+.teamleader_unsended{
+    border-color: #BCE8F1 !important;
+    color: #3A87AD;
+}
+
+.teamleader_sended{
+    border-color: #D6E9C6 !important;
+    color: #468847;
+}
+
+.btn-group.report_edit{
+    float: right;
+    margin: -20px;
+    position: relative;
+}
+
+.btn-group.report_edit > .btn:last-child{
+    border-bottom-right-radius: 0 !important;
+}
+.btn-group.report_edit > .btn:first-child{
+    border-top-left-radius: 0 !important;
+}
+
+blockquote > p{
+    margin: 10px 0 10px 0 !important;
+
+ }
+
+.dashboard-box{
+    width: 450px;
+    height: 245px;
+    margin:0 20px 0 0;
+}
+.dashboard-box > .box{
+    height: 190px;
+    overflow: auto
+}
+/* timepicker */
+.ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+.ui-timepicker-div dl { text-align: left; }
+.ui-timepicker-div dl dt { height: 25px; margin-bottom: -25px; }
+.ui-timepicker-div dl dd { margin: 0 10px 10px 65px; }
+.ui-timepicker-div td { font-size: 90%; }
+.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+
+.ui-timepicker-rtl{ direction: rtl; }
+.ui-timepicker-rtl dl { text-align: right; }
+.ui-timepicker-rtl dl dd { margin: 0 65px 10px 10px; }

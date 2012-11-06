@@ -1,0 +1,19 @@
+= form_for [:admin, @search], :url => admin_desktops_path, :html => {:method => :get, :class => 'well form-horizontal'} do |f|
+  .search-query{:type => "text"}
+    %p
+      = f.label :name_equals, "Введите имя компьютера"
+      = f.text_field :name_equals
+    %p
+      = f.label :ip_equals, "Введите ip"
+      = f.text_field :ip_equals
+    %p
+      = f.label :mac_equals, "Введите mac"
+      = f.text_field :mac_equals
+    %p
+      = f.label :user_id_equals, "Выберите пользователя"
+      = select_tag :user_id_equals, options_from_collection_for_select(@users, :id, :full_name), :prompt => 'Выбрать пользователя', :include_blank => true, :name => "search[user_id_equals]"
+    %p
+      = f.label :room_id_equals, "Выберите офис"
+      = select_tag :room_id_equals, options_from_collection_for_select(@rooms, :id, :name), :prompt => 'Выбрать офис', :include_blank => true, :name => "search[room_id_equals]"
+    %button.btn{:type => "submit"} Найти
+    = link_to "Сбросить", admin_desktops_path, :class => 'btn btn-inverse'

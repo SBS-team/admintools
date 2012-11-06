@@ -1,0 +1,5 @@
+%li(style="display:none")
+  = link_to teamleader_user_path(user) do
+    = user.full_name
+    -if user.role.eql?'teamleader'
+      %i.icon-star

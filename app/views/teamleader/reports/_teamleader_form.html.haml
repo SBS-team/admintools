@@ -1,0 +1,19 @@
+= form_for([:teamleader, @report]) do |a|
+  .well{:style=>"text-align:center;"}
+    .report_container{:style=>"display:-moz-groupbox;"}
+      -if (@report.id?)
+        = a.text_area :body, :rows=> 10, :style=>"width:800px; height:500px;", :placeholder=>"Enter text ...", :class=>"report"
+      -else
+        = a.text_area :body, :rows=> 10, :style=>"width:800px; height:500px;", :placeholder=>"Enter text ...", :class=>"report" , :value =>" В общем по группе: \n\n #{@teamleader_users.map {|v| "#{v.full_name}:\n\n"}.join(' ')} Пожелания:"
+      .btn-group
+        = a.submit (@report.id?) ? 'Изменить отчёт' : 'Сохранить отчёт', :class=>"btn btn-large btn-block btn-primary"
+
+- @teamleader_users_reports_unsended.each do |user_report|
+  .well.alert-info
+    .report_show_container{:style=>"display:-moz-groupbox; height:auto; width:800px;cursor:text;"}
+      %blockquote
+        %h3 Отчёт пользователя: #{user_report.user.full_name}
+        =simple_format(user_report.body)
+        %small
+          Report updated at:
+          =user_report.updated_at.strftime("%d %b %Y")

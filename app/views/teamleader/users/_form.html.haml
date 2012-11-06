@@ -1,0 +1,68 @@
+= form_for([:teamleader, @user], :html => {:class => 'well form-horizontal', :multipart => true}) do |u|
+  -if @user.errors.any?
+    #error_explanation.alert.alert-error
+      %a.close{"data-dismiss" => "alert", :href => "#"}
+        ×
+      %h2 Возникли ошибки:
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
+
+  %fieldset
+    .control-group
+      = u.label :first_name, 'Имя', :class => 'control-label'
+      .controls
+        = u.text_field :first_name, :class => 'input-xlarge'
+    .control-group
+      = u.label :last_name, 'Фамилия', :class => 'control-label'
+      .controls
+        = u.text_field :last_name, :class => 'input-xlarge'
+    .control-group
+      = u.label :email, 'Email', :class => 'control-label'
+      .controls
+        = u.text_field :email, :class => 'input-xlarge'
+    .control-group
+      = u.label :department_id, 'Отдел', :class => 'control-label'
+      .controls
+        = u.collection_select :department_id, @departments, :id, :name, {:include_blank => '---'}, :class => 'input-xlarge'
+    .control-group
+      = u.label :phone_field, 'Телефон', :class => 'control-label'
+      .controls
+        = u.text_field :phone, :value => "#{@user.phone ||'+3 80'}", :class => 'input-xlarge'
+    .control-group
+      = u.label :skype, 'Skype', :class => 'control-label'
+      .controls
+        = u.text_field :skype, :class => 'input-xlarge'
+    .control-group
+      = u.label :birthday, 'Дата рождения', :class => 'control-label'
+      .controls
+        = u.text_field :birthday, :class => 'input-xlarge'
+    .control-group
+      = u.label :daily, 'График работы', :class => 'control-label'
+      .controls
+        = u.hidden_field :daily
+        = text_field_tag nil, nil, :class => 'input-small', :id => 'daily-from'
+        = text_field_tag nil, nil, :class => 'input-small', :id => 'daily-to'
+    .control-group
+      = label :manager_id, 'Менеджер', :class => 'control-label'
+      .controls
+        = u.collection_select :manager_id, @managers, :id, :full_name, {:include_blank => '---'}, :class => 'input-xlarge'
+    .control-group
+      = u.label :employer, 'Заказчик', :class => 'control-label'
+      .controls
+        = u.text_field :employer, :class => 'input-xlarge'
+    .control-group
+      = u.label :odesk, 'oDesk аккаунт', :class => 'control-label'
+      .controls
+        = u.text_field :odesk, :class => 'input-xlarge'
+    .control-group
+      = u.label :info, 'Информация', :class => 'control-label'
+      .controls
+        = u.text_area :info, :class => 'input-xxlarge', :id => 'nic', :style => "height:200px"
+    .control-group
+      = u.label :avatar, 'Фото', :class => 'control-label'
+      .controls
+        = u.file_field :avatar
+    .form-actions
+      = u.submit (@user.id?) ? 'Изменить' : 'Создать' , :class => 'btn btn-primary'
+      = link_to 'Назад', teamleader_users_path, :class => 'btn'
