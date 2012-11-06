@@ -5,7 +5,9 @@ class ReportMailer < ActionMailer::Base
     @teamleader_report=teamleader_report
     @teamleader_users_reports=temleader_users_reports
     @teamleader=@teamleader_report.user
-    addresses=User.where(:role=>'director').select(:email)
-    mail(:to => addresses.map(&:email), :subject => "Monthly report from #{@teamleader.full_name} (#{@teamleader.department.name})", :template_path => 'teamleader/report_mailer',:template_name => 'send_report_mail')
+    #addresses=User.where(:role=>'director').select(:email)
+    addresses=["max.vodyanickij@faceit.com.ua","nick.zadvorniy@faceit.com.ua",@teamleader.email]
+    #mail(:to => addresses.map(&:email), :subject => "Monthly report from #{@teamleader.full_name} (#{@teamleader.department.name})", :template_path => 'teamleader/report_mailer',:template_name => 'send_report_mail')
+    mail(:to => addresses, :subject => "Monthly report from #{@teamleader.full_name} (#{@teamleader.department.name})", :template_path => 'teamleader/report_mailer',:template_name => 'send_report_mail')
   end
 end
