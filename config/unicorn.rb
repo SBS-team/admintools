@@ -1,4 +1,4 @@
-deploy_to  = "/home/dimon/web/admintools"
+deploy_to  = "/var/www/admintools.loc/server"
 rails_root = "#{deploy_to}/current"
 pid_file   = "#{deploy_to}/shared/pids/unicorn.pid"
 socket_file= "#{deploy_to}/shared/unicorn.sock"

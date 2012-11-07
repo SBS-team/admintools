@@ -5,18 +5,21 @@ class Ability
 
     if user.is_user?
       can :read, :except => UserChange
+      can :manage, Report
     end
 
     if user.is_teamleader?
       can :look, :dashboard
       can :manage, User.where(:department_id => user.department_id)
       can :read, UserChange
+      can :manage, Report
     end
 
     if user.is_manager?
       can :look, :dashboard
       can :manage, User
       can :manage, Department
+      can :restore, :departments
       can :read, UserChange
     end
 

@@ -1,9 +1,0 @@
-%tr
-  %td= department.name
-  %td
-    = link_to edit_teamleader_department_path(department), :class => "btn" do
-      %i{:class => "icon-pencil"}
-      Редактировать
-    = link_to teamleader_department_path(department), :method => :DELETE, :class => "btn btn-danger", :confirm => "Ты уверен?" do
-      %i{:class => "icon-remove"}
-      Удалить

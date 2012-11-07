@@ -1,0 +1,6 @@
+.well.report_sidebar
+  %h5 Отчёты будут отправлены администраторам:
+  -@admins_email.each do |email|
+    %p.admin_email= email
+  %h5 Копия:
+  %p.admin_email=@user_teamleader.email

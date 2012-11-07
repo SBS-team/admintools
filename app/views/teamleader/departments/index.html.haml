@@ -1,13 +1,15 @@
-%h1 Отделы
-%hr
+%h1
+  Отделы
+  .pull-right
+    -if @deleted!="1"
+      .department_real
+        = link_to 'Удаленные', teamleader_departments_path(:deleted => 1), :class => "btn btn-danger", :id => "deleted_departments", "data-loading-text" => "???"
+      .department_deleted.hide
+        = link_to 'Действующие', teamleader_departments_path(:deleted => 0), :class => "btn btn-success", :id => "real_departments", "data-loading-text" => "???"
+    -else
+      .department_real.hide
+        = link_to 'Удаленные', teamleader_departments_path(:deleted => 1), :class => "btn btn-danger", :id => "deleted_departments", "data-loading-text" => "???"
+      .department_deleted
+        = link_to 'Действующие', teamleader_departments_path(:deleted => 0), :class => "btn btn-success", :id => "real_departments", "data-loading-text" => "???"
 .well
-  %table.table.table-striped.pretty
-    %thead
-      %tr
-        %th Название
-        %th
-          = link_to new_teamleader_department_path, :class => "btn btn-success" do
-            %i{:class => "icon-plus"}
-            Создать
-    %tbody
-      =render @departments
+  =render "departments_data"

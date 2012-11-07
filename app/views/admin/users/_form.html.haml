@@ -23,6 +23,10 @@
         / = u.select :role, {:'пользователь' => :user, :'менеджер' => :manager, :'тимлид' => :teamleader}, {:selected => :user},  :class => 'input-xlarge'
         = u.select :role, User::ROLES, {}, :class => 'input-xlarge'
     .control-group
+      = u.label :department_id, 'Отдел', :class => 'control-label'
+      .controls
+        = u.collection_select :department_id, @departments, :id, :name, {:include_blank => '---'}, :class => 'input-xlarge'
+    .control-group
       = u.label :email, 'Email', :class => 'control-label'
       .controls
         = u.text_field :email, :class => 'input-xlarge'
@@ -35,27 +39,27 @@
       .controls
         = u.text_field :skype, :class => 'input-xlarge'
         .control-group
-      = u.label :birthday, 'Дата рождения', :class => 'control-label'
-      .controls
-        = u.text_field :birthday, :class => 'input-xlarge'
-    .control-group
-      = u.label :daily, 'График работы', :class => 'control-label'
-      .controls
-        = u.hidden_field :daily
-        = text_field_tag nil, nil, :class => 'input-small', :id => 'daily-from'
-        = text_field_tag nil, nil, :class => 'input-small', :id => 'daily-to'
-    .control-group
-      = label :manager_id, 'Менеджер', :class => 'control-label'
-      .controls
-        = u.collection_select :manager_id, @managers, :id, :full_name, {:include_blank => '---'}, :class => 'input-xlarge'
-    .control-group
-      = u.label :employer, 'Заказчик', :class => 'control-label'
-      .controls
-        = u.text_field :employer, :class => 'input-xlarge'
-    .control-group
-      = u.label :odesk, 'oDesk аккаунт', :class => 'control-label'
-      .controls
-        = u.url_field :odesk, :class => 'input-xlarge'
+    /   = u.label :birthday, 'Дата рождения', :class => 'control-label'
+    /   .controls
+    /     = u.text_field :birthday, :class => 'input-xlarge'
+    / .control-group
+    /   = u.label :daily, 'График работы', :class => 'control-label'
+    /   .controls
+    /     = u.hidden_field :daily
+    /     = text_field_tag nil, nil, :class => 'input-small', :id => 'daily-from'
+    /     = text_field_tag nil, nil, :class => 'input-small', :id => 'daily-to'
+    / .control-group
+    /   = label :manager_id, 'Менеджер', :class => 'control-label'
+    /   .controls
+    /     = u.collection_select :manager_id, @managers, :id, :full_name, {:include_blank => '---'}, :class => 'input-xlarge'
+    / .control-group
+    /   = u.label :employer, 'Заказчик', :class => 'control-label'
+    /   .controls
+    /     = u.text_field :employer, :class => 'input-xlarge'
+    / .control-group
+    /   = u.label :odesk, 'oDesk аккаунт', :class => 'control-label'
+    /   .controls
+    /     = u.url_field :odesk, :class => 'input-xlarge'
     .control-group
       = u.label :info, 'Информация', :class => 'control-label'
       .controls

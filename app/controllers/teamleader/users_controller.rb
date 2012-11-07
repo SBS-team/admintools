@@ -26,7 +26,11 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
   end
 
   def birthday
-    @users = User.all.sort_by{ |d|d.birthday.day }
+    @users = {}
+    users = User.where('birthday IS NOT NULL AND birthday!="0000-00-00"').sort_by{ |d| d.birthday.day }
+    Date::MONTHNAMES[1..-1].each do |month|
+      @users[month] = users.select{ |u| u.birthday.strftime("%B") == month }
+    end
   end
 
   def edit_password

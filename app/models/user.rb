@@ -37,16 +37,24 @@ class User < ActiveRecord::Base
 
   has_many :reports
 
+  has_many :polls
+
   validates :first_name,    :presence => true
   validates :last_name,     :presence => true
-  validates :email,         :presence => true, :uniqueness => true
   validates :skype,         :presence => true
-  validates :birthday,      :presence => true,
+
+  validates :birthday,      :if => :by_user,
+                            :presence => true,
                             :format => { :with => /\d{4}\-\d{2}\-\d{2}/ }
-  validates :daily,         :presence => true,
+  validates :daily,         :if => :by_user,
+                            :presence => true,
                             :format => { :with => /^\d{2}\:\d{2}\-\d{2}\:\d{2}$/ }
+
   validates :department_id, :numericality => { :greater_than => 0 },
                             :if => :department_id?
+
+  validates :role,          :uniqueness => { :scope => :department_id, :message => :one_leader },
+                            :if => :set_teamleader
 
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>"}
 
@@ -55,6 +63,7 @@ class User < ActiveRecord::Base
 
   scope :by_name, lambda { order(:last_name, :first_name) }
   scope :managers, lambda { where(:role => ['manager']) }
+  scope :admins, lambda { where(:role => ['admin']) }
   scope :out_department, lambda { where(:department_id => nil, :role => [:user, :teamleader]) }
   scope :for_manager, lambda { where(:role => ['teamleader', 'user']).order(:last_name, :first_name) }
   scope :teamleader_users, lambda { |u| where(:role => 'user', :department_id => u.department_id).order(:last_name, :first_name) }
@@ -91,6 +100,15 @@ class User < ActiveRecord::Base
   end
 
   private
+
+  def set_teamleader
+    self.is_teamleader?
+  end
+
+  def by_user
+    self.changer.is_a?User
+  end
+
   def write_log
     UserChange.create(:editor => self.changer,
                       :edited_id => self.id,
@@ -99,10 +117,10 @@ class User < ActiveRecord::Base
 
   def toggle_out_of_work
     if self.changes.has_key?(:employer)
-      if self.changes[:employer][0].present? && self.changes[:employer][1].empty?
+      if self.changes[:employer][0].present? && self.changes[:employer][1].blank?
         self.out_of_work = Time.zone.now
       end
-      if self.changes[:employer][0].empty? && self.changes[:employer][1].present?
+      if self.changes[:employer][0].blank? && self.changes[:employer][1].present?
         self.out_of_work = nil
       end
     end

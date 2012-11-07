@@ -16,6 +16,10 @@
 
 html, body { height: 100%; }
 
+.uneditable-input{
+    color: #444444 !important;
+}
+
 table.m-hover tr:hover td{
     background-color: #e8fbff !important;
 }
@@ -163,6 +167,19 @@ li.nav-header.custom.warning{
     border-top-left-radius: 0 !important;
 }
 
+.report_sidebar{
+    margin: 190px 0 0 0 ;
+}
+
+.admin_email{
+    padding: 0 0 0 20px;
+    display: block;
+    line-height: 20px;
+    color: #797979;
+    font-size: 11pt;
+    cursor: text;
+}
+
 blockquote > p{
     margin: 10px 0 10px 0 !important;
 
@@ -170,11 +187,12 @@ blockquote > p{
 
 .dashboard-box{
     width: 450px;
-    height: 220px;
+    height: 245px;
     margin:0 20px 0 0;
 }
 .dashboard-box > .box{
     height: 190px;
+    overflow: auto
 }
 /* timepicker */
 .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }

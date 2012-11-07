@@ -14,5 +14,8 @@
       .controls
         = u.text_field :name, :class => 'input-xlarge'
     .form-actions
-      = u.submit (@department.id?) ? 'Изменить' : 'Создать' , :class => 'btn btn-primary'
+      -if @deleted!="1"
+        = u.submit (@department.id?) ? 'Изменить' : 'Создать' , :class => 'btn btn-primary'
+      - else
+        = u.submit 'Восстановить' , :class => 'btn btn-primary'
       = link_to 'Назад', teamleader_departments_path, :class => 'btn'

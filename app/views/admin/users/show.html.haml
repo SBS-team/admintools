@@ -64,7 +64,7 @@
         oDesk аккаунт
       .controls
         %span.input-xlarge.uneditable-input
-          = link_to nil, @user.odesk
+          = link_to_if(@user.odesk.present?, @user.odesk)
     .control-group
       %label.control-label
         Информация

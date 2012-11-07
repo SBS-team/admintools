@@ -21,9 +21,11 @@ Admintools::Application.routes.draw do
       end
     end
     resources :poll
+    get "departments/restore/:id"     => "departments#restore", :as => :restore_department
     resources :departments
     resources :dashboard, :only => [:index]
     post 'poll/voted' => 'poll#voted', :as => 'voted'
+
   end
 
   namespace :admin do

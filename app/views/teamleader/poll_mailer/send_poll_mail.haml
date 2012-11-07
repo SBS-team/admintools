@@ -1,1 +1,2 @@
-= "Появился новый опрос. Тема: '#{@poll.question}'"
+= "Сотрудник #{@user.full_name} создал новую форму голосования на тему '#{@poll.question}'."
+= "Пожалуйста проголосуйте #{link_to @poll.question, teamleader_poll_url(@poll.id)}".html_safe

@@ -18,7 +18,8 @@
           Отдел
         .controls
           %span.input-xlarge.uneditable-input
-            = @user.department ? @user.department.name : '---'
+            - if @user.department
+              = @user.department.name
     .control-group
       %label.control-label
         Email
@@ -52,8 +53,6 @@
           %span.input-xlarge.uneditable-input
             - if (@user.is_user? || @user.is_teamleader?) && @user.manager
               = @user.manager.full_name
-            - else
-              \---
       .control-group
         %label.control-label
           Заказчик
@@ -64,7 +63,7 @@
           oDesk аккаунт
         .controls
           %span.input-xlarge.uneditable-input
-            = link_to nil, @user.odesk
+            = @user.odesk
       .control-group
         %label.control-label
           Информация
