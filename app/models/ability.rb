@@ -5,7 +5,9 @@ class Ability
 
     if user.is_user?
       can :read, :except => UserChange
-      can :manage, Report
+      if user.department_id.present?
+        can :manage, Report
+      end
     end
 
     if user.is_teamleader?
