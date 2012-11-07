@@ -7,4 +7,8 @@ class Report < ActiveRecord::Base
   belongs_to :user
 
   scope :users_unsended_reports, joins(:user).where(:report_send => false)
+
+  def report_emails
+    User.where("id = ? or role = 'admin'", self.user_id).pluck(:email)
+  end
 end

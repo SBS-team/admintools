@@ -19,11 +19,12 @@
     .box
       %ul.unstyled
         - @last_logs.each do |log|
-          %li(style="height: 18px;")
+          %li(style="height: 18px; clear:both")
             = render :partial => 'teamleader/user_changes/changes', :locals => { :changes => log }
             = link_to log.edited.full_name, teamleader_user_path(log.edited)
-            = link_to "#changesModal#{log.id}", :'data-toggle' => :modal do
+            = link_to "#changesModal#{log.id}", :'data-toggle' => :modal, :class => :"pull-right" do
               %i.icon-search
+
 
 -unless @birthdays.empty?
   .well.well-small.pull-left.dashboard-box
