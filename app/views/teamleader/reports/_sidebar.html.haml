@@ -1,4 +1,5 @@
 .well.report_sidebar
   %h5 Отчёты будут отправлены по следующим емаилам:
-  -@report_unsended.report_emails.each do |email|
-    %p.admin_email= email
+  -if @report_unsended.present?
+    -@report_unsended.report_emails.each do |email|
+      %p.admin_email= email
