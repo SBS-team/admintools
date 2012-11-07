@@ -43,6 +43,7 @@ end
 
 after "deploy:update_code",
       "deploy:config_symlink",
+      "deploy:config_sarg",
       "deploy:rewrite_production_rb",
       "deploy:db_create",
       "deploy:db_migrate",
@@ -54,6 +55,9 @@ after "deploy:update_code",
 namespace :deploy do
   task :config_symlink do
     run "cp #{shared_path}/database.yml #{release_path}/config/database.yml"
+  end
+  task :config_sarg do
+    run "cp -d #{shared_path}/sarg_dir #{release_path}/public/sarg_dir"
   end
   task :rewrite_production_rb do
     run "cp -f #{shared_path}/production.rb #{release_path}/config/environments/production.rb"
