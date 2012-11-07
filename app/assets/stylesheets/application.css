@@ -167,6 +167,19 @@ li.nav-header.custom.warning{
     border-top-left-radius: 0 !important;
 }
 
+.report_sidebar{
+    margin: 190px 0 0 0 ;
+}
+
+.admin_email{
+    padding: 0 0 0 20px;
+    display: block;
+    line-height: 20px;
+    color: #797979;
+    font-size: 11pt;
+    cursor: text;
+}
+
 blockquote > p{
     margin: 10px 0 10px 0 !important;
 

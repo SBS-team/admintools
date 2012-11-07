@@ -24,7 +24,12 @@
                       = succeed ":" do
                         = link_to teamleader_user_url(@teamleader), :style => "font-weight:700;color:#70aa00;text-decoration:none", :target => "_blank"  do
                           = @teamleader.full_name
-                    %h2{:style => "font:17px/17px Arial; margin:0 10px 0 40px;"} #{@teamleader_report.body}
+                    .report_show_container{:style => "cursor: text;font:17px/17px Arial; margin:0 10px 0 40px;"}
+                      %blockquote{:style=>"padding: 0 0 0 15px; margin: 0 0 20px; border-left: 5px solid #CCC;"}
+                        =simple_format(@teamleader_report.body)
+                        %small{:style=>"line-height: 20px; color: #999;font-size: 85%;"}
+                          Report updated at:
+                          =@teamleader_report.updated_at.strftime("%d %b %Y")
                 - @teamleader_users_reports.each do |report|
                   %tr
                     %td
@@ -43,4 +48,9 @@
                           %tr
                             %td{:style => "width:477px;padding:0;border-width:1px;border-style:solid;border-color:#d4d4d4;border-top:none;padding:8px 10px"}
                               %p{:style => "font:15px/17px Arial;color:#7d7d7d;margin:0"}
-                                = report.body
+                                .report_show_container{:style => "cursor: text;font:17px/17px Arial; margin:0 10px 0 40px;"}
+                                  %blockquote{:style=>"padding: 0 0 0 15px; margin: 0 0 20px; border-left: 5px solid #CCC;"}
+                                    =simple_format(report.body)
+                                    %small{:style=>"line-height: 20px; color: #999;font-size: 85%;"}
+                                      Report updated at:
+                                      =report.updated_at.strftime("%d %b %Y")

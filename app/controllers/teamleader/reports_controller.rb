@@ -1,5 +1,6 @@
 # encoding: UTF-8
 class Teamleader::ReportsController < Teamleader::AppTeamleaderController
+  load_and_authorize_resource
   before_filter :set_user
   before_filter :find_report, :only => [:show, :edit, :update, :destroy]
 
@@ -50,7 +51,7 @@ class Teamleader::ReportsController < Teamleader::AppTeamleaderController
   def teamleader_mail_send
     if @report_unsended.update_attributes(:report_send => true)
       if current_user.role=="teamleader"
-        ReportMailer.send_report_mail(@report_unsended, @teamleader_users_reports_unsended).deliver # Отправка отчётов на емейл, когда будут роли для директора.
+        ReportMailer.send_report_mail(@report_unsended, @teamleader_users_reports_unsended, @admins_email).deliver # Отправка отчётов на емейл, когда будут роли для директора.
         @teamleader_users_reports_unsended.update_all(:report_send => true, :teamleader_report_id => @report_unsended.id)
       end
       redirect_to teamleader_reports_path, :notice => "Отчёт отправлен"
@@ -66,6 +67,7 @@ class Teamleader::ReportsController < Teamleader::AppTeamleaderController
 
   def set_user
     @user = current_user
+    @admins_email = User.admins.select(&:email)
     @user_teamleader = User.user_teamleader(current_user).first
     @teamleader_users = User.teamleader_users(current_user)
     @teamleader_users_reports_unsended = Report.users_unsended_reports
