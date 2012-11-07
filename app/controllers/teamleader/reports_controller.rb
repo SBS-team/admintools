@@ -1,5 +1,6 @@
 # encoding: UTF-8
 class Teamleader::ReportsController < Teamleader::AppTeamleaderController
+  load_and_authorize_resource
   before_filter :set_user
   before_filter :find_report, :only => [:show, :edit, :update, :destroy]
 
@@ -66,6 +67,7 @@ class Teamleader::ReportsController < Teamleader::AppTeamleaderController
 
   def set_user
     @user = current_user
+    @admins_email = User.admins.select(&:email)
     @user_teamleader = User.user_teamleader(current_user).first
     @teamleader_users = User.teamleader_users(current_user)
     @teamleader_users_reports_unsended = Report.users_unsended_reports
