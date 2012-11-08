@@ -23,11 +23,11 @@
     .control-group
       = f.label :user_id, 'Пользователь', :class => 'control-label'
       .controls
-        = select_tag :user_id, options_from_collection_for_select(@users, :id, :full_name, @desktop.user_id), :prompt => 'Выбрать пользователя', :include_blank => true, :class => 'input-xlarge', :name => "desktop[user_id]"
+        = select_tag :user_id, options_from_collection_for_select(@users, :id, :full_name, @desktop.user_id), :prompt => 'Выбрать пользователя', :class => 'input-xlarge', :name => "desktop[user_id]"
     .control-group
       = f.label :room_id, 'Офис', :class => 'control-label'
       .controls
-        = select_tag :room_id, options_from_collection_for_select(@rooms, :id, :name, @desktop.room_id), :prompt => 'Выбрать офис', :include_blank => true, :class => 'input-xlarge', :name => "desktop[room_id]"
+        = select_tag :room_id, options_from_collection_for_select(@rooms, :id, :name, @desktop.room_id), :prompt => 'Выбрать офис', :class => 'input-xlarge', :name => "desktop[room_id]"
     .control-group
       = f.label :info, 'Информация', :class => 'control-label'
       .controls

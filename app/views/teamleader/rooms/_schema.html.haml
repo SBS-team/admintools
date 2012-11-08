@@ -1,0 +1,16 @@
+.modal.hide.fade(id="schemaModal#{schemato.id}")
+  .modal-header
+    %h1 Схема офиса #{schemato.name}
+  .modal-body
+    .room-schema.well{:id => "room_#{schemato.id}"}
+      - schemato.workplaces.each do |w|
+        .workplace-fix{ :title => "#{w.title}", :class => "#{w.workplace_type} #{w.workplace_form}", :style => "top:#{w.top}px;left:#{w.left}px" }
+          - if w.desktop
+            %a.desktop-fix{:title => "#{w.desktop.name}",
+                           :"data-trigger" => :hover,
+                           :"data-content" => "IP: #{w.desktop.ip}<br />MAC: #{w.desktop.mac}<br />#{w.desktop.user.try('full_name')}",
+                           :href => "#",
+                           :rel => "popover"}
+  .modal-footer
+    = link_to '#', :class => "btn btn-inverse", :'data-dismiss' => "modal" do
+      Закрыть

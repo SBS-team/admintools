@@ -1,0 +1,19 @@
+%h1 Офисы
+%hr
+-if @rooms.present?
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Название
+        %th
+    %tbody
+      - @rooms.each do |room|
+        %tr
+          %td= room.name
+          %td
+            = render :partial => 'schema', :locals => { :schemato => room }
+            = link_to "#schemaModal#{room.id}", :'data-toggle' => :modal, :class => 'btn btn-inverse' do
+              %i{:class => "icon-search"}
+              Просмотр
+-else
+  %p.text-error Записи отсутствуют

@@ -1,0 +1,2 @@
+module Teamleader::RoomsHelper
+end
