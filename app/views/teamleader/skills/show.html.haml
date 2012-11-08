@@ -1,0 +1,10 @@
+%h1= "Навыки #{current_user.full_name}"
+%hr
+  %table
+    - @skills.each do |skill|
+
+
+  -if can? :manage, SkillUserRelation
+    = link_to edit_teamleader_skills_path, :class => 'btn' do
+      %i.icon-pencil
+      Редактировать навыки

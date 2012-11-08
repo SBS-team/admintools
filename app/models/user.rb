@@ -27,6 +27,10 @@ class User < ActiveRecord::Base
 
   has_many :user_changes, :foreign_key => "edited_id"
 
+  has_many :skill_user_relations, :dependent => :destroy
+
+  has_many :skills, :through => :skill_user_relations
+
   has_one :room, :through => :desktop
 
   # self join

@@ -77,3 +77,7 @@
         = link_to edit_teamleader_user_path(@user), :class => 'btn btn-inverse' do
           %i.icon-pencil
           Редактировать
+      -if can? :read, SkillUserRelation
+        = link_to teamleader_skills_path, :class => 'btn' do
+          %i.icon-pencil
+          Навыки

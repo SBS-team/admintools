@@ -15,6 +15,7 @@ class Ability
       can :manage, User.where(:department_id => user.department_id)
       can :read, UserChange
       can :manage, Report
+      can :manage, SkillUserRelation
     end
 
     if user.is_manager?
@@ -23,6 +24,7 @@ class Ability
       can :manage, Department
       can :restore, :departments
       can :read, UserChange
+      can :read, SkillUserRelation
     end
 
     can :manage, :all if user.is_admin?

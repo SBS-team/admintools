@@ -8,6 +8,8 @@ Admintools::Application.routes.draw do
     resources :absents
     match "/birthday" => "users#birthday", :as => 'birthday'
 
+    resource :skills, :only => [:show, :edit, :update]
+
     resources :users, :except => [:new, :create, :destroy] do
       member do
         get :edit_password
@@ -32,6 +34,7 @@ Admintools::Application.routes.draw do
 
     root :to => 'rooms#index'
 
+    resource :skills, :only => [:show, :edit, :update]
     resources :devices
     resources :rooms
     resources :users
