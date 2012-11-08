@@ -4,14 +4,17 @@
   width: 410px;
   height: 430px; }
 
-.room {
+.room, .room-schema {
   position: relative;
   width: 410px;
   height: 350px;
   border: 1px solid black;
   padding: 0;
-  margin: 0;
-  float: left; }
+  margin: 0 auto; }
+
+.room {
+  float: left;
+  margin: 0; }
 
 #trash {
   background-size: 50px 50px;
@@ -34,19 +37,21 @@
 #desktops {
   float: left;
   width: 170px;
-  // height: 450px;
+  /*height: 450px;*/
   position: relative;
   text-align: center; }
 
-.desktop {
+.desktop, .desktop-fix {
   display:inline-block;
   position: relative;
   width: 16px;
   height: 16px;
   background: url("server-icon.png");
   z-index:22; }
-
-.workplace {
+.popover {
+    z-index: 12060 !important;
+}
+.workplace, .workplace-fix {
   position: absolute;
   display: inline-block;
   text-align: center;
