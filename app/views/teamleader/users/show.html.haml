@@ -11,59 +11,58 @@
       .control-group
         %label.control-label
           Роль
-        .controls
-          %span.input-xlarge.uneditable-input= @user.role
+        .controls.simple-input
+          %span= @user.role
       .control-group
         %label.control-label
           Отдел
-        .controls
-          %span.input-xlarge.uneditable-input
+        .controls.simple-input
+          %span
             - if @user.department
               = @user.department.name
     .control-group
       %label.control-label
         Email
-      .controls
-        %span.input-xlarge.uneditable-input= @user.email
+      .controls.simple-input
+        %span= @user.email
     .control-group
       %label.control-label
         Телефон
-      .controls
-        %span.input-xlarge.uneditable-input= @user.phone
+      .controls.simple-input
+        %span= @user.phone
     .control-group
       %label.control-label
         Skype
-      .controls
-        %span.input-xlarge.uneditable-input= @user.skype
+      .controls.simple-input
+        %span= @user.skype
     .control-group
       %label.control-label
         Дата рождения
-      .controls
-        %span.input-xlarge.uneditable-input= @user.birthday
+      .controls.simple-input
+        %span= @user.birthday
     .control-group
       %label.control-label
         График работы
-      .controls
-        %span.input-xlarge.uneditable-input= @user.daily
-    -if (current_user == @user) || (can? :manage,@user)
+      .controls.simple-input
+        %span= @user.daily
+    -if (current_user == @user) || (can? :manage, @user)
       .control-group
         %label.control-label
           Менеджер
-        .controls
-          %span.input-xlarge.uneditable-input
+        .controls.simple-input
+          %span
             - if (@user.is_user? || @user.is_teamleader?) && @user.manager
               = @user.manager.full_name
       .control-group
         %label.control-label
           Заказчик
-        .controls
-          %span.input-xlarge.uneditable-input= @user.employer
+        .controls.simple-input
+          %span= @user.employer
       .control-group
         %label.control-label
           oDesk аккаунт
-        .controls
-          %span.input-xlarge.uneditable-input
-            = @user.odesk
+        .controls.simple-input
+          %span= @user.odesk
       .control-group
         %label.control-label
           Информация
