@@ -39,10 +39,15 @@
         = u.text_field :birthday, :class => 'input-xlarge'
     .control-group
       = u.label :daily, 'График работы', :class => 'control-label'
+      %br
       .controls
-        = u.hidden_field :daily
-        = text_field_tag nil, nil, :class => 'input-small', :id => 'daily-from'
-        = text_field_tag nil, nil, :class => 'input-small', :id => 'daily-to'
+        -(0..6).to_a.map do |i|
+          %span{:style => "width:100px; display: inline-block;"}= Date::DAYNAMES[i]
+          = u.hidden_field "daily_#{i}".to_sym
+          - daily_vals = (@user.send("daily_#{i}") || "").split('-')
+          = text_field_tag nil, daily_vals.first, :class => 'input-small daily-from', "data-parent" => "#user_daily_#{i}"
+          = text_field_tag nil, daily_vals.last, :class => 'input-small daily-to', "data-parent" => "#user_daily_#{i}"
+          %br
     .control-group
       = label_tag :manager, 'Менеджер', :class => 'control-label'
       .controls

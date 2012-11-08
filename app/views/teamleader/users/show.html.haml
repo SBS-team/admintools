@@ -43,8 +43,12 @@
     .control-group
       %label.control-label
         График работы
+      %br
       .controls
-        %span.input-xlarge.uneditable-input= @user.daily
+        - (0..6).to_a.each do |i|
+          %span{:style => "width:100px; display: inline-block;"}= Date::DAYNAMES[i]
+          %span.input-small.uneditable-input= @user.send("daily_#{i}")
+          %br
     -if (current_user == @user) || (can? :manage,@user)
       .control-group
         %label.control-label

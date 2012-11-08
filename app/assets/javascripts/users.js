@@ -1,18 +1,7 @@
-function set_daily_value(type, time){
-  var times = $('#user_daily').attr('value').split('-')
-  if(type == 'from'){
-    times[0] = time
-  }
-  if(type == 'to'){
-    times[1] = time
-  }
-  $('#user_daily').attr('value', times.join('-'))
-  console.log($('#user_daily').attr('value'))
-}
-function init_daily_times(){
-  var times = $('#user_daily').attr('value').split('-')
-  $('#daily-from').attr('value',times[0])
-  $('#daily-to').attr('value',times[1])
+function set_daily_value(daily){
+  var from = $(daily).next();
+  var to = $(from).next();
+  $(daily).attr('value', from.val() + '-' + to.val());
 }
 $(document).ready(function(){
   if($('#user_daily').length > 0){
@@ -24,14 +13,14 @@ $(document).ready(function(){
     'changeMonth': true,
     'yearRange': "c-50:c+10"
   });
-  $('#daily-from').timepicker({
+  $('.daily-from').timepicker({
     onClose: function(time){
-      set_daily_value('from', time)
+      set_daily_value($(this).data('parent'))
     }
   })
-  $('#daily-to').timepicker({
+  $('.daily-to').timepicker({
     onClose: function(time){
-      set_daily_value('to', time)
+      set_daily_value($(this).data('parent'))
     }
   })
   $("#deleted_users").on("click", function(event){

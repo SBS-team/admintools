@@ -46,7 +46,9 @@ class User < ActiveRecord::Base
   validates :birthday,      :if => :by_user,
                             :presence => true,
                             :format => { :with => /\d{4}\-\d{2}\-\d{2}/ }
-  validates :daily,         :if => :by_user,
+  validates :daily_1,:daily_2,
+            :daily_3,:daily_4,
+            :daily_5,       :if => :by_user,
                             :presence => true,
                             :format => { :with => /^\d{2}\:\d{2}\-\d{2}\:\d{2}$/ }
 
