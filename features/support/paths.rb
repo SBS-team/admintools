@@ -9,8 +9,16 @@ module NavigationHelpers
       when /Пользователи/
         visit admin_users_path
 
-      when /Создать/
+      when /Офисы/
+        visit admin_rooms_path
+        sleep(5)
+
+      when /Создать button to user create/
         visit new_admin_user_path
+
+      when /Создать button to room create/
+        visit new_admin_room_path
+        sleep(5)
 
       else
         raise "Can't find mapping from \"#{page_name}\" to a path."
