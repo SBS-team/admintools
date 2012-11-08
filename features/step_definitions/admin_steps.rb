@@ -25,6 +25,15 @@ Given /^I create a new room "([^\"]*)" and select user "([^\"]*)"$/ do |room_nam
   click_button "Создать"
 end
 
+Given /I create a new desktop "([^\"]*)" and select user "([^\"]*)" and room "([^\"]*)"$/ do |fields, full_name, room_name|
+  fill_in 'desktop_name', :with => elem(fields, ', ')[0]
+  fill_in 'desktop_ip', :with => elem(fields, ', ')[1]
+  fill_in 'desktop_mac', :with => elem(fields, ', ')[2]
+  select(full_name, :from => "user_id")
+  select(room_name, :from => "room_id")
+  click_button "Создать"
+end
+
 When /^I go to on ([^\"]*) page$/ do |url|
   path_to(url)
 end
