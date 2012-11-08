@@ -14,6 +14,8 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
   def edit
     @user = User.find(params[:id])
     authorize! :manage, @user
+    @user_managers = @user.user_manager_ids
+    @managers = User.managers
   end
 
   def update
@@ -44,6 +46,16 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
     else
       render 'edit_password'
     end
+  end
+
+  def manage
+    @user = User.find params[:id]
+    current_user.manage! @user
+  end
+
+  def unmanage
+    @user = User.find params[:id]
+    current_user.unmanage! @user
   end
 
   private

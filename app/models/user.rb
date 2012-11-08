@@ -39,6 +39,13 @@ class User < ActiveRecord::Base
 
   has_many :polls
 
+  has_many :relationships, foreign_key: 'manager_id', dependent: :destroy
+  has_many :managed_users, through: :relationships, source: :managed
+  has_many :reverse_relationships, foreign_key: 'managed_id',
+           class_name:  'Relationship',
+           dependent:   :destroy
+  has_many :user_managers, through: :reverse_relationships, source: :manager
+
   validates :first_name,    :presence => true
   validates :last_name,     :presence => true
   validates :skype,         :presence => true

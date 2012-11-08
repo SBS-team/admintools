@@ -47,6 +47,12 @@
       = label :manager_id, 'Менеджер', :class => 'control-label'
       .controls
         = u.collection_select :manager_id, @managers, :id, :full_name, {:include_blank => '---'}, :class => 'input-xlarge'
+    .field{:id => "managers", :style => "display: none;"}
+    = fields_for :user_managers do |repeat|
+      -@managers.each_with_index  do |manager,val|
+        .control-group
+          = repeat.label "#", "#{manager.full_name}", :class => 'control-label'
+          = repeat.check_box :option, {:name=>"ch_managers[]", :class => "input-xlarge", :checked => "#{((@user_managers||[]).include? manager.id)?'checked':''}"}, val, nil
     .control-group
       = u.label :employer, 'Заказчик', :class => 'control-label'
       .controls

@@ -403,6 +403,9 @@ ru:
     mailer:
       poll_mailer:
         new_poll: "Новый опрос"
+    absent_mailer:
+      send_absent_mail:
+        subject: "Уведомление об отсутствии работника"
   January: "Январь"
   February: "Февраль"
   March: "Март"
