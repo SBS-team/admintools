@@ -194,6 +194,19 @@ blockquote > p{
     height: 190px;
     overflow: auto
 }
+.simple-input{
+    height: 20px;
+    line-height: 20px;
+    margin-top: 5px;
+}
+.dl-horizontal.birthday dd{
+    margin-left: 220px;
+}
+
+.dl-horizontal.birthday dt{
+    width: 200px;
+}
+
 /* timepicker */
 .ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
 .ui-timepicker-div dl { text-align: left; }
