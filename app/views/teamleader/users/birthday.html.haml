@@ -2,10 +2,8 @@
   - if users.present?
     %h1
       = t(month)
-    .well.form-horizontal
-      .control-group{:style => "font-size:18;"}
+    .well.well-small
+      %dl.dl-horizontal.birthday
         - users.each do |user|
-          %label.control-label
-            = "#{user.full_name}"
-          .controls
-            %span.input-xlarge.uneditable-input= user.birthday.strftime("%d %B %Y")
+          %dt= "#{user.full_name}"
+          %dd= user.birthday.strftime("%d %B %Y")
