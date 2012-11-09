@@ -1,8 +1,8 @@
-%h1= "Навыки #{current_user.full_name}"
+%h1= "Навыки #{@user.full_name}"
 %hr
   %table#skills
     - @skills.each do |skill|
-      = render(:partial => 'teamleader/skills/skill', :locals => { :@editable => @editable, :skill => skill })
+      = render(:partial => 'admin/skills/skill', :locals => { :@editable => @editable, :skill => skill })
 
   - if @editable
     %hr
@@ -14,6 +14,6 @@
     = link_to "+", "#", :class => "add_skill"
 
   -if can?(:manage, SkillUserRelation) && !@editable
-    = link_to edit_teamleader_skills_path, :class => 'btn' do
+    = link_to edit_admin_user_skills_path(@user), :class => 'btn' do
       %i.icon-pencil
       Редактировать навыки

@@ -34,10 +34,11 @@ Admintools::Application.routes.draw do
 
     root :to => 'rooms#index'
 
-    resource :skills, :only => [:show, :edit, :update]
     resources :devices
     resources :rooms
-    resources :users
+    resources :users do
+      resource :skills, :only => [:show, :edit, :update]
+    end
     resources :desktops
     resources :admins
     resources :constructors, :except => [:index, :show]

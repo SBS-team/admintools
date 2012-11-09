@@ -1,7 +1,7 @@
 class AddSkillTable < ActiveRecord::Migration
   def up
     create_table :skills do |t|
-      t.integer :name
+      t.string :name
 
       t.timestamps
     end
