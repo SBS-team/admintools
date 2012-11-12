@@ -12,6 +12,9 @@ class User < ActiveRecord::Base
 
   acts_as_paranoid
 
+  before_update :write_log
+  before_update :toggle_out_of_work
+
   self.per_page = 10
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>"}
 
@@ -38,6 +41,13 @@ class User < ActiveRecord::Base
   has_many :reports
 
   has_many :polls
+
+  has_many :relationships, foreign_key: 'manager_id', dependent: :destroy
+  has_many :managed_users, through: :relationships, source: :managed
+  has_many :reverse_relationships, foreign_key: 'managed_id',
+           class_name:  'Relationship',
+           dependent:   :destroy
+  has_many :user_managers, through: :reverse_relationships, source: :manager
 
   validates :first_name,    :presence => true
   validates :last_name,     :presence => true
@@ -92,11 +102,16 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
-  before_update :write_log
-  before_update :toggle_out_of_work
-
   def self.subordinates(collect, user)
     collect.where(:users => {:role => 'user', :department_id => user.department_id})
+  end
+
+  def manage! manager_id
+    reverse_relationships.create!(manager_id: manager_id)
+  end
+
+  def unmanage! manager_id
+    reverse_relationships.find_by_manager_id(manager_id).destroy
   end
 
   private
