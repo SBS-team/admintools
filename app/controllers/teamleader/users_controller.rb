@@ -9,6 +9,7 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
   end
 
   def show
+    @user_managers = @user.user_managers
   end
 
   def edit
@@ -19,6 +20,12 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
   end
 
   def update
+    list_managers = params[:ch_managers]||[].map(&:to_i)
+    new_managers = list_managers - @user.user_manager_ids
+    past_managers = @user.user_manager_ids - list_managers
+    past_managers.each {|manager| @user.unmanage! manager }
+    new_managers.each {|manager| @user.manage! manager }
+
     params[:user].update(:changer => current_user)
     if @user.update_attributes(params[:user], :as => :user)
       redirect_to :teamleader_user, :notice => t(:'teamleader.users.update.updated')

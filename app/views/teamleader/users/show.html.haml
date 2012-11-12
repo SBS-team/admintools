@@ -51,8 +51,9 @@
           Менеджер
         .controls.simple-input
           %span
-            - if (@user.is_user? || @user.is_teamleader?) && @user.manager
-              = @user.manager.full_name
+            -#- if (@user.is_user? || @user.is_teamleader?) && @user.manager
+            - if (@user.is_user? || @user.is_teamleader?) && @user_managers
+              = @user_managers.map(&:full_name).join(", ")
       .control-group
         %label.control-label
           Заказчик
