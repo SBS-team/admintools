@@ -41,17 +41,20 @@
       = u.label :daily, 'График работы', :class => 'control-label'
       %br
       .controls
-        -(0..6).to_a.map do |i|
-          %span{:style => "width:100px; display: inline-block;"}= Date::DAYNAMES[i]
+        -(1..7).to_a.map do |i|
+          %span{:style => "width:100px; display: inline-block;"}= I18n.t('date.day_names')[i]
           = u.hidden_field "daily_#{i}".to_sym
           - daily_vals = (@user.send("daily_#{i}") || "").split('-')
           = text_field_tag nil, daily_vals.first, :class => 'input-small daily-from', "data-parent" => "#user_daily_#{i}"
           = text_field_tag nil, daily_vals.last, :class => 'input-small daily-to', "data-parent" => "#user_daily_#{i}"
           %br
-    .control-group
-      = label :manager_id, 'Менеджер', :class => 'control-label'
-      .controls
-        = u.collection_select :manager_id, @managers, :id, :full_name, {:include_blank => '---'}, :class => 'input-xlarge'
+    .field{:id => "managers", :style => "display: none;"}
+      = fields_for :user_managers do |repeat|
+        -@managers.each  do |manager|
+          .control-group
+            = repeat.label "#", "#{manager.full_name}", :class => 'control-label'
+            .controls
+              = repeat.check_box :option, {:name=>"ch_managers[]", :class => "input-xlarge", :checked => "#{((@user_managers||[]).include? manager.id)?'checked':''}"}, manager.id, nil
     .control-group
       = u.label :employer, 'Заказчик', :class => 'control-label'
       .controls

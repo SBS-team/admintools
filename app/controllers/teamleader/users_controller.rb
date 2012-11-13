@@ -1,22 +1,31 @@
 class Teamleader::UsersController < Teamleader::AppTeamleaderController
-  before_filter :init_user, :only => [:show, :update, :destroy]
+  before_filter :init_user, :only => [:index, :show, :update, :destroy]
   before_filter :password_for_user, :only => [:edit_password, :update_password]
   before_filter :select_related_options, :only => [:edit, :update]
 
   def index
-    @user = current_user
+    @user_managers = @user.user_managers
     render 'show'
   end
 
   def show
+    @user_managers = @user.user_managers
   end
 
   def edit
     @user = User.find(params[:id])
     authorize! :manage, @user
+    @user_managers = @user.user_manager_ids
+    @managers = User.managers
   end
 
   def update
+    list_managers = params[:ch_managers]||[].map(&:to_i)
+    new_managers = list_managers - @user.user_manager_ids
+    past_managers = @user.user_manager_ids - list_managers
+    past_managers.each {|manager| @user.unmanage! manager }
+    new_managers.each {|manager| @user.manage! manager }
+
     params[:user].update(:changer => current_user)
     if @user.update_attributes(params[:user], :as => :user)
       redirect_to :teamleader_user, :notice => t(:'teamleader.users.update.updated')
@@ -46,9 +55,23 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
     end
   end
 
+  def manage
+    @user = User.find params[:id]
+    current_user.manage! @user
+  end
+
+  def unmanage
+    @user = User.find params[:id]
+    current_user.unmanage! @user
+  end
+
   private
   def init_user
-    @user = User.find_by_id(params[:id])
+    if params[:id]
+      @user = User.find_by_id(params[:id])
+    else
+      @user = current_user
+    end
   end
 
   def password_for_user
