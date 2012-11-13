@@ -1,10 +1,10 @@
 class Teamleader::UsersController < Teamleader::AppTeamleaderController
-  before_filter :init_user, :only => [:show, :update, :destroy]
+  before_filter :init_user, :only => [:index, :show, :update, :destroy]
   before_filter :password_for_user, :only => [:edit_password, :update_password]
   before_filter :select_related_options, :only => [:edit, :update]
 
   def index
-    @user = current_user
+    @user_managers = @user.user_managers
     render 'show'
   end
 
@@ -67,7 +67,11 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
 
   private
   def init_user
-    @user = User.find_by_id(params[:id])
+    if params[:id]
+      @user = User.find_by_id(params[:id])
+    else
+      @user = current_user
+    end
   end
 
   def password_for_user
