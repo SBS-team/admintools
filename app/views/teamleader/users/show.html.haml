@@ -43,16 +43,20 @@
     .control-group
       %label.control-label
         График работы
-      .controls.simple-input
-        %span= @user.daily
-    -if (current_user == @user) || (can? :manage, @user)
+      %br
+      .controls
+        - (1..7).to_a.each do |i|
+          %span{:style => "width:100px; display: inline-block;"}= I18n.t('date.day_names')[i]
+          %span= @user.send("daily_#{i}")
+          %br
+    -if (current_user == @user) || (can? :manage,@user)
       .control-group
         %label.control-label
           Менеджер
         .controls.simple-input
           %span
-            - if (@user.is_user? || @user.is_teamleader?) && @user.manager
-              = @user.manager.full_name
+            - if (@user.is_user? || @user.is_teamleader?) && @user_managers
+              = @user_managers.map(&:full_name).join(", ")
       .control-group
         %label.control-label
           Заказчик

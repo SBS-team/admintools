@@ -1,10 +1,11 @@
 class AbsentMailer < ActionMailer::Base
-  default from: "dmitriy.savran@faceit.com.ua"
+  default from: "emailfaceit@gmail.com"
 
   def send_absent_mail(absent)
     @absent=absent
     @user=absent.user
-    addresses=User.where(:role=>'manager').select(:email)+User.user_teamleader(@user).select(:email)
-    mail(:to => addresses.map(&:email), :subject => "About absent", :template_path => 'teamleader/absent_mailer',:template_name => 'send_absent_mail')
+    addresses = User.user_teamleader(@user).select(:email)
+    mail(:to => addresses.map(&:email)+["manager@faceit.com.ua"], :subject => t(:'teamleader.absent_mailer.send_absent_mail.subject'), :template_path => 'teamleader/absent_mailer',:template_name => 'send_absent_mail')
   end
 end
+
