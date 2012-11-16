@@ -1,0 +1,15 @@
+%h1
+  Навыки
+  .pull-right
+    -if @deleted!="1"
+      .department_real
+        = link_to 'Удаленные', show_list_teamleader_skills_path(:deleted => 1), :class => "btn btn-danger", :id => "deleted_skills", "data-loading-text" => "???"
+      .department_deleted.hide
+        = link_to 'Действующие', show_list_teamleader_skills_path(:deleted => 0), :class => "btn btn-success", :id => "real_skills", "data-loading-text" => "???"
+    -else
+      .department_real.hide
+        = link_to 'Удаленные', show_list_teamleader_skills_path(:deleted => 1), :class => "btn btn-danger", :id => "deleted_skills", "data-loading-text" => "???"
+      .department_deleted
+        = link_to 'Действующие', show_list_teamleader_skills_path(:deleted => 0), :class => "btn btn-success", :id => "real_skills", "data-loading-text" => "???"
+.well
+  =render "skills_data"

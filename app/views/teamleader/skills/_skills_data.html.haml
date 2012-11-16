@@ -1,0 +1,25 @@
+%table.table.table-striped.pretty
+  %thead
+    %tr
+      %th Название
+      %th
+        -if @deleted!="1"
+          = link_to new_teamleader_skills_path, :class => "btn btn-success" do
+            %i{:class => "icon-plus"}
+            Создать
+  %tbody
+    -@skills.each do |skill|
+      %tr
+        %td= skill.name
+        %td
+          -if @deleted!="1"
+            = link_to edit_teamleader_skills_path(skill), :class => "btn" do
+              %i{:class => "icon-pencil"}
+              Редактировать
+            = link_to teamleader_delete_skills_path(skill), :method => :DELETE, :class => "btn btn-danger", :confirm => "Ты уверен?" do
+              %i{:class => "icon-remove"}
+              Удалить
+          -else
+            = link_to teamleader_restore_skills_path(skill), :class => "btn btn-success" do
+              %i.icon-plus
+              Восстановить
