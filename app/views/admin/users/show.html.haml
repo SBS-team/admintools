@@ -9,7 +9,7 @@
         %label.control-label
           Фото
         .controls
-          = image_tag (@user.avatar(:thumb) != "/avatars/thumb/missing.png" ? @user.avatar(:thumb) : "no_avatar.gif")
+          = avatar_image_link_tag(@user, 200)
     .control-group
       %label.control-label
         Имя
@@ -45,8 +45,8 @@
         График работы
       %br
       .controls
-        - (0..6).to_a.each do |i|
-          %span{:style => "width:100px; display: inline-block;"}= Date::DAYNAMES[i]
+        - (1..7).to_a.each do |i|
+          %span{:style => "width:100px; display: inline-block;"}= I18n.t('date.day_names')[i]
           %span.input-small.uneditable-input= @user.send("daily_#{i}")
           %br
     .control-group
