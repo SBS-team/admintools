@@ -1,5 +1,5 @@
 class AbsentMailer < ActionMailer::Base
-  default from: "emailfaceit@gmail.com"
+  default from: "LTD FaceIT <emailfaceit@gmail.com>"
 
   def send_absent_mail(absent)
     @absent=absent
