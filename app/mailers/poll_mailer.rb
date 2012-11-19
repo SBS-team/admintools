@@ -1,5 +1,5 @@
 class PollMailer < ActionMailer::Base
-  default from: "emailfaceit@gmail.com"
+  default from: "LTD FaceIT <emailfaceit@gmail.com>"
 
   def send_poll_mail(poll,user)
     @poll=poll

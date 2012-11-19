@@ -6,7 +6,7 @@
       %label.control-label
         Фото
       .controls
-        = image_tag (@user.avatar(:thumb) != "/avatars/thumb/missing.png" ? @user.avatar(:thumb) : "no_avatar.gif")
+        = avatar_image_link_tag(@user, 200)
     -if (current_user == @user) || (can? :manage,@user)
       .control-group
         %label.control-label

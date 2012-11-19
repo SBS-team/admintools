@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   # devise :database_authenticatable, :registerable,
          # :recoverable, :rememberable, :trackable, :validatable
-  devise :database_authenticatable, :rememberable, :trackable, :validatable, :authentication_keys => [ :email ]
+  devise :database_authenticatable, :rememberable, :trackable, :validatable, :recoverable,:authentication_keys => [ :email ]
   # Setup accessible (or protected) attributes for your model
   # attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_protected :role, :as => :user
@@ -16,7 +16,6 @@ class User < ActiveRecord::Base
   before_update :toggle_out_of_work
 
   self.per_page = 10
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>"}
 
   has_one  :desktop
 
@@ -71,8 +70,6 @@ class User < ActiveRecord::Base
 
   validates :role,          :uniqueness => { :scope => :department_id, :message => :one_leader },
                             :if => :set_teamleader
-
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>"}
 
 
   ROLES = %w[user teamleader manager admin]

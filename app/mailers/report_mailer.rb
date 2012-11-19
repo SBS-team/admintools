@@ -1,5 +1,5 @@
 class ReportMailer < ActionMailer::Base
-  default from: "dmitriy.savran@faceit.com.ua"
+  default from: "LTD FaceIT <emailfaceit@gmail.com>"
 
   def send_report_mail(teamleader_report, temleader_users_reports)
     @teamleader_report=teamleader_report

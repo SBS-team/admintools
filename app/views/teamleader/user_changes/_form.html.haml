@@ -64,10 +64,6 @@
       = u.label :info, 'Информация', :class => 'control-label'
       .controls
         = u.text_area :info, :class => 'input-xxlarge', :id => 'nic', :style => "height:200px"
-    .control-group
-      = u.label :avatar, 'Фото', :class => 'control-label'
-      .controls
-        = u.file_field :avatar
     .form-actions
       = u.submit (@user.id?) ? 'Изменить' : 'Создать' , :class => 'btn btn-primary'
       = link_to 'Назад', teamleader_users_path, :class => 'btn'

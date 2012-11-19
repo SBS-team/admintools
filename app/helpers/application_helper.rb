@@ -47,4 +47,11 @@ module ApplicationHelper
     @out_users_list = User.out_department.by_name
     render :partial => 'teamleader/shared/sidebar'
   end
+
+  def avatar_image_link_tag(user, size = 50)
+    gravatar_id = Digest::MD5::hexdigest(user.email).downcase
+    link_to "http://gravatar.com", :target => :blank do
+      image_tag "http://gravatar.com/avatar/#{gravatar_id}.png?d=wavatar&s=#{size}"
+    end
+  end
 end

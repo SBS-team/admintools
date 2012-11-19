@@ -1,7 +1,7 @@
 #encoding=UTF-8
 class AdminMailer < ActionMailer::Base
 
-  default from: "scheduler@faceit.com.ua"
+  default from: "LTD FaceIT <emailfaceit@gmail.com>"
 
   def send_event_email(admin,event)
     @event = event
