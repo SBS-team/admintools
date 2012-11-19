@@ -27,7 +27,7 @@ role :db,  domain, :primary => true
 role :resque_worker, domain
 role :resque_scheduler, domain
 
-set :workers, { "*" => 2 }
+set :workers, { :shedule_event => 1, :local_ping => 1, :domain_jobs_ping => 1, :clear_log => 1}
 
 before 'deploy:setup', 'rvm:install_rvm', 'rvm:install_ruby' # интеграция rvm с capistrano настолько хороша, что при выполнении cap deploy:setup установит себя и указанный в rvm_ruby_string руби.
 
