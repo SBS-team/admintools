@@ -8,9 +8,15 @@ Admintools::Application.routes.draw do
     resources :absents
     match "/birthday" => "users#birthday", :as => 'birthday'
 
-    resource :skills, :only => [:show, :edit, :update]
+    resource :skills do
+      get :show_list, :on => :member
+    end
+    get "skills/restore/:id" => "skills#restore", :as => :restore_skills
+    delete "skills/delete/:id" => "skills#destroy", :as => :delete_skills
 
     resources :users, :except => [:new, :create, :destroy] do
+      get "/skills" => "skills#show", :as => :skill_list_show
+      resource :skills
       member do
         get :edit_password
         put :update_password

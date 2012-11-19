@@ -33,9 +33,9 @@ namespace :populate do
 
   desc "Populate `skills`"
   task :skills => :environment do
-    Skill.delete_all
-    (1..50).each do |n|
-      Skill.create!(name: Faker::Name.name)
-    end
+    #Skill.delete_all
+    #(1..50).each do |n|
+    #  Skill.create!(name: Faker::Name.name)
+    #end
   end
 end

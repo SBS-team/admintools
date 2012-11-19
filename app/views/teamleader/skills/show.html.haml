@@ -1,4 +1,4 @@
-%h1= "Навыки #{current_user.full_name}"
+%h1= "Навыки #{@user.full_name}"
 %hr
   %table#skills
     - @skills.each do |skill|
@@ -13,7 +13,7 @@
     = collection_select :skill, :new, @skill_list, :id, :name
     = link_to "+", "#", :class => "add_skill"
 
-  -if can?(:manage, SkillUserRelation) && !@editable
+  -if !@editable && (@user == current_user)
     = link_to edit_teamleader_skills_path, :class => 'btn' do
       %i.icon-pencil
       Редактировать навыки

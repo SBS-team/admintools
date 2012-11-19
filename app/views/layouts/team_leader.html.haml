@@ -45,6 +45,8 @@
                 %li#departments_tab= link_to "Отделы", teamleader_departments_path
               -if can?(:read, UserChange)
                 %li#user_changes_tab= link_to "Логи", teamleader_user_changes_path
+              -if can?(:manage, Skill)
+                %li#user_changes_tab= link_to "Навыки", show_list_teamleader_skills_path
               %li#rooms_tab= link_to "Офисы", teamleader_rooms_path
             = flash_alerts
             = yield

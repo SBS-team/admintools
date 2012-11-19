@@ -2,6 +2,8 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
   before_filter :init_user, :only => [:index, :show, :update, :destroy]
   before_filter :password_for_user, :only => [:edit_password, :update_password]
   before_filter :select_related_options, :only => [:edit, :update]
+  before_filter :show_skills_button, :only => [:index, :show]
+
 
   def index
     @user_managers = @user.user_managers
@@ -10,6 +12,8 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
 
   def show
     @user_managers = @user.user_managers
+    @skills_button =  (((User.teamleader_users(current_user).include? @user) && (current_user.is_teamleader?)) || current_user.is_manager? || current_user.id == @user.id) && !@user.is_manager?
+    i = 5
   end
 
   def edit
@@ -82,4 +86,10 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
     @departments = Department.all
     @managers = User.managers
   end
+
+  def show_skills_button
+    @skills_button =  (((User.teamleader_users(current_user).include? @user) && (current_user.is_teamleader?)) ||
+                           current_user.is_manager? || current_user.id == @user.id) && !@user.is_manager?
+  end
+
 end

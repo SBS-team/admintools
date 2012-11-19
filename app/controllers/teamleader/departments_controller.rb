@@ -45,7 +45,7 @@ class Teamleader::DepartmentsController < ApplicationController
   def restore
     authorize! :restore, :departments
     department = Department.only_deleted.find_by_id(params[:id])
-    department.update_attributes(:deleted_at => nil)
+    department.recover
     redirect_to teamleader_departments_path(:deleted => 1), :notice => t('teamleader.departments.restore.restored', :name => department.name)
   end
 

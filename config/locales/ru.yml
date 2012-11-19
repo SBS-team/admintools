@@ -414,6 +414,15 @@ ru:
     absent_mailer:
       send_absent_mail:
         subject: "Уведомление об отсутствии работника"
+    skills:
+      create:
+        created: "Навык %{name} добавлен"
+      update:
+        updated: "Информация изменена"
+      destroy:
+        destroyed: "Навык %{name} удален"
+      restore:
+        restored: "Навык %{name} восстановлен"
   January: "Январь"
   February: "Февраль"
   March: "Март"
