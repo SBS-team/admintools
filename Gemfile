@@ -49,3 +49,4 @@ group :test do
 end
 
 gem 'capistrano'
+gem 'capistrano-resque'
