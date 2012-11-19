@@ -20,9 +20,14 @@ set :rvm_ruby_string, 'ruby-1.9.3-p194' # Это указание на то, к�
 set :scm, :git
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
+
 role :web, domain
 role :app, domain
 role :db,  domain, :primary => true
+role :resque_worker, domain
+role :resque_scheduler, domain
+
+set :workers, { "*" => 2 }
 
 before 'deploy:setup', 'rvm:install_rvm', 'rvm:install_ruby' # интеграция rvm с capistrano настолько хороша, что при выполнении cap deploy:setup установит себя и указанный в rvm_ruby_string руби.
 
@@ -49,10 +54,8 @@ after "deploy:update_code",
       "deploy:db_migrate",
       "deploy:db_seed",
       "deploy:bundle_install_no_dev",
-      "deploy:stop_scheduler",
-      "deploy:start_scheduler",
-      "deploy:stop_workers",
-      "deploy:start_workers"
+      "deploy:start_workers",
+      "deploy:start_scheduler"
       #"deploy:start"
 
 
@@ -78,14 +81,11 @@ namespace :deploy do
   task :bundle_install_no_dev, :roles => :app do
     run "cd #{release_path}; bundle install --no-deployment"
   end
-  task :resque_scheduler, :roles => :app do
-    run "cd #{release_path}; rake resque:resque_scheduler [start|restart|stop] RAILS_ENV=production"
-  end
-  task :stop_workers, :roles => :app do
+  task :start_workers, :roles => :app do
     run "cd #{release_path}; QUEUE=* rake resque:work RAILS_ENV=production"
   end
-  task :start_workers, :roles => :app do
-    run "cd #{release_path}; rake resque:start_workers RAILS_ENV=production"
+  task :resque_scheduler, :roles => :app do
+    run "cd #{release_path}; rake resque:scheduler RAILS_ENV=production"
   end
 end
 
