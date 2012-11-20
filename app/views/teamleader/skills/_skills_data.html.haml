@@ -13,9 +13,6 @@
         %td= skill.name
         %td
           -if @deleted!="1"
-            = link_to edit_teamleader_skills_path(skill), :class => "btn" do
-              %i{:class => "icon-pencil"}
-              Редактировать
             = link_to teamleader_delete_skills_path(skill), :method => :DELETE, :class => "btn btn-danger", :confirm => "Ты уверен?" do
               %i{:class => "icon-remove"}
               Удалить
