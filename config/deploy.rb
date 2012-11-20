@@ -54,11 +54,8 @@ after "deploy:update_code",
       "deploy:db_migrate",
       "deploy:db_seed",
       "deploy:bundle_install_no_dev",
-      "resque:stop",
-      "resque:start",
-      "resque:restart"
-      #"deploy:start_workers",
-      #"deploy:start_scheduler"
+      "deploy:start_workers",
+      "deploy:start_scheduler"
       #"deploy:start"
 
 
@@ -84,12 +81,12 @@ namespace :deploy do
   task :bundle_install_no_dev, :roles => :app do
     run "cd #{release_path}; bundle install --no-deployment"
   end
-  #task :start_workers, :roles => :app do
-  #  run "cd #{release_path}; QUEUE=* rake resque:work RAILS_ENV=production"
-  #end
-  #task :resque_scheduler, :roles => :app do
-  #  run "cd #{release_path}; rake resque:scheduler RAILS_ENV=production"
-  #end
+  task :start_workers, :roles => :app do
+    run "cd #{release_path}; QUEUE=* rake resque:work RAILS_ENV=production -D"
+  end
+  task :resque_scheduler, :roles => :app do
+    run "cd #{release_path}; rake resque:scheduler RAILS_ENV=production -D"
+  end
 end
 
 #after 'deploy:update_code', :roles => :app do
