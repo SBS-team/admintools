@@ -82,10 +82,10 @@ namespace :deploy do
     run "cd #{release_path}; bundle install --no-deployment"
   end
   task :start_workers, :roles => :app do
-    run "cd #{release_path}; BACKGROUND=yes bundle exec rake resque:work QUEUE=* RAILS_ENV=production"
+    run "cd #{release_path}; bundle exec rake RAILS_ENV=production BACKGROUND=yes QUEUE=* resque:work"
   end
   task :start_scheduler, :roles => :app do
-    run "cd #{release_path}; BACKGROUND=yes bundle exec rake resque:scheduler RAILS_ENV=production"
+    run "cd #{release_path}; bundle exec rake RAILS_ENV=production BACKGROUND=yes resque:scheduler"
   end
 end
 
