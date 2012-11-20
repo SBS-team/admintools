@@ -82,7 +82,7 @@ namespace :deploy do
     run "cd #{release_path}; bundle install --no-deployment"
   end
   task :start_workers, :roles => :app do
-    run "cd #{release_path}; bundle exec QUEUE=* rake resque:work RAILS_ENV=production -D"
+    run "cd #{release_path}; bundle exec rake resque:work QUEUE=* RAILS_ENV=production -D"
   end
   task :start_scheduler, :roles => :app do
     run "cd #{release_path}; bundle exec rake resque:scheduler RAILS_ENV=production -D"
