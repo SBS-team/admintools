@@ -266,6 +266,7 @@ ru:
       room: Room
       desktop: Desktop
       device: Device
+      skill: Skill
     attributes:
       user:
         first_name: "Имя"
@@ -295,6 +296,8 @@ ru:
       device:
         name: "Имя"
         user_id: "Пользователь"
+      skill:
+        name: "Название"
     errors:
       <<: *errors
   first_name: "Имя"

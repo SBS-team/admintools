@@ -1,6 +1,6 @@
 class Teamleader::SkillsController < Teamleader::AppTeamleaderController
-  before_filter :init_user
-  before_filter -> {@skills = @user.skill_user_relations.includes(:skill)}
+  before_filter :init_user, :except => [:destroy]
+  before_filter -> {@skills = @user.skill_user_relations.includes(:skill)}, :except => [:destroy]
   before_filter -> {@skill_list = Skill.all}
   before_filter :init_skill, :only => [:destroy]
   before_filter :show_skills, :only => [:index, :show]
@@ -71,8 +71,7 @@ class Teamleader::SkillsController < Teamleader::AppTeamleaderController
 
   def init_user
     if params[:id]||params[:user_id]
-      @user = User.find_by_id(params[:id]||params[:user_id])
-      i = 5
+      @user = User.find_by_id((params[:id]||params[:user_id]).to_i)
     else
       @user = current_user
     end
