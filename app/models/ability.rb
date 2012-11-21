@@ -18,7 +18,6 @@ class Ability
       can :look, :dashboard
       can :manage, User
       can :manage, Department
-      can :manage, Skill
       can :restore, :departments
       can :restore, :skills
       can :read, UserChange
