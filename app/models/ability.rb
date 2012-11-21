@@ -8,6 +8,7 @@ class Ability
     end
 
     if user.is_teamleader?
+      can :look, :teamleader_users
       can :look, :dashboard
       can :manage, User.where(:department_id => user.department_id)
       can :read, UserChange
