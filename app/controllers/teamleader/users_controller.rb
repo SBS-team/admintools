@@ -16,6 +16,13 @@ class Teamleader::UsersController < Teamleader::AppTeamleaderController
     i = 5
   end
 
+  def teamleader_users
+    authorize! :look, :teamleader_users
+    @teamlead_bool=true if current_user.is_teamleader?
+    @search = User.where(:department_id=>current_user.department_id).search(params[:search] || {"meta_sort" => "id.asc"})
+    @users=@search.includes(:desktop, :room).paginate(:page => params[:page]).order('created_at').all
+  end
+
   def edit
     @user = User.find(params[:id])
     authorize! :manage, @user

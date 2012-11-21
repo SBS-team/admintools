@@ -7,7 +7,7 @@ Admintools::Application.routes.draw do
     root :to => 'dashboard#index'
     resources :absents
     match "/birthday" => "users#birthday", :as => 'birthday'
-
+    get "/teamleader_users"=>"users#teamleader_users", :as=>:show_users
     resource :skills do
       get :show_list, :on => :member
     end

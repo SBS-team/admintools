@@ -10,6 +10,7 @@ class Ability
 
     if user.is_teamleader?
       can :look_admin, :dashboard
+      can :look, :teamleader_users
       can :manage, User.where(:department_id => user.department_id)
       can :read, UserChange
       can :manage, Report.where(:user_id => user.id)
