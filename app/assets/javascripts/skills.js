@@ -1,20 +1,28 @@
+function toDelete() {
+
+}
+
 $(document).ready(function() {
-    $('.delete_skill').click(function() {
+    $('.delete_skill').live('click', function() {
         var current = $(this);
-        if (current.data('exist') === 1) {
+        if (current.data('exist')) {
             var moved = $(current.parent().prev().find('select'));
             if (current.closest('#deleted').length > 0) {
                 moved.attr('name', moved.attr('name').replace("delete", "score"));
                 current.closest('tr').appendTo('#skills');
+                current.text("удалить");
+                current.removeClass("btn-success").addClass("btn-danger");
             } else {
                 moved.attr('name', moved.attr('name').replace("score", "delete"));
                 current.closest('tr').appendTo('#deleted');
+                current.text("восстановить");
+                current.addClass("btn-success").removeClass("btn-danger");
             }
         }
         else current.closest('tr').remove();
     });
 
-    $('.add_skill').click(function() {
+    $('.add_skill').live('click', function() {
         var current = $(this).prev().find(':selected');
         var skill_id = current.val();
         var skill_name = current.text();
