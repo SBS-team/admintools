@@ -49,7 +49,7 @@
                 %li#user_changes_tab= link_to "Навыки", show_list_teamleader_skills_path
               %li#rooms_tab= link_to "Офисы", teamleader_rooms_path
               -if can?(:look, :teamleader_users)
-                %li#teamleader_users_tab= link_to "Батраки", teamleader_show_users_path
+                %li#teamleader_users_tab= link_to "Команда", teamleader_show_users_path
             = flash_alerts
             = yield
           .span3
