@@ -6,11 +6,11 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     if resource.is_a?User
-      if resource.is_user?
+      #if resource.is_user?
         teamleader_root_path
-      else
-        teamleader_dashboard_index_path
-      end
+      #else
+      #  teamleader_dashboard_index_path
+      #end
     else
       admin_root_path
     end

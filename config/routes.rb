@@ -4,7 +4,7 @@ Admintools::Application.routes.draw do
   devise_for :admins, :path => 'admin'
 
   namespace :teamleader do
-    root :to => 'users#index'
+    root :to => 'dashboard#index'
     resources :absents
     match "/birthday" => "users#birthday", :as => 'birthday'
 

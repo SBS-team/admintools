@@ -1,6 +1,6 @@
 class Teamleader::DashboardController < Teamleader::AppTeamleaderController
   def index
-    authorize! :look, :dashboard
+
 
     @without_job = User.out_of_work
 
@@ -12,6 +12,9 @@ class Teamleader::DashboardController < Teamleader::AppTeamleaderController
     @absents = Absent.actual_absents(Time.zone.now.midnight.to_s(:db))
     if current_user.is_teamleader?
       @absents = User.subordinates(@absents, current_user)
+    end
+    if current_user.is_user?
+      @polls = Poll.order("created_at DESC")
     end
 
     start = Time.now

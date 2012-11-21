@@ -63,7 +63,7 @@ function tab_menu(){
     if (!$(".active").length && tab[0] == 'admin'){
         $("#rooms_tab").addClass("active");
     } else if (!$(".active").length){
-        $("#users_tab").addClass("active");
+        $("#dashboard_tab").addClass("active");
     }
 }
 
