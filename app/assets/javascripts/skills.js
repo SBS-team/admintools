@@ -1,7 +1,3 @@
-function toDelete() {
-
-}
-
 $(document).ready(function() {
     $('.delete_skill').live('click', function() {
         var current = $(this);
@@ -10,12 +6,12 @@ $(document).ready(function() {
             if (current.closest('#deleted').length > 0) {
                 moved.attr('name', moved.attr('name').replace("delete", "score"));
                 current.closest('tr').appendTo('#skills');
-                current.text("удалить");
+                current.text("Удалить");
                 current.removeClass("btn-success").addClass("btn-danger");
             } else {
                 moved.attr('name', moved.attr('name').replace("score", "delete"));
                 current.closest('tr').appendTo('#deleted');
-                current.text("восстановить");
+                current.text("В список");
                 current.addClass("btn-success").removeClass("btn-danger");
             }
         }

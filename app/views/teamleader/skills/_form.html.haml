@@ -17,5 +17,5 @@
       -if @deleted!="1"
         = u.submit (@skill.id?) ? 'Изменить' : 'Создать' , :class => 'btn btn-primary'
       - else
-        = u.submit 'Восстановить' , :class => 'btn btn-primary'
+        = u.submit 'В список' , :class => 'btn btn-primary'
       = link_to 'Назад', show_list_teamleader_skills_path, :class => 'btn'

@@ -6,4 +6,4 @@
     -else
       = skill.score rescue 0
   - if @editable
-    %td= link_to "удалить", "#", :class => "btn btn-danger delete_skill", "data-exist" => !!skill
+    %td{:style => "width:130px"}= link_to "Удалить", "#", :class => "btn btn-danger delete_skill", "data-exist" => !!skill
