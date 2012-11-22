@@ -1,5 +1,11 @@
 %h1= "Навыки #{@user.full_name}"
 %hr
+  - if @editable
+    %hr
+      %table#add.table.table-striped
+        = collection_select :skill, :new, @skill_list, :id, :name
+        = link_to "Добавить", "#", :class => "btn btn-success add_skill"
+
   %table#skills.table.table-striped
     - @skills.each do |skill|
       = render(:partial => 'teamleader/skills/skill', :locals => { :@editable => @editable, :skill => skill })
@@ -9,10 +15,7 @@
     %h1= "На удаление"
     %table#deleted.table.table-striped
 
-    %hr
-    %table#add.table.table-striped
-      = collection_select :skill, :new, @skill_list, :id, :name
-      = link_to "Добавить", "#", :class => "btn btn-success add_skill"
+
 
   -if !@editable && (@user == current_user)
     = link_to edit_teamleader_skills_path, :class => 'btn' do

@@ -24,6 +24,7 @@ class Ability
       can :manage, User
       can :manage, Department
       can :restore, :departments
+      can :manage, Skill
       can :restore, :skills
       can :read, UserChange
 
