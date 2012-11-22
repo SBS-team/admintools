@@ -28,13 +28,14 @@
                 %i.icon-search
 
 -if can? :look_user, :dashboard
-  .well.well-small.pull-left.dashboard-box
-    %h2 Список голосований
-    .box
-      %ul.unstyled
-        -@polls.each do |poll|
-          %li
-            = link_to poll.question, teamleader_poll_path(poll.id)
+  -unless @polls.empty?
+    .well.well-small.pull-left.dashboard-box
+      %h2 Список голосований
+      .box
+        %ul.unstyled
+          -@polls.each do |poll|
+            %li
+              = link_to poll.question, teamleader_poll_path(poll.id)
 
 -unless @birthdays.empty?
   .well.well-small.pull-left.dashboard-box
