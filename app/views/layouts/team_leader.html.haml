@@ -49,6 +49,7 @@
               %li#rooms_tab= link_to "Офисы", teamleader_rooms_path
               -if can?(:look, :teamleader_users)
                 %li#teamleader_users_tab= link_to "Команда", teamleader_show_users_path
+              %li#vacations_tab= link_to "Отпуска", "/vacations"
             = flash_alerts
             = yield
           .span3

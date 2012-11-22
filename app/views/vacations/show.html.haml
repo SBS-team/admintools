@@ -1,0 +1,23 @@
+#datepickers
+.vac-controls
+  = link_to "Указать дни отпуска", "#", :onclick => "$('#datepickers').DatePickerShow();"
+%table#vacation-table
+  %tr
+    %th
+    - (1..12).each do |month|
+      %th=t(Date::MONTHNAMES[month])
+
+  - dates = []
+  - @users.each do |user|
+    %tr
+      %th= user.full_name
+      - (1..12).each do |month|
+        %td
+          - user.vacations.by_month_and_year(month, Date.today.year).each do |date|
+            - dates << date
+            .range{:style => "display:inline"}
+              = "#{date.day_from} - #{date.day_to}"
+              .range-controls{:style => "display:inline"}
+                = link_to "x", "#", :class => "delete_range"
+                -#- if current_user.role == "admin"
+                = link_to "v", "#", :class => "approve_range"

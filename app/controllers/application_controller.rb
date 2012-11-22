@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   layout :layout_for_auth
   before_filter :authenticate_user!
   before_filter :set_locale
+  #before_filter -> { `rake populate:vacations`}
 
   def after_sign_in_path_for(resource)
     if resource.is_a?User

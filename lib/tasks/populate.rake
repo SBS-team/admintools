@@ -38,4 +38,20 @@ namespace :populate do
     #  Skill.create!(name: Faker::Name.name)
     #end
   end
+
+  desc "Populate `vacations`"
+  task :vacations => :environment do
+    years = [Date.today.year - 1, Date.today.year]
+    Vacation.delete_all
+    users = User.all.map(&:id)
+
+    2.times do |i|
+      30.times do
+        date_from = Date.new(years[rand(years.length)], rand(11) + 1, rand(28) + 1)
+        User.find(users[rand(users.length - 1)]).vacations.create(:date_from => date_from,
+                                                                  :date_to => date_from + (rand(20) + 1).days,
+                                                                  :approved => i == 1)
+      end
+    end
+  end
 end

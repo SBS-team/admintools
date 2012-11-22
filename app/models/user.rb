@@ -51,6 +51,7 @@ class User < ActiveRecord::Base
            class_name:  'Relationship',
            dependent:   :destroy
   has_many :user_managers, through: :reverse_relationships, source: :manager
+  has_many :vacations, :dependent => :destroy
 
   validates :first_name,    :presence => true
   validates :last_name,     :presence => true

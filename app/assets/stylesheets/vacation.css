@@ -1,0 +1,14 @@
+table#vacation-table tr td{
+    min-width:120px;
+    padding: 0 10px;
+    border: solid 1px black;
+}
+
+table#vacation-table tr th{
+    min-width:120px;
+    padding: 0 10px;
+}
+
+.range {
+    background-color: #fafad2;
+}
