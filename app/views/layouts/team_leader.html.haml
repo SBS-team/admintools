@@ -36,7 +36,7 @@
               %li#dashboard_tab= link_to "Dashboard", teamleader_dashboard_index_path
               %li#users_tab= link_to "Профиль", teamleader_users_path
               %li#poll_tab= link_to "Голосование", teamleader_poll_index_path
-              -if can?(:manage, Report)
+              -if can?(:look, :report)
                 %li#reports_tab= link_to "Отчёт", teamleader_reports_path
               %li#absents_tab= link_to "Отпроситься", teamleader_absents_path
               %li#birthday_tab= link_to "Дни рождения", teamleader_birthday_path

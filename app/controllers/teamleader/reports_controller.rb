@@ -1,6 +1,5 @@
 # encoding: UTF-8
 class Teamleader::ReportsController < Teamleader::AppTeamleaderController
-  load_and_authorize_resource
   before_filter :set_user
   before_filter :find_report, :only => [:show, :edit, :update, :destroy]
 
@@ -68,7 +67,7 @@ class Teamleader::ReportsController < Teamleader::AppTeamleaderController
   def set_user
     @user = current_user
     @user_teamleader = User.user_teamleader(current_user).first
-    @teamleader_users = User.teamleader_users(current_user)
+    @teamleader_users = User.teamleader_users(current_user) << current_user
     @teamleader_users_reports_unsended = Report.users_unsended_reports
     @teamleader_users_reports_unsended = User.subordinates(@teamleader_users_reports_unsended,current_user)
     @report_unsended = current_user.reports.find_by_report_send(false)
@@ -76,5 +75,6 @@ class Teamleader::ReportsController < Teamleader::AppTeamleaderController
 
   def find_report
     @report = Report.find(params[:id])
+    authorize! Report,@report
   end
 end

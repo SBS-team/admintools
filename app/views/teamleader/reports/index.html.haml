@@ -1,19 +1,17 @@
 %h1 Отчёты пользователя: #{@user.full_name} #{@user.department && @user_teamleader!= @user ? "(" + @user.department.name + ")" : ""}
--if @user.department && @user_teamleader!= @user
-  -if @user_teamleader
-    .report_department_info
-      %dl
-        %dt Отдел:
-        %dd (#{@user.department.name})
-        %dt Начальник отдела:
-        %dd #{@user_teamleader.full_name}
--else
-  .report_department_info
-    %dl
-      %dt Отдел:
-      %dd (#{@user.department.name})
-      %dt Начальник отдела:
-      %dd #{@user_teamleader.full_name}
+.report_department_info
+  %p
+    %b Отдел:
+    #{@user.department.name}
+  %p
+    %b Начальник отдела:
+    #{@user_teamleader.full_name}
+  -if @report_unsended.present?
+    %p
+    %b Отчёты будут отправлены по следующим E-mail адресам:
+    =@report_unsended.report_emails.join(", ")
+
+
 
 %hr
 
@@ -101,5 +99,3 @@
           %small
             Report updated at:
             =report.updated_at.strftime("%d %b %Y")
-
-- content_for :sidebar, render(:partial => 'sidebar')
