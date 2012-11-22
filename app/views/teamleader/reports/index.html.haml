@@ -1,11 +1,11 @@
-%h1 Отчёты пользователя: #{@user.full_name} #{@user.department && @user_teamleader!= @user ? "(" + @user.department.name + ")" : ""}
+%h1 Отчёты пользователя: #{@user.full_name}
 .report_department_info
   %p
     %b Отдел:
-    #{@user.department.name}
+    #{@user.department.name if @report_unsended.present?}
   %p
     %b Начальник отдела:
-    #{@user_teamleader.full_name}
+    #{@user_teamleader.full_name if @report_unsended.present?}
   -if @report_unsended.present?
     %p
     %b Отчёты будут отправлены по следующим E-mail адресам:

@@ -18,7 +18,8 @@ class Teamleader::AbsentsController < Teamleader::AppTeamleaderController
   end
 
   def destroy
-   @absent = Absent.find(params[:id]).destroy()
-   redirect_to teamleader_absents_path
+    current_user.absents.find(params[:id]).destroy()
+    redirect_to teamleader_absents_path
   end
+
 end

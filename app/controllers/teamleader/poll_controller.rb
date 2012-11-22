@@ -54,7 +54,9 @@ class Teamleader::PollController < Teamleader::AppTeamleaderController
   end
 
   def destroy
-    @poll.destroy and redirect_to :teamleader_poll_index, notice: t(:'teamleader.poll.destroy.destroyed', question: @poll.question)
+    if @poll.user_id.eql?current_user.id
+      @poll.destroy and redirect_to :teamleader_poll_index, notice: t(:'teamleader.poll.destroy.destroyed', question: @poll.question)
+    end
   end
 
   private
