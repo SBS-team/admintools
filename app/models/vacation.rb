@@ -1,41 +1,21 @@
 class Vacation < ActiveRecord::Base
-  attr_accessible :day_from, :day_to, :month, :year, :user_id, :approved, :date_from, :date_to
-  attr_accessor :date_from, :date_to
+  attr_accessible :date_from, :date_to, :user_id, :approved
+
   belongs_to :user
 
-  validates :user_id, :approved, :presence => true
-  #validate :validate_params
+  validates :user_id, :presence => true
+
+  scope :by_year, lambda {|v| where("YEAR(date_from) = ? OR YEAR(date_to) = ?", v, v)}
 
 
-  scope :by_month_and_year, lambda{ |month, year| where("month = ? AND year = ?", month, year) }
 
-  before_create :prepare_values
-
-private
-  #def validate_params
-  #  if date_from || date_to
-  #    validates :user_id, :approved, :presence => true
-  #  else
-  #    validates :day_from, :day_to, :month, :year, :presence => true
-  #  end
-  #end
-
-  def prepare_values
-    return if self.date_from.blank? or self.date_to.blank?
-
-    if (self.date_from.month != self.date_to.month)
-      Vacation.create!(:user_id => self.user_id,
-                       :day_from => self.date_from.day,
-                       :day_to => self.date_from.end_of_month.day,
-                       :month => self.date_from.month,
-                       :year => self.date_from.year,
-                       :approved => self.approved)
-      self.date_from = self.date_to.beginning_of_month
+  def date_for_year(year)
+    if self.date_from.year != year
+      self.date_from = self.date_to.beginning_of_year
     end
-
-    self.day_from = self.date_from.day
-    self.month = self.date_from.month
-    self.year = self.date_from.year
-    self.day_to = self.date_to.day
+    if self.date_to.year != year
+      self.date_to = self.date_from.end_of_year
+    end
   end
+
 end

@@ -1,14 +1,28 @@
 table#vacation-table tr td{
-    min-width:120px;
+    min-width:5px;
+    width: 10px;
     padding: 0 10px;
     border: solid 1px black;
 }
 
-table#vacation-table tr th{
-    min-width:120px;
+table#vacation-table tr td.bold{
+    border-right: 2px black solid;
+}
+
+table#vacation-table .names{
+    min-width:200px;
     padding: 0 10px;
 }
 
 .range {
     background-color: #fafad2;
+}
+
+#otpusk {
+    position: relative;
+    left: 220px;
+    top: 43px;
+    width: 150px;
+    height: 20px;
+    background-color: blue;
 }
