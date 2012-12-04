@@ -23,14 +23,11 @@ class Teamleader::PollController < Teamleader::AppTeamleaderController
   end
 
   def create
-    if !params['poll']['question'].blank? && params['poll']['max_votes'].to_i > 0 && params['poll']['option'].delete_if { |x| x == "" }.count > 1
-      @poll = current_user.polls.build(params['poll'])
-      @poll.update_attribute(:end_at, 1.day.from_now) if @poll.end_at < DateTime.now
+    if (@poll = current_user.polls.create(params['poll'])).persisted?
       PollMailer.send_poll_mail(@poll,current_user).deliver
       redirect_to teamleader_poll_index_path
     else
-      flash[:alert] = t(:'teamleader.poll.create.invalid')
-      redirect_to new_teamleader_poll_path
+      render :action => :new, :alert => t(:'teamleader.poll.create.invalid')
     end
   end
 
