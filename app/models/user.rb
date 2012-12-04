@@ -86,6 +86,19 @@ class User < ActiveRecord::Base
 
   scope :out_of_work, where("`users`.`employer` = ''")
 
+  def vacation_data
+    {
+      name: self.full_name,
+      desc: "",
+      customClass: "ganttGreen",
+      values:
+        self.vacations.by_year(Date.today.year).map {|vacation| {
+            from: "/Date(\"#{vacation.date_from.strftime('%m/%d/%Y')}\")/",
+            to: "/Date(\"#{vacation.date_to.strftime("%m/%d/%Y")}\")/",
+            label: "---"}}
+    }
+  end
+
   def is_user?
     self.role.eql?'user'
   end

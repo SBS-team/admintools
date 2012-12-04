@@ -2,27 +2,72 @@
 .vac-controls
   = link_to "Указать дни отпуска", "#", :onclick => "$('#datepickers').DatePickerShow();"
 -#= select("#","#", @year_list, { :prompt => Time.now.year.to_s}, { :multiple => false})
-= collection_select :vacation,:show, @year_list, :year, :year
-%table#vacation-table
-  %tr
-    %th
+= select :vacation,:show, options_for_select(@year_list)
 
-    #otpusk
-    - (1..12).each do |month|
-      %th{:colspan => 4}=t(Date::MONTHNAMES[month])
+.gantt
 
-  - dates = []
-  - @users.each do |user|
-    %tr
-      %th.names= user.full_name
-      - (1..12).each do |month|
-        - (1..4).each do |i|
-          %td{:class => "#{i == 4 ? "bold" : ""}"}
-      - user.vacations.by_year(Date.today.year).each do |date|
-        -#- dates << date
-        -#.range{:style => "display:inline"}
-        -#  = "#{date.day_from} - #{date.day_to}"
-        -#  .range-controls{:style => "display:inline"}
-        -#    = link_to "x", "#", :class => "delete_range"
-        -#    -#- if current_user.role == "admin"
-        -#    = link_to "v", "#", :class => "approve_range"
+
+
+:javascript
+    $(function() {
+        "use strict";
+
+        $(".gantt").gantt({
+            source: #{@vacations.to_json},
+            navigate: "scroll",
+            scale: "weeks",
+            maxScale: "months",
+            months: ["Январь", "Февраль", "Мартъ", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+            dow: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+            minScale: "days",
+            itemsPerPage: 100,
+            onItemClick: function(data) {
+                alert("Item clicked - show some details");
+            },
+            onAddClick: function(dt, rowId) {
+                alert("Empty space clicked - add an item!");
+            },
+            onRender: function() {
+                if (window.console && typeof console.log === "function") {
+                    console.log("chart rendered");
+                }
+            }
+        });
+
+        $(".gantt").popover({
+            selector: ".bar",
+            title: "I'm a popover",
+            content: "And I'm the content of said popover.",
+            trigger: "hover"
+        });
+    });
+
+
+-#
+-#%table#vacation-table
+-#  %tr
+-#    %th
+-#
+-#
+-#
+-#
+-#
+-#    #otpusk
+-#    - (1..12).each do |month|
+-#      %th{:colspan => 4}= t(Date::MONTHNAMES[month])
+-#
+-#  - dates = []
+-#  - @users.each do |user|
+-#    %tr
+-#      %th.names= user.full_name
+-#      - (1..12).each do |month|
+-#        - (1..4).each do |i|
+-#          %td{:class => "#{i == 4 ? "bold" : ""}"}
+-#      - user.vacations.by_year(Date.today.year).each do |date|
+-#        -#- dates << date
+-#        -#.range{:style => "display:inline"}
+-#        -#  = "#{date.day_from} - #{date.day_to}"
+-#        -#  .range-controls{:style => "display:inline"}
+-#        -#    = link_to "x", "#", :class => "delete_range"
+-#        -#    -#- if current_user.role == "admin"
+-#        -#    = link_to "v", "#", :class => "approve_range"
