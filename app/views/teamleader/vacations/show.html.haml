@@ -34,7 +34,8 @@
                     data: {vacation: {approved: true, id: $(this).closest('.bar').data("dataObj").id}},
                     success: function(response) {
                       if (response.status != false)
-                        bar.toggleClass("ganttRed ganttGreen")
+                        bar.toggleClass("ganttRed ganttGreen");
+                        bar.find('vac_approve').remove();
                     }
                   });
               });
@@ -55,16 +56,17 @@
                     }
                   });
               });
+
+              $('.bar').on('mouseover', function(event) {
+                $(this).popover({
+                  title: false,
+                  content: $(this).data("dataObj").from + " - " + $(this).data("dataObj").to,
+                  trigger: "hover"
+                }).popover('show');
+              })
             },
             onItemClick: function(data) {
 
             }
         });
-
-        //$(".gantt").popover({
-        //    selector: ".bar",
-        //    title: "I'm a popover",
-        //    content: "And I'm the content of said popover.",
-        //    trigger: "hover"
-        //});
     });
