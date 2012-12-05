@@ -95,7 +95,7 @@ class User < ActiveRecord::Base
           {
             from: "/Date(\"#{vacation.date_from.strftime('%m/%d/%Y')}\")/",
             to: "/Date(\"#{vacation.date_to.strftime("%m/%d/%Y")}\")/",
-            label: "---",
+            label: "",
             customClass: "gantt#{vacation.approved ? "Green" : "Red"} #{"acceptable" if curr_user.is_admin? && !vacation.approved } #{"editable" if vacation.date_to > Date.today && self.id == curr_user.id} #{"removable" if vacation.date_from > Date.today && self.id == curr_user.id}",
             dataObj: {id: vacation.id, from: vacation.date_from, to: vacation.date_to}
           }

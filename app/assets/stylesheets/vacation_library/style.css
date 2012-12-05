@@ -179,7 +179,7 @@
 
 .fn-gantt .bar {
     background-color: #D0E4FD;
-    height: 12px;
+    height: 19px;
     margin: 4px 3px 3px 3px;
     position: absolute;
     z-index: 10;
@@ -193,7 +193,7 @@
 }
 
 .fn-gantt .bar .fn-label {
-    line-height: 12px;
+    line-height: 3px;
     font-weight: bold;
     white-space: nowrap;
     width: 100%;

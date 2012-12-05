@@ -33,9 +33,10 @@
                     url: "/teamleader/vacations.json",
                     data: {vacation: {approved: true, id: $(this).closest('.bar').data("dataObj").id}},
                     success: function(response) {
-                      if (response.status != false)
+                      if (response.status != false) {
                         bar.toggleClass("ganttRed ganttGreen");
-                        bar.find('vac_approve').remove();
+                        bar.find('.vac_approve').remove();
+                      }
                     }
                   });
               });
@@ -60,10 +61,11 @@
               $('.bar').on('mouseover', function(event) {
                 $(this).popover({
                   title: false,
-                  content: $(this).data("dataObj").from + " - " + $(this).data("dataObj").to,
-                  trigger: "hover"
+                  content: $(this).data("dataObj").from + " to " + $(this).data("dataObj").to,
                 }).popover('show');
-              })
+              });
+
+              $('.bar').on('mouseout', function(event) { $(this).popover('destroy') })
             },
             onItemClick: function(data) {
 
