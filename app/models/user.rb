@@ -86,16 +86,20 @@ class User < ActiveRecord::Base
 
   scope :out_of_work, where("`users`.`employer` = ''")
 
-  def vacation_data
+  def vacation_data(curr_user)
     {
       name: self.full_name,
       desc: "",
-      customClass: "ganttGreen",
       values:
-        self.vacations.by_year(Date.today.year).map {|vacation| {
+        self.vacations.by_year(Date.today.year).map {|vacation|
+          {
             from: "/Date(\"#{vacation.date_from.strftime('%m/%d/%Y')}\")/",
             to: "/Date(\"#{vacation.date_to.strftime("%m/%d/%Y")}\")/",
-            label: "---"}}
+            label: "---",
+            customClass: "gantt#{vacation.approved ? "Green" : "Red"} #{"acceptable" if curr_user.is_admin?} #{"editable" if vacation.date_to > Date.today && self.id == curr_user.id} #{"removable" if vacation.date_from > Date.today && self.id == curr_user.id}",
+            dataObj: {id: vacation.id}
+          }
+        }
     }
   end
 

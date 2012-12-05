@@ -36,7 +36,7 @@ Admintools::Application.routes.draw do
     resources :dashboard, :only => [:index]
     post 'poll/voted' => 'poll#voted', :as => 'voted'
     resources :rooms, :only => [:index]
-    resource :vacations, :only => [:show, :update]
+    resource :vacations, :except => [:index]
   end
 
   namespace :admin do

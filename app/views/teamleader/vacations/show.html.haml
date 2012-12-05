@@ -1,8 +1,5 @@
-#datepickers
 .vac-controls
-  = link_to "Указать дни отпуска", "#", :onclick => "$('#datepickers').DatePickerShow();"
--#= select("#","#", @year_list, { :prompt => Time.now.year.to_s}, { :multiple => false})
-= select :vacation,:show, options_for_select(@year_list)
+  = link_to "Указать дни отпуска", "#", :onclick => "popupik(600, '#{new_teamleader_vacations_path}')"
 
 .gantt
 
@@ -15,59 +12,59 @@
         $(".gantt").gantt({
             source: #{@vacations.to_json},
             navigate: "scroll",
-            scale: "weeks",
+            scale: "weeks", //months//days
             maxScale: "months",
             months: ["Январь", "Февраль", "Мартъ", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
             dow: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
             minScale: "days",
-            itemsPerPage: 100,
-            onItemClick: function(data) {
-                alert("Item clicked - show some details");
-            },
-            onAddClick: function(dt, rowId) {
-                alert("Empty space clicked - add an item!");
-            },
+            itemsPerPage: 20,
+            scrollToToday: true,
             onRender: function() {
-                if (window.console && typeof console.log === "function") {
-                    console.log("chart rendered");
-                }
+              //$('.vac_remove, .vac_edit, .vac_approve').remove();
+
+              $('.removable').append($('<div>x</div>').addClass("vac_remove"));
+              $('.editable').append($('<div>*</div>').addClass("vac_edit"));
+              $('.acceptable').append($('<div>+</div>').addClass("vac_approve"));
+
+              $('.vac_approve').click(function() {
+                  var bar = $(this).closest('.bar');
+                  $.ajax({
+                    type: "PUT",
+                    url: "/teamleader/vacations.json",
+                    data: {vacation: {approved: true, id: $(this).closest('.bar').data("dataObj").id}},
+                    success: function(response) {
+                      if (response.status != false)
+                        bar.toggleClass("ganttRed ganttGreen")
+                    }
+                  });
+              });
+
+              $('.vac_edit').click(function() {
+                  popupik(600, "/teamleader/vacations/edit?id=" + $(this).closest('.bar').data("dataObj").id)
+              });
+
+              $('.vac_remove').click(function() {
+                  var bar = $(this).closest('.bar');
+                  $.ajax({
+                    type: "DELETE",
+                    url: "/teamleader/vacations.json",
+                    data: {vacation: {id: bar.data("dataObj").id}},
+                    success: function(response) {
+                      if (response.status != false)
+                        bar.remove()
+                    }
+                  });
+              });
+            },
+            onItemClick: function(data) {
+
             }
         });
 
-        $(".gantt").popover({
-            selector: ".bar",
-            title: "I'm a popover",
-            content: "And I'm the content of said popover.",
-            trigger: "hover"
-        });
+        //$(".gantt").popover({
+        //    selector: ".bar",
+        //    title: "I'm a popover",
+        //    content: "And I'm the content of said popover.",
+        //    trigger: "hover"
+        //});
     });
-
-
--#
--#%table#vacation-table
--#  %tr
--#    %th
--#
--#
--#
--#
--#
--#    #otpusk
--#    - (1..12).each do |month|
--#      %th{:colspan => 4}= t(Date::MONTHNAMES[month])
--#
--#  - dates = []
--#  - @users.each do |user|
--#    %tr
--#      %th.names= user.full_name
--#      - (1..12).each do |month|
--#        - (1..4).each do |i|
--#          %td{:class => "#{i == 4 ? "bold" : ""}"}
--#      - user.vacations.by_year(Date.today.year).each do |date|
--#        -#- dates << date
--#        -#.range{:style => "display:inline"}
--#        -#  = "#{date.day_from} - #{date.day_to}"
--#        -#  .range-controls{:style => "display:inline"}
--#        -#    = link_to "x", "#", :class => "delete_range"
--#        -#    -#- if current_user.role == "admin"
--#        -#    = link_to "v", "#", :class => "approve_range"

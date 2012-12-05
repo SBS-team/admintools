@@ -1,28 +1,20 @@
-table#vacation-table tr td{
-    min-width:5px;
-    width: 10px;
-    padding: 0 10px;
-    border: solid 1px black;
+.vac_edit, .vac_approve, .vac_remove {
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    content: "*";
+    float: right;
+    height: 10px;
+    line-height: 6px;
+    cursor: pointer;
+    padding: 1px;
+    font-weight: bold;
+    font-size: 13px;
 }
 
-table#vacation-table tr td.bold{
-    border-right: 2px black solid;
-}
-
-table#vacation-table .names{
-    min-width:200px;
-    padding: 0 10px;
-}
-
-.range {
-    background-color: #fafad2;
-}
-
-#otpusk {
-    position: relative;
-    left: 220px;
-    top: 43px;
-    width: 150px;
-    height: 20px;
-    background-color: blue;
+.vac_remove:after {
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
 }
