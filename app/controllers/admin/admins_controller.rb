@@ -29,7 +29,7 @@ class Admin::AdminsController < Admin::AppAdminController
 
   def update
     if @admin.update_attributes(params[:admin])
-      redirect_to :admins, notice: t(:'admin.admins.update.updated')
+      redirect_to :admin_admins, notice: t(:'admin.admins.update.updated')
     else
       render :action => 'edit'
     end

@@ -49,13 +49,11 @@ class DomainJobsPing
   end
 
   def self.send_status(site_url, flag)
-    @admins = Admin.all
-    @admins.each do |admin|
-      if flag == "url"
-        AdminMailer.send_email_status_critical(admin.email, admin.name, site_url).deliver
-      else
-        AdminMailer.send_email_status_no_inet(admin.email, admin.name, site_url).deliver
-      end
+    @admin = Admin.all.select(&:is_super_admin?).first
+    if flag == "url"
+      AdminMailer.send_email_status_critical(@admin.email, @admin.name, site_url).deliver
+    else
+      AdminMailer.send_email_status_no_inet(@admin.email, @admin.name, site_url).deliver
     end
   end
 end
