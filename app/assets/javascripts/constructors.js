@@ -26,10 +26,7 @@ var dropWorkplaceOpt = {
 }
 
 function isWorkplace(obj){
-  if($(obj).hasClass('line') || $(obj).hasClass('angl'))
-    return true
-  else
-    return false
+  $(obj).hasClass('line') || $(obj).hasClass('angl')
 }
 
 var dragOpt = {
@@ -63,9 +60,10 @@ var dragOpt = {
     if(revertGlobal){
       updateWorkplace(workplace_id, ui.position)
     }
-    if($(this).hasClass("new-table")){
-      $(this).removeClass("new-table")
-    }
+//    if($(this).hasClass("new-table")){
+//      $(this).removeClass("new-table")
+//    }
+    $(this).removeClass("new-table")
   }
 };
 
@@ -145,8 +143,8 @@ $(document).ready(function() {
 
   $('#trash').droppable({
     drop: function(event, ui){
-      var workplace_id = ui.draggable.attr("id").split("_")[1]
       if(confirm('Удалить?')){
+        var workplace_id = ui.draggable.attr("id").split("_")[1]
         destroyWorkplace(workplace_id)
         if( $("#"+ui.draggable.attr("id")).children().hasClass("desktop") ){
           $("#"+ui.draggable.attr('id')).children().css({'top':'0', 'left':'0'}).detach().appendTo("#desktops")

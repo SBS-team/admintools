@@ -1,0 +1,74 @@
+.vac-controls
+  = link_to "Указать дни отпуска", "#", :onclick => "popupik(600, '#{new_teamleader_vacations_path}')"
+
+.gantt
+
+
+
+:javascript
+    $(function() {
+        "use strict";
+
+        $(".gantt").gantt({
+            source: #{@vacations.to_json},
+            navigate: "scroll",
+            scale: "weeks", //months//days
+            maxScale: "months",
+            months: ["Январь", "Февраль", "Мартъ", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
+            dow: ["Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"],
+            minScale: "days",
+            itemsPerPage: 20,
+            scrollToToday: true,
+            onRender: function() {
+              //$('.vac_remove, .vac_edit, .vac_approve').remove();
+
+              $('.removable').append($('<div>x</div>').addClass("vac_remove"));
+              $('.editable').append($('<div>*</div>').addClass("vac_edit"));
+              $('.acceptable').append($('<div>+</div>').addClass("vac_approve"));
+
+              $('.vac_approve').click(function() {
+                  var bar = $(this).closest('.bar');
+                  $.ajax({
+                    type: "PUT",
+                    url: "/teamleader/vacations.json",
+                    data: {vacation: {approved: true, id: $(this).closest('.bar').data("dataObj").id}},
+                    success: function(response) {
+                      if (response.status != false) {
+                        bar.toggleClass("ganttRed ganttGreen");
+                        bar.find('.vac_approve').remove();
+                      }
+                    }
+                  });
+              });
+
+              $('.vac_edit').click(function() {
+                  popupik(600, "/teamleader/vacations/edit?id=" + $(this).closest('.bar').data("dataObj").id)
+              });
+
+              $('.vac_remove').click(function() {
+                  var bar = $(this).closest('.bar');
+                  $.ajax({
+                    type: "DELETE",
+                    url: "/teamleader/vacations.json",
+                    data: {vacation: {id: bar.data("dataObj").id}},
+                    success: function(response) {
+                      if (response.status != false)
+                        bar.remove()
+                    }
+                  });
+              });
+
+              $('.bar').on('mouseover', function(event) {
+                $(this).popover({
+                  title: false,
+                  content: $(this).data("dataObj").from + " to " + $(this).data("dataObj").to,
+                }).popover('show');
+              });
+
+              $('.bar').on('mouseout', function(event) { $(this).popover('destroy') })
+            },
+            onItemClick: function(data) {
+
+            }
+        });
+    });

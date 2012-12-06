@@ -51,6 +51,7 @@ class User < ActiveRecord::Base
            class_name:  'Relationship',
            dependent:   :destroy
   has_many :user_managers, through: :reverse_relationships, source: :manager
+  has_many :vacations, :dependent => :destroy
 
   validates :first_name,    :presence => true
   validates :last_name,     :presence => true
@@ -84,6 +85,23 @@ class User < ActiveRecord::Base
   scope :two_week_birthday, lambda {where("birthday < ? and birthday >= ?", Time.now.to_date+14.days,Time.now.to_date).order("birthday ASC")}
 
   scope :out_of_work, where("`users`.`employer` = ''")
+
+  def vacation_data(curr_user)
+    {
+      name: self.full_name,
+      desc: "",
+      values:
+        self.vacations.by_year(Date.today.year).map {|vacation|
+          {
+            from: "/Date(\"#{vacation.date_from.strftime('%m/%d/%Y')}\")/",
+            to: "/Date(\"#{vacation.date_to.strftime("%m/%d/%Y")}\")/",
+            label: "",
+            customClass: "gantt#{vacation.approved ? "Green" : "Red"} #{"acceptable" if curr_user.is_admin? && !vacation.approved } #{"editable" if vacation.date_to > Date.today && self.id == curr_user.id} #{"removable" if vacation.date_from > Date.today && self.id == curr_user.id}",
+            dataObj: {id: vacation.id, from: vacation.date_from, to: vacation.date_to}
+          }
+        }
+    }
+  end
 
   def is_user?
     self.role.eql?'user'

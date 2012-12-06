@@ -11,6 +11,7 @@
           /[if lt IE 9]
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
           = stylesheet_link_tag "application"
+          = javascript_include_tag "application"
           = favicon_link_tag
 
   %body
@@ -49,6 +50,7 @@
               %li#rooms_tab= link_to "Офисы", teamleader_rooms_path
               -if can?(:look, :teamleader_users)
                 %li#teamleader_users_tab= link_to "Команда", teamleader_show_users_path
+              %li#vacations_tab= link_to "Отпуска", teamleader_vacations_path
             = flash_alerts
             = yield
           .span3
@@ -57,4 +59,3 @@
       .push
     %footer.container-fluid
       %p © Company 2012
-    = javascript_include_tag "application"

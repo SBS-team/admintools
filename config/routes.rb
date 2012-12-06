@@ -3,6 +3,8 @@ Admintools::Application.routes.draw do
   devise_for :users, :path => 'teamleader'
   devise_for :admins, :path => 'admin'
 
+
+
   namespace :teamleader do
     root :to => 'dashboard#index'
     resources :absents
@@ -34,6 +36,7 @@ Admintools::Application.routes.draw do
     resources :dashboard, :only => [:index]
     post 'poll/voted' => 'poll#voted', :as => 'voted'
     resources :rooms, :only => [:index]
+    resource :vacations, :except => [:index]
   end
 
   namespace :admin do
