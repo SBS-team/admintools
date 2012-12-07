@@ -15,47 +15,12 @@
 
 %hr
 
--unless @report_check
-  .well{:style=>"text-align:center;"}
-    = link_to new_teamleader_report_path, :class => 'btn btn-large btn-primary', :style=>"width:800px;" do
-      Написать отчет
-
--if current_user.role=="teamleader"
-
-  - if @report_unsended
-    .well.teamleader_unsended
-      .btn-group.report_edit
-        = link_to teamleader_mail_send_teamleader_report_path(@report_unsended), :method => :PUT, :class => "report_edit btn btn-block btn-success" do
-          %i{:class => "icon-envelope"}
-          Отправить
-        = link_to edit_teamleader_report_path(@report_unsended), :class => 'report_edit btn btn-block btn-warning' do
-          %i.icon-pencil
-          Редактировать
-        = link_to teamleader_report_path(@report_unsended), :method => :DELETE, :class => "report_edit btn btn-block btn-danger", :confirm => "Ты уверен?" do
-          %i{:class => "icon-remove"}
-          Удалить
-
-      .report_show_container
-        %blockquote
-          =simple_format(@report_unsended.body)
-          %small
-            Report updated at:
-            =@report_unsended.updated_at.strftime("%d %b %Y")
-
-      - @teamleader_users_reports_unsended.each do |user_report|
-        .well.alert-info
-          .report_show_container{:style=>"display:-moz-groupbox; height:auto; width:800px;cursor:text;"}
-            %blockquote
-              %h3 Отчёт пользователя: #{user_report.user.full_name}
-              =simple_format(user_report.body)
-              %small
-                Report updated at:
-                =user_report.updated_at.strftime("%d %b %Y")
-
-  - @teamleader_users_reports_sended.each do |teamleader_report|
+-if current_user.is_admin?
+  - @reports_sended.each do |teamleader_report|
     .well.teamleader_sended
       .report_show_container
         %blockquote
+          %h3 Отчёт тим лидера: #{teamleader_report.user.full_name}
           =simple_format(teamleader_report.body)
           %small
             Report updated at:
@@ -71,31 +36,88 @@
                 %small
                   Report updated at:
                   =report.updated_at.strftime("%d %b %Y")
-
-
 -else
-  - if @report_unsended
-    .well.alert-info
-      .btn-group.report_edit
-        = link_to edit_teamleader_report_path(@report_unsended), :class => 'report_edit btn btn-block btn-warning' do
-          %i.icon-pencil
-          Редактировать
-        = link_to teamleader_report_path(@report_unsended), :method => :DELETE, :class => "report_edit btn btn-block btn-danger", :confirm => "Ты уверен?" do
-          %i{:class => "icon-remove"}
-          Удалить
+  -unless @report_check
+    .well{:style=>"text-align:center;"}
+      = link_to new_teamleader_report_path, :class => 'btn btn-large btn-primary', :style=>"width:800px;" do
+        Написать отчет
 
-      .report_show_container
-        %blockquote
-          =simple_format(@report_unsended.body)
-          %small
-            Report updated at:
-            =@report_unsended.updated_at.strftime("%d %b %Y")
+  -if current_user.is_teamleader?
 
-  - @report_sended.each do |report|
-    .well.alert-success
-      .report_show_container
-        %blockquote
-          =simple_format(report.body)
-          %small
-            Report updated at:
-            =report.updated_at.strftime("%d %b %Y")
+    - if @report_unsended
+      .well.teamleader_unsended
+        .btn-group.report_edit
+          = link_to teamleader_mail_send_teamleader_report_path(@report_unsended), :method => :PUT, :class => "report_edit btn btn-block btn-success" do
+            %i{:class => "icon-envelope"}
+            Отправить
+          = link_to edit_teamleader_report_path(@report_unsended), :class => 'report_edit btn btn-block btn-warning' do
+            %i.icon-pencil
+            Редактировать
+          = link_to teamleader_report_path(@report_unsended), :method => :DELETE, :class => "report_edit btn btn-block btn-danger", :confirm => "Ты уверен?" do
+            %i{:class => "icon-remove"}
+            Удалить
+
+        .report_show_container
+          %blockquote
+            =simple_format(@report_unsended.body)
+            %small
+              Report updated at:
+              =@report_unsended.updated_at.strftime("%d %b %Y")
+
+        - @teamleader_users_reports_unsended.each do |user_report|
+          .well.alert-info
+            .report_show_container{:style=>"display:-moz-groupbox; height:auto; width:800px;cursor:text;"}
+              %blockquote
+                %h3 Отчёт пользователя: #{user_report.user.full_name}
+                =simple_format(user_report.body)
+                %small
+                  Report updated at:
+                  =user_report.updated_at.strftime("%d %b %Y")
+
+    - @teamleader_users_reports_sended.each do |teamleader_report|
+      .well.teamleader_sended
+        .report_show_container
+          %blockquote
+            =simple_format(teamleader_report.body)
+            %small
+              Report updated at:
+              =teamleader_report.updated_at.strftime("%d %b %Y")
+
+
+          - teamleader_report.users_reports.each do |report|
+            .well.alert-success
+              .report_show_container{:style=>"display:-moz-groupbox; height:auto; width:800px;cursor:text;"}
+                %blockquote
+                  %h3 Отчёт пользователя: #{report.user.full_name}
+                  =simple_format(report.body)
+                  %small
+                    Report updated at:
+                    =report.updated_at.strftime("%d %b %Y")
+
+
+  -else
+    - if @report_unsended
+      .well.alert-info
+        .btn-group.report_edit
+          = link_to edit_teamleader_report_path(@report_unsended), :class => 'report_edit btn btn-block btn-warning' do
+            %i.icon-pencil
+            Редактировать
+          = link_to teamleader_report_path(@report_unsended), :method => :DELETE, :class => "report_edit btn btn-block btn-danger", :confirm => "Ты уверен?" do
+            %i{:class => "icon-remove"}
+            Удалить
+
+        .report_show_container
+          %blockquote
+            =simple_format(@report_unsended.body)
+            %small
+              Report updated at:
+              =@report_unsended.updated_at.strftime("%d %b %Y")
+
+    - @report_sended.each do |report|
+      .well.alert-success
+        .report_show_container
+          %blockquote
+            =simple_format(report.body)
+            %small
+              Report updated at:
+              =report.updated_at.strftime("%d %b %Y")
