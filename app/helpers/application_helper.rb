@@ -1,6 +1,10 @@
 #encoding=UTF-8
 module ApplicationHelper
 
+  def birthday(date)
+    "#{date.day} #{t("date.month_names")[date.month]}" rescue "date not set"
+  end
+
   def check_empty(obj,field)
     obj.try(field) || "Пусто"
   end
