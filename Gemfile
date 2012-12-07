@@ -16,6 +16,7 @@ gem "cancan"
 git 'git://github.com/goncalossilva/rails3_acts_as_paranoid.git' do
   gem 'rails3_acts_as_paranoid'
 end
+
 group :assets do
   gem "twitter-bootstrap-rails", "~> 2.1.3"
   gem "sass-rails",   "~> 3.2.3"
