@@ -1,11 +1,7 @@
 module UserChangesHelper
 
   def editor_name(user)
-    if user.is_a?Admin
-      user.name
-    else
-      user.full_name
-    end
+    user.respond_to?(:name) ? user.name : user.respond_to?(:full_name) ? user.full_name : "undefined"
   end
 
   def print_changes(field, value)
