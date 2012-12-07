@@ -1,7 +1,7 @@
 %h1 Dashboard
 %hr
 -if can? :look_admin, :dashboard
-  -unless @absents.empty?
+  -unless @absents.blank?
     .well.well-small.pull-left.dashboard-box
       %h2 Отпросились
       .box
@@ -15,7 +15,7 @@
               = a.date_to.to_s(:db)
 
 -if can? :look_admin, :dashboard
-  -unless @last_logs.empty?
+  -unless @last_logs.blank?
     .well.well-small.pull-left.dashboard-box
       %h2 Лог
       .box
@@ -28,7 +28,7 @@
                 %i.icon-search
 
 -if can? :look_user, :dashboard
-  -unless @polls.empty?
+  -unless @polls.blank?
     .well.well-small.pull-left.dashboard-box
       %h2 Список голосований
       .box
@@ -37,7 +37,7 @@
             %li
               = link_to poll.question, teamleader_poll_path(poll.id)
 
--unless @birthdays.empty?
+-unless @birthdays.blank?
   .well.well-small.pull-left.dashboard-box
     %h2 Дни рождения
     .box
@@ -48,7 +48,7 @@
               #{u.birthday} #{u.full_name}
 
 -if can? :look_admin, :dashboard
-  -unless @without_job.empty?
+  -unless @without_job.blank?
     .well.well-small.pull-left.dashboard-box
       %h2 Без работы
       .box
