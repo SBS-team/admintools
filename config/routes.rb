@@ -41,6 +41,10 @@ Admintools::Application.routes.draw do
 
   namespace :admin do
 
+    authenticate :admin do
+      mount Resque::Server.new, :at => "/resque"
+    end
+
     root :to => 'rooms#index'
 
     resources :devices
