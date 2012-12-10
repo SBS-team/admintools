@@ -6,4 +6,4 @@
       %dl.dl-horizontal.birthday
         - users.each do |user|
           %dt= "#{user.full_name}"
-          %dd= birthday(user.birthday)
+          %dd= l(user.birthday, :format => :birthday)

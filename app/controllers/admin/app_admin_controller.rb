@@ -9,17 +9,8 @@ class Admin::AppAdminController < ActionController::Base
     I18n.locale = params[:locale]
   end
 
-  def birthday(date)
-    "#{date.day} #{t("date.month_names")[date.month]}" rescue "date not set"
-  end
-  helper_method :birthday
-
   private
   def layout_for_auth
-    if devise_controller?
-      "authorization"
-    else
-      "application"
-    end
+    devise_controller? ? "authorization" : "application"
   end
 end
