@@ -21,4 +21,9 @@ class AdminMailer < ActionMailer::Base
     mail(:to => email, :subject => "Подключение к интернету отсутствует", :template_path => 'admin/admin_mailer',:template_name => 'send_email_status_no_inet')
   end
 
+  def send_email_to_the_added_user(user)
+    @user = user
+    mail(:to => user.email, :subject => "Выбыли добавлены на сайт admintools.loc ", :template_path => 'admin/admin_mailer',:template_name => 'send_email_to_the_added_user')
+  end
+
 end
