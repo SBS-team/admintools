@@ -5,7 +5,7 @@
   %body
     %h4 Уважаемый "#{@user.full_name}"!
     Вы были добавлены на admintools, пожалуйста, залогинтесь, пройдя по этой ссылке:
-    = link_to "Sign_in to Admintools", new_user_session_path(:host => "192.168.137.37:3000")
+    = link_to "Sign_in to Admintools", root_url(:only_path => false)
     %p
       Ваш email: #{@user.email}
 
