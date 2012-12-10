@@ -1,0 +1,14 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %h4 Уважаемый "#{@user.full_name}"!
+    Вы были добавлены на admintools, пожалуйста, залогинтесь, пройдя по этой ссылке:
+    = link_to "Sign_in to Admintools", new_user_session_path(:host => "192.168.137.37:3000")
+    %p
+      Ваш email: #{@user.email}
+
+      Ваш пароль: #{@user.password}
+    %h3
+      Для безопасности, пожалуйста измените свой пароль!
