@@ -23,7 +23,7 @@
         %th= sort_link @search, :email, "Email"
         %th
           -if @deleted!="1"
-            = link_to new_admin_admin_path, :class => "btn btn-success" do
+            = link_to new_admin_admin_path, :class => "btn btn-success", :id => "creating_new_admin" do
               %i.icon-plus
               Создать
     %tbody
