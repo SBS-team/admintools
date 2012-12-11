@@ -325,6 +325,8 @@ ru:
         updated: "Информация изменена"
       destroy:
         destroyed: "Администратор %{name} удален"
+      restore:
+        restored: "Администратор %{name} восстановлен"
     users:
       new:
         title: "Добавить пользователя"
