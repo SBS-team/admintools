@@ -4,8 +4,28 @@ class Admin::AdminsController < Admin::AppAdminController
   before_filter :check_admin, :only => [:new, :create, :edit, :update, :destroy]
 
   def index
-    @search = Admin.search(params[:search] || {"meta_sort" => "id.asc"})
+    @deleted = params[:deleted]
+    if @deleted=="1"
+      @search = Admin.only_deleted.search(params[:search] || {"meta_sort" => "id.asc"})
+    else
+      @search = Admin.search(params[:search] || {"meta_sort" => "id.asc"})
+    end
     @admins = @search.paginate(:page => params[:page]).order('created_at').all
+
+
+    #def index
+    #  @deleted = params[:deleted]
+    #  if @deleted=="1"
+    #    @search = User.only_deleted.search(params[:search] || {"meta_sort" => "id.asc"})
+    #  else
+    #    @search = User.search(params[:search] || {"meta_sort" => "id.asc"})
+    #  end
+    #  @users = @search.includes(:desktop, :room).paginate(:page => params[:page]).order('created_at').all
+    #end
+
+    #
+
+
   end
 
   def new
@@ -36,7 +56,13 @@ class Admin::AdminsController < Admin::AppAdminController
   end
 
   def destroy
-    @admin.destroy and redirect_to :admin_admins, notice: t(:'admin.admins.destroy.destroyed', name: @admin.name)
+    @admin.destroy and redirect_to :admin_admins, notice: t('admin.admins.destroy.destroyed', :name => @admin.name)
+  end
+
+  def restore
+    admin = Admin.only_deleted.find_by_id(params[:id])
+    admin.update_attributes(:deleted_at => nil)
+    redirect_to admin_admins_path(:deleted => 1), :notice => t('admin.admins.restore.restored', :name => admin.name)
   end
 
   private
