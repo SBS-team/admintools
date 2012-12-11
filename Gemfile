@@ -15,6 +15,7 @@ gem "cancan"
 git 'git://github.com/goncalossilva/rails3_acts_as_paranoid.git' do
   gem 'rails3_acts_as_paranoid'
 end
+
 group :assets do
   gem "twitter-bootstrap-rails", "~> 2.1.3"
   gem "sass-rails",   "~> 3.2.3"
@@ -35,18 +36,24 @@ gem "jquery-rails", "~> 2.1.1"
 gem "redis", "~> 3.0.1"
 gem "resque", "~> 1.22.0"
 
-gem "rspec-rails", :group => [:test, :development]
+#gem "rspec-rails", :group => [:test, :development]
 
 group :test do
   gem "factory_girl_rails", "~> 4.0.0"
   gem "capybara", "~> 1.1.2"
-  gem "cucumber"
   gem "capybara-mechanize"
   gem "database_cleaner", "~> 0.8.0"
   gem "guard-rspec", "~> 1.2.1"
   gem "shoulda-matchers", "~> 1.2.0"
   gem "xpath", "~> 0.1.4"
+  #gem 'cucumber-rails', "~> 1.3.0"
+  #gem 'cucumber'
+  gem "rspec-rails", "~> 2.0"
+  gem 'cucumber-rails', :require => false
+  gem 'spork'
+  gem 'launchy'
 end
+
 
 gem 'capistrano'
 gem 'capistrano-resque'
