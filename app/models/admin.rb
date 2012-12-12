@@ -1,4 +1,7 @@
 class Admin < ActiveRecord::Base
+
+  acts_as_paranoid
+
   self.per_page = 10
 
   devise :database_authenticatable, :rememberable, :trackable, :validatable, :authentication_keys => [ :name ]

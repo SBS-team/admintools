@@ -63,5 +63,9 @@ module Admintools
     config.assets.version = '1.0'
 
     config.assets.paths << Rails.root.join("vendor", "assets", "images")
+
+    config.generators do |g|
+      g.test_framework :rspec
+    end
   end
 end

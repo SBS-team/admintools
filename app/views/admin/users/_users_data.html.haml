@@ -29,7 +29,7 @@
           %td
             -if @deleted!="1"
               .btn-group
-                = link_to admin_user_path(user), :class => "btn btn-primary" do
+                = link_to admin_user_path(user), :class => "btn btn-primary", :id => "user_profile" do
                   %i.icon-user
                   Профиль
                   = link_to '#', :class => "btn btn-primary dropdown-toggle", :'data-toggle' => "dropdown" do
@@ -42,7 +42,7 @@
                     %li
                       = link_to admin_user_path(user), :method => :DELETE, :confirm => "Ты уверен?" do
                         %i.icon-trash
-                        Удалить
+                        Уволить
               / = link_to admin_user_path(user), :class => "btn" do
               /   %i.icon-zoom-in
               /   Просмотр

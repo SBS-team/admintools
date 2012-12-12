@@ -257,6 +257,7 @@ ru:
       long: ! '%d %B %Y, %H:%M'
       short: ! '%d %b, %H:%M'
       birthday: ! '%d %B'
+      long_x: ! '%d %B %Y'
     pm: вечера
   # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
   activemodel:
@@ -327,6 +328,8 @@ ru:
         updated: "Информация изменена"
       destroy:
         destroyed: "Администратор %{name} удален"
+      restore:
+        restored: "Администратор %{name} восстановлен"
     users:
       new:
         title: "Добавить пользователя"
