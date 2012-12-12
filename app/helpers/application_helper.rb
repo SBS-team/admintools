@@ -10,7 +10,7 @@ module ApplicationHelper
   end
 
   def auth_role( role )
-    role.is_a?User ? "пользователя" : "админстратора"
+    role.is_a?(User) ? "пользователя" : "админстратора"
   end
 
   def login_by_role( role )
