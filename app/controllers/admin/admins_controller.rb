@@ -12,7 +12,6 @@ class Admin::AdminsController < Admin::AppAdminController
     end
     @admins = @search.paginate(:page => params[:page]).order('created_at').all
 
-
     #def index
     #  @deleted = params[:deleted]
     #  if @deleted=="1"

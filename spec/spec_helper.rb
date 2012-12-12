@@ -38,10 +38,19 @@ RSpec.configure do |config|
   # order dependency and want to debug it, you can fix the order by providing
   # the seed, which is printed after each run.
   #     --seed 1234
+  #
   config.order = "random"
   config.include Devise::TestHelpers, :type => :controller
 
   config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.before(:each, :js => true) do
     DatabaseCleaner.strategy = :truncation
   end
 
@@ -64,8 +73,8 @@ def auth_for(type, &block)
   end
 end
 
-def login_admin
-  @admin = FactoryGirl.create(:admin)
+def login_admin(obj)
+  @admin = FactoryGirl.create(obj)
   visit new_admin_session_path
   within "#new_admin" do
     fill_in 'admin_name', :with => @admin.name
