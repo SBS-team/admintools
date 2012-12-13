@@ -39,7 +39,7 @@
       %label.control-label
         Дата рождения
       .controls
-        %span.input-xlarge.uneditable-input= l(@user.birthday, :format => :birthday)
+        %span.input-xlarge.uneditable-input= @user.formatted_birthday
     .control-group
       %label.control-label
         График работы

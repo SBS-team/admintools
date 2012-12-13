@@ -39,7 +39,7 @@
       %label.control-label
         Дата рождения
       .controls.simple-input
-        %span= l(@user.birthday.to_datetime, :format => :birthday)
+        %span= @user.formatted_birthday
     .control-group
       %label.control-label
         График работы

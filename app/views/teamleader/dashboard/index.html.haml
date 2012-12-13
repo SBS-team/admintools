@@ -45,7 +45,7 @@
         - @birthdays.each do |u|
           %li
             = link_to teamleader_user_path(u) do
-              #{l(u.birthday, :format => :birthday)} #{u.full_name}
+              #{u.formatted_birthday} #{u.full_name}
 
 -if can? :look_admin, :dashboard
   -unless @without_job.blank?

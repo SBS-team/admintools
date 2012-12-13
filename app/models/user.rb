@@ -123,6 +123,10 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def formatted_birthday
+    self.birthday.blank? ? "" : I18n.l(self.birthday, :format => :birthday)
+  end
+
   def self.subordinates(collect, user)
     collect.where(:users => {:role => 'user', :department_id => user.department_id})
   end

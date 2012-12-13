@@ -20,7 +20,7 @@
           %td= check_empty(user, "phone")
           %td= user.email
           %td= user.skype
-          %td= l(user.birthday, :format => :birthday)
+          %td= user.formatted_birthday
           %td
             .btn-group
               = link_to teamleader_user_path(user), :class => "btn btn-primary" do
