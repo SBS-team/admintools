@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
 
   self.per_page = 10
 
+  has_many :time_requests, :dependent => :destroy
+  has_many :approved_time_requests, :conditions => {:approved => true}
+  has_many :not_approved_time_requests, :conditions => {:approved => false}
+
   has_one  :desktop
 
   has_many :devices

@@ -36,6 +36,7 @@
             %ul.nav.nav-tabs
               %li#dashboard_tab= link_to "Dashboard", teamleader_dashboard_index_path
               %li#users_tab= link_to "Профиль", teamleader_users_path
+              %li#time_requests_tab= link_to "Запросы", teamleader_user_time_requests_path(current_user)
               %li#poll_tab= link_to "Голосование", teamleader_poll_index_path
               -if can?(:look, :report)
                 %li#reports_tab= link_to "Отчёт", teamleader_reports_path

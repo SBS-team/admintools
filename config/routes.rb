@@ -3,8 +3,6 @@ Admintools::Application.routes.draw do
   devise_for :users, :path => 'teamleader'
   devise_for :admins, :path => 'admin'
 
-
-
   namespace :teamleader do
     root :to => 'dashboard#index'
     resources :absents
@@ -37,9 +35,14 @@ Admintools::Application.routes.draw do
     post 'poll/voted' => 'poll#voted', :as => 'voted'
     resources :rooms, :only => [:index]
     resource :vacations, :except => [:index]
+    resources :users do
+      resources :time_requests, :except => [:show, :create, :update, :new]
+    end
+    resources :time_requests, :only => [:create, :update, :new]
   end
 
   namespace :admin do
+    resources :time_requests
 
     authenticate :admin do
       mount Resque::Server.new, :at => "/resque"
