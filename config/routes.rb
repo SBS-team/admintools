@@ -38,7 +38,7 @@ Admintools::Application.routes.draw do
     resources :users do
       resources :time_requests, :only => [:index]
     end
-    resources :time_requests do
+    resources :time_requests, :except => [:show] do
       get :approve
       get :decline
       get :alternative

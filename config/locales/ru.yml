@@ -431,6 +431,9 @@ ru:
       update_password:
         updated: "Пароль изменен"
     mailer:
+      time_request_mailer:
+        new_request: "Новый запрос"
+
       poll_mailer:
         new_poll: "Новый опрос"
     absent_mailer:

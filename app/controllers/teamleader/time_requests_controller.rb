@@ -12,7 +12,7 @@ class Teamleader::TimeRequestsController < Teamleader::AppTeamleaderController
 
   def create
     if (@time_request = current_user.time_requests.create(params[:time_request])).persisted?
-      TimeRequestMailer.deliver_send_time_request(@time_request)
+      TimeRequestMailer.send_time_request(@time_request).deliver
       redirect_to teamleader_user_time_requests_path(current_user)
     else
       render :action => :new
@@ -51,7 +51,11 @@ class Teamleader::TimeRequestsController < Teamleader::AppTeamleaderController
   protected
   def update_request(&block)
     yield
-    @time_request.update_attributes(params[:time_request])
+    if params['time_request'].present?
+      @time_request.update_attributes(params['time_request'].slice(:requested_time))
+    else
+      @time_request.save
+    end
     redirect_to teamleader_time_requests_path
   end
 

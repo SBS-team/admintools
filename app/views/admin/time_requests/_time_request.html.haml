@@ -1,7 +1,0 @@
-%tr{:class => "#{time_request.approved ? "btn-success" : time_request.approved.present? ? "btn-danger" : ""}" }
-  %td= time_request.request_date
-  %td= time_request.requested_time
-  %td= time_request.message
-  %td= link_to "accept", admin_time_request_approve(time_request)
-  %td= link_to "alternative", "#", :onclick => "popupik(600, '#{edit_teamleader_time_request_path(time_request)}')"
-  %td= link_to "decline", admin_time_request_decline(time_request)
