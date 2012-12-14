@@ -38,15 +38,14 @@ Admintools::Application.routes.draw do
     resources :users do
       resources :time_requests, :only => [:index]
     end
-    resources :time_requests, :except => [:show, :index]
+    resources :time_requests do
+      get :approve
+      get :decline
+      get :alternative
+    end
   end
 
   namespace :admin do
-    resources :time_requests, :only => [:show, :index] do
-      get :approve
-      get :decline
-    end
-
     authenticate :admin do
       mount Resque::Server.new, :at => "/resque"
     end

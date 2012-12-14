@@ -1,0 +1,24 @@
+:javascript
+  $('#add_time_request_form').submit(function(e) {
+      e.preventDefault();
+      this.submit();
+      setTimeout(function(){ closePopup(10) }, 100);
+  });
+
+.popupik
+  = form_for(@time_request,
+            :url => teamleader_time_request_approve_path(@time_request),
+            :html => {:id => "add_time_request_form", :method => "GET"}) do |f|
+    .lfield
+      = f.label "Дата"
+      = f.date_select :request_date, :discard_day => true, :use_month_names => t("date.month_names2"), :disabled => :disabled
+    .lfield{:style=> "padding-left: 20px"}
+      = f.label "Запрашиваемое время(в часах)"
+      = f.number_field :requested_time, :value => @time_request.requested_time || 160, :in => 160...320
+    .cb{:style => "clear:both"}
+    .field
+      = f.label "Причина"
+      = f.text_area :message, :rows => "10", :style => "width:99%", :disabled => :disabled
+    .actions
+      = f.submit "Proceed"
+      = link_to "Cancel", "#", :onclick => "closePopup(10)"

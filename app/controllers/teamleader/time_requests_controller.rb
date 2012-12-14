@@ -1,8 +1,8 @@
 class Teamleader::TimeRequestsController < Teamleader::AppTeamleaderController
-  before_filter ->{@time_requests = current_user.time_requests.order(:request_date)}, :only => [:index]
-  before_filter ->{redirect teamleader_time_requests_path unless (@time_request = current_user.time_requests.find_by_id(params[:id]))}, :only => [:edit, :destroy, :update]
+  before_filter :preinit, :except => [:index, :new, :create]
 
   def index
+    @time_requests = (current_user.is_admin? ? TimeRequest : current_user.time_requests).order(:request_date)
   end
 
   def new
@@ -33,5 +33,30 @@ class Teamleader::TimeRequestsController < Teamleader::AppTeamleaderController
 
   def destroy
     @time_request.destroy and redirect_to teamleader_user_time_requests_path(current_user)
+  end
+
+#### admin section
+  def approve
+    update_request {@time_request.approved = true}
+  end
+
+  def decline
+    update_request {@time_request.approved = false}
+  end
+
+  def alternative
+    render :layout => false
+  end
+
+  protected
+  def update_request(&block)
+    yield
+    @time_request.update_attributes(params[:time_request])
+    redirect_to teamleader_time_requests_path
+  end
+
+  def preinit
+    redirect_to teamleader_time_requests_path unless
+        (@time_request = (current_user.is_admin? ? TimeRequest : current_user.time_requests).find_by_id([params[:id], params[:time_request_id]]))
   end
 end
