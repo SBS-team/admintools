@@ -433,6 +433,7 @@ ru:
     mailer:
       time_request_mailer:
         new_request: "Новый запрос"
+        request_response: "Ответ на запрос"
 
       poll_mailer:
         new_poll: "Новый опрос"
