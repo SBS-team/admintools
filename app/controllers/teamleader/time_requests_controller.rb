@@ -52,8 +52,11 @@ class Teamleader::TimeRequestsController < Teamleader::AppTeamleaderController
   def update_request(&block)
     yield
     if params['time_request'].present?
+      old_time = @time_request.requested_time
       @time_request.update_attributes(params['time_request'].slice(:requested_time))
+      TimeRequestMailer.time_request_response(@time_request, old_time).deliver
     else
+      TimeRequestMailer.time_request_response(@time_request).deliver
       @time_request.save
     end
     redirect_to teamleader_time_requests_path
