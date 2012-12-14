@@ -3,10 +3,10 @@ class CreateTimeRequest < ActiveRecord::Migration
   def change
     create_table :time_requests do |t|
       t.references :user
-      t.integer :date
+      t.date :request_date
       t.integer :requested_time
       t.text :message
-      t.boolean :approved, :default => false
+      t.boolean :approved
 
       t.timestamps
     end

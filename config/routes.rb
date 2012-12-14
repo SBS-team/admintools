@@ -34,15 +34,18 @@ Admintools::Application.routes.draw do
     resources :dashboard, :only => [:index]
     post 'poll/voted' => 'poll#voted', :as => 'voted'
     resources :rooms, :only => [:index]
-    resource :vacations, :except => [:index]
+    resource  :vacations, :except => [:index]
     resources :users do
-      resources :time_requests, :except => [:show, :create, :update, :new]
+      resources :time_requests, :only => [:index]
     end
-    resources :time_requests, :only => [:create, :update, :new]
+    resources :time_requests, :except => [:show, :index]
   end
 
   namespace :admin do
-    resources :time_requests
+    resources :time_requests, :only => [:show, :index] do
+      get :approve
+      get :decline
+    end
 
     authenticate :admin do
       mount Resque::Server.new, :at => "/resque"
