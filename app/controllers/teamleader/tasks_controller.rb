@@ -1,6 +1,7 @@
 class Teamleader::TasksController < ApplicationController
 
   before_filter :find_the_user, :only => [:edit, :update, :destroy]
+  before_filter :all_users, :only => [:edit, :new]
 
   def index
     @tasks = Task.all
@@ -39,6 +40,10 @@ class Teamleader::TasksController < ApplicationController
 
   def find_the_user
     @task = Task.find(params[:id])
+  end
+
+  def all_users
+    @users = User.all
   end
 
 end
