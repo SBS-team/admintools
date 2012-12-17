@@ -1,0 +1,21 @@
+:javascript
+  $('#add_material_request_form').submit(function(e) {
+      e.preventDefault();
+      this.submit();
+      setTimeout(function(){ closePopup(10) }, 100);
+  });
+
+.popupik
+  = form_for(@material_request,
+            :url => "#{@material_request.persisted? ? teamleader_material_request_path(@material_request) : teamleader_material_requests_path}",
+            :html => {:id => "add_material_request_form", :method => "#{@material_request.persisted? ? "PUT" : "POST"}"}) do |f|
+    .field
+      = f.label :name
+      = f.text_field :name
+
+    .field
+      = f.label :priority
+      = f.select :priority, options_for_select(PRIORITY)
+    .actions
+      = f.submit "Proceed"
+      = link_to "Cancel", "#", :onclick => "closePopup(10)"

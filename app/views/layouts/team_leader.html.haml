@@ -52,6 +52,8 @@
               -if can?(:look, :teamleader_users)
                 %li#teamleader_users_tab= link_to "Команда", teamleader_show_users_path
               %li#vacations_tab= link_to "Отпуска", teamleader_vacations_path
+              - if current_user.is_teamleader? || current_user.is_admin?
+                %li#vacations_tab= link_to "Запросы по материалам", teamleader_material_requests_path
             = flash_alerts
             = yield
           .span3

@@ -1,0 +1,10 @@
+%tr{:class => "#{material_request.status ? "btn-success" : material_request.status == false ? "btn-danger" : ""}" }
+  %td= material_request.created_at
+  %td= PRIORITY[material_request.priority].first
+  %td= material_request.name
+
+  - unless current_user.is_teamleader?
+    %td= link_to "edit", "#", :onclick => "popupik(600, '#{edit_teamleader_material_request_path(material_request)}')"
+    %td= link_to "delete", teamleader_material_request_path(material_request), :method => :delete
+  - else
+    %td= link_to "accept", "#"

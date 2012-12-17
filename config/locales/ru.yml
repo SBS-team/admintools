@@ -315,6 +315,8 @@ ru:
         user_id: "Пользователь"
       skill:
         name: "Название"
+      material_request:
+        name: Запрос
     errors:
       <<: *errors
   first_name: "Имя"

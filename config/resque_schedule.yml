@@ -15,3 +15,8 @@ local_ping_job:
   every: ['10m', first_in: '1s']
   class: LocalPing
   description: "Ping local desktops for check available"
+
+shedule_material_requests:
+  every: ['1d', first_at: '6h']
+  class: ScheduleMaterialRequests
+  description: "Send unconfirmed requests about materials to admins"
