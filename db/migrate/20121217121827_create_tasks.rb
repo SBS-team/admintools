@@ -3,11 +3,11 @@ class CreateTasks < ActiveRecord::Migration
     create_table :tasks do |t|
       t.string :title
       t.text :description
-      t.string :priority
+      t.string :priority, :default => "medium"
       t.date :execution_date
-      t.integer :creater_id
+      t.integer :creator_id
       t.integer :user_id
-      t.boolean :task
+      t.boolean :task, :default => false
 
       t.timestamps
     end
