@@ -52,6 +52,7 @@
               -if can?(:look, :teamleader_users)
                 %li#teamleader_users_tab= link_to "Команда", teamleader_show_users_path
               %li#vacations_tab= link_to "Отпуска", teamleader_vacations_path
+              %li#tasks_tab= link_to "Задачи", teamleader_tasks_path
             = flash_alerts
             = yield
           .span3

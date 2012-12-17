@@ -6,6 +6,7 @@ Admintools::Application.routes.draw do
   namespace :teamleader do
     root :to => 'dashboard#index'
     resources :absents
+    resources :tasks
     match "/birthday" => "users#birthday", :as => 'birthday'
     get "/teamleader_users"=>"users#teamleader_users", :as=>:show_users
     resource :skills do
