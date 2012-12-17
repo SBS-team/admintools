@@ -23,8 +23,8 @@
           %td= task.title
           %td= task.description
           %td= task.execution_date
-          %td= task.creator_id
-          %td= task.user_id
+          %td= check_empty(task.creator, "full_name")
+          %td= check_empty(task.user, "full_name")
           %td
             = link_to edit_teamleader_task_path(task), :class => "btn" do
               %i.icon-pencil
