@@ -12,7 +12,11 @@
     .control-group
       = t.label :user_id, 'Отдел', :class => 'control-label'
       .controls
-        = t.collection_select :user_id, @users, :id, :first_name, {:include_blank => '---'}, :class => 'input-xlarge'
+        = select_tag :user_id, options_from_collection_for_select(@users, :id, :full_name, @task.user_id), :prompt => 'Выбрать пользователя', :class => 'input-xlarge', :name => "task[user_id]"
+    .control-group
+      = t.label :execution_date, 'Выполнить', :class => 'control-label'
+      .controls
+        = t.date_select(:execution_date, :start_year => 2012, :order => [:day, :month, :year], :class => 'input-xlarge')
     .control-group
       = t.label :title, 'Название', :class => 'control-label'
       .controls
