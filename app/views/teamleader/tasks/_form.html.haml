@@ -10,7 +10,11 @@
 
   %fieldset
     .control-group
-      = t.label :user_id, 'Отдел', :class => 'control-label'
+      = t.label :priority, 'Приоритет', :class => 'control-label'
+      .controls
+        = t.select :priority, Task::PRIORITY
+    .control-group
+      = t.label :user_id, 'Назначить на:', :class => 'control-label'
       .controls
         = select_tag :user_id, options_from_collection_for_select(@users, :id, :full_name, @task.user_id), :prompt => 'Выбрать пользователя', :class => 'input-xlarge', :name => "task[user_id]"
     .control-group

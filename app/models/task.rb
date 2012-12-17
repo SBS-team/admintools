@@ -3,4 +3,6 @@ class Task < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :creator, :class_name => "User", :foreign_key => "creator_id"
+
+  PRIORITY = %w(low medium high)
 end
