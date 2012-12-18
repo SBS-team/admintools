@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe "User" do
   before(:each) do
-    login_admin
+    login_admin(:admin)
     @user = FactoryGirl.create(:user)
   end
 
