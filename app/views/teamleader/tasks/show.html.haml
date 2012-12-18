@@ -1,0 +1,31 @@
+%h1 Просмотр задания
+
+%hr
+
+  .control-group
+    %label.control-label
+      Дата создания
+    .controls
+      %span.input-xlarge.uneditable-input= @task.created_at.to_date
+  .control-group
+    %label.control-label
+      Выполнить до
+    .controls
+      %span.input-xlarge.uneditable-input= @task.execution_date
+  .control-group
+    %label.control-label
+      Тема
+    .controls
+      %span.input-xlarge.uneditable-input= @task.title
+  .control-group
+    %label.control-label
+      Описание задания
+    .controls
+      %span.input-xxlarge.uneditable-input{:readonly => 'readonly', :style => 'height:200px;overflow:auto'}= @task.description.html_safe
+    .form-actions
+      = link_to teamleader_tasks_path, :class => 'btn btn-primary' do
+        %i.icon-circle-arrow-left
+        Назад
+      = link_to edit_teamleader_task_path, :class => 'btn btn-warning' do
+        %i.icon-pencil
+        Редактировать

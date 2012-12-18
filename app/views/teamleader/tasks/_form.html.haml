@@ -1,0 +1,34 @@
+= form_for([:teamleader, @task], :html => {:class => 'well form-horizontal', :multipart => true}) do |t|
+  -if @task.errors.any?
+    #error_explanation.alert.alert-error
+      %a.close{"data-dismiss" => "alert", :href => "#"}
+        ×
+      %h2 Возникли ошибки:
+      %ul
+        - @task.errors.full_messages.each do |msg|
+          %li= msg
+
+  %fieldset
+    .control-group
+      = t.label :priority, 'Приоритет', :class => 'control-label'
+      .controls
+        = t.select :priority, Task::PRIORITY
+    .control-group
+      = t.label :user_id, 'Назначить на:', :class => 'control-label'
+      .controls
+        = select_tag :user_id, options_from_collection_for_select(@users, :id, :full_name, @task.user_id), :prompt => 'Выбрать пользователя', :class => 'input-xlarge', :name => "task[user_id]"
+    .control-group
+      = t.label :execution_date, 'Выполнить', :class => 'control-label'
+      .controls
+        = t.date_select(:execution_date, :start_year => 2012, :order => [:day, :month, :year], :class => 'input-xlarge')
+    .control-group
+      = t.label :title, 'Название', :class => 'control-label'
+      .controls
+        = t.text_field :title, :class => 'input-xlarge'
+    .control-group
+      = t.label :description, 'Описание', :class => 'control-label'
+      .controls
+        = t.text_area :description, :class => 'input-xxlarge', :id => 'nic', :style => "height:200px"
+    .form-actions
+      = t.submit (@task.id?) ? 'Изменить' : 'Создать' , :class => 'btn btn-primary'
+      = link_to 'Назад', teamleader_users_path, :class => 'btn'
