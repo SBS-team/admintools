@@ -1,0 +1,13 @@
+%tr
+  %td= l(material_request.created_at, :format => :short)
+  - if current_user.is_admin?
+    %td= material_request.user.department.name
+  %td= PRIORITY[material_request.priority].first
+  %td= material_request.name
+
+  - if current_user.is_user?
+    %td= link_to "edit", "#", :onclick => "popupik(600, '#{edit_teamleader_material_request_path(material_request)}')"
+  - if current_user.is_user? || current_user.is_teamleader?
+    %td= link_to "delete", teamleader_material_request_path(material_request), :method => :delete
+  - elsif current_user.is_admin?
+    %td= link_to "accept", teamleader_material_request_approve_path(material_request)

@@ -315,6 +315,8 @@ ru:
         user_id: "Пользователь"
       skill:
         name: "Название"
+      material_request:
+        name: Запрос
     errors:
       <<: *errors
   first_name: "Имя"
@@ -409,6 +411,9 @@ ru:
         destroy:
           destroyed: "Подсеть удалена"
   teamleader:
+    material_request:
+      table_empty: "Таблица запросов пуста"
+
     departments:
       create:
         created: "Отдел %{name} добавлен"

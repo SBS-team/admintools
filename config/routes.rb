@@ -44,6 +44,10 @@ Admintools::Application.routes.draw do
       get :decline
       get :alternative
     end
+    resources :material_requests, :except => :show do
+      get :approve
+      get :send_requests, :on => :collection
+    end
   end
 
   namespace :admin do
