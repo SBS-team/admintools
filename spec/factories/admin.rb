@@ -1,4 +1,5 @@
 FactoryGirl.define do
+
   factory :admin do
     sequence(:email) {|n| "example#{n}@example.com"}
     sequence(:name) {|n| "admin#{n}"}
@@ -9,6 +10,8 @@ FactoryGirl.define do
 
   factory :super_admin, :parent => :admin do
     name "admin"
+    email "admin@admin.com"
   end
+
 
 end
