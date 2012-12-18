@@ -7,6 +7,7 @@ require 'rspec/autorun'
 require 'factory_girl'
 require 'capybara/rspec'
 require 'capybara/rails'
+require 'support/mailer_macros'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -20,9 +21,6 @@ RSpec.configure do |config|
   # config.mock_with :mocha
   # config.mock_with :flexmock
   # config.mock_with :rr
-
-  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -41,6 +39,7 @@ RSpec.configure do |config|
   #
   config.order = "random"
   config.include Devise::TestHelpers, :type => :controller
+  config.include(MailerMacros)
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
@@ -100,4 +99,9 @@ def edit_username_for_desktop
   click_link('Редактировать')
   select @user.full_name.first
   click_button('Изменить')
+end
+
+def user_with_teamleader
+  user = FactoryGirl.create(:teamleader)
+  FactoryGirl.create(:user, :department => user.department)
 end

@@ -14,4 +14,13 @@ FactoryGirl.define do
   factory :invalid_user, :parent => :user do
     email ""
   end
+
+  factory :manager, :parent => :user do
+    role 'manager'
+  end
+
+  factory :teamleader, :parent => :user do
+    role 'teamleader'
+    department
+  end
 end
