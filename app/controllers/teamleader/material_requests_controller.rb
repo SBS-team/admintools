@@ -20,7 +20,7 @@ class Teamleader::MaterialRequestsController < Teamleader::AppTeamleaderControll
   end
 
   def edit
-    render :layout => false
+    render :new, :layout => false
   end
 
   def update
@@ -37,9 +37,10 @@ class Teamleader::MaterialRequestsController < Teamleader::AppTeamleaderControll
   end
 
   def send_requests
+    @material_requests = current_user.material_requests.unconfirmed
+    MaterialRequestMailer.send_material_request(@material_requests).deliver
+    @material_requests.update_all(:status => false)
     redirect_to teamleader_material_requests_path
-    current_user.material_requests.unconfirmed.update_all(:status => false)
-    MaterialRequestMailer.send_material_request(@material_request).deliver
   end
 
   def approve
@@ -50,6 +51,6 @@ class Teamleader::MaterialRequestsController < Teamleader::AppTeamleaderControll
 
 private
   def preinit
-    redirect_to teamleader_material_requests_path if (@material_request = current_user.material_requests.find_by_id(params[:id]))
+    redirect_to teamleader_material_requests_path unless (@material_request = (current_user.is_teamleader? ? current_user.material_requests : MaterialRequest).find_by_id(params[:id]))
   end
 end

@@ -15,7 +15,7 @@
 
     .field
       = f.label :priority
-      = f.select :priority, options_for_select(PRIORITY)
+      = f.select :priority, options_for_select(PRIORITY, @material_request.priority)
     .actions
       = f.submit "Proceed"
       = link_to "Cancel", "#", :onclick => "closePopup(10)"

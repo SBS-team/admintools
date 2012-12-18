@@ -1,1 +1,1 @@
-PRIORITY = [["Low", 0],["Middle", 1],["Height", 2]]
+PRIORITY = [["Low", 0],["Middle", 1],["High", 2]]

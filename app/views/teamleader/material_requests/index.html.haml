@@ -6,9 +6,12 @@
 
 %h2 Запросы на материалы
 
-%table.material_requests
-  %tr
-    %th Date
-    %th Priority
-    %th Request
-  = render @material_requests
+- if @material_requests.empty?
+  %h3= t('teamleader.material_request.table_empty')
+- else
+  %table.material_requests
+    %tr
+      %th Date
+      %th Priority
+      %th Request
+    = render @material_requests

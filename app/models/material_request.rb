@@ -3,4 +3,5 @@ class MaterialRequest < ActiveRecord::Base
   attr_accessible :name, :priority, :status
 
   scope :unconfirmed, where(:status => nil)
+  scope :unprocessed, where(:status => false)
 end
