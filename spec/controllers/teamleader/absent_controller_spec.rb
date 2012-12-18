@@ -3,7 +3,8 @@ require 'spec_helper'
 describe Teamleader::AbsentsController do
   before(:each) do
     #FactoryGirl.create(:manager)
-    sign_in (@user = user_with_teamleader)
+    @user, @admin = user_with_teamleader
+    sign_in @user
   end
 
   it do
@@ -20,7 +21,7 @@ describe Teamleader::AbsentsController do
     it 'valid' do
       post :create, :absent => FactoryGirl.build(:absent).attributes.except('id', 'created_at', 'updated_at')
       response.should redirect_to teamleader_absents_path
-      #last_email.to.should include(@email)
+      last_email.to.should include(@admin.email)
       #last_email.body.should have_content("Change my password")
     end
 

@@ -1,6 +1,6 @@
 module MailerMacros
-  def last_email(n = 1)
-    ActionMailer::Base.deliveries.last(n)
+  def last_email
+    ActionMailer::Base.deliveries.last
   end
 
   def reset_email

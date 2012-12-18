@@ -103,5 +103,5 @@ end
 
 def user_with_teamleader
   user = FactoryGirl.create(:teamleader)
-  FactoryGirl.create(:user, :department => user.department)
+  [FactoryGirl.create(:user, :department => user.department), user]
 end
