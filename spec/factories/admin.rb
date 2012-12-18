@@ -5,7 +5,6 @@ FactoryGirl.define do
     sequence(:name) {|n| "admin#{n}"}
     password "secret"
     password_confirmation { password }
-
   end
 
   factory :super_admin, :parent => :admin do
