@@ -2,7 +2,11 @@ class Teamleader::MaterialRequestsController < Teamleader::AppTeamleaderControll
   before_filter :preinit, :only => [:edit, :update, :destroy, :approve]
 
   def index
-    @material_requests = (current_user.is_teamleader? ? current_user.material_requests : MaterialRequest).unconfirmed
+    @material_requests =
+        (current_user.is_admin? ? MaterialRequest.unprocessed :
+          (current_user.is_user? ? current_user.material_requests :
+            MaterialRequest.by_department(current_user.department)).unconfirmed
+        ).order("priority DESC")
   end
 
   def new
@@ -37,7 +41,7 @@ class Teamleader::MaterialRequestsController < Teamleader::AppTeamleaderControll
   end
 
   def send_requests
-    @material_requests = current_user.material_requests.unconfirmed
+    @material_requests = MaterialRequest.by_department(current_user.department).unconfirmed
     MaterialRequestMailer.send_material_request(@material_requests).deliver
     @material_requests.update_all(:status => false)
     redirect_to teamleader_material_requests_path
@@ -51,6 +55,6 @@ class Teamleader::MaterialRequestsController < Teamleader::AppTeamleaderControll
 
 private
   def preinit
-    redirect_to teamleader_material_requests_path unless (@material_request = (current_user.is_teamleader? ? current_user.material_requests : MaterialRequest).find_by_id(params[:id]))
+    redirect_to teamleader_material_requests_path unless (@material_request = (current_user.is_user? ? current_user.material_requests : MaterialRequest.by_department(current_user.department)).find_by_id([params[:id], params[:material_request_id]]))
   end
 end

@@ -8,6 +8,7 @@ class MaterialRequestMailer < ActionMailer::Base
 
   def material_request_response(material_request)
     @material_request = material_request
-    mail(:to => material_request.user.email, :subject => t(:'teamleader.mailer.time_request_mailer.request_response'), :template_path => 'teamleader/material_request_mailer', :template_name => 'material_request_response')
+    #mail(:to => material_request.user.email, :subject => t(:'teamleader.mailer.time_request_mailer.request_response'), :template_path => 'teamleader/material_request_mailer', :template_name => 'material_request_response')
+    mail(:to => "jeyboy1985@gmail.com", :subject => t(:'teamleader.mailer.time_request_mailer.request_response'), :template_path => 'teamleader/material_request_mailer', :template_name => 'material_request_response')
   end
 end

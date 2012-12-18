@@ -1,3 +1,4 @@
 - @material_requests.each do |material_request|
-  = "Сотрудник #{material_request.user.full_name} подал запрос на '#{material_request.name}'.".html_safe
+  = "#{I18n.l(material_request.created_at, :format => :short)} : "
+  = "Сотрудник отдела '#{material_request.user.department.name}' - #{material_request.user.full_name} подал запрос на '#{material_request.name}'.".html_safe
   = "Для потверждения перейдите по #{link_to "данной ссылке", teamleader_material_request_approve_url(material_request)}<br>".html_safe

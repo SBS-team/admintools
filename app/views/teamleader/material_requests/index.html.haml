@@ -12,6 +12,8 @@
   %table.material_requests
     %tr
       %th Date
+      - if current_user.is_admin?
+        %th Depatment
       %th Priority
       %th Request
     = render @material_requests
