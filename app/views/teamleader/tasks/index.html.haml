@@ -1,0 +1,39 @@
+%h1 Задания
+
+%hr
+
+.well
+  %table.table.table-striped.pretty
+    %thead
+      %tr
+        %th Дата создания
+        %th Приоритет
+        %th Тема
+        %th Описание
+        %th Дата выполнения
+        %th Создал
+        %th Исполнит
+        %th
+          = link_to new_teamleader_task_path, :class => "btn btn-success" do
+            %i.icon-plus
+            Создать
+    %tbody
+      - @tasks.each do |task|
+        %tr
+          %td= task.created_at
+          %td= task.priority
+          %td= task.title
+          %td= task.description
+          %td= task.execution_date
+          %td= check_empty(task.creator, "full_name")
+          %td= check_empty(task.user, "full_name")
+          %td
+            = link_to edit_teamleader_task_path(task), :class => "btn" do
+              %i.icon-pencil
+              Редактировать
+            = link_to "#", :class => "btn" do
+              %i.icon-pencil
+              Выполнил
+            = link_to teamleader_task_path(task), :method => :DELETE, :class => "btn btn-danger", :confirm => "Ты уверен?" do
+              %i.icon-remove
+              Удалить
