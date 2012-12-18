@@ -22,18 +22,28 @@
         %tr
           %td= task.created_at.to_date
           %td= task.priority
-          %td= task.title
-          %td= truncate(task.description, :length => 10, :separator => ' ')
+          %td= truncate(task.title, :length => 10, :separator => '')
+          %td= truncate(task.description, :length => 10, :separator => '')
           %td= task.execution_date
           %td= check_empty(task.creator, "full_name")
           %td= check_empty(task.user, "full_name")
           %td
-            = link_to edit_teamleader_task_path(task), :class => "btn" do
-              %i.icon-pencil
-              Редактировать
-            = link_to "#", :class => "btn" do
-              %i.icon-pencil
-              Выполнил
-            = link_to teamleader_task_path(task), :method => :DELETE, :class => "btn btn-danger", :confirm => "Ты уверен?" do
-              %i.icon-remove
-              Удалить
+            .btn-group
+              = link_to edit_teamleader_task_path(task), :class => "btn btn-primary", :id => "user_profile" do
+                %i.icon-user
+                Редактировать
+                = link_to '#', :class => "btn btn-primary dropdown-toggle", :'data-toggle' => "dropdown" do
+                  %span.caret
+                %ul.dropdown-menu
+                  %li
+                    = link_to "#" do
+                      %i.icon-pencil
+                      Выполнил
+                  %li
+                    = link_to teamleader_task_path(task) do
+                      %i.icon-eye-open
+                      Подробнее
+                  %li
+                    = link_to teamleader_task_path(task), :method => :DELETE, :confirm => "Ты уверен?" do
+                      %i.icon-trash
+                      Удалить
