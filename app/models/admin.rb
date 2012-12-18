@@ -11,8 +11,7 @@ class Admin < ActiveRecord::Base
 
   has_many :users_change, :as=>:editor,:class_name => 'UserChange'
 
-  validates :name, :presence => true, :uniqueness => true
-  validates :email, :presence => true, :uniqueness => true
+  validates :name, :email, :presence => true, :uniqueness => true
 
   SUPER_ADMIN = "admin"
 

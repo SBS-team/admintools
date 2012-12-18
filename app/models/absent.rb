@@ -7,7 +7,7 @@ class Absent < ActiveRecord::Base
   belongs_to :user
 
   scope :actual_absents, lambda { |now|  joins(:user).where("absents.date_to > '#{now}'" ) }
-  scope :subordinates, lambda { |u| where(:users => {:role => 'user', :department_id => u.department_id}) }
+  scope :subordinates, lambda { |u| joins(:user).where(:users => {:role => 'user', :department_id => u.department_id}) }
 
   private
   def date_to_less_than_date_from
