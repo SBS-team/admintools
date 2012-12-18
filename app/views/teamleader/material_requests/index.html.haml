@@ -2,7 +2,7 @@
   = link_to "Добавить запрос на материалы", "#", :onclick => "popupik(600, '#{new_teamleader_material_request_path}')"
 
 - if current_user.is_teamleader?
-  = link_to "Отправить запросы", send_requests_teamleader_material_requests_path
+  = link_to "Отправить запросы", send_requests_teamleader_material_requests_path, :confirm => "Точно отправить?"
 
 %h2 Запросы на материалы
 
