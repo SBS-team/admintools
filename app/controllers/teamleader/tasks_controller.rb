@@ -1,6 +1,6 @@
 class Teamleader::TasksController < ApplicationController
 
-  before_filter :find_the_user, :only => [:edit, :update, :destroy]
+  before_filter :find_the_user, :only => [:edit, :show, :update, :destroy]
   before_filter :all_users, :only => [:edit, :new]
 
   def index
@@ -12,6 +12,9 @@ class Teamleader::TasksController < ApplicationController
   end
 
   def edit
+  end
+
+  def show
   end
 
   def create
