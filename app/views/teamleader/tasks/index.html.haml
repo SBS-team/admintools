@@ -20,10 +20,10 @@
     %tbody
       - @tasks.each do |task|
         %tr
-          %td= task.created_at
+          %td= task.created_at.to_date
           %td= task.priority
           %td= task.title
-          %td= task.description
+          %td= truncate(task.description, :length => 10, :separator => ' ')
           %td= task.execution_date
           %td= check_empty(task.creator, "full_name")
           %td= check_empty(task.user, "full_name")
