@@ -1,0 +1,2 @@
+= "Сотрудник #{@time_request.user.full_name} подал запрос на расширение месячного лимита времени до '#{@time_request.requested_time}' часов с обоснованием '#{@time_request.message}'."
+= "Пожалуйста #{link_to "рассмотрите", teamleader_time_requests_url}, #{link_to "подтвердите", teamleader_time_request_approve_url(@time_request)} или #{link_to "отклоните", teamleader_time_request_decline_url(@time_request)} данную заявку".html_safe

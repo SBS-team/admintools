@@ -1,0 +1,9 @@
+- @users.each_pair do |month, users|
+  - if users.present?
+    %h1
+      = t(month)
+    .well.well-small
+      %dl.dl-horizontal.birthday
+        - users.each do |user|
+          %dt= "#{user.full_name}"
+          %dd= user.formatted_birthday

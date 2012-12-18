@@ -14,12 +14,12 @@ login: &login
   reconnect: false
   pool: 5
   username: username
-  password: userpassword
+  password: username_password
   socket: /var/run/mysqld/mysqld.sock
 
 development:
   <<: *login
-  database: youappname_development
+  database: you_db_name_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -27,8 +27,8 @@ development:
 
 test:
   <<: *login
-  database: youappname_test
+  database: you_db_name_test
 
 production:
   <<: *login
-  database: youappname_production
+  database: you_db_name_production

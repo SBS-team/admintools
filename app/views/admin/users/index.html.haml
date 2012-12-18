@@ -1,0 +1,17 @@
+%h1
+  Пользователи
+  .pull-right
+    -if @deleted!="1"
+      .users_real
+        = link_to 'Уволенные', admin_users_path(:deleted => 1), :class => "btn btn-danger", :id => "deleted_users", "data-loading-text" => "???"
+      .users_deleted.hide
+        = link_to 'Действующие', admin_users_path(:deleted => 0), :class => "btn btn-success", :id => "real_users", "data-loading-text" => "???"
+    -else
+      .users_real.hide
+        = link_to 'Уволенные', admin_users_path(:deleted => 1), :class => "btn btn-danger", :id => "deleted_users", "data-loading-text" => "???"
+      .users_deleted
+        = link_to 'Действующие', admin_users_path(:deleted => 0), :class => "btn btn-success", :id => "real_users", "data-loading-text" => "???"
+.well
+  = render 'users_data'
+- content_for :sidebar, render(:partial => 'sidebar')
+

@@ -1,0 +1,45 @@
+%h1= t :'.title', :name => @desktop.name
+
+%hr
+
+.well.form-horizontal
+  %fieldset
+    .control-group
+      %label.control-label
+        Имя ПК
+      .controls
+        %span.input-xlarge.uneditable-input= @desktop.name
+    .control-group
+      %label.control-label
+        IP
+      .controls
+        %span.input-xlarge.uneditable-input= @desktop.ip
+    .control-group
+      %label.control-label
+        MAC
+      .controls
+        %span.input-xlarge.uneditable-input= @desktop.mac
+    .control-group
+      %label.control-label
+        Офис
+      .controls
+        %span.input-xlarge.uneditable-input
+          = (@desktop.room_id) ? (@desktop.room.name) : ('-')
+    .control-group
+      %label.control-label
+        Пользователь
+      .controls
+        %span.input-xlarge.uneditable-input
+          = (@desktop.user_id) ? (@desktop.user.full_name) : ('-')
+    .control-group
+      %label.control-label
+        Информация
+      .controls
+        %span.input-xxlarge{:readonly => 'readonly', :style => 'height:200px;overflow:auto'}= @desktop.info.html_safe
+    .form-actions
+      = link_to admin_desktops_path, :class => 'btn btn-primary' do
+        %i.icon-circle-arrow-left
+        Назад
+      = link_to edit_admin_desktop_path, :class => 'btn btn-warning' do
+        %i.icon-pencil
+        Редактировать

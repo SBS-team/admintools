@@ -1,0 +1,56 @@
+!!!
+%html
+  %head
+    %title
+  %body
+    %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-collapse:separate;background:#f7f7f7;margin:auto", :width => "800"}
+      %tbody
+        %tr
+          %td{:style => "font:11px/21px Arial;color:#7a7a7a;padding-top:10px;padding-bottom:10px;padding-left:0;padding-right:0;border-top-right-radius:6px;border-top-left-radius:6px;border-spacing:0;border-width:1px;border-style:solid;border-color:#eaeaea;border-bottom:none;"}
+            %h2{:style => "font:bold 20px/7px Arial; text-align:center;"} Отчёт за месяц #{@teamleader.full_name}, начальник отдела (#{@teamleader.department.name})
+        %tr
+          %td{:style => "background:#fff;border-collapse:separate;border-radius:6px;border-spacing:0;border-width:1px;border-style:solid;border-color:#eaeaea;border-top:none;border-bottom-color:#d2d2d2"}
+            %table{:style => "border-spacing:0;border-collapse:collapse"}
+              %tbody
+                %tr
+                  %td{:style => "padding:0"}
+                    %img{:alt => "", :style => "display:block;width:800px;min-height:7px;margin-top:1px;margin-left:1px;margin-right:1px;margin-bottom:0"}/
+            %table{:style => "width:800px;margin:auto;background:#fff;border-bottom-right-radius:6px;border-bottom-left-radius:6px;padding-bottom:10px"}
+              %tbody
+                %tr
+                  %td{:style => "padding-top:23px;padding-left:47px;padding-bottom:16px"}
+                    %h2{:style => "font:bold 17px/7px Arial"}
+                      Отчёт сотрудника
+                      = succeed ":" do
+                        = link_to teamleader_user_url(@teamleader), :style => "font-weight:700;color:#70aa00;text-decoration:none", :target => "_blank"  do
+                          = @teamleader.full_name
+                    .report_show_container{:style => "cursor: text;font:17px/17px Arial; margin:0 10px 0 40px;"}
+                      %blockquote{:style=>"padding: 0 0 0 15px; margin: 0 0 20px; border-left: 5px solid #CCC;"}
+                        =simple_format(@teamleader_report.body)
+                        %small{:style=>"line-height: 20px; color: #999;font-size: 85%;"}
+                          Report updated at:
+                          =@teamleader_report.updated_at.strftime("%d %b %Y")
+                - @teamleader_users_reports.each do |report|
+                  %tr
+                    %td
+                      %img{:alt => "", :style => "display:block;margin-left:33px"}/
+                  %tr
+                    %td{:style => "padding-top:15px;padding-bottom:15px"}
+                      %table{:border => "0", :cellpadding => "0", :cellspacing => "0", :style => "border-collapse:collapse;width:700px;margin: 0 0 0 80px"}
+                        %tbody
+                          %tr
+                            %td{:style => "text-align:left;vertical-align:middle;border-width:1px;border-style:solid;border-color:#d4d4d4;padding-top:10px;padding-bottom:10px;padding-left: 10px;"}
+                              %p{:style => "font:15px/17px Arial;color:#363636;margin:0"}
+                                Отчёт сотрудника
+                                = succeed ":" do
+                                  = link_to teamleader_user_url(report.user), :style => "font-weight:700;color:#70aa00;text-decoration:none", :target => "_blank"  do
+                                    = report.user.full_name
+                          %tr
+                            %td{:style => "width:477px;padding:0;border-width:1px;border-style:solid;border-color:#d4d4d4;border-top:none;padding:8px 10px"}
+                              %p{:style => "font:15px/17px Arial;color:#7d7d7d;margin:0"}
+                                .report_show_container{:style => "cursor: text;font:17px/17px Arial; margin:0 10px 0 40px;"}
+                                  %blockquote{:style=>"padding: 0 0 0 15px; margin: 0 0 20px; border-left: 5px solid #CCC;"}
+                                    =simple_format(report.body)
+                                    %small{:style=>"line-height: 20px; color: #999;font-size: 85%;"}
+                                      Report updated at:
+                                      =report.updated_at.strftime("%d %b %Y")

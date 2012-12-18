@@ -1,0 +1,11 @@
+- unless current_user.is_admin?
+  = link_to "Добавить запрос по времени", "#", :onclick => "popupik(600, '#{new_teamleader_time_request_path}')"
+
+%h2 Запросы по времени
+
+%table.time_requests
+  %tr
+    %th Date
+    %th Requested time
+    %th Reason
+  = render @time_requests

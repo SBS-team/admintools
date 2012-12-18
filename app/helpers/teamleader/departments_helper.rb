@@ -1,0 +1,2 @@
+module Teamleader::DepartmentsHelper
+end

@@ -1,0 +1,24 @@
+%p#notice= notice
+%p
+  %b Заголовок:
+  = @event.title
+%p
+  %b Начало:
+  = @event.starts_at
+%p
+  %b Конец:
+  = @event.ends_at
+%p
+  %b Весь день:
+  = @event.all_day
+%p
+  %b Описание:
+  = @event.description
+%p
+  %b Отослано:
+  = @event.sended
+= link_to 'Редактировать', '#' , :onclick => "PopupEventEdit(#{@event.id.to_s});return false;"
+= link_to 'Назад', admin_events_path
+= link_to 'Удалить', admin_event_path(@event), :confirm => 'Вы уверены?', :method => :delete
+%p
+  = (link_to 'Удалить всю группу', admin_event_path(@event, :delete_group => @event.group_id), :confirm => 'Вы уверены?', :method => :delete) if @event.group_id?

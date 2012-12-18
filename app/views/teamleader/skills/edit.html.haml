@@ -1,0 +1,9 @@
+:javascript
+  var shablon = "#{escape_javascript render(:partial => 'teamleader/skills/skill', :locals => { :@editable => true })}"
+
+- @editable = true
+= form_for :skills, :url => teamleader_skills_path, :html => {:method => :put} do |f|
+  =render :template => "teamleader/skills/show"
+  %br
+
+  = f.submit "Сохранить", :class => "btn btn-primary"

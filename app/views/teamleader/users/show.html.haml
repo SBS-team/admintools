@@ -1,0 +1,87 @@
+%h1= @user.full_name
+%hr
+.well.form-horizontal
+  %fieldset
+    .control-group
+      %label.control-label
+        Фото
+      .controls
+        = avatar_image_link_tag(@user, 200)
+    -if (current_user == @user) || (can? :manage,@user)
+      .control-group
+        %label.control-label
+          Роль
+        .controls.simple-input
+          %span= @user.role
+      .control-group
+        %label.control-label
+          Отдел
+        .controls.simple-input
+          %span
+            - if @user.department
+              = @user.department.name
+    .control-group
+      %label.control-label
+        Email
+      .controls.simple-input
+        %span= @user.email
+    .control-group
+      %label.control-label
+        Телефон
+      .controls.simple-input
+        %span= @user.phone
+    .control-group
+      %label.control-label
+        Skype
+      .controls.simple-input
+        %span= @user.skype
+    .control-group
+      %label.control-label
+        Дата рождения
+      .controls.simple-input
+        %span= @user.formatted_birthday
+    .control-group
+      %label.control-label
+        График работы
+      %br
+      .controls
+        - (1..7).to_a.each do |i|
+          %span{:style => "width:100px; display: inline-block;"}= I18n.t('date.day_names')[i]
+          %span= @user.send("daily_#{i}")
+          %br
+    -if (current_user == @user) || (can? :manage,@user)
+      .control-group
+        %label.control-label
+          Менеджер
+        .controls.simple-input
+          %span
+            - if (@user.is_user? || @user.is_teamleader?) && @user_managers
+              = @user_managers.map(&:full_name).join(", ")
+      .control-group
+        %label.control-label
+          Заказчик
+        .controls.simple-input
+          %span= @user.employer
+      .control-group
+        %label.control-label
+          oDesk аккаунт
+        .controls.simple-input
+          %span= @user.odesk
+      .control-group
+        %label.control-label
+          Информация
+        .controls
+          %span.input-xxlarge.uneditable-input{:readonly => 'readonly', :style => 'height:200px;overflow:auto'}= @user.info.html_safe
+    .form-actions
+      -if @user.id.eql?current_user.id
+        = link_to edit_password_teamleader_user_path(@user), :class => 'btn' do
+          %i.icon-pencil
+          Изменить пароль
+      -if can? :manage,@user
+        = link_to edit_teamleader_user_path(@user), :class => 'btn btn-inverse' do
+          %i.icon-pencil
+          Редактировать
+      -if @skills_button
+        = link_to teamleader_user_skill_list_show_path(@user), :class => 'btn' do
+          %i.icon-pencil
+          Навыки

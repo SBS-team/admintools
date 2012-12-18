@@ -1,6 +1,6 @@
 $("#start_scheduler").on "click", (e) ->
   e.preventDefault()
-  $.post "/tasks/scheduler",
+  $.post "/admin/tasks/scheduler",
     _method: "put"
   , ((res, status) ->
     if res.status > 0
@@ -11,7 +11,7 @@ $("#start_scheduler").on "click", (e) ->
 
 $("#stop_scheduler").on "click", (e) ->
   e.preventDefault()
-  $.post "/tasks/scheduler",
+  $.post "/admin/tasks/scheduler",
     _method: "delete"
   , ((res, status) ->
     if res.status > 0
@@ -22,7 +22,7 @@ $("#stop_scheduler").on "click", (e) ->
 
 $("#start_workers").on "click", (e) ->
   e.preventDefault()
-  $.post "/tasks/workers",
+  $.post "/admin/tasks/workers",
     _method: "put"
   , ((res, status) ->
     if res.status > 0
@@ -33,7 +33,7 @@ $("#start_workers").on "click", (e) ->
 
 $("#stop_workers").on "click", (e) ->
   e.preventDefault()
-  $.post "/tasks/workers",
+  $.post "/admin/tasks/workers",
     _method: "delete"
   , ((res, status) ->
     if res.status > 0

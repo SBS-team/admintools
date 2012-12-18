@@ -1,0 +1,83 @@
+%h1= t(:'.title', full_name: @user.full_name)
+
+%hr
+
+-if @user
+  .well.form-horizontal
+    %fieldset
+      .control-group
+        %label.control-label
+          Фото
+        .controls
+          = avatar_image_link_tag(@user, 200)
+    .control-group
+      %label.control-label
+        Имя
+      .controls
+        %span.input-xlarge.uneditable-input= @user.full_name
+    .control-group
+      %label.control-label
+        Роль
+      .controls
+        %span.input-xlarge.uneditable-input= @user.role
+    .control-group
+      %label.control-label
+        Email
+      .controls
+        %span.input-xlarge.uneditable-input= @user.email
+    .control-group
+      %label.control-label
+        Телефон
+      .controls
+        %span.input-xlarge.uneditable-input= @user.phone
+    .control-group
+      %label.control-label
+        Skype
+      .controls
+        %span.input-xlarge.uneditable-input= @user.skype
+    .control-group
+      %label.control-label
+        Дата рождения
+      .controls
+        %span.input-xlarge.uneditable-input= @user.formatted_birthday
+    .control-group
+      %label.control-label
+        График работы
+      %br
+      .controls
+        - (1..7).to_a.each do |i|
+          %span{:style => "width:100px; display: inline-block;"}= I18n.t('date.day_names')[i]
+          %span.input-small.uneditable-input= @user.send("daily_#{i}")
+          %br
+    .control-group
+      %label.control-label
+        Менеджер
+      .controls
+        %span.input-xlarge.uneditable-input
+          - if @user.manager
+            = @user.manager.full_name
+          - else
+            \---
+    .control-group
+      %label.control-label
+        Заказчик
+      .controls
+        %span.input-xlarge.uneditable-input= @user.employer
+    .control-group
+      %label.control-label
+        oDesk аккаунт
+      .controls
+        %span.input-xlarge.uneditable-input
+          = link_to_if(@user.odesk.present?, @user.odesk)
+    .control-group
+      %label.control-label
+        Информация
+      .controls
+        %span.input-xxlarge.uneditable-input{:readonly => 'readonly', :style => 'height:200px;overflow:auto'}= @user.info.html_safe
+      .form-actions
+        = link_to admin_users_path, :class => 'btn btn-primary' do
+          %i.icon-circle-arrow-left
+          Назад
+        = link_to edit_admin_user_path, :class => 'btn btn-warning' do
+          %i.icon-pencil
+          Редактировать

@@ -68,8 +68,8 @@ def login_admin
   @admin = FactoryGirl.create(:admin)
   visit new_admin_session_path
   within "#new_admin" do
-    fill_in 'Name', :with => @admin.name
-    fill_in 'Password', :with => "secret"
+    fill_in 'admin_name', :with => @admin.name
+    fill_in 'admin_password', :with => "secret"
   end
   click_button('Sign in')
 end

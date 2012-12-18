@@ -3,6 +3,6 @@ class AddTitleColumnToWorkplace < ActiveRecord::Migration
     add_column :workplaces, :title, :string
   end
   def down
-    destroy_column :workplaces, :title
+    remove_column :workplaces, :title
   end
 end

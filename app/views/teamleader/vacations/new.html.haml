@@ -1,0 +1,20 @@
+:javascript
+  $('#add_vacation_form').submit(function(e) {
+      e.preventDefault();
+      this.submit();
+      setTimeout(function(){ closePopup(10) }, 100);
+  });
+
+.popupik
+  = form_for(@vacation, :url => teamleader_vacations_path, :html => {:id => "add_vacation_form", :method => "#{@vacation.persisted? ? "PUT" : "POST"}"}) do |f|
+    -if @vacation.persisted?
+      = f.hidden_field :id, :value => @vacation.id
+    .field
+      = f.label "Начало"
+      = f.date_select :date_from
+    .field
+      = f.label "Конец"
+      = f.date_select :date_to
+    .actions
+      = f.submit "Proceed"
+      = link_to "Cancel", "#", :onclick => "closePopup(10)"

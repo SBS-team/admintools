@@ -10,22 +10,19 @@
           /[if lt IE 9]
           = javascript_include_tag "http://html5shim.googlecode.com/svn/trunk/html5.js"
           = stylesheet_link_tag "application", :media => "all"
-          %link(href="images/apple-touch-icon-144x144.png" rel="apple-touch-icon-precomposed" sizes="144x144")
-          %link(href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon-precomposed" sizes="114x114")
-          %link(href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon-precomposed" sizes="72x72")
-          %link(href="images/apple-touch-icon.png" rel="apple-touch-icon-precomposed")
-          %link(href="images/favicon.ico" rel="shortcut icon")
+          = favicon_link_tag
 
   %body
     .wrapper
-      .navbar.navbar-fixed-top
+      .navbar.navbar-inverse.navbar-fixed-top
         .navbar-inner
           .container-fluid
-            %a.brand{:href => "#"} Admintools
+            %a.brand{:href => "#"} #{auth_page_title resource}
       .container-fluid
         .content-fluid
           .span12
             .well
+              = flash_alerts
               = yield
       .push
     %footer.container-fluid

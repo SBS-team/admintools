@@ -1,9 +1,0 @@
-= form_tag "/sarg/folder_create", :method => "post" do
-  .sarg_folder_choose
-    .control-group
-      .controls
-        .input-prepend.input-append
-          %span.add-on
-            %i.icon-folder-open
-          = text_field_tag :sarg_folder_path, "", :size => "16", :class => "span2", :placeholder => "Past path to \"Sarg\" folder."
-          = submit_tag "Create!", :class => "btn"

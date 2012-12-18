@@ -1,6 +1,5 @@
 # Sample localization file for English. Add more files in this directory for other locales.
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 ru:
   date:
     abbr_day_names:
@@ -26,17 +25,19 @@ ru:
     - нояб.
     - дек.
     day_names:
-    - воскресенье
+    -
     - понедельник
     - вторник
     - среда
     - четверг
     - пятница
     - суббота
+    - воскресенье
     formats:
       default: ! '%d.%m.%Y'
       long: ! '%d %B %Y'
       short: ! '%d %b'
+      birthday: ! '%d %B'
     month_names:
     -
     - января
@@ -51,6 +52,19 @@ ru:
     - октября
     - ноября
     - декабря
+    month_names2:
+    - Январь
+    - Февраль
+    - Март
+    - Апрель
+    - Май
+    - Июнь
+    - Июль
+    - Август
+    - Сентябрь
+    - Октябрь
+    - Ноябрь
+    - Декабрь
     order:
     - :day
     - :month
@@ -121,8 +135,10 @@ ru:
       second: Секунд
       year: Год
   errors: &errors
-    format: ! '%{attribute} %{message}'
+    format: ! 'Поле "%{attribute}" %{message}'
     messages:
+      attributes:
+        first_name: "Имя"
       accepted: нужно подтвердить
       blank: не может быть пустым
       confirmation: не совпадает с подтверждением
@@ -140,7 +156,10 @@ ru:
       not_an_integer: не является целым числом
       odd: может иметь лишь четное значение
       record_invalid: ! 'Возникли ошибки: %{errors}'
-      taken: уже существует
+      taken: с таким значением уже существует
+      one_leader: ", в отделе может быть один управляющий"
+      wrong_option_count: должно присутствовать два или более вариантов ответов
+      wrong_date_range: указаный период должен быть более или равен текущему
       too_long:
         few: слишком большой длины (не может быть больше чем %{count} символа)
         many: слишком большой длины (не может быть больше чем %{count} символов)
@@ -250,11 +269,195 @@ ru:
       default: ! '%a, %d %b %Y, %H:%M:%S %z'
       long: ! '%d %B %Y, %H:%M'
       short: ! '%d %b, %H:%M'
+      birthday: ! '%d %B'
+      long_x: ! '%d %B %Y'
     pm: вечера
   # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
   activemodel:
     errors:
       <<: *errors
   activerecord:
+    models:
+      user: User
+      department: Department
+      room: Room
+      desktop: Desktop
+      device: Device
+      skill: Skill
+    attributes:
+      user:
+        first_name: "Имя"
+        last_name: "Фамилия"
+        password: "Пароль"
+        current_password: "Старый пароль"
+        email: "Email"
+        skype: "Skype"
+        birthday: "День рождения"
+        daily: "График работы"
+        daily_1: "График работы: Понедельник"
+        daily_2: "График работы: Вторник"
+        daily_3: "График работы: Среда"
+        daily_4: "График работы: Четверг"
+        daily_5: "График работы: Пятница"
+        daily_6: "График работы: Суббота"
+        daily_7: "График работы: Воскресенье"
+        department_id: "Отдел"
+        role: "Роль"
+      department:
+        name: "Название"
+      room:
+        name: "Офис"
+        user_id: "Ответственный"
+      desktop:
+        name: "Имя ПК"
+      device:
+        name: "Имя"
+        user_id: "Пользователь"
+      skill:
+        name: "Название"
     errors:
       <<: *errors
+  first_name: "Имя"
+  last_name: "Фамилия"
+  skype: "Skype"
+  info: "Информация"
+  phone: "Телефон"
+  email: "Email"
+  birthday: "Дата рождения"
+  odesk: "odesk"
+  role: "Роль"
+  employer: "Заказчик"
+  daily: "График работы"
+  department_id: "Отдел"
+  manager_id: "Менеджер"
+  remember_me: "Запомнить меня"
+  password: "Пароль"
+  name: "Имя"
+  admin:
+    admins:
+      create:
+        created: "Администратор %{name} добавлен"
+      update:
+        updated: "Информация изменена"
+      destroy:
+        destroyed: "Администратор %{name} удален"
+      restore:
+        restored: "Администратор %{name} восстановлен"
+    users:
+      new:
+        title: "Добавить пользователя"
+      show:
+        title: "%{full_name}: информация о пользователе"
+      create:
+        title: 1
+        created: "Пользователь %{full_name} добавлен"
+      update:
+        updated: "Информация изменена"
+      destroy:
+        destroyed: "%{full_name} удален"
+      restore:
+        restored: "%{full_name} восстановлен"
+    rooms:
+      index:
+        title: "Офисы"
+      new:
+        title: "Добавить офис"
+      create:
+        created: "Офис %{name} добавлен"
+      update:
+        updated: "Офис %{name}, информация изменена"
+      destroy:
+        destroyed: "Офис %{name} удален"
+    desktops:
+      index:
+        title: "Компьютеры"
+      show:
+        title: "Информация о компьютере %{name}"
+      create:
+        created: "Компьютер %{name} добавлен"
+      update:
+        updated: "Компьютер %{name}, информация изменена"
+      destroy:
+        destroyed: "Компьютер %{name} удален"
+    devices:
+      index:
+        title: "Устройства"
+      create:
+        created: "Личное устройство добавлено"
+      update:
+        updated: "%{name} информация изменена"
+      destroy:
+        destroyed: "%{name} устройство удалено"
+    domains:
+      index:
+        title: "Внешние сервера"
+      new:
+        title: "Добавить домен"
+      create:
+        created: "Домен %{url} добавлен"
+      update:
+        updated: "Домен %{url} обновлен"
+      destroy:
+        destroyed: "Домен %{url} удален"
+    clear_logs:
+      choose: "Выберите дату для очищения логов"
+      cleaning: "Логи будут очишены в ближайщее время"
+    local_pings:
+      subnetworks:
+        create:
+          created: "Подсеть добавлена"
+        destroy:
+          destroyed: "Подсеть удалена"
+  teamleader:
+    departments:
+      create:
+        created: "Отдел %{name} добавлен"
+      update:
+        updated: "Информация изменена"
+      destroy:
+        destroyed: "Отдел %{name} удален"
+      restore:
+        restored: "Отдел %{name} восстановлен"
+    poll:
+      create:
+        invalid: "Неверно введены данные"
+      voted:
+        invalid: "Неверное количество голосов"
+      destroy:
+        destroyed: "Опрос %{question} удален"
+    users:
+      update:
+        updated: "Информация изменена"
+      update_password:
+        updated: "Пароль изменен"
+    mailer:
+      time_request_mailer:
+        new_request: "Новый запрос"
+        request_response: "Ответ на запрос"
+
+      poll_mailer:
+        new_poll: "Новый опрос"
+    absent_mailer:
+      send_absent_mail:
+        subject: "Уведомление об отсутствии работника"
+    skills:
+      create:
+        created: "Навык %{name} добавлен"
+      update:
+        updated: "Информация изменена"
+      destroy:
+        destroyed: "Навык %{name} удален"
+      restore:
+        restored: "Навык %{name} восстановлен"
+  January: "Январь"
+  February: "Февраль"
+  March: "Март"
+  April: "Апрель"
+  May: "Май"
+  June: "Июнь"
+  July: "Июль"
+  August: "Август"
+  September: "Сентябрь"
+  October: "Октябрь"
+  November: "Ноябрь"
+  December: "Декабрь"

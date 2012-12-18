@@ -31,7 +31,6 @@ Admintools::Application.configure do
 
   # Do not compress assets
   config.assets.compress = false
-  #Paperclip.options[:command_path] = "/usr/local/bin/"
   # Expands the lines which load the assets
   config.assets.debug = true
 
@@ -41,8 +40,8 @@ Admintools::Application.configure do
       :port                 => 587,
       :domain               => "mail.google.com",
 
-      :user_name            => "dmitriy.savran@faceit.com.ua",
-      :password             => "CYo4zxh3xcF",
+      :user_name            => "emailfaceit@gmail.com",
+      :password             => "hiddenfile",
       :authentication       => "plain",
       :enable_starttls_auto => true
   }

@@ -1,0 +1,9 @@
+%tr
+  %td= skill.skill.name rescue "#name"
+  %td
+    - if @editable
+      = select :skill, :score, (0..10).to_a, {:selected => (skill.score rescue 0)}, :name => "skill[score][#{skill.skill.id rescue '#id'}]"
+    -else
+      = skill.score rescue 0
+  - if @editable
+    %td= link_to "x", "#", :class => "delete_skill", "data-exist" => "1"

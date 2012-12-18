@@ -1,0 +1,4 @@
+-if @out_users_list.present?
+  %ul.nav.nav-list
+    %li.nav-header.custom.warning Без отдела
+    =render :partial => "teamleader/users/user", :collection => @out_users_list

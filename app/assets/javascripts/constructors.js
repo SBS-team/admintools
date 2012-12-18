@@ -7,7 +7,7 @@ if(checkRoom > 0){
 
 var dropWorkplaceOpt = {
   drop: function(event, ui){
-    if(ui.draggable.hasClass("desktop")){ 
+    if(ui.draggable.hasClass("desktop")){
       // check for desktop
       // if add new desktop, old desktop will deleted from workplace
       if($(this).children().length > 0){
@@ -16,7 +16,7 @@ var dropWorkplaceOpt = {
       }
       // clear old workplace
       if($("#"+ui.draggable.attr("id")).parent().hasClass("workplace")){
-        relateDesktopToWorkplace($("#"+ui.draggable.attr("id")).parent().attr('id').split("_")[1], 'nil')  
+        relateDesktopToWorkplace($("#"+ui.draggable.attr("id")).parent().attr('id').split("_")[1], 'nil')
       }
       // relate desktop with workplace from desktops area
       $("#"+ui.draggable.attr('id')).detach().appendTo("#"+$(this).attr('id')).css({'top':'0', 'left':'0'})
@@ -26,14 +26,11 @@ var dropWorkplaceOpt = {
 }
 
 function isWorkplace(obj){
-  if($(obj).hasClass('line') || $(obj).hasClass('angl'))
-    return true
-  else
-    return false
+  $(obj).hasClass('line') || $(obj).hasClass('angl')
 }
 
 var dragOpt = {
-  grid: [5, 5], 
+  grid: [5, 5],
   containment:   "#schema-wrapper",
   snap:          ".room",
   snapMode:      "inner",
@@ -50,7 +47,7 @@ var dragOpt = {
       revertGlobal = true
       return false
     }
-  }, 
+  },
   stack:         ".room div",
   stop: function(event, ui){
     // fix snap position
@@ -58,14 +55,15 @@ var dragOpt = {
       $(this).css('top', ui.position.top > 0 ? ui.position.top - 1 : ui.position.top + 1)
     if(ui.position.left % 5)
       $(this).css('left', ui.position.left > 0 ? ui.position.left - 1 : ui.position.left + 1)
-    
+
     var workplace_id = $(this).attr("id").split("_")[1]
     if(revertGlobal){
       updateWorkplace(workplace_id, ui.position)
     }
-    if($(this).hasClass("new-table")){
-      $(this).removeClass("new-table")
-    }
+//    if($(this).hasClass("new-table")){
+//      $(this).removeClass("new-table")
+//    }
+    $(this).removeClass("new-table")
   }
 };
 
@@ -83,7 +81,7 @@ function createWorkplace(type, form, title){
   if(title)
     reqData["workplace"]["title"] = title
   $.post(
-      "/constructors",
+      "/admin/constructors",
       reqData,
       function(res, status){
         if(res.status > 0){
@@ -98,8 +96,8 @@ function createWorkplace(type, form, title){
 
 function updateWorkplace(id, position){
   $.post(
-    "/constructors/"+id,
-    { 
+    "/admin/constructors/"+id,
+    {
       "_method": "put",
       "workplace": {
         "top"  : position.top,
@@ -111,14 +109,14 @@ function updateWorkplace(id, position){
 
 function destroyWorkplace(id){
   $.post(
-    "/constructors/"+id,
+    "/admin/constructors/"+id,
     {"_method": "delete"}
   )
 }
 
 function relateDesktopToWorkplace(workplace, desktop){
     $.post(
-    "/constructors/"+workplace,
+    "/admin/constructors/"+workplace,
     {
       "_method": "put",
       "workplace": {
@@ -145,8 +143,8 @@ $(document).ready(function() {
 
   $('#trash').droppable({
     drop: function(event, ui){
-      var workplace_id = ui.draggable.attr("id").split("_")[1]
       if(confirm('Удалить?')){
+        var workplace_id = ui.draggable.attr("id").split("_")[1]
         destroyWorkplace(workplace_id)
         if( $("#"+ui.draggable.attr("id")).children().hasClass("desktop") ){
           $("#"+ui.draggable.attr('id')).children().css({'top':'0', 'left':'0'}).detach().appendTo("#desktops")

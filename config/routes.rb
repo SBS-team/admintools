@@ -1,44 +1,99 @@
 Admintools::Application.routes.draw do
 
-  devise_for :admins
+  devise_for :users, :path => 'teamleader'
+  devise_for :admins, :path => 'admin'
 
-  resources :devices
-  resources :rooms
-  resources :users
-  resources :desktops
-  resources :admins
-  resources :constructors, :except => [:index, :show]
-  resources :domains
-  resources :internet_pings, :only => [:index]
+  namespace :teamleader do
+    root :to => 'dashboard#index'
+    resources :absents
+    match "/birthday" => "users#birthday", :as => 'birthday'
+    get "/teamleader_users"=>"users#teamleader_users", :as=>:show_users
+    resource :skills do
+      get :show_list, :on => :member
+    end
+    get "skills/restore/:id" => "skills#restore", :as => :restore_skills
+    delete "skills/delete/:id" => "skills#destroy", :as => :delete_skills
 
-  namespace :local_pings do
-    resources :subnetworks, :only => [:new, :create, :destroy]
+    resources :users, :except => [:new, :create, :destroy] do
+      get "/skills" => "skills#show", :as => :skill_list_show
+      resource :skills
+      member do
+        get :edit_password
+        put :update_password
+      end
+    end
+    resources :user_changes, :only => [:index, :show]
+    resources :reports do
+      member do
+        put :teamleader_mail_send
+      end
+    end
+    resources :poll
+    get "departments/restore/:id" => "departments#restore", :as => :restore_department
+    resources :departments
+    resources :dashboard, :only => [:index]
+    post 'poll/voted' => 'poll#voted', :as => 'voted'
+    resources :rooms, :only => [:index]
+    resource  :vacations, :except => [:index]
+    resources :users do
+      resources :time_requests, :only => [:index]
+    end
+    resources :time_requests, :except => [:show] do
+      get :approve
+      get :decline
+      get :alternative
+    end
   end
 
-  get "tasks"               => "tasks#index",           :as => :show_tasks
-  put "tasks/workers"       => "tasks#start_workers",   :as => :start_workers
-  put "tasks/scheduler"     => "tasks#start_scheduler", :as => :start_scheduler
-  delete "tasks/workers"    => "tasks#stop_workers",    :as => :stop_workers
-  delete "tasks/scheduler"  => "tasks#stop_scheduler",  :as => :stop_scheduler
+  namespace :admin do
+    authenticate :admin do
+      mount Resque::Server.new, :at => "/resque"
+    end
 
-  get "/sarg" => "sarg#index", :as =>  :sarg_index
-  post "/sarg/folder_create" => "sarg#folder_create", :as =>  :sarg_folder_create
+    root :to => 'rooms#index'
 
-  get "rooms/:id/constructor" => "constructors#show", :as => :room_constructor
+    resources :devices
+    resources :rooms
+    resources :users do
+      resource :skills, :only => [:show, :edit, :update]
+    end
+    resources :desktops
+    resources :admins
+    resources :constructors, :except => [:index, :show]
+    resources :domains
+    resources :internet_pings, :only => [:index]
+    resources :events
 
-  get "events/new/:start/:end/:all_day" => "events#new"
-  get "local_pings" => "local_pings#index", :as => :local_pings
-  get  "local_pings/import" => "local_pings#import", :as => :import_local_pings
-  delete "local_pings" => "local_pings#clear", :as => :clear_local_logs
+    namespace :local_pings do
+      resources :subnetworks, :only => [:new, :create, :destroy]
+    end
 
-  get  "internet_pings/import" => "internet_pings#import", :as => :import_server_pings
-  delete "internet_pings" => "internet_pings#clear", :as => :clear_server_logs
+    get "tasks"               => "tasks#index",           :as => :show_tasks
+    put "tasks/workers"       => "tasks#start_workers",   :as => :start_workers
+    put "tasks/scheduler"     => "tasks#start_scheduler", :as => :start_scheduler
+    delete "tasks/workers"    => "tasks#stop_workers",    :as => :stop_workers
+    delete "tasks/scheduler"  => "tasks#stop_scheduler",  :as => :stop_scheduler
 
-  constraints(:ip => /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/) do
-    get "local_pings/:ip" => "local_pings#show", :as => :local_ping
+    get "/sarg" => "sarg#index", :as =>  :sarg_index
+    post "/sarg/folder_create" => "sarg#folder_create", :as =>  :sarg_folder_create
+
+    get "rooms/:id/constructor" => "constructors#show", :as => :room_constructor
+
+    get "events/new/:start/:end/:all_day" => "events#new"
+    get "local_pings" => "local_pings#index", :as => :local_pings
+    get  "local_pings/import" => "local_pings#import", :as => :import_local_pings
+    delete "local_pings" => "local_pings#clear", :as => :clear_local_logs
+
+    get  "internet_pings/import" => "internet_pings#import", :as => :import_server_pings
+    delete "internet_pings" => "internet_pings#clear", :as => :clear_server_logs
+
+    get "users/restore/:id"     => "users#restore", :as => :restore_user
+    get "admins/restore/:id"     => "admins#restore", :as => :restore_admin
+
+    constraints(:ip => /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/) do
+      get "local_pings/:ip" => "local_pings#show", :as => :local_ping
+    end
   end
 
-  resources :events
-
-  root :to => 'rooms#index'
+  root :to => 'teamleader/users#index'
 end

@@ -10,7 +10,7 @@ module DomainsHelper
       when 1
         "Активен"
       else
-        {}
+        "Нет информации"
     end
   end
 end
