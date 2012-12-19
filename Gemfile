@@ -52,6 +52,7 @@ group :test do
   gem 'cucumber-rails', :require => false
   gem 'spork'
   gem 'launchy'
+  gem 'mocha'
 end
 
 

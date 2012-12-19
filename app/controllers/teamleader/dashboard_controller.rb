@@ -1,7 +1,5 @@
 class Teamleader::DashboardController < Teamleader::AppTeamleaderController
   def index
-
-
     @without_job = User.out_of_work
 
     @last_logs = UserChange.includes([:editor,:edited]).order('user_changes.created_at DESC').limit 10
@@ -16,20 +14,6 @@ class Teamleader::DashboardController < Teamleader::AppTeamleaderController
     if current_user.is_user?
       @polls = Poll.order("created_at DESC")
     end
-
-    #@last_logs = if current_user.is_teamleader?
-    #               UserChange.subordinates(current_user)
-    #             else
-    #               UserChange.includes([:editor,:edited])
-    #             end.order('user_changes.created_at DESC').limit 10
-    #
-    #@absents = if current_user.is_teamleader?
-    #             User.subordinates(@absents, current_user)
-    #           else
-    #             Absent.actual_absents(Time.zone.now.midnight.to_s(:db))
-    #           end
-    #
-    #@polls = Poll.order("created_at DESC") if current_user.is_user?
 
     start = Time.now
     finish = Time.now + 2.week
